@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://st_project_start_screen"]
+
+[node name="StartScreen" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("res://assets/background_placeholder.jpeg")
+position = Vector2(640, 360) # adjust for your resolution
+
+[node name="Character" type="Sprite2D" parent="."]
+texture = ExtResource("res://assets/character_placeholder.jpeg")
+position = Vector2(640, 400)
+
+[node name="PlayButton" type="Button" parent="."]
+text = "Play"
+position = Vector2(640, 550)
+size = Vector2(250, 60)
