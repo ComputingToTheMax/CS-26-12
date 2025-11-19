@@ -1,15 +1,22 @@
 extends GutTest
 
-var scene_path := "res://StartScreen.tscn"
+var scenePath: String = "res://StartScreen.tscn"
+var sceneInstance: Node = null
 
-func before_each():
-    var scene := load(scene_path)
-    self.scene_instance = scene.instantiate()
-    self.scene_instance._ready() # Ensure script runs
+func before_each() -> void:
+    var scene: PackedScene = load(scenePath)
+    assert_not_null(scene, "Scene failed to load")
+    sceneInstance = scene.instantiate()
+    assert_not_null(sceneInstance, "Scene failed to instantiate")
 
-func after_each():
-    self.scene_instance.queue_free()
+    # Force ready on all children so scripts initialize
+    sceneInstance.propagate_call("_ready")
 
-func test_play_button_is_disabled():
-    var btn := scene_instance.get_node("PlayButton")
+func after_each() -> void:
+    if sceneInstance:
+        sceneInstance.queue_free()
+
+func test_play_button_is_disabled() -> void:
+    var btn: Button = sceneInstance.get_node("PlayButton")
+    assert_not_null(btn, "PlayButton node missing")
     assert_true(btn.disabled, "PlayButton should be disabled on _ready()")
