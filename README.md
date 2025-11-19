@@ -1,1 +1,2 @@
 # CS-26-12
+This is a explination of how to run our NASA Psycheopoly game. To run our game you will need Godot, 4.5.1 or higher installed on your machine. To get the latest version go to https://godotengine.org/download/windows/. Next you need to download our files, simply download the files from this github onto your computer. Finally open up Godot, and drag and drop the folder into Godot, and voilà.
