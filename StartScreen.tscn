@@ -16,9 +16,9 @@ position = Vector2(640, 360)
 texture = ExtResource(2)
 position = Vector2(640, 400)
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="star" type="Sprite2D" parent="."]
 texture = ExtResource(4)
-position = Vector2(1000, 1000)
+position = Vector2(200, 200)
 
 [node name="PlayButton" type="Button" parent="."]
 text = "Play"
