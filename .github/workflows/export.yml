@@ -38,7 +38,7 @@ jobs:
           mkdir -v -p build/web
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Web" "$EXPORT_DIR"/web/index.html"
+          godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
       
       # End Unverified Script
 
