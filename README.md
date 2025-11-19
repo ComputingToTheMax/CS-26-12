@@ -7,6 +7,7 @@ Aiden Bak | Christian Buenafe | Avery Feingold | Max Tran
 ---
 
 
+
 ### How do I play?
 
 At this exciting moment in our project's development, two options are available to get started with out game:
