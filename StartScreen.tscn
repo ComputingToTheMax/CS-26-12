@@ -21,7 +21,7 @@ offset_bottom = 147.0
 text = "Settings"
 
 [node name="Character" type="Sprite2D" parent="."]
-position = Vector2(368, 377)
+position = Vector2(363.00003, 375)
 scale = Vector2(5, 5)
 texture = ExtResource("2")
 
