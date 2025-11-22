@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://b66ej8u3vttls"]
+
+[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1_unjit"]
+
+[node name="TutorialScreen" type="Node2D"]
+
+[node name="SpaceBackgroundPlain" type="Sprite2D" parent="."]
+position = Vector2(577, 315)
+texture = ExtResource("1_unjit")
+
+[node name="TextEdit" type="TextEdit" parent="SpaceBackgroundPlain"]
+offset_left = -568.0
+offset_top = -287.0
+offset_right = -18.0
+offset_bottom = 138.0
+theme_override_font_sizes/font_size = 36
+text = "Key Binds:
+Next: Enter
+Back: Backspace
+Settings: Escape"
+
+[node name="TextEdit2" type="TextEdit" parent="SpaceBackgroundPlain"]
+offset_left = -18.0
+offset_top = -288.0
+offset_right = 631.0
+offset_bottom = 138.0
+theme_override_font_sizes/font_size = 36
+text = "Movement:
+Up: Up Arrow
+Down: Down Arrow
+Left: Left Arrow
+Right: Right Arrow"
