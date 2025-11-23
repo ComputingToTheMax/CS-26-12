@@ -1,5 +1,10 @@
 extends Node2D
 
-func _ready() -> void:
-	# Button is intentionally non-functional for sprint 1
-	$PlayButton.disabled = true
+func _ready():
+	var playBtn = $PlayButton
+	playBtn.disabled = false
+	playBtn.pressed.connect(_on_play_pressed)
+
+func _on_play_pressed():
+	var nextScene = load("res://Tutorial Screen.tscn")
+	get_tree().change_scene_to_packed(nextScene)
