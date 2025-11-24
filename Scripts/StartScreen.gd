@@ -8,16 +8,19 @@ func _ready():
 	$Background/SettingsButton.pressed.connect(_on_settings_pressed)
 
 	# Psyche external link button
-	if $Background.has_node("PsycheIconColorPng"):
-		$Background/PsycheIconColorPng.pressed.connect(_on_external_link_pressed)
+	if $Background.has_node("PsycheButton"):
+		$Background/PsycheButton.pressed.connect(_on_external_link_pressed)
+
 
 func _on_play_pressed():
 	var next_scene = load("res://Tutorial_Screen.tscn")
 	get_tree().change_scene_to_packed(next_scene)
 
+
 func _on_settings_pressed():
 	var next_scene = load("res://Settings_Screen.tscn")
 	get_tree().change_scene_to_packed(next_scene)
+
 
 func _on_external_link_pressed():
 	OS.shell_open("https://psyche.ssl.berkeley.edu/mission/faq/")
