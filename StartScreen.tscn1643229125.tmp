@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://cpmdovpetc8ty"]
+
+[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1"]
+[ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="2"]
+[ext_resource type="Script" uid="uid://jg740726aevo" path="res://Scripts/StartScreen.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://cr5kndstdjdki" path="res://Sources/Images/StarSmall-1.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="5_vno1p"]
+[ext_resource type="Script" uid="uid://nbwt3bympniv" path="res://settings_screen.gd" id="6_gtard"]
+
+[node name="StartScreen" type="Node2D"]
+script = ExtResource("3")
+
+[node name="Character" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(-263.9999, 13.0000305)
+scale = Vector2(5, 5)
+texture = ExtResource("2")
+
+[node name="star" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(-416, -197)
+scale = Vector2(1, 0.78125)
+texture = ExtResource("4")
+
+[node name="PlayButton" type="Button" parent="."]
+offset_left = -116.0
+offset_top = 16.0
+offset_right = 134.0
+offset_bottom = 76.0
+text = "Play"
+metadata/_edit_use_anchors_ = true
+
+[node name="PsycheAsteroid" type="Sprite2D" parent="."]
+position = Vector2(309, -152.00002)
+scale = Vector2(0.38981482, 0.41296297)
+texture = ExtResource("5_vno1p")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -972.0
+offset_top = -639.0
+offset_right = 948.0
+offset_bottom = 441.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1")
+
+[node name="Button" type="Button" parent="TextureRect3"]
+layout_mode = 0
+offset_left = 857.0
+offset_top = 733.0
+offset_right = 1107.0
+offset_bottom = 797.0
+text = "Settings"
+script = ExtResource("6_gtard")

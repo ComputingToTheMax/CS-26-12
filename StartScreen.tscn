@@ -55,3 +55,11 @@ text = "Play"
 position = Vector2(914, 194)
 scale = Vector2(0.38981482, 0.41296297)
 texture = ExtResource("5_vno1p")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 458.0
+offset_top = 470.0
+offset_right = 713.0
+offset_bottom = 537.0
+theme_override_font_sizes/font_size = 32
+text = "Credits"

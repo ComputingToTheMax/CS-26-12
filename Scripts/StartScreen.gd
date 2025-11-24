@@ -11,6 +11,9 @@ func _ready():
 	if $Background.has_node("PsycheButton"):
 		$Background/PsycheButton.pressed.connect(_on_external_link_pressed)
 
+	# Credits button
+	$Button.pressed.connect(_on_credits_pressed)
+
 
 func _on_play_pressed():
 	var next_scene = load("res://Tutorial_Screen.tscn")
@@ -24,3 +27,8 @@ func _on_settings_pressed():
 
 func _on_external_link_pressed():
 	OS.shell_open("https://psyche.ssl.berkeley.edu/mission/faq/")
+
+
+func _on_credits_pressed():
+	var credits_scene = load("res://Credits.tscn")
+	get_tree().change_scene_to_packed(credits_scene)
