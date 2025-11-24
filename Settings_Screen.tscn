@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbx4uhnqjl7v2"]
+[gd_scene load_steps=3 format=3 uid="uid://cbx4uhnqjl7v2"]
 
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1"]
+[ext_resource type="Script" uid="uid://wvsan6sbtn7d" path="res://Scripts/Settings_Screen.gd" id="1_83wcm"]
 
 [node name="SettingsScreen" type="Node2D"]
+script = ExtResource("1_83wcm")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(577.75, 329.75)
