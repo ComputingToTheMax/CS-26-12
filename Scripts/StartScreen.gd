@@ -1,10 +1,23 @@
 extends Node2D
 
 func _ready():
-	var playBtn = $PlayButton
-	playBtn.disabled = false
-	playBtn.pressed.connect(_on_play_pressed)
+	# Play button
+	$PlayButton.pressed.connect(_on_play_pressed)
+
+	# Settings button
+	$Background/SettingsButton.pressed.connect(_on_settings_pressed)
+
+	# Psyche external link button
+	if $Background.has_node("PsycheIconColorPng"):
+		$Background/PsycheIconColorPng.pressed.connect(_on_external_link_pressed)
 
 func _on_play_pressed():
-	var nextScene = load("res://Tutorial_Screen.tscn")
-	get_tree().change_scene_to_packed(nextScene)
+	var next_scene = load("res://Tutorial_Screen.tscn")
+	get_tree().change_scene_to_packed(next_scene)
+
+func _on_settings_pressed():
+	var next_scene = load("res://Settings_Screen.tscn")
+	get_tree().change_scene_to_packed(next_scene)
+
+func _on_external_link_pressed():
+	OS.shell_open("https://psyche.ssl.berkeley.edu/mission/faq/")
