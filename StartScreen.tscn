@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpmdovpetc8ty"]
+[gd_scene load_steps=7 format=3 uid="uid://cpmdovpetc8ty"]
 
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1"]
 [ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="2"]
 [ext_resource type="Script" uid="uid://jg740726aevo" path="res://Scripts/StartScreen.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://dmsm4lpd63fya" path="res://Sources/Images/Psyche_Icon_Color-PNG.png" id="3_gtard"]
 [ext_resource type="Texture2D" uid="uid://cr5kndstdjdki" path="res://Sources/Images/StarSmall-1.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="5_vno1p"]
 
@@ -21,6 +22,17 @@ offset_right = 211.28986
 offset_bottom = 209.17468
 theme_override_font_sizes/font_size = 32
 text = "Settings"
+
+[node name="PsycheButton" type="Button" parent="Background"]
+offset_left = 788.3524
+offset_top = 374.58734
+offset_right = 933.8441
+offset_bottom = 504.66907
+
+[node name="PsycheIconColorPng" type="Sprite2D" parent="Background"]
+position = Vector2(859.4637, 440.4312)
+scale = Vector2(0.10245897, 0.08821405)
+texture = ExtResource("3_gtard")
 
 [node name="Character" type="Sprite2D" parent="."]
 position = Vector2(361.00003, 357)
