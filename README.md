@@ -1,6 +1,6 @@
 # SU CS.26.12 | NASA Psyche-opoly Game Team
 
-**Crew Members:**
+**Team Members:**
 
 Aiden Bak | Christian Buenafe | Avery Feingold | Max Tran
 
