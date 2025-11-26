@@ -5,6 +5,8 @@ func _ready():
 	await get_tree().create_timer(3.0).timeout
 	_go_to_start_screen()
 
+
+# Load and run the initial start scene.
 func _go_to_start_screen():
 	var start_scene: PackedScene = load("res://StartScreen.tscn")
 	if start_scene:
