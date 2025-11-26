@@ -7,7 +7,7 @@ env:
   # GODOT_VERSION: 4.5
   GODOT_VERSION: 4.3
   EXPORT_NAME: psyche-opoly
-  PROJECT_PATH: psyche-opoly
+  PROJECT_PATH: ./
 
 jobs:
 
