@@ -7,7 +7,7 @@ func _ready():
 	# Settings button
 	$Background/SettingsButton.pressed.connect(_on_settings_pressed)
 
-	# Psyche external link button
+	# Link to external Psyche Resources
 	if $Background.has_node("PsycheButton"):
 		$Background/PsycheButton.pressed.connect(_on_external_link_pressed)
 
