@@ -7,7 +7,7 @@
 script = ExtResource("1_66cu8")
 
 [node name="SpaceBackgroundPlain" type="Sprite2D" parent="."]
-position = Vector2(475, 441)
+position = Vector2(494, 443)
 texture = ExtResource("1_un4pt")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="SpaceBackgroundPlain"]
