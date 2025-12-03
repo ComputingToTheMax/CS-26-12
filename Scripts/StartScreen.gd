@@ -12,7 +12,6 @@ func _ready():
 	click_player.stream = load("res://Sources/Sounds/click.wav")
 
 	# Return to Main Menu button
-	$Background/ReturnButton.pressed.connect(_on_return_pressed)
 
 	# Play button
 	fade_rect.color.a=1.0
@@ -36,23 +35,20 @@ func _transition_to_scene(path: String) ->void:
 	
 	var next_scene: PackedScene=load(path)
 	get_tree().change_scene_to_packed(next_scene)
+func _click_then_transition(path: String):
+	if click_player and click_player.stream:
+		click_player.play()
+		await get_tree().create_timer(click_player.stream.get_length()).timeout
+	await _transition_to_scene(path)
+	
 
 func _on_play_pressed() -> void:
-	_transition_to_scene("res://Tutorial_Screen.tscn")
-func _on_play_pressed():
-	click_player.play()
-	await get_tree().create_timer(click_player.stream.get_length()).timeout
-	var next_scene = load("res://Tutorial_Screen.tscn")
-	get_tree().change_scene_to_packed(next_scene)
+	await _click_then_transition("res://Tutorial_Screen.tscn")
 
 
 func _on_settings_pressed():
-	_transition_to_scene("res://Settings_Screen.tscn")
-	
-	click_player.play()
-	await get_tree().create_timer(click_player.stream.get_length()).timeout
-	var next_scene = load("res://Settings_Screen.tscn")
-	get_tree().change_scene_to_packed(next_scene)
+	await _click_then_transition("res://Settings_Screen.tscn")
+
 
 
 func _on_external_link_pressed():
@@ -62,5 +58,5 @@ func _on_external_link_pressed():
 
 
 func _on_credits_pressed():
-	_transition_to_scene("res://Credits.tscn")
+	await _click_then_transition("res://Credits.tscn")
 	
