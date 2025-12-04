@@ -1,32 +1,71 @@
-[gd_scene load_steps=2 format=3 uid="uid://b66ej8u3vttls"]
+[gd_scene load_steps=3 format=3 uid="uid://b66ej8u3vttls"]
 
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1_unjit"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aj4rq"]
+bg_color = Color(0.17436922, 0.6423982, 0.89108616, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5132329, 0.51323295, 0.51323265, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="TutorialScreen" type="Node2D"]
 
 [node name="SpaceBackgroundPlain" type="Sprite2D" parent="."]
-position = Vector2(577, 315)
+position = Vector2(595, 354)
 texture = ExtResource("1_unjit")
 
-[node name="TextEdit" type="TextEdit" parent="SpaceBackgroundPlain"]
-offset_left = -568.0
-offset_top = -287.0
-offset_right = -18.0
-offset_bottom = 138.0
-theme_override_font_sizes/font_size = 36
-text = "Key Binds:
-Next: Enter
-Back: Backspace
-Settings: Escape"
+[node name="DialogLayer" type="CanvasLayer" parent="."]
 
-[node name="TextEdit2" type="TextEdit" parent="SpaceBackgroundPlain"]
-offset_left = -18.0
-offset_top = -288.0
-offset_right = 631.0
-offset_bottom = 138.0
+[node name="DialogBox" type="Panel" parent="DialogLayer"]
+custom_minimum_size = Vector2(0, 180)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -241.0
+offset_right = 9.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_aj4rq")
+
+[node name="NameText" type="Label" parent="DialogLayer/DialogBox"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -61.0
+offset_right = -854.0
+offset_bottom = 3.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 36
-text = "Movement:
-Up: Up Arrow
-Down: Down Arrow
-Left: Left Arrow
-Right: Right Arrow"
+text = "Mission Control:"
+vertical_alignment = 1
+
+[node name="DialogContainer" type="MarginContainer" parent="DialogLayer/DialogBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="DialogText" type="Label" parent="DialogLayer/DialogBox/DialogContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Hello
+Text here
+anything works"
+autowrap_mode = 3
