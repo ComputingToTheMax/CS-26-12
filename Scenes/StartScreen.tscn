@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpmdovpetc8ty"]
+[gd_scene load_steps=11 format=3 uid="uid://cpmdovpetc8ty"]
 
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1"]
 [ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="2"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://dmsm4lpd63fya" path="res://Sources/Images/Psyche_Icon_Color-PNG.png" id="3_gtard"]
 [ext_resource type="Texture2D" uid="uid://cr5kndstdjdki" path="res://Sources/Images/StarSmall-1.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="5_vno1p"]
+[ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scenes/button_logic.gd" id="6_6mw8b"]
+[ext_resource type="PackedScene" uid="uid://b66ej8u3vttls" path="res://Scenes/Tutorial_Screen.tscn" id="7_ogpyo"]
+[ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/Settings_Screen.tscn" id="8_aae8c"]
+[ext_resource type="PackedScene" uid="uid://cqwsjkofhpive" path="res://Scenes/Credits.tscn" id="9_qg82j"]
 
 [node name="StartScreen" type="Control"]
 layout_mode = 3
@@ -18,30 +22,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3")
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(577.75, 329.75)
-scale = Vector2(0.6117187, 0.6226852)
-texture = ExtResource("1")
-
-[node name="Character" type="Sprite2D" parent="."]
-position = Vector2(254.50002, 380.88046)
-scale = Vector2(2.9374993, 3.1131108)
-texture = ExtResource("2")
-
-[node name="star" type="Sprite2D" parent="."]
-position = Vector2(200, 200)
-texture = ExtResource("4")
-
-[node name="PsycheAsteroid" type="Sprite2D" parent="."]
-position = Vector2(914, 194)
-scale = Vector2(0.38981482, 0.41296297)
-texture = ExtResource("5_vno1p")
-
 [node name="FadeLayer" type="CanvasLayer" parent="."]
 layer = 2
 
 [node name="FadeRect" type="ColorRect" parent="FadeLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -49,6 +33,25 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(577.75, 329.75)
+scale = Vector2(0.6117187, 0.6226852)
+texture = ExtResource("1")
+
+[node name="Astronaut" type="Sprite2D" parent="."]
+position = Vector2(254.50002, 380.88046)
+scale = Vector2(2.9374993, 3.1131108)
+texture = ExtResource("2")
+
+[node name="Star" type="Sprite2D" parent="."]
+position = Vector2(200, 200)
+texture = ExtResource("4")
+
+[node name="PsycheAsteroid" type="Sprite2D" parent="."]
+position = Vector2(914, 194)
+scale = Vector2(0.38981482, 0.41296297)
+texture = ExtResource("5_vno1p")
 
 [node name="GameMenu" type="Control" parent="."]
 layout_mode = 1
@@ -68,34 +71,32 @@ offset_top = -175.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="PlayButton" type="Button" parent="GameMenu/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="GameMenu/VBoxContainer" node_paths=PackedStringArray("target_handler")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Play"
+script = ExtResource("6_6mw8b")
+target_handler = NodePath("../../..")
+target_signal_name = "request_transition"
+target_scene = ExtResource("7_ogpyo")
 
-[node name="SettingsButton" type="Button" parent="GameMenu/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="GameMenu/VBoxContainer" node_paths=PackedStringArray("target_handler")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Settings"
+script = ExtResource("6_6mw8b")
+target_handler = NodePath("../../..")
+target_signal_name = "request_transition"
+target_scene = ExtResource("8_aae8c")
 
-[node name="CreditsButton" type="Button" parent="GameMenu/VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="GameMenu/VBoxContainer" node_paths=PackedStringArray("target_handler")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Credits"
-
-[node name="Psyche Mission Link" type="CenterContainer" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -30.0
-offset_top = -30.0
-grow_horizontal = 0
-grow_vertical = 0
+script = ExtResource("6_6mw8b")
+target_handler = NodePath("../../..")
+target_signal_name = "request_transition"
+target_scene = ExtResource("9_qg82j")
 
 [node name="PsycheMissionLink" type="Button" parent="."]
 custom_minimum_size = Vector2(30, 30)
@@ -110,3 +111,5 @@ grow_vertical = 2
 icon = ExtResource("3_gtard")
 icon_alignment = 1
 expand_icon = true
+
+[connection signal="request_transition" from="." to="." method="_on_request_transition"]
