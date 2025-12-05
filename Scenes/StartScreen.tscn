@@ -48,7 +48,7 @@ texture = ExtResource("2")
 position = Vector2(200, 200)
 texture = ExtResource("4")
 
-[node name="PsycheAsteroid" type="Sprite2D" parent="."]
+[node name="16Psyche" type="Sprite2D" parent="."]
 position = Vector2(914, 194)
 scale = Vector2(0.38981482, 0.41296297)
 texture = ExtResource("5_vno1p")
