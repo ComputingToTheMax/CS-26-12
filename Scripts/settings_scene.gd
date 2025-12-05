@@ -44,7 +44,7 @@ func _on_toggle_sound_pressed():
 func _on_return_pressed():
 	play_click()
 	await get_tree().create_timer(click_player.stream.get_length()).timeout
-	get_tree().change_scene_to_file("res://StartScreen.tscn")
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 func _change_resolution(height: int, width: int) -> void:
 	play_click()
