@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://cqwsjkofhpive"]
 
-[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1_ynf4x"]
-[ext_resource type="Script" uid="uid://dhhooc4dw8xxn" path="res://Scripts/Credits.gd" id="2_4qwwl"]
+[ext_resource type="Script" uid="uid://dhhooc4dw8xxn" path="res://Scripts/credits_scene.gd" id="1_gryuy"]
+[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_ccovl"]
 
 [node name="Credits" type="Node2D"]
-script = ExtResource("2_4qwwl")
+script = ExtResource("1_gryuy")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(901, 446)
-texture = ExtResource("1_ynf4x")
+texture = ExtResource("2_ccovl")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Background"]
 offset_left = -553.0
