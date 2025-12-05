@@ -1,16 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://7o6op8afgol0"]
 
-[ext_resource type="Script" uid="uid://cu080wi28yq8p" path="res://Scripts/Disclaimer.gd" id="1_tmjte"]
-[ext_resource type="PackedScene" uid="uid://cpmdovpetc8ty" path="res://Scenes/StartScreen.tscn" id="2_amrdu"]
-[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_q6dpt"]
+[ext_resource type="Script" uid="uid://cu080wi28yq8p" path="res://Scripts/disclaimer_scene.gd" id="1_mtboa"]
+[ext_resource type="PackedScene" uid="uid://cpmdovpetc8ty" path="res://Scenes/main_menu.tscn" id="2_lxaew"]
+[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="3_k2o1j"]
 
 [node name="Disclaimer" type="Node2D"]
-script = ExtResource("1_tmjte")
-target_scene = ExtResource("2_amrdu")
+script = ExtResource("1_mtboa")
+target_scene = ExtResource("2_lxaew")
 
 [node name="SpaceBackgroundPlain" type="Sprite2D" parent="."]
 position = Vector2(494, 443)
-texture = ExtResource("2_q6dpt")
+texture = ExtResource("3_k2o1j")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="SpaceBackgroundPlain"]
 offset_left = -196.0
