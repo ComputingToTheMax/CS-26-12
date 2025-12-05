@@ -19,10 +19,13 @@ text = "Developers:
 Aidek Bak, Christian Buenafe, Avery Feingold, Max Tran
 
 Project Sponsor:
+NASA
+
+Project Mentor:
 Dr. Cassie Bowman, Arizona State University
 
 Project Advisor:
-Dr. Braxton Cuneo"
+Dr. Braxton Cuneo, Seattle University"
 
 [node name="ReturnButton" type="Button" parent="Background"]
 offset_left = -888.0
