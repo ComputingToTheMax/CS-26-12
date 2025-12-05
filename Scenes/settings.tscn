@@ -1,15 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://cbx4uhnqjl7v2"]
 
-[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1"]
-[ext_resource type="Script" uid="uid://wvsan6sbtn7d" path="res://Scripts/Settings_Screen.gd" id="1_83wcm"]
+[ext_resource type="Script" uid="uid://wvsan6sbtn7d" path="res://Scripts/settings_scene.gd" id="1_i44u3"]
+[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_lhmql"]
 
 [node name="SettingsScreen" type="Node2D"]
-script = ExtResource("1_83wcm")
+script = ExtResource("1_i44u3")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(577.75, 329.75)
 scale = Vector2(0.6117187, 0.6226852)
-texture = ExtResource("1")
+texture = ExtResource("2_lhmql")
 
 [node name="ReturnButton" type="Button" parent="Background"]
 offset_left = -911.77527
