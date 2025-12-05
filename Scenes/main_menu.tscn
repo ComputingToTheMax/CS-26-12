@@ -1,15 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpmdovpetc8ty"]
+[gd_scene load_steps=14 format=3 uid="uid://cpmdovpetc8ty"]
 
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1"]
 [ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="2"]
-[ext_resource type="Script" uid="uid://jg740726aevo" path="res://Scripts/StartScreen.gd" id="3"]
+[ext_resource type="Script" uid="uid://jg740726aevo" path="res://Scripts/main_menu_scene.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://dmsm4lpd63fya" path="res://Sources/Images/Psyche_Icon_Color-PNG.png" id="3_gtard"]
 [ext_resource type="Texture2D" uid="uid://cr5kndstdjdki" path="res://Sources/Images/StarSmall-1.png" id="4"]
+[ext_resource type="Shader" uid="uid://dqs4472nlo58l" path="res://Shaders/16PsycheVisualShader.tres" id="5_aae8c"]
 [ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="5_vno1p"]
-[ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scenes/button_logic.gd" id="6_6mw8b"]
-[ext_resource type="PackedScene" uid="uid://b66ej8u3vttls" path="res://Scenes/Tutorial_Screen.tscn" id="7_ogpyo"]
-[ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/Settings_Screen.tscn" id="8_aae8c"]
-[ext_resource type="PackedScene" uid="uid://cqwsjkofhpive" path="res://Scenes/Credits.tscn" id="9_qg82j"]
+[ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="6_6mw8b"]
+[ext_resource type="PackedScene" uid="uid://b66ej8u3vttls" path="res://Scenes/tutorial.tscn" id="7_ogpyo"]
+[ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/settings.tscn" id="8_aae8c"]
+[ext_resource type="PackedScene" uid="uid://cqwsjkofhpive" path="res://Scenes/credits.tscn" id="9_qg82j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qg82j"]
+shader = ExtResource("5_aae8c")
+
+[sub_resource type="LabelSettings" id="LabelSettings_2sbhq"]
+font_size = 70
 
 [node name="StartScreen" type="Control"]
 layout_mode = 3
@@ -49,9 +56,18 @@ position = Vector2(200, 200)
 texture = ExtResource("4")
 
 [node name="16Psyche" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qg82j")
 position = Vector2(914, 194)
 scale = Vector2(0.38981482, 0.41296297)
 texture = ExtResource("5_vno1p")
+
+[node name="Label" type="Label" parent="16Psyche"]
+offset_left = -51.30641
+offset_top = 152.55605
+offset_right = 673.6936
+offset_bottom = 262.55603
+text = "Asteroid 16 Psyche"
+label_settings = SubResource("LabelSettings_2sbhq")
 
 [node name="GameMenu" type="Control" parent="."]
 layout_mode = 1
@@ -111,5 +127,11 @@ grow_vertical = 2
 icon = ExtResource("3_gtard")
 icon_alignment = 1
 expand_icon = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 114.0
+offset_bottom = 34.0
+text = "Psyche-opoly"
 
 [connection signal="request_transition" from="." to="." method="_on_request_transition"]
