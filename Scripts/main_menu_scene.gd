@@ -20,6 +20,7 @@ func _ready():
 	# Link to external Psyche Resources
 	$PsycheMissionLink.pressed.connect(_on_external_link_pressed)
 
+
 	
 func _on_external_link_pressed():
 	click_player.play()

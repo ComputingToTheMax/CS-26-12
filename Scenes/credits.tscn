@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqwsjkofhpive"]
+[gd_scene load_steps=3 format=3 uid="uid://damhiumjctum"]
 
 [ext_resource type="Script" uid="uid://dhhooc4dw8xxn" path="res://Scripts/credits_scene.gd" id="1_gryuy"]
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_ccovl"]

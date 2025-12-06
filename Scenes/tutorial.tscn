@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b66ej8u3vttls"]
+[gd_scene load_steps=5 format=3 uid="uid://b66ej8u3vttls"]
 
+[ext_resource type="Script" uid="uid://bfmak480tvjlv" path="res://Scenes/Tutorial.gd" id="1_omtrn"]
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1_unjit"]
+[ext_resource type="PackedScene" uid="uid://d1jbsh7ox37wt" path="res://Scenes/PauseMenu.tscn" id="2_feyax"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aj4rq"]
 bg_color = Color(0.17436922, 0.6423982, 0.89108616, 1)
@@ -15,6 +17,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [node name="TutorialScreen" type="Node2D"]
+script = ExtResource("1_omtrn")
 
 [node name="SpaceBackgroundPlain" type="Sprite2D" parent="."]
 position = Vector2(595, 354)
@@ -69,3 +72,12 @@ text = "Hello
 Text here
 anything works"
 autowrap_mode = 3
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_feyax")]
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -1728.0
+offset_bottom = -972.0
