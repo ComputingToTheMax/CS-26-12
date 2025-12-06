@@ -1,16 +1,20 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpmdovpetc8ty"]
+[gd_scene load_steps=16 format=3 uid="uid://cpmdovpetc8ty"]
 
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1"]
 [ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="2"]
 [ext_resource type="Script" uid="uid://jg740726aevo" path="res://Scripts/main_menu_scene.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://dmsm4lpd63fya" path="res://Sources/Images/Psyche_Icon_Color-PNG.png" id="3_gtard"]
+[ext_resource type="Shader" uid="uid://btd5q6cjf24tg" path="res://Shaders/floating_shader.tres" id="3_t1dhk"]
 [ext_resource type="Texture2D" uid="uid://cr5kndstdjdki" path="res://Sources/Images/StarSmall-1.png" id="4"]
 [ext_resource type="Shader" uid="uid://dqs4472nlo58l" path="res://Shaders/16PsycheVisualShader.tres" id="5_aae8c"]
 [ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="5_vno1p"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="6_6mw8b"]
-[ext_resource type="PackedScene" uid="uid://b66ej8u3vttls" path="res://Scenes/tutorial.tscn" id="7_ogpyo"]
 [ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/settings.tscn" id="8_aae8c"]
+[ext_resource type="PackedScene" uid="uid://b7t5eepnxoou1" path="res://Scenes/GameSetup/game_setup.tscn" id="8_vr1f0"]
 [ext_resource type="PackedScene" uid="uid://cqwsjkofhpive" path="res://Scenes/credits.tscn" id="9_qg82j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5egv6"]
+shader = ExtResource("3_t1dhk")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qg82j"]
 shader = ExtResource("5_aae8c")
@@ -47,6 +51,7 @@ scale = Vector2(0.6117187, 0.6226852)
 texture = ExtResource("1")
 
 [node name="Astronaut" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5egv6")
 position = Vector2(254.50002, 380.88046)
 scale = Vector2(2.9374993, 3.1131108)
 texture = ExtResource("2")
@@ -94,7 +99,7 @@ text = "Play"
 script = ExtResource("6_6mw8b")
 target_handler = NodePath("../../..")
 target_signal_name = "request_transition"
-target_scene = ExtResource("7_ogpyo")
+target_scene = ExtResource("8_vr1f0")
 
 [node name="SettingsButton" type="Button" parent="GameMenu/VBoxContainer" node_paths=PackedStringArray("target_handler")]
 layout_mode = 2
