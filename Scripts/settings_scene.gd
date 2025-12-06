@@ -37,9 +37,9 @@ func _on_toggle_sound_pressed():
 
 	# Update button text
 	if enabled:
-		$Background/ToggleSoundButton.text = "Disable Clicks"
+		$Background/ToggleSoundButton.text = "Disable Click Sounds"
 	else:
-		$Background/ToggleSoundButton.text = "Enable Clicks"
+		$Background/ToggleSoundButton.text = "Enable Click Sounds"
 
 func _on_return_pressed():
 	play_click()
