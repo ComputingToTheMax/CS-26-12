@@ -4,7 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://cpmdovpetc8ty" path="res://Scenes/main_menu.tscn" id="2_lxaew"]
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="3_k2o1j"]
 
-[node name="Disclaimer" type="Node2D"]
+[node name="Disclaimer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_mtboa")
 target_scene = ExtResource("2_lxaew")
 
@@ -12,9 +18,26 @@ target_scene = ExtResource("2_lxaew")
 position = Vector2(494, 443)
 texture = ExtResource("3_k2o1j")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SpaceBackgroundPlain"]
-offset_left = -196.0
-offset_top = -334.0
-offset_right = 429.0
-offset_bottom = 121.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.075
+anchor_top = 0.3
+anchor_right = 0.925
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 text = "This work was created in partial fulfillment of Seattle University Capstone Course “CPSC  4870-4890″. The work is a result of the Psyche Student Collaborations component of NASA’s Psyche Mission (https://psyche.ssl.berkeley.edu/). “Psyche: A Journey to a Metal World” [Contract number NNM16AA09C] is part of the NASA Discovery Program mission to solar system targets. Trade names and trademarks of ASU and NASA are used in this work for identification only. Their usage does not constitute an official endorsement, either expressed or implied, by Arizona State University or National Aeronautics and Space Administration. The content is solely the responsibility of the authors and does not necessarily represent the official views of ASU or NASA."
+fit_content = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_top = -538.5
+offset_right = 1152.0
+offset_bottom = 1186.5
+grow_horizontal = 2
+grow_vertical = 2
