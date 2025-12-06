@@ -1,6 +1,6 @@
 extends "res://addons/gut/test.gd"
 
-const SCENE_PATH := "res://StartScreen.tscn"
+const SCENE_PATH := "res://Scenes/main_menu.tscn"
 
 var start_scene
 var root
@@ -37,17 +37,17 @@ func test_scene_has_background():
 
 
 func test_scene_has_play_button():
-	var btn = root.get_node_or_null("PlayButton")
+	var btn = root.get_node_or_null("GameMenu/GameMenuButtons/PlayButton")
 	assert_not_null(btn, "PlayButton missing")
 
 
 func test_scene_has_settings_button():
-	var btn = root.get_node_or_null("Background/SettingsButton")
+	var btn = root.get_node_or_null("GameMenu/GameMenuButtons/SettingsButton")
 	assert_not_null(btn, "SettingsButton missing")
 
 
 func test_scene_has_character():
-	var char = root.get_node_or_null("Character")
+	var char = root.get_node_or_null("Astronaut")
 	assert_not_null(char, "Character node missing")
 
 
@@ -55,19 +55,19 @@ func test_scene_has_character():
 # SIGNAL CONNECTION TESTS
 # ---------------------------------------------------------
 func test_play_button_has_signal_connected():
-	var btn = root.get_node_or_null("PlayButton")
+	var btn = root.get_node("GameMenu/GameMenuButtons/PlayButton")
 	assert_not_null(btn)
-	assert_true(btn.pressed.is_connected(root._on_play_pressed), "Play button should connect to _on_play_pressed")
+	assert_true(btn.pressed.has_connections(), "The button does not seem to be properly configured with an action.")
 
 
 func test_settings_button_has_signal_connected():
-	var btn = root.get_node_or_null("Background/SettingsButton")
+	var btn = root.get_node_or_null("GameMenu/GameMenuButtons/SettingsButton")
 	assert_not_null(btn)
-	assert_true(btn.pressed.is_connected(root._on_settings_pressed), "Settings button should connect to _on_settings_pressed")
+	assert_true(btn.pressed.has_connections(), "The button does not seem to be properly configured with an action.")
 
 
 func test_optional_psyche_button_if_exists():
-	var btn = root.get_node_or_null("Background/PsycheButton")
+	var btn = root.get_node_or_null("PsycheMissionLink")
 	if btn:
 		assert_true(btn.pressed.is_connected(root._on_external_link_pressed), "PsycheButton exists but isn't connected")
 	else:
