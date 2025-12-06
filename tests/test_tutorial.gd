@@ -1,6 +1,6 @@
 extends GutTest
 
-var scenePath: String = "res://Tutorial_Screen.tscn"
+var scenePath: String = "res://Scenes/tutorial.tscn"
 var sceneInstance: Node = null
 
 func before_each() -> void:
