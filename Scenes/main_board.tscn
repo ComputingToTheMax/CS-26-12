@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://thfx5mw34uqr"]
+
+[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1_ockhe"]
+
+[node name="MainBoard" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -366.0
+offset_top = -219.0
+offset_right = 1554.0
+offset_bottom = 861.0
+texture = ExtResource("1_ockhe")
+stretch_mode = 2
