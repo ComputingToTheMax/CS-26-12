@@ -22,3 +22,10 @@ project/assembly_name="Race To Psyche"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
+[input]
+
+advance_dialog={
+"deadzone": 0.2,
+"events": []
+}

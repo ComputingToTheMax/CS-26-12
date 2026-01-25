@@ -24,6 +24,7 @@ position = Vector2(595, 354)
 texture = ExtResource("1_unjit")
 
 [node name="DialogLayer" type="CanvasLayer" parent="."]
+layer = 10
 
 [node name="DialogBox" type="Panel" parent="DialogLayer"]
 custom_minimum_size = Vector2(0, 180)
@@ -81,3 +82,48 @@ offset_left = -576.0
 offset_top = -324.0
 offset_right = -1728.0
 offset_bottom = -972.0
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Background" type="TextureRect" parent="BackgroundLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Characters" type="Control" parent="BackgroundLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Spaceman" type="TextureRect" parent="BackgroundLayer/Characters"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 104.0
+offset_top = 153.0
+offset_right = 266.0
+offset_bottom = 344.0
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ContextLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Context" type="TextureRect" parent="ContextLayer"]
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -264.0
+offset_top = 58.0
+offset_right = 314.0
+offset_bottom = 358.0
+grow_horizontal = 2
+expand_mode = 1
+stretch_mode = 5
