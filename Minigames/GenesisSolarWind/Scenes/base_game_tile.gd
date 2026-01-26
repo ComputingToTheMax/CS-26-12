@@ -35,8 +35,10 @@ func _process(delta: float) -> void:
 			to_orbit.progress += 50 * delta
 			
 		CURRENT_PATH.ELLIPTICAL_ORBIT:
+			pass
 			
 		CURRENT_PATH.FROM_ORBIT:
+			pass
 	
 	
 	
