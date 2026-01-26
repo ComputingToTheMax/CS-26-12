@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var snap = get_parent().cell_size
 
 var target
+var rng = RandomNumberGenerator.new()
 
 func _ready():
 	var cell_size = get_parent().cell_size
@@ -19,7 +20,10 @@ func _is_off_board():
 		get_tree().change_scene_to_file("res://Scenes/end_screen.tscn")
 		
 func _process(event):
-	if Input.is_key_pressed(KEY_RIGHT):
-		target.x += snap.x
+	if Input.is_action_just_pressed("ui_accept"):
+		rng.randomize()
+		var random_int = rng.randi_range(1, 6)
+		
+		target.x += random_int*snap.x
 		global_position = target
 		_is_off_board();

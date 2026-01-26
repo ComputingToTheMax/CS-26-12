@@ -23,7 +23,7 @@ var dialog_entries := [
 		"context":""
 	},
 	{
-		"text": "In this game you will race around our psyche-themed board trying to reach psyche before any of your competitors",
+		"text": "In this game you will race around our psyche-themed board trying to reach psyche before any of your competitors. You do this by rolling dice which can be rolled by pressing space",
 		"bg": "",
 		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
 		"context":"res://Sources/Images/boardexample.png"
@@ -47,6 +47,12 @@ var dialog_entries := [
 	},
 	{
 		"text": "You can spend your money at shops to buy powerful items, or to hire people to help you along your journey",
+		"bg": "",
+		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
+		"context":""
+	},
+	{
+		"text": "Items and People will give you stats that will help you win the game, and some people will give you benifits in minigames",
 		"bg": "",
 		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
 		"context":""
