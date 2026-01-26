@@ -1,3 +1,11 @@
 [gd_scene format=3 uid="uid://bo4mp5audgyic"]
 
 [node name="BaseGameTile" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="SubViewport"]
+offset_right = 40.0
+offset_bottom = 40.0
