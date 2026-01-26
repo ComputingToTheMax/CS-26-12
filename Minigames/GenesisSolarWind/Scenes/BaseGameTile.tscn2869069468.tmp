@@ -53,13 +53,14 @@ position = Vector2(0, 2)
 curve = SubResource("Curve2D_301g5")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ToOrbit"]
-position = Vector2(395, 46)
-rotation = 3.073406
+position = Vector2(323.26276, 57.986637)
+rotation = 3.087992
+progress = 77.09778
 
 [node name="GenesisSpacecraft" type="Sprite2D" parent="ToOrbit/PathFollow2D"]
-position = Vector2(-44.86133, -106.303604)
-rotation = -3.073406
-scale = Vector2(0.34, 0.34)
+position = Vector2(-118.68341, -97.51187)
+rotation = -3.087992
+scale = Vector2(0.33999997, 0.33999997)
 texture = ExtResource("2_t5ql6")
 
 [node name="EllipticalOrbit" type="Path2D" parent="."]
