@@ -1,11 +1,38 @@
-[gd_scene format=3 uid="uid://bo4mp5audgyic"]
+[gd_scene load_steps=4 format=3 uid="uid://bo4mp5audgyic"]
+
+[ext_resource type="Texture2D" uid="uid://b35l82h0q0o3c" path="res://Minigames/GenesisSolarWind/Src/Images/MissionTrajectory.png" id="1_y4iy6"]
+[ext_resource type="Texture2D" uid="uid://b15o7brdcqmb5" path="res://Sources/Images/Placeholder.png" id="2_t5ql6"]
+
+[sub_resource type="Curve2D" id="Curve2D_301g5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 395, 46, -10.702338, 0.8918615, 10.702338, -0.8918615, 378, 47, 10.405051, -2.2296538, -10.405051, 2.2296538, 353, 54, 22.296537, -1.1891487, -22.296537, 1.1891487, 323, 58, 12.337418, 6.2430305, -12.337418, -6.2430305, 293, 50, 5.2025256, 8.621327, -5.2025256, -8.621327, 273, 34, 1.040505, 10.999625, -1.040505, -10.999625, 263, 7, -2.824228, 14.1211405, 2.824228, -14.1211405, 264, -11, 0, 0, 0, 0, 275, -30, 6.2430305, -11.445556, -6.2430305, 11.445556, 266, -20)
+}
+point_count = 10
 
 [node name="BaseGameTile" type="Node2D"]
 
+[node name="Genesis Mission Trajectory" type="Sprite2D" parent="."]
+position = Vector2(176, -81)
+scale = Vector2(0.6235011, 0.62350124)
+texture = ExtResource("1_y4iy6")
+centered = false
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_t5ql6")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(394, 46)
+scale = Vector2(0.060000002, 0.060000002)
+texture = ExtResource("2_t5ql6")
+centered = false
 
 [node name="SubViewport" type="SubViewport" parent="."]
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="SubViewport"]
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="ToOrbit" type="Path2D" parent="."]
+position = Vector2(0, 2)
+curve = SubResource("Curve2D_301g5")
