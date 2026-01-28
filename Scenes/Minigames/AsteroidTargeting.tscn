@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvmlyfc1gkgul"]
-
-[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1_kocxc"]
-
-[node name="AsteroidTargeting" type="Node2D"]
-
-[node name="SpaceBackgroundPlain" type="Sprite2D" parent="."]
-position = Vector2(619, 442)
-texture = ExtResource("1_kocxc")
