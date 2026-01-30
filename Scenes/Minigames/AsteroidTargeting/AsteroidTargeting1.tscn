@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dxa8vvf0ft5vl" path="res://Sources/Images/AsteroidMinigame/BlackSkyBackground.png" id="1_bg"]
 [ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="2_ast"]
-[ext_resource type="Script" path="res://Scripts/AsteroidTargeting.gd" id="3_script"]
-[ext_resource type="AudioStream" path="res://Sources/Sounds/AsteroidMinigame/ConfirmTarget.wav" id="4_sound"]
+[ext_resource type="Script" uid="uid://4qfccl7cabti" path="res://Scripts/AsteroidTargeting.gd" id="3_script"]
+[ext_resource type="AudioStream" uid="uid://dgbff4kx04bpc" path="res://Sources/Sounds/AsteroidMinigame/ConfirmTarget.wav" id="4_sound"]
 
 [node name="AsteroidTargeting1" type="Node2D"]
 
