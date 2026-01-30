@@ -1,129 +1,52 @@
-##// File: main.tscn
-##[gd_scene load_steps=6 format=3]
-##
-##[ext_resource type="Script" path="res://scripts/Main.gd" id=1]
-##[ext_resource type="Texture" path="res://assets/background1.png" id=2]
-##[ext_resource type="Texture" path="res://assets/asteroid.png" id=3]
-##[ext_resource type="Texture" path="res://assets/crosshair.png" id=4]
-##
-##[node name="Main" type="Node2D"]
-##script = ExtResource( 1 )
-##
-##[node name="Background" type="Sprite2D" parent="."]
-##texture = ExtResource( 2 )
-##centered = true
-##
-##[node name="Asteroid" type="Sprite2D" parent="."]
-##texture = ExtResource( 3 )
-##scale = Vector2(0.5, 0.5)
-##
-##[node name="Crosshair" type="Sprite2D" parent="."]
-##texture = ExtResource( 4 )
-##
-##[node name="UI" type="CanvasLayer" parent="."]
-##
-##[node name="TutorialLabel" type="Label" parent="UI"]
-##text = "Move with WASD or Arrow Keys. Press ENTER to lock target."
-##
-##[node name="ResultLabel" type="Label" parent="UI"]
-##visible = false
-##
-##
-##// File: scripts/Main.gd
-##extends Node2D
-#
-#@export var backgrounds: Array[Texture2D]
-#@export var moveSpeed := 300
-#
-#var progress := 0
-#var maxProgress := 3
-#var gameActive := false
-#
-#@onready var bg := $Background
-#@onready var asteroid := $Asteroid
-#@onready var crosshair := $Crosshair
-#@onready var tutorial := $UI/TutorialLabel
-#@onready var result := $UI/ResultLabel
-#
-#func _ready():
-	#bg.texture = backgrounds[0]
-	#tutorial.visible = true
-	#result.visible = false
-	#gameActive = true
-#
-#func _process(delta):
-	#if not gameActive:
-		#return
-#
-	#var dir := Vector2.ZERO
-	#if Input.is_action_pressed("ui_right") or Input.is_action_pressed("move_right"):
-		#dir.x += 1
-	#if Input.is_action_pressed("ui_left") or Input.is_action_pressed("move_left"):
-		#dir.x -= 1
-	#if Input.is_action_pressed("ui_down") or Input.is_action_pressed("move_down"):
-		#dir.y += 1
-	#if Input.is_action_pressed("ui_up") or Input.is_action_pressed("move_up"):
-		#dir.y -= 1
-#
-	#crosshair.position += dir.normalized() * moveSpeed * delta
-#
-	#if Input.is_action_just_pressed("ui_accept"):
-		#check_lock()
-#
-#func check_lock():
-	#if crosshair.get_rect().intersects(asteroid.get_rect()):
-		#progress += 1
-		#if progress >= maxProgress:
-			#win()
-		#else:
-			#advance_stage()
-	#else:
-		#lose()
-#
-#func advance_stage():
-	#asteroid.scale *= 1.5
-	#bg.texture = backgrounds[min(progress, backgrounds.size() - 1)]
-#
-#func win():
-	#gameActive = false
-	#result.text = "SUCCESS"
-	#result.visible = true
-#
-#func lose():
-	#gameActive = false
-	#result.text = "FAILED"
-	#result.visible = true
-#
-#
-##File: input_map.txt
-## Add these actions in Project Settings > Input Map
-##move_up = W
-##move_down = S
-##move_left = A
-##move_right = D
-##
-##// File: scenes/Tutorial.tscn
-##[gd_scene format=3]
-##
-##[node name="Tutorial" type="Control"]
-##
-##[node name="Label" type="Label" parent="."]
-##text = "Cover the asteroid with the crosshair and press ENTER."
-##
-##
-##// File: scenes/Success.tscn
-##[gd_scene format=3]
-##
-##[node name="Success" type="Control"]
-##
-##[node name="Label" type="Label" parent="."]
-##text = "Mission Successful"
-##
-##
-##// File: scenes/Failure.tscn
-##[gd_scene format=3]
-##
-##[node name="Failure" type="Control"]
-##
-##[node name="Label" type="Label" parent="."]
-##text = "Mission Failed"
+extends Sprite2D
+
+@export var moveSpeed: float = 200.0
+
+@onready var controlRoot: Control = get_parent().get_node("Control")
+@onready var confirmPlayer: AudioStreamPlayer = $ConfirmTargetPlayer
+
+var direction: Vector2
+
+func _ready():
+	randomize()
+	_set_random_direction()
+	set_process(true)
+
+func _process(delta):
+	position += direction * moveSpeed * delta
+	_keep_inside_control()
+
+func _set_random_direction():
+	direction = Vector2(
+		randf_range(-1.0, 1.0),
+		randf_range(-1.0, 1.0)
+	).normalized()
+
+func _keep_inside_control():
+	var rect := controlRoot.get_global_rect()
+	var texSize := texture.get_size() * scale
+
+	var left = rect.position.x + texSize.x * 0.5
+	var right = rect.position.x + rect.size.x - texSize.x * 0.5
+	var top = rect.position.y + texSize.y * 0.5
+	var bottom = rect.position.y + rect.size.y - texSize.y * 0.5
+
+	if position.x < left or position.x > right:
+		direction.x *= -1
+
+	if position.y < top or position.y > bottom:
+		direction.y *= -1
+
+	position.x = clamp(position.x, left, right)
+	position.y = clamp(position.y, top, bottom)
+
+func _input(event):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if _is_mouse_over():
+			confirmPlayer.play()
+
+func _is_mouse_over() -> bool:
+	var mousePos = get_global_mouse_position()
+	var size = texture.get_size() * scale
+	var rect = Rect2(position - size * 0.5, size)
+	return rect.has_point(mousePos)
