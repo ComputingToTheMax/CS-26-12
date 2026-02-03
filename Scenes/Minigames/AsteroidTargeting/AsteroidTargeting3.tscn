@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbho4dex4qdsi"]
+
+[ext_resource type="AudioStream" uid="uid://bg0sxfbbtqulw" path="res://Sources/Sounds/AsteroidMinigame/BackgroundMusic.ogg" id="1_hiuh5"]
+[ext_resource type="Texture2D" uid="uid://b760yqcfgp404" path="res://Sources/Images/AsteroidMinigame/BlackSpaceBackground2.png" id="2_jp8fb"]
+[ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="3_s6tao"]
+[ext_resource type="Script" uid="uid://4qfccl7cabti" path="res://Scripts/AsteroidTargeting.gd" id="4_o8nsx"]
+[ext_resource type="Texture2D" uid="uid://dlqomjqp1pluq" path="res://Sources/Images/Mars.png" id="5_5as1p"]
+[ext_resource type="Texture2D" uid="uid://i42qvfhpmres" path="res://Sources/Images/Moon.png" id="6_s7ufu"]
+
+[node name="AsteroidTargeting3" type="Node2D"]
+
+[node name="BlackSpaceBackground2" type="Sprite2D" parent="."]
+position = Vector2(579, 323)
+scale = Vector2(2.0277777, 2.0246913)
+texture = ExtResource("2_jp8fb")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_hiuh5")
+autoplay = true
+parameters/looping = false
+
+[node name="PsycheAsteroid" type="Sprite2D" parent="."]
+position = Vector2(936.00006, 209.00003)
+scale = Vector2(0.07222226, 0.087500006)
+texture = ExtResource("3_s6tao")
+script = ExtResource("4_o8nsx")
+
+[node name="Mars" type="Sprite2D" parent="."]
+position = Vector2(273, 146.99997)
+scale = Vector2(0.1268229, 0.14907414)
+texture = ExtResource("5_5as1p")
+
+[node name="Moon" type="Sprite2D" parent="."]
+position = Vector2(565.00006, 415)
+scale = Vector2(0.20052083, 0.2015625)
+texture = ExtResource("6_s7ufu")
