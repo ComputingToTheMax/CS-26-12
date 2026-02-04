@@ -16,20 +16,12 @@ scale = Vector2(2.0277777, 2.0246913)
 texture = ExtResource("2_jp8fb")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlackSpaceBackground2"]
-stream = ExtResource("2_s6tao")
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_hiuh5")
 autoplay = true
 parameters/looping = false
+
+[node name="Fail Click" type="AudioStreamPlayer" parent="BlackSpaceBackground2"]
+stream = ExtResource("2_s6tao")
 
 [node name="PsycheAsteroid" type="Sprite2D" parent="."]
 position = Vector2(936.00006, 209.00003)
@@ -52,3 +44,11 @@ texture = ExtResource("6_s7ufu")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Moon"]
 stream = ExtResource("2_s6tao")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
