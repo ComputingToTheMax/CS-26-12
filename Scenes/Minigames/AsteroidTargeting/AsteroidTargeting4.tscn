@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1hqjmgsxhvrp"]
+[gd_scene load_steps=8 format=3 uid="uid://d1hqjmgsxhvrp"]
 
 [ext_resource type="Texture2D" uid="uid://b760yqcfgp404" path="res://Sources/Images/AsteroidMinigame/BlackSpaceBackground2.png" id="1_os45r"]
 [ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="2_f05yf"]
+[ext_resource type="AudioStream" uid="uid://bg0sxfbbtqulw" path="res://Sources/Sounds/AsteroidMinigame/BackgroundMusic.ogg" id="2_f60cq"]
 [ext_resource type="Script" uid="uid://4qfccl7cabti" path="res://Scripts/AsteroidTargeting.gd" id="3_0nwcv"]
 [ext_resource type="Texture2D" uid="uid://dlqomjqp1pluq" path="res://Sources/Images/Mars.png" id="4_f60cq"]
+[ext_resource type="AudioStream" uid="uid://dgbff4kx04bpc" path="res://Sources/Sounds/AsteroidMinigame/ConfirmTarget.wav" id="5_lmwoc"]
+[ext_resource type="AudioStream" uid="uid://k5506rca1wus" path="res://Sources/Sounds/AsteroidMinigame/FailClick.wav" id="7_j747q"]
 
 [node name="AsteroidTargeting4" type="Node2D"]
 
@@ -11,6 +14,11 @@
 position = Vector2(578, 326)
 scale = Vector2(2.0243056, 2.0308642)
 texture = ExtResource("1_os45r")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlackSpaceBackground2"]
+stream = ExtResource("2_f60cq")
+autoplay = true
+parameters/looping = true
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -26,7 +34,13 @@ scale = Vector2(0.11296292, 0.13425925)
 texture = ExtResource("2_f05yf")
 script = ExtResource("3_0nwcv")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PsycheAsteroid"]
+stream = ExtResource("5_lmwoc")
+
 [node name="Mars" type="Sprite2D" parent="."]
 position = Vector2(485, 388)
 scale = Vector2(0.15833333, 0.16944444)
 texture = ExtResource("4_f60cq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Mars"]
+stream = ExtResource("7_j747q")
