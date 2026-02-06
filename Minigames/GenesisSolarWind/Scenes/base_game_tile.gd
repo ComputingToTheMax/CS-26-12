@@ -3,8 +3,8 @@ extends Node2D
 enum CURRENT_PATH { TO_ORBIT, ELLIPTICAL_ORBIT, FROM_ORBIT, NONE=-1}
 
 @onready
-var genesis_spacecraft = $TestCraft
-#var genesis_spacecraft = $GenesisSpacecraft
+#var genesis_spacecraft = $TestCraft
+var genesis_spacecraft = $GenesisSpacecraft
 
 @onready
 var to_orbit = $ToOrbit/PathFollow2D

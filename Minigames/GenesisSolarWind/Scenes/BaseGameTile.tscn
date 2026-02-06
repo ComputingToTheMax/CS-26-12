@@ -36,6 +36,12 @@ centered = false
 texture = ExtResource("2_t5ql6")
 centered = false
 
+[node name="GenesisSpacecraft" type="CharacterBody2D" parent="."]
+position = Vector2(395, 48)
+scale = Vector2(0.34, 0.34)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GenesisSpacecraft"]
+
 [node name="TestCraft" type="Sprite2D" parent="."]
 position = Vector2(394, 46)
 scale = Vector2(0.060000002, 0.060000002)
@@ -56,10 +62,6 @@ curve = SubResource("Curve2D_301g5")
 position = Vector2(395, 46)
 rotation = 3.073406
 loop = false
-
-[node name="GenesisSpacecraft" type="Sprite2D" parent="ToOrbit/PathFollow2D"]
-scale = Vector2(0.34, 0.34)
-texture = ExtResource("2_t5ql6")
 
 [node name="EllipticalOrbit" type="Path2D" parent="."]
 curve = SubResource("Curve2D_y4iy6")
