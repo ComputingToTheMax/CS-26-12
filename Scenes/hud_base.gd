@@ -11,7 +11,7 @@ extends Control
 @onready var dim: ColorRect = $InvOverlay/Screen/ColorRect
 
 # Example “big button”
-@onready var crew_btn: BaseButton = $InvOverlay/Screen/InvPanel/VBoxContainer/Crew
+@onready var crew_btn: BaseButton = $InvOverlay/Screen/InvPanel/CrewCont/Crew
 
 var overlay_open := false
 var tween: Tween
@@ -21,6 +21,9 @@ func _ready() -> void:
 	inv_overlay.visible = false
 	close_btn.visible = false
 	inv_btn.visible = true
+	var inv_panel := $InvOverlay/Screen/InvPanel
+	print("InvPanel node:", inv_panel)
+	print("InvPanel script:", inv_panel.get_script())	
 
 	_place_screen_offscreen()
 

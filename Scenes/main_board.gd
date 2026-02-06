@@ -5,7 +5,8 @@ extends Node2D
 var board_size
 var red_box_positions = []
 
-func _ready():
+func _ready() -> void:
+	
 	initialize_board()
 
 func initialize_board():
