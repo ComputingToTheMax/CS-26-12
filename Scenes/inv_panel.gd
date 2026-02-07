@@ -1,9 +1,9 @@
 extends Panel
 
 @export var slot_button_scene: PackedScene
-@export var slot_count: int = 24
+@export var slot_count: int = 12
 @export var columns: int = 6
-@export var slot_size: Vector2 = Vector2(80, 110) # width, height
+@export var slot_size: Vector2 = Vector2(80, 110) # width height
 
 @onready var grid: GridContainer = $CenterContainer/MarginContainer/GridContainer
 

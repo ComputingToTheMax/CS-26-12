@@ -1,9 +1,11 @@
 extends Control
 
-@onready var close_btn: BaseButton = $Panel/Content/TitleBar/CloseBtn
+@onready var close_btn: BaseButton = $Panel/Root/MarginContainer/NavBar/Close
 
 func _ready() -> void:
 	close_btn.pressed.connect(_on_close_pressed)
+	await get_tree().process_frame
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"): 

@@ -2,58 +2,133 @@
 
 [ext_resource type="Script" uid="uid://cnqnt2dpdsbrq" path="res://Scenes/UI/shopscreen.gd" id="1_rsstx"]
 
-[node name="Shops" type="Node2D"]
-
-[node name="Control" type="Control" parent="."]
+[node name="Shops" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_rsstx")
+mouse_filter = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Control"]
-custom_minimum_size = Vector2(900, 650)
+[node name="Control" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -450.0
-offset_top = -631.0
-offset_right = 450.0
-offset_bottom = 631.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_rsstx")
 
-[node name="Cont" type="VBoxContainer" parent="Control/PanelContainer"]
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.6872149, 0.68721503, 0.6872149, 1)
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Root" type="Control" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Panel/Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="NavBar" type="Control" parent="Control/Panel/Root/MarginContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Title" type="Label" parent="Control/Panel/Root/MarginContainer/NavBar"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -84.5
+offset_right = 84.5
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "Welcome to the Shop!"
+horizontal_alignment = 1
+
+[node name="Close" type="Button" parent="Control/Panel/Root/MarginContainer/NavBar"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -54.0
+offset_bottom = 31.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Close "
+
+[node name="MainShopCont" type="VBoxContainer" parent="Control/Panel/Root/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="Control/Panel/Root/MarginContainer/MainShopCont"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/Panel/Root/MarginContainer/MainShopCont/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Spacer" type="Control" parent="Control/Panel/Root/MarginContainer/MainShopCont/Control/ScrollContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ShopBtns" type="HBoxContainer" parent="Control/Panel/Root/MarginContainer/MainShopCont"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 
-[node name="TitleBar" type="HBoxContainer" parent="Control/PanelContainer/Cont"]
+[node name="SellBtn" type="Button" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopBtns"]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
+text = "Sell"
 
-[node name="Title" type="Label" parent="Control/PanelContainer/Cont/TitleBar"]
+[node name="BuyBtn" type="Button" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopBtns"]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
+text = "Buy"
 
-[node name="Close" type="Button" parent="Control/PanelContainer/Cont/TitleBar"]
+[node name="HireBtn" type="Button" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopBtns"]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-
-[node name="ShopBtns" type="VBoxContainer" parent="Control/PanelContainer/Cont"]
-layout_mode = 2
-
-[node name="SellBtn" type="Button" parent="Control/PanelContainer/Cont/ShopBtns"]
-custom_minimum_size = Vector2(100, 400)
-layout_mode = 2
-
-[node name="BuyBtn" type="Button" parent="Control/PanelContainer/Cont/ShopBtns"]
-custom_minimum_size = Vector2(100, 400)
-layout_mode = 2
-
-[node name="HireBtn" type="Button" parent="Control/PanelContainer/Cont/ShopBtns"]
-custom_minimum_size = Vector2(100, 400)
-layout_mode = 2
-
-[node name="Descp" type="Label" parent="Control/PanelContainer/Cont"]
-layout_mode = 2
+text = "Hire"
