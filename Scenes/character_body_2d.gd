@@ -26,7 +26,7 @@ func _process(event):
 	if Input.is_action_just_pressed("ui_accept"):
 		rng.randomize()
 		var random_int = rng.randi_range(1, 6)
-		
+		get_parent().set_dice_result(random_int)
 		target.x += random_int * snap.x
 		global_position = target
 		
