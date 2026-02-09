@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://thfx5mw34uqr"]
 
-[ext_resource type="Script" uid="uid://bt332c6ro6dx7" path="res://Scenes/main_board.gd" id="1_6bsxh"]
+[ext_resource type="Script" uid="uid://bt332c6ro6dx7" path="res://Scripts/main_board.gd" id="1_6bsxh"]
 [ext_resource type="Script" uid="uid://t16dhillvlnl" path="res://Scenes/character_body_2d.gd" id="2_6bsxh"]
 [ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="3_y7j1t"]
-[ext_resource type="Script" uid="uid://bwmuoxp53eed" path="res://Scenes/hud_base.gd" id="4_u7eij"]
+[ext_resource type="Script" uid="uid://bwmuoxp53eed" path="res://Scripts/hud_base.gd" id="4_u7eij"]
 [ext_resource type="Texture2D" uid="uid://ca758bk7k5kol" path="res://Sources/Images/Player-Idle.png" id="5_njf4n"]
 [ext_resource type="Script" uid="uid://b5k67o2lop2t3" path="res://Scenes/roll.gd" id="6_m4kfr"]
 

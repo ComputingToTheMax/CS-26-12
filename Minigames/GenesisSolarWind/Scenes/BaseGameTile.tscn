@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bo4mp5audgyic"]
+[gd_scene load_steps=8 format=3 uid="uid://bo4mp5audgyic"]
 
 [ext_resource type="Script" uid="uid://dat1imjp8k34d" path="res://Minigames/GenesisSolarWind/Scenes/base_game_tile.gd" id="1_t5ql6"]
 [ext_resource type="Texture2D" uid="uid://b35l82h0q0o3c" path="res://Minigames/GenesisSolarWind/Src/Images/MissionTrajectory.png" id="1_y4iy6"]
 [ext_resource type="Texture2D" uid="uid://b15o7brdcqmb5" path="res://Sources/Images/Placeholder.png" id="2_t5ql6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5ql6"]
+size = Vector2(170, 120)
 
 [sub_resource type="Curve2D" id="Curve2D_301g5"]
 _data = {
@@ -41,6 +44,10 @@ position = Vector2(395, 48)
 scale = Vector2(0.34, 0.34)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GenesisSpacecraft"]
+shape = SubResource("RectangleShape2D_t5ql6")
+
+[node name="Sprite2D" type="Sprite2D" parent="GenesisSpacecraft"]
+texture = ExtResource("2_t5ql6")
 
 [node name="TestCraft" type="Sprite2D" parent="."]
 position = Vector2(394, 46)

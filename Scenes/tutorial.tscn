@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b66ej8u3vttls"]
 
-[ext_resource type="Script" uid="uid://bfmak480tvjlv" path="res://Scenes/Tutorial.gd" id="1_omtrn"]
+[ext_resource type="Script" uid="uid://bfmak480tvjlv" path="res://Scripts/Tutorial.gd" id="1_omtrn"]
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1_unjit"]
 [ext_resource type="PackedScene" uid="uid://d1jbsh7ox37wt" path="res://Scenes/UI/PauseMenu.tscn" id="2_feyax"]
 
