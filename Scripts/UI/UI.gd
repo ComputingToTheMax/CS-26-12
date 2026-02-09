@@ -1,11 +1,12 @@
 extends CanvasLayer
 class_name UI
 
-@export var inventory_overlay_scene: PackedScene
-var inventory: InventoryOverlay
+@export var inventory_overlay_scene: PackedScene = preload("res://Scenes/UI/Inventory.tscn")
+
+var inventory: InventoryOverlay = null
 
 func _ready() -> void:
-	layer = 100  # always on top
+	layer = 100
 
 func show_inventory() -> void:
 	if inventory == null:

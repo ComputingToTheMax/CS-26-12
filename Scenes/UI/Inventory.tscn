@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxllthmye7w1s"]
+[gd_scene load_steps=4 format=3 uid="uid://cxllthmye7w1s"]
 
 [ext_resource type="Script" uid="uid://dba1ue0q5qqkl" path="res://Scenes/UI/Inventory.gd" id="1_8q74i"]
+[ext_resource type="Texture2D" uid="uid://dxlsrut5ml7or" path="res://Sources/Images/MediumArrow-Left-Idle.png" id="2_oc7th"]
+[ext_resource type="Script" uid="uid://detts2cbten4t" path="res://Scenes/UI/closebtn.gd" id="3_s6pj7"]
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -18,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.17641911, 0.17641908, 0.17641908, 1)
 
 [node name="Screen" type="Panel" parent="."]
@@ -27,18 +30,110 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="Title" type="Label" parent="Screen"]
-layout_mode = 0
-offset_right = 40.0
+[node name="InvPanel" type="Panel" parent="Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CrewCont" type="VBoxContainer" parent="Screen/InvPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crew" type="Button" parent="Screen/InvPanel/CrewCont"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Screen/InvPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Screen/InvPanel/CenterContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Screen/InvPanel/CenterContainer/MarginContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 25
+columns = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TopBar" type="Control" parent="Screen/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+
+[node name="Closebtn" type="TextureButton" parent="Screen/MarginContainer/VBoxContainer/TopBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_bottom = 65.0
+grow_horizontal = 0
+texture_normal = ExtResource("2_oc7th")
+script = ExtResource("3_s6pj7")
+
+[node name="Title" type="Label" parent="Screen/MarginContainer/VBoxContainer/TopBar"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.5
+offset_right = 37.5
 offset_bottom = 23.0
+grow_horizontal = 2
+text = "Inventory"
 
-[node name="CloseBtn" type="TextureButton" parent="Screen"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="progresscontain" type="Control" parent="Screen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 
-[node name="Content" type="Control" parent="Screen"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/MarginContainer/VBoxContainer/progresscontain"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -238.0
+offset_right = 238.0
+offset_bottom = 30.0
+grow_horizontal = 2
+
+[node name="progresslabel" type="Label" parent="Screen/MarginContainer/VBoxContainer/progresscontain/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "Percentage complete: "
+
+[node name="progress" type="ProgressBar" parent="Screen/MarginContainer/VBoxContainer/progresscontain/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+value = 20.0

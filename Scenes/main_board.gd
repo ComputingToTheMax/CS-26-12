@@ -14,7 +14,7 @@ func initialize_board():
 
 	var mid_y = round(board_size.y / 2) * cell_size.y
 	for x in range(board_size.x + 1):
-		if x % 2 == 1:
+		if x % 4 == 1:
 			var pos = Vector2(x * cell_size.x, mid_y)
 			red_box_positions.append(pos)
 			
