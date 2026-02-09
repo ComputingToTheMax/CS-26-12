@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://da7v2pxnl3ccx"]
+
+[ext_resource type="Script" uid="uid://bf4vhe2g47nii" path="res://alien_communication.gd" id="1_jrg4c"]
+
+[node name="alien_communication" type="Node2D"]
+script = ExtResource("1_jrg4c")
