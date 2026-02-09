@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ckesh74ho2idd"]
 
-[ext_resource type="Script" uid="uid://ihtjh4yrjx5j" path="res://Scenes/keycap.gd" id="1_bammy"]
+[ext_resource type="Script" uid="uid://ihtjh4yrjx5j" path="res://Scripts/keycap.gd" id="1_bammy"]
 [ext_resource type="Texture2D" uid="uid://b1oxpxuep3alt" path="res://Sources/Images/UnpressedKeycap.png" id="2_3ckqt"]
 [ext_resource type="Texture2D" uid="uid://cmsy0gnmk5qgm" path="res://Sources/Images/PressedKeycap.png" id="2_fgoes"]
 
