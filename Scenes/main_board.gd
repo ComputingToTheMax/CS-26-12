@@ -5,9 +5,19 @@ extends Node2D
 var board_size
 var red_box_positions = []
 
+var last_roll: int = 0
+var roll_label: Label
+
 func _ready() -> void:
-	
+	roll_label = Label.new()
+	roll_label.position = Vector2(10, 10)
+	roll_label.text = "Roll: 0"
+	add_child(roll_label)
 	initialize_board()
+	
+func set_dice_result(value: int):
+	last_roll = value
+	roll_label.text = "Roll: %d" % value
 
 func initialize_board():
 	board_size = Vector2i(get_viewport_rect().size) / cell_size
