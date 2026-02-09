@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://crmyvtlto5r43"]
+[gd_scene load_steps=2 format=3 uid="uid://crmyvtlto5r43"]
+
+[ext_resource type="Script" uid="uid://chptnarfqe8hv" path="res://Scenes/end_screen.gd" id="1_f2mtv"]
 
 [node name="end_screen" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_f2mtv")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -17,4 +20,4 @@ offset_bottom = 584.0
 theme_override_font_sizes/font_size = 30
 text = "Congratulations on getting to the psyche asteroid first.
  Good look on all of your future adventures astronaut!
- Click anywhere to try retern to the main menu"
+ Click anywhere to return to the main menu"
