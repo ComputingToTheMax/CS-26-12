@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://d33wx43jvdny0" path="res://Themes/primary_game_theme.tres" id="2_d4sn7"]
 [ext_resource type="Texture2D" uid="uid://dj700dm2g3hel" path="res://Sources/Images/PlayerSelection/Standard 1.svg" id="3_vkkjp"]
 [ext_resource type="Texture2D" uid="uid://bdrt0u0qj0o5c" path="res://Sources/Images/PlayerSelection/Wave 2.svg" id="4_2sgsx"]
+[ext_resource type="Texture2D" uid="uid://b48301im34184" path="res://Sources/Images/PlayerSelection/Wave 1.svg" id="4_d4sn7"]
 [ext_resource type="Texture2D" uid="uid://cga61nc5ec372" path="res://Sources/Images/PlayerSelection/Standard 2.svg" id="5_1h5sy"]
 [ext_resource type="Texture2D" uid="uid://csavoyffrds2n" path="res://Sources/Images/PlayerSelection/Standard 3.svg" id="6_srncb"]
 [ext_resource type="Texture2D" uid="uid://b6doxvtikh8pe" path="res://Sources/Images/PlayerSelection/Wave 3.svg" id="7_36mvp"]
@@ -50,7 +51,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
 texture_normal = ExtResource("3_vkkjp")
-texture_pressed = ExtResource("4_2sgsx")
+texture_pressed = ExtResource("4_d4sn7")
 ignore_texture_size = true
 stretch_mode = 5
 
