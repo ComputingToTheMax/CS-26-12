@@ -1,26 +1,33 @@
 extends Control
 
+var current_pressed_button = null
 
-@onready var play_checkbox: CheckBox =%PlayTutorial
 
-@export var tutorial_scene_path := "res://Scenes/tutorial.tscn"
-@export var main_board_scene_path := "res://Scenes/main_board.tscn"
-
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# If using an autoload GameSettings, initialize checkbox from it
-	if Engine.has_singleton("GameSettings"):
-		play_checkbox.button_pressed = Settings.play_tutorial
+	
+	# Connect Children Player Count Selection Buttons to the Below Handler
+	# TODO: Store the assumption that button names represent player counts.
+	var selection_buttons = $VBoxContainer/PlayerCountButtons
+	
+	for button in selection_buttons.get_children():
+		
+		# Bind the buttons themselves to the callable so that it can be accessed as a parameter.
+		button.pressed.connect(Callable(handle_player_count_selection).bind(button))
 
-	# Optional: update setting immediately when toggled
-	play_checkbox.toggled.connect(_on_play_toggled)
 
-func _on_play_toggled(pressed: bool) -> void:
-	Settings.play_tutorial = pressed
 
-func on_confirm_pressed() -> void:
-	Settings.play_tutorial = play_checkbox.button_pressed
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
 
-	if Settings.play_tutorial:
-		Navigator.go_to(tutorial_scene_path)
-	else:
-		Navigator.go_to(main_board_scene_path)
+
+func handle_player_count_selection(origin_node):
+	
+	GlobalSettings.number_of_players = int(origin_node.name)
+	
+	# "Unpress" any currently pressed button and afterwards assign the new button as currently pressed.
+	if current_pressed_button:
+			current_pressed_button.button_pressed = false
+			
+	current_pressed_button = origin_node
