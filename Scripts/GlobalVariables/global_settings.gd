@@ -2,8 +2,6 @@ extends Node
 
 # Public Global Settings Variables
 
-var number_of_players : int
-
 # Classes and Structures
 class PlayerConfiguration:
 	
@@ -19,18 +17,42 @@ class PlayerConfiguration:
 	
 	var shape:player_shapes
 	
+	func __init__(id, color=null, button_one=null, button_two=null, shape=null):
+		self.id = id
+		
+		if !color:
+			self.color=ALL_PLAYER_COLORS[GlobalSettings.number_of_players]
+			
+		var i = 0
+		while !button_one:
+			
+			var current_suggested_button = COMMON_BUTTON_COMBINATIONS[GlobalSettings.number_of_players][i]
+			
+			# If we've gone through the common and recommended button combinations, start picking random letters.
+			if i >= len(COMMON_BUTTON_COMBINATIONS[GlobalSettings.number_of_players]):
+				current_suggested_button = ALL_BUTTONS[randi_range(0, len(ALL_BUTTONS) - 1)]
+				
+			
+			if !GlobalSettings.check_if_button_in_use(current_suggested_button):
+				button_one = current_suggested_button
+			else:
+				i += 1
+		
+	
 
 	
 
 
 # Setup and Configuration
 
-static var current_player_index = 0
+static var number_of_players = 0
 static var players:Array[PlayerConfiguration] = []
 
 const ALL_PLAYER_COLORS = ["#0C6E9E", "#E76F51", "#33673B", "#8B426A"]
 
-const COMMON_BUTTON_COMBINATIONS = [["Q", "W"], ["O", "P"], ["Z", "X"], ["N", "M"]]
+const ALL_BUTTONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+const COMMON_BUTTON_COMBINATIONS = [["Q", "W", "E", "R", "A", "S", "D", "F"], ["O", "P", "I", "U", "L", "K", "J", "H"], ["Z", "X", "C", "V", "A", "S", "D", "F"], ["N", "M", "B", "V", "L", "K", "J", "H", "G"]]
+static var used_buttons = []
 
 enum player_shapes {Square, Circle, Triangle, Pentagon}
 
@@ -50,7 +72,14 @@ func _init() -> void:
 		
 		
 # Methods
-func create_player
+func create_player():
+	var new_player = PlayerConfiguration.new()
+	players.append(new_player)
+	number_of_players += 1
+	
+func check_if_button_in_use(button_letter:String):
+	return (button_letter in GlobalSettings.used_buttons)
+	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
