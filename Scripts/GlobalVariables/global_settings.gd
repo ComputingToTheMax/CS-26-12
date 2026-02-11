@@ -56,7 +56,7 @@ static var used_buttons = []
 
 enum player_shapes {Square, Circle, Triangle, Pentagon}
 
-static var player_colors = ALL_PLAYER_COLORS.duplicate_deep()
+static var player_colors = ALL_PLAYER_COLORS.duplicate(true)
 
 #
 
