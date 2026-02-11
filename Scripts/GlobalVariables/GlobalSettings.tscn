@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dflk6v4lamg8u"]
+
+[ext_resource type="Script" uid="uid://cewj5y0q4j6ae" path="res://Scripts/GlobalVariables/global_settings.gd" id="1_lylwd"]
+
+[node name="GlobalSettings" type="Node"]
+script = ExtResource("1_lylwd")
