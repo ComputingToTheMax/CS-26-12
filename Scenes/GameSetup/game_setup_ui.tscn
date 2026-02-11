@@ -1,28 +1,27 @@
-[gd_scene format=3 uid="uid://dgf6h3ujaa6al"]
+[gd_scene format=3 uid="uid://d2uekh8ssr6ci"]
 
-[ext_resource type="Script" uid="uid://ditvekvq4uvay" path="res://Scripts/game_setup_ui.gd" id="1_57ten"]
-[ext_resource type="Theme" uid="uid://d33wx43jvdny0" path="res://Themes/primary_game_theme.tres" id="2_d4sn7"]
-[ext_resource type="Texture2D" uid="uid://dj700dm2g3hel" path="res://Sources/Images/PlayerSelection/Standard 1.svg" id="3_vkkjp"]
-[ext_resource type="Texture2D" uid="uid://bdrt0u0qj0o5c" path="res://Sources/Images/PlayerSelection/Wave 2.svg" id="4_2sgsx"]
-[ext_resource type="Texture2D" uid="uid://b48301im34184" path="res://Sources/Images/PlayerSelection/Wave 1.svg" id="4_d4sn7"]
-[ext_resource type="Texture2D" uid="uid://cga61nc5ec372" path="res://Sources/Images/PlayerSelection/Standard 2.svg" id="5_1h5sy"]
-[ext_resource type="Texture2D" uid="uid://csavoyffrds2n" path="res://Sources/Images/PlayerSelection/Standard 3.svg" id="6_srncb"]
-[ext_resource type="Texture2D" uid="uid://b6doxvtikh8pe" path="res://Sources/Images/PlayerSelection/Wave 3.svg" id="7_36mvp"]
-[ext_resource type="Texture2D" uid="uid://cpfawjltxl5ie" path="res://Sources/Images/PlayerSelection/Standard 4.svg" id="8_yv1cg"]
-[ext_resource type="Texture2D" uid="uid://drlafv6f5v1o" path="res://Sources/Images/PlayerSelection/Wave 4.svg" id="9_x338h"]
-[ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="10_y3ush"]
-[ext_resource type="PackedScene" uid="uid://b66ej8u3vttls" path="res://Scenes/tutorial.tscn" id="11_d5rn2"]
+[ext_resource type="Theme" uid="uid://d33wx43jvdny0" path="res://Themes/primary_game_theme.tres" id="1_glc04"]
+[ext_resource type="Script" uid="uid://buuqp7ltev2ld" path="res://Scenes/GameSetupUI.gd" id="1_pknw2"]
+[ext_resource type="Texture2D" uid="uid://dj700dm2g3hel" path="res://Sources/Images/PlayerSelection/Standard 1.svg" id="2_hb04o"]
+[ext_resource type="Texture2D" uid="uid://cga61nc5ec372" path="res://Sources/Images/PlayerSelection/Standard 2.svg" id="3_ndywl"]
+[ext_resource type="Texture2D" uid="uid://csavoyffrds2n" path="res://Sources/Images/PlayerSelection/Standard 3.svg" id="4_182us"]
+[ext_resource type="Texture2D" uid="uid://cpfawjltxl5ie" path="res://Sources/Images/PlayerSelection/Standard 4.svg" id="5_6mjld"]
+[ext_resource type="Texture2D" uid="uid://drlafv6f5v1o" path="res://Sources/Images/PlayerSelection/Wave 4.svg" id="5_182us"]
+[ext_resource type="Texture2D" uid="uid://bdrt0u0qj0o5c" path="res://Sources/Images/PlayerSelection/Wave 2.svg" id="5_cc3me"]
+[ext_resource type="Texture2D" uid="uid://b48301im34184" path="res://Sources/Images/PlayerSelection/Wave 1.svg" id="6_hb04o"]
+[ext_resource type="Texture2D" uid="uid://b6doxvtikh8pe" path="res://Sources/Images/PlayerSelection/Wave 3.svg" id="7_6mjld"]
+[ext_resource type="Script" uid="uid://7er0duyq21il" path="res://Scenes/ConfirmBtnLogic.gd" id="11_ywvoo"]
 
-[node name="GameSetupUI" type="Control" unique_id=176878863]
+[node name="GameSetupUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_57ten")
+script = ExtResource("1_pknw2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1020624638]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.075
@@ -31,74 +30,75 @@ anchor_bottom = 0.925
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=1875728189]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_d4sn7")
+theme = ExtResource("1_glc04")
 bbcode_enabled = true
 text = "[b]How Many Players?[/b]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayerCountButtons" type="HBoxContainer" parent="VBoxContainer" unique_id=1496868090]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 45
 alignment = 1
 
-[node name="1" type="TextureButton" parent="VBoxContainer/PlayerCountButtons" unique_id=1405481559]
+[node name="OnePlayer" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
-texture_normal = ExtResource("3_vkkjp")
-texture_pressed = ExtResource("4_d4sn7")
+texture_normal = ExtResource("2_hb04o")
+texture_pressed = ExtResource("6_hb04o")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="2" type="TextureButton" parent="VBoxContainer/PlayerCountButtons" unique_id=311575011]
+[node name="TwoPlayers" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
-texture_normal = ExtResource("5_1h5sy")
-texture_pressed = ExtResource("4_2sgsx")
+texture_normal = ExtResource("3_ndywl")
+texture_pressed = ExtResource("5_cc3me")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="3" type="TextureButton" parent="VBoxContainer/PlayerCountButtons" unique_id=974267731]
+[node name="ThreePlayers" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
-texture_normal = ExtResource("6_srncb")
-texture_pressed = ExtResource("7_36mvp")
+texture_normal = ExtResource("4_182us")
+texture_pressed = ExtResource("7_6mjld")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="4" type="TextureButton" parent="VBoxContainer/PlayerCountButtons" unique_id=1854159846]
+[node name="FourPlayers" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
-texture_normal = ExtResource("8_yv1cg")
-texture_pressed = ExtResource("9_x338h")
+texture_normal = ExtResource("5_6mjld")
+texture_pressed = ExtResource("5_182us")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer" unique_id=1163385731]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/CenterContainer" unique_id=297119800]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/CenterContainer"]
 layout_mode = 2
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/CenterContainer/HBoxContainer2" unique_id=1078275390]
+[node name="PlayTutorial" type="CheckBox" parent="VBoxContainer/CenterContainer/HBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 text = "Play Tutorial"
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1608580452]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 20
 
-[node name="Button" type="Button" parent="VBoxContainer/MarginContainer" unique_id=932996281]
+[node name="confirm" type="Button" parent="VBoxContainer/MarginContainer" node_paths=PackedStringArray("target_handler")]
 layout_mode = 2
 text = "Confirm"
-script = ExtResource("10_y3ush")
-target_scene = ExtResource("11_d5rn2")
+script = ExtResource("11_ywvoo")
+target_handler = NodePath("../../..")
