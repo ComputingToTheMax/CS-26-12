@@ -32,8 +32,8 @@ point_count = 25
 script = ExtResource("1_t5ql6")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1733274154]
-position = Vector2(308.6111, 41.750027)
-scale = Vector2(0.55144674, 0.550463)
+position = Vector2(248.30554, 56.874977)
+scale = Vector2(0.61426497, 0.6168981)
 texture = ExtResource("2_d84ag")
 
 [node name="Genesis Mission Trajectory Map" type="Sprite2D" parent="." unique_id=531711872]
