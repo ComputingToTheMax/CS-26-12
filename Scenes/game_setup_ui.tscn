@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dgf6h3ujaa6al"]
+[gd_scene format=3 uid="uid://d2uekh8ssr6ci"]
 
 [ext_resource type="Theme" uid="uid://d33wx43jvdny0" path="res://Themes/primary_game_theme.tres" id="1_glc04"]
 [ext_resource type="Texture2D" uid="uid://dj700dm2g3hel" path="res://Sources/Images/PlayerSelection/Standard 1.svg" id="2_hb04o"]
