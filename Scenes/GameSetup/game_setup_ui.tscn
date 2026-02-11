@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dgf6h3ujaa6al"]
 
 [ext_resource type="Theme" uid="uid://d33wx43jvdny0" path="res://Themes/primary_game_theme.tres" id="1_glc04"]
-[ext_resource type="Script" uid="uid://buuqp7ltev2ld" path="res://Scenes/GameSetupUI.gd" id="1_pknw2"]
+[ext_resource type="Script" uid="uid://buuqp7ltev2ld" path="res://Scripts/GameSetupUI.gd" id="1_pknw2"]
 [ext_resource type="Texture2D" uid="uid://dj700dm2g3hel" path="res://Sources/Images/PlayerSelection/Standard 1.svg" id="2_hb04o"]
 [ext_resource type="Texture2D" uid="uid://cga61nc5ec372" path="res://Sources/Images/PlayerSelection/Standard 2.svg" id="3_ndywl"]
 [ext_resource type="Texture2D" uid="uid://csavoyffrds2n" path="res://Sources/Images/PlayerSelection/Standard 3.svg" id="4_182us"]
