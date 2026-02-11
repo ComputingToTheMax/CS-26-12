@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dat1imjp8k34d" path="res://Minigames/GenesisSolarWind/Scenes/base_game_tile.gd" id="1_t5ql6"]
 [ext_resource type="Texture2D" uid="uid://b35l82h0q0o3c" path="res://Minigames/GenesisSolarWind/Src/Images/MissionTrajectory.png" id="1_y4iy6"]
+[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_d84ag"]
 [ext_resource type="Texture2D" uid="uid://b15o7brdcqmb5" path="res://Sources/Images/Placeholder.png" id="2_t5ql6"]
 [ext_resource type="Script" uid="uid://ckrca6ka7kjro" path="res://Minigames/GenesisSolarWind/Scenes/genesis_spacecraft.gd" id="4_301g5"]
+[ext_resource type="PackedScene" uid="uid://ckesh74ho2idd" path="res://Scenes/Keycap.tscn" id="6_ku7c8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5ql6"]
 size = Vector2(170, 120)
@@ -29,6 +31,11 @@ point_count = 25
 [node name="BaseGameTile" type="Node2D" unique_id=1403132214]
 script = ExtResource("1_t5ql6")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1733274154]
+position = Vector2(308.6111, 41.750027)
+scale = Vector2(0.55144674, 0.550463)
+texture = ExtResource("2_d84ag")
+
 [node name="Genesis Mission Trajectory Map" type="Sprite2D" parent="." unique_id=531711872]
 visible = false
 position = Vector2(176, -81)
@@ -50,6 +57,10 @@ shape = SubResource("RectangleShape2D_t5ql6")
 
 [node name="Sprite2D" type="Sprite2D" parent="GenesisSpacecraft" unique_id=324884284]
 texture = ExtResource("2_t5ql6")
+
+[node name="Keycap" parent="GenesisSpacecraft" unique_id=1104716233 instance=ExtResource("6_ku7c8")]
+position = Vector2(2.9411774, -185.29414)
+scale = Vector2(0.365, 0.365)
 
 [node name="HistoricalTrajectory" type="Line2D" parent="." unique_id=1463188988]
 position = Vector2(3.0517578e-05, 3.8146973e-06)
