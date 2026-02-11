@@ -39,32 +39,47 @@ theme_override_constants/margin_top = 24
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/HUDBase/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="Control2" type="Control" parent="HUD/HUDBase/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 
-[node name="roll" type="Button" parent="HUD/HUDBase/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(70, 70)
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/HUDBase/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="roll" type="Button" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Roll"
 script = ExtResource("6_m4kfr")
-player_path = NodePath("../../../../../CharacterBody2D")
+player_path = NodePath("../../../../../../CharacterBody2D")
 
-[node name="turn counter" type="Label" parent="HUD/HUDBase/MarginContainer/HBoxContainer"]
+[node name="turn counter" type="Label" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 35
 text = "Turn: 0"
 
 [node name="Control" type="Control" parent="HUD/HUDBase/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 
-[node name="InvBtn" type="TextureButton" parent="HUD/HUDBase/MarginContainer/HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/HUDBase/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="InvBtn" type="TextureButton" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("5_njf4n")
 texture_hover = ExtResource("5_njf4n")
 
-[connection signal="pressed" from="HUD/HUDBase/MarginContainer/HBoxContainer/InvBtn" to="HUD/HUDBase" method="_on_inv_btn_pressed"]
+[node name="Control3" type="Control" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[connection signal="pressed" from="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer2/InvBtn" to="HUD/HUDBase" method="_on_inv_btn_pressed"]

@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 ui="*res://Scripts/UI/UI.gd"
 Navigator="*res://Scripts/Navigator.gd"
 GlobalSettings="*res://Scenes/GlobalVariables/global_settings.gd"
+Settings="*res://Scripts/PlayerSettings.gd"
 
 [dotnet]
 

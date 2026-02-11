@@ -11,7 +11,8 @@ func go_to(scene_path: String) -> void:
 		stack.push_back(current.scene_file_path)
 	get_tree().change_scene_to_file(scene_path)
 	var err := get_tree().change_scene_to_file(scene_path)
-
+	if err != OK:
+		push_error("SceneNavigator.go_to failed: %s (err=%d)" % [scene_path, err])
 func go_back() -> void:
 	if not stack.is_empty():
 		get_tree().change_scene_to_file(stack.pop_back())
