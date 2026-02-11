@@ -1,19 +1,34 @@
 extends Button
 
+
 @export var target_handler: Node
-@export var target_method_name: String = "on_confirm_pressed"
+@export var target_signal_name: String
+
 @export var target_scene: PackedScene
 
+
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	if (target_handler == null) and (target_scene == null):
+		push_error("Oops! It looks like this button was neither given a target scene, nor a target handler (a method to do something on a press). Please select the node and provide one of these so that button presses can trigger some event.")
+	
+	# Automatically connect any buttons this script is applied to to the _on_pressed method
+	# to handle button presses.
 	if target_handler != null:
-		pressed.connect(_on_pressed)
+		self.pressed.connect(_on_pressed_call);
+	elif target_scene != null:
+		self.pressed.connect(_on_pressed_switch_scenes)
 
-func _on_pressed() -> void:
-	if target_handler == null:
-		push_error("ConfirmButton: target_handler is null")
-		return
-	if not target_handler.has_method(target_method_name):
-		push_error("ConfirmButton: handler '%s' has no method '%s'" % [target_handler.name, target_method_name])
-		return
 
-	target_handler.call("_on_request_transition", target_scene)
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_pressed_call():
+	target_handler.emit_signal(target_signal_name, target_scene)
+	
+func _on_pressed_switch_scenes():
+	get_tree().change_scene_to_packed(target_scene)
+	
