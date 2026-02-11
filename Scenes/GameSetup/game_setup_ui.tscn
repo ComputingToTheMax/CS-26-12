@@ -40,13 +40,13 @@ text = "[b]How Many Players?[/b]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=2000576554]
+[node name="PlayerCountButtons" type="HBoxContainer" parent="VBoxContainer" unique_id=2000576554]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 45
 alignment = 1
 
-[node name="OnePlayer" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=1007039250]
+[node name="1" type="TextureButton" parent="VBoxContainer/PlayerCountButtons" unique_id=1007039250]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
@@ -55,7 +55,7 @@ texture_pressed = ExtResource("6_hb04o")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="TwoPlayers" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=530377323]
+[node name="2" type="TextureButton" parent="VBoxContainer/PlayerCountButtons" unique_id=530377323]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
@@ -64,7 +64,7 @@ texture_pressed = ExtResource("5_cc3me")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="ThreePlayers" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=2023156087]
+[node name="3" type="TextureButton" parent="VBoxContainer/PlayerCountButtons" unique_id=2023156087]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
@@ -73,7 +73,7 @@ texture_pressed = ExtResource("7_6mjld")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="FourPlayers" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=608313769]
+[node name="4" type="TextureButton" parent="VBoxContainer/PlayerCountButtons" unique_id=608313769]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
