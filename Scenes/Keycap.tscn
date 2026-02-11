@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckesh74ho2idd"]
+[gd_scene format=3 uid="uid://ckesh74ho2idd"]
 
 [ext_resource type="Script" uid="uid://ihtjh4yrjx5j" path="res://Scripts/keycap.gd" id="1_bammy"]
 [ext_resource type="Texture2D" uid="uid://b1oxpxuep3alt" path="res://Sources/Images/UnpressedKeycap.png" id="2_3ckqt"]
@@ -9,16 +9,16 @@ font_size = 90
 font_color = Color(0, 0, 0, 1)
 shadow_size = 6
 
-[node name="Keycap" type="Node2D"]
+[node name="Keycap" type="Node2D" unique_id=1104716233]
 script = ExtResource("1_bammy")
 unpressed_keycap = ExtResource("2_3ckqt")
 pressed_keycap = ExtResource("2_fgoes")
 
-[node name="Key" type="Sprite2D" parent="."]
+[node name="Key" type="Sprite2D" parent="." unique_id=474696140]
 texture = ExtResource("2_fgoes")
 centered = false
 
-[node name="KeyCharacter" type="Label" parent="Key"]
+[node name="KeyCharacter" type="Label" parent="Key" unique_id=589437798]
 offset_left = 210.0
 offset_top = 160.0
 offset_right = 293.0
@@ -28,7 +28,7 @@ label_settings = SubResource("LabelSettings_1hkb5")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BlinkTimer" type="Timer" parent="."]
+[node name="BlinkTimer" type="Timer" parent="." unique_id=669722198]
 autostart = true
 
 [connection signal="timeout" from="BlinkTimer" to="." method="flip_state"]
