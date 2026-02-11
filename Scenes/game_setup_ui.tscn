@@ -1,6 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dgf6h3ujaa6al"]
 
 [ext_resource type="Theme" uid="uid://d33wx43jvdny0" path="res://Themes/primary_game_theme.tres" id="1_glc04"]
+[ext_resource type="Script" uid="uid://buuqp7ltev2ld" path="res://Scenes/GameSetupUI.gd" id="1_pknw2"]
 [ext_resource type="Texture2D" uid="uid://dj700dm2g3hel" path="res://Sources/Images/PlayerSelection/Standard 1.svg" id="2_hb04o"]
 [ext_resource type="Texture2D" uid="uid://cga61nc5ec372" path="res://Sources/Images/PlayerSelection/Standard 2.svg" id="3_ndywl"]
 [ext_resource type="Texture2D" uid="uid://csavoyffrds2n" path="res://Sources/Images/PlayerSelection/Standard 3.svg" id="4_182us"]
@@ -9,8 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bdrt0u0qj0o5c" path="res://Sources/Images/PlayerSelection/Wave 2.svg" id="5_cc3me"]
 [ext_resource type="Texture2D" uid="uid://b48301im34184" path="res://Sources/Images/PlayerSelection/Wave 1.svg" id="6_hb04o"]
 [ext_resource type="Texture2D" uid="uid://b6doxvtikh8pe" path="res://Sources/Images/PlayerSelection/Wave 3.svg" id="7_6mjld"]
-[ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="10_cc3me"]
-[ext_resource type="PackedScene" uid="uid://b66ej8u3vttls" path="res://Scenes/tutorial.tscn" id="11_ywvoo"]
+[ext_resource type="Script" uid="uid://7er0duyq21il" path="res://Scenes/ConfirmBtnLogic.gd" id="11_ywvoo"]
 
 [node name="GameSetupUI" type="Control"]
 layout_mode = 3
@@ -19,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_pknw2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -86,7 +87,8 @@ layout_mode = 2
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/CenterContainer"]
 layout_mode = 2
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/CenterContainer/HBoxContainer2"]
+[node name="PlayTutorial" type="CheckBox" parent="VBoxContainer/CenterContainer/HBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 text = "Play Tutorial"
@@ -95,8 +97,8 @@ text = "Play Tutorial"
 layout_mode = 2
 theme_override_constants/margin_top = 20
 
-[node name="Button" type="Button" parent="VBoxContainer/MarginContainer"]
+[node name="confirm" type="Button" parent="VBoxContainer/MarginContainer" node_paths=PackedStringArray("target_handler")]
 layout_mode = 2
 text = "Confirm"
-script = ExtResource("10_cc3me")
-target_scene = ExtResource("11_ywvoo")
+script = ExtResource("11_ywvoo")
+target_handler = NodePath("../../..")

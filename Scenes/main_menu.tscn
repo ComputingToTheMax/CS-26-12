@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="5_vno1p"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="6_6mw8b"]
 [ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/settings.tscn" id="8_aae8c"]
-[ext_resource type="PackedScene" uid="uid://b7t5eepnxoou1" path="res://Scenes/GameSetup/game_setup.tscn" id="8_vr1f0"]
+[ext_resource type="PackedScene" uid="uid://dgf6h3ujaa6al" path="res://Scenes/game_setup_ui.tscn" id="9_16hvj"]
 [ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/credits.tscn" id="9_qg82j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5egv6"]
@@ -32,6 +32,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3")
+play_target_scene = ExtResource("9_16hvj")
 
 [node name="FadeLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -98,8 +99,7 @@ theme_override_font_sizes/font_size = 32
 text = "Play"
 script = ExtResource("6_6mw8b")
 target_handler = NodePath("../../..")
-target_signal_name = "request_transition"
-target_scene = ExtResource("8_vr1f0")
+target_scene = ExtResource("9_16hvj")
 
 [node name="SettingsButton" type="Button" parent="GameMenu/GameMenuButtons" node_paths=PackedStringArray("target_handler")]
 layout_mode = 2
@@ -107,7 +107,6 @@ theme_override_font_sizes/font_size = 32
 text = "Settings"
 script = ExtResource("6_6mw8b")
 target_handler = NodePath("../../..")
-target_signal_name = "request_transition"
 target_scene = ExtResource("8_aae8c")
 
 [node name="CreditsButton" type="Button" parent="GameMenu/GameMenuButtons" node_paths=PackedStringArray("target_handler")]
@@ -116,7 +115,6 @@ theme_override_font_sizes/font_size = 32
 text = "Credits"
 script = ExtResource("6_6mw8b")
 target_handler = NodePath("../../..")
-target_signal_name = "request_transition"
 target_scene = ExtResource("9_qg82j")
 
 [node name="PsycheMissionLink" type="Button" parent="."]
@@ -138,5 +136,3 @@ layout_mode = 0
 offset_right = 114.0
 offset_bottom = 34.0
 text = "Psyche-opoly"
-
-[connection signal="request_transition" from="." to="." method="_on_request_transition"]

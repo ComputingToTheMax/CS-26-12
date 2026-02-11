@@ -2,7 +2,7 @@ extends CharacterBody2D
 @export var Board: MainBoard
 @export var cell_size : Vector2i
 @onready var snap:Vector2i
-@onready var turn_label: Label = get_parent().get_node("HUD/HUDBase/MarginContainer/HBoxContainer/turn counter")
+@onready var turn_label: Label = get_parent().get_node("HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer/turn counter")
 var initialized:= false
 var target
 var rng = RandomNumberGenerator.new()
@@ -44,7 +44,7 @@ func _update_turn_label() -> void:
 func _is_off_board():
 	var board = get_viewport_rect().size
 	if target.x > board.x:
-		get_tree().change_scene_to_file("res://Scenes/end_screen.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting1.tscn")
 
 func _check_red_box():
 	var red_positions = get_parent().red_box_positions

@@ -88,29 +88,34 @@ layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 1
 
+[node name="Title" type="Label" parent="Screen/MarginContainer/VBoxContainer/TopBar"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.5
+offset_right = 81.5
+offset_bottom = 49.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 35
+text = "Inventory"
+
 [node name="Closebtn" type="TextureButton" parent="Screen/MarginContainer/VBoxContainer/TopBar"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -72.0
+offset_left = -82.0
+offset_right = -10.0
 offset_bottom = 65.0
 grow_horizontal = 0
 texture_normal = ExtResource("2_oc7th")
 script = ExtResource("3_s6pj7")
 
-[node name="Title" type="Label" parent="Screen/MarginContainer/VBoxContainer/TopBar"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -37.5
-offset_right = 37.5
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 35
-text = "Inventory"
+[node name="spacer" type="Control" parent="Screen/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
 
 [node name="progresscontain" type="Control" parent="Screen/MarginContainer/VBoxContainer"]
 layout_mode = 2
