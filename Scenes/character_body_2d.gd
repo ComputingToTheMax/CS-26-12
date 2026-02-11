@@ -1,21 +1,30 @@
 extends CharacterBody2D
-
-@onready var snap = get_parent().cell_size
-@onready var cell_size = get_parent().cell_size
+@export var Board: MainBoard
+@export var cell_size : Vector2i
+@onready var snap:Vector2i
 @onready var turn_label: Label = get_parent().get_node("HUD/HUDBase/MarginContainer/HBoxContainer/turn counter")
-
+var initialized:= false
 var target
 var rng = RandomNumberGenerator.new()
 var turn_count:=0
 var can_roll := true
 var roll:=0
+
 func _ready():
+	
+	
+	cell_size = Board.get("cell_size")
+	snap=cell_size
 	rng.randomize()
 	var board_size = Vector2i(get_viewport_rect().size)/cell_size
 	target = Vector2(0, round(board_size.y/2) * cell_size.y)
 	global_position = target
+	initialized=true
 	_update_turn_label()
 func roll_and_move() -> void:
+	if not initialized:
+		push_error("roll and move called too early")
+		return		
 	if not can_roll:
 		return
 
@@ -23,7 +32,7 @@ func roll_and_move() -> void:
 
 	roll = rng.randi_range(1, 6)
 	print("rolled:", roll)
-	target.x += roll * cell_size.x
+	target.x += (roll * cell_size.x)
 	global_position = target
 
 	_is_off_board()
@@ -41,7 +50,7 @@ func _check_red_box():
 	var red_positions = get_parent().red_box_positions
 	for pos in red_positions:
 		if target.is_equal_approx(pos):
-			get_tree().change_scene_to_file("res://Scenes/Minigames/hanger_madness.tscn")
+			get_tree().change_scene_to_file("res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting1.tscn")
 			return
 
 func _process(event):

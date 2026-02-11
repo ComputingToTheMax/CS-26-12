@@ -109,6 +109,7 @@ offset_left = -37.5
 offset_right = 37.5
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_font_sizes/font_size = 35
 text = "Inventory"
 
 [node name="progresscontain" type="Control" parent="Screen/MarginContainer/VBoxContainer"]
@@ -128,6 +129,7 @@ grow_horizontal = 2
 [node name="progresslabel" type="Label" parent="Screen/MarginContainer/VBoxContainer/progresscontain/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Percentage complete: "
 
 [node name="progress" type="ProgressBar" parent="Screen/MarginContainer/VBoxContainer/progresscontain/HBoxContainer"]
