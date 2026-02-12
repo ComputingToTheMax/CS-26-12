@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://cewj5y0q4j6ae" path="res://Scripts/GlobalVariables/global_settings.gd" id="1_lylwd"]
 
-[node name="GlobalSettings" type="Node"]
+[node name="GlobalSettings" type="Node" unique_id=1777761347]
 script = ExtResource("1_lylwd")

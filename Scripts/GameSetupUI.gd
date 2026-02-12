@@ -1,6 +1,6 @@
 extends Control
 
-var current_pressed_button = null
+var currently_pressed_button = null
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,10 +24,10 @@ func _process(delta: float) -> void:
 
 func handle_player_count_selection(origin_node):
 	
-	GlobalSettings.number_of_players = int(origin_node.name)
+	GlobalSettings.set_number_of_players(int(origin_node.name)) 
 	
 	# "Unpress" any currently pressed button and afterwards assign the new button as currently pressed.
-	if current_pressed_button:
-			current_pressed_button.button_pressed = false
+	if currently_pressed_button:
+			currently_pressed_button.button_pressed = false
 			
-	current_pressed_button = origin_node
+	currently_pressed_button = origin_node

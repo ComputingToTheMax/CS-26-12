@@ -77,6 +77,12 @@ func create_player():
 	players.append(new_player)
 	number_of_players += 1
 	
+func set_number_of_players(new_number_of_players:int):
+	number_of_players = new_number_of_players
+	
+	while len(players) < new_number_of_players:
+		create_player()
+	
 func check_if_button_in_use(button_letter:String):
 	return (button_letter in GlobalSettings.used_buttons)
 	
