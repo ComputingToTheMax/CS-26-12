@@ -47,6 +47,7 @@ class PlayerConfiguration:
 
 static var number_of_players = 0
 static var players:Array[PlayerConfiguration] = []
+static var active_players:Array[PlayerConfiguration] = []
 
 const ALL_PLAYER_COLORS = ["#0C6E9E", "#E76F51", "#33673B", "#8B426A"]
 
@@ -72,18 +73,21 @@ func _init() -> void:
 		
 		
 # Methods
-func create_player():
+static func create_player():
 	var new_player = PlayerConfiguration.new()
 	players.append(new_player)
 	number_of_players += 1
 	
-func set_number_of_players(new_number_of_players:int):
+static func set_number_of_players(new_number_of_players:int):
 	number_of_players = new_number_of_players
 	
 	while len(players) < new_number_of_players:
 		create_player()
+		
+static func get_number_of_active_players() -> int:
+	return len(active_players)
 	
-func check_if_button_in_use(button_letter:String):
+static func check_if_button_in_use(button_letter:String):
 	return (button_letter in GlobalSettings.used_buttons)
 	
 
