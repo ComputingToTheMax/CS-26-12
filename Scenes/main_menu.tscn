@@ -98,7 +98,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Play"
 script = ExtResource("6_6mw8b")
-signal_name_to_emit = null
 target_scene = ExtResource("9_16hvj")
 
 [node name="SettingsButton" type="Button" parent="GameMenu/GameMenuButtons" unique_id=2004235370]
@@ -106,7 +105,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Settings"
 script = ExtResource("6_6mw8b")
-signal_name_to_emit = null
 target_scene = ExtResource("8_aae8c")
 
 [node name="CreditsButton" type="Button" parent="GameMenu/GameMenuButtons" unique_id=1033019032]
@@ -114,7 +112,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Credits"
 script = ExtResource("6_6mw8b")
-signal_name_to_emit = null
 target_scene = ExtResource("9_qg82j")
 
 [node name="PsycheMissionLink" type="Button" parent="." unique_id=1155316679]
