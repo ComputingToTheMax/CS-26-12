@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dhhooc4dw8xxn" path="res://Scripts/credits_scene.gd" id="1_gryuy"]
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_ccovl"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="3_1bamb"]
-[ext_resource type="PackedScene" uid="uid://7o6op8afgol0" path="res://Scenes/Disclaimer.tscn" id="4_xelri"]
 [ext_resource type="PackedScene" uid="uid://cpmdovpetc8ty" path="res://Scenes/main_menu.tscn" id="5_xelri"]
 
 [node name="Credits" type="Control" unique_id=1290088201]
@@ -37,17 +36,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_ccovl")
 
-[node name="ReturnButton" type="Button" parent="TextureRect" unique_id=634405436]
-visible = false
-layout_mode = 0
-offset_left = 13.0
-offset_top = 609.0
-offset_right = 186.0
-offset_bottom = 640.0
-text = "Return to Main Menu"
-script = ExtResource("3_1bamb")
-target_scene = ExtResource("4_xelri")
-
 [node name="RichTextLabel" type="RichTextLabel" parent="TextureRect" unique_id=1053069381]
 layout_mode = 1
 anchors_preset = 15
@@ -68,7 +56,7 @@ Dr. Cassie Bowman, Arizona State University
 Project Advisor:
 Dr. Braxton Cuneo, Seattle University"
 
-[node name="Button" type="Button" parent="." unique_id=1914405049]
+[node name="ReturnButton" type="Button" parent="." unique_id=1914405049]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
