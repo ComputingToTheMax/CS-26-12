@@ -9,9 +9,9 @@
 [ext_resource type="Shader" uid="uid://dqs4472nlo58l" path="res://Shaders/16PsycheVisualShader.tres" id="5_aae8c"]
 [ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="5_vno1p"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="6_6mw8b"]
-[ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/settings.tscn" id="8_aae8c"]
 [ext_resource type="PackedScene" uid="uid://dgf6h3ujaa6al" path="res://Scenes/GameSetup/game_setup_ui.tscn" id="9_16hvj"]
-[ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/credits.tscn" id="9_qg82j"]
+[ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/settings.tscn" id="9_qg82j"]
+[ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/credits.tscn" id="11_t1dhk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5egv6"]
 shader = ExtResource("3_t1dhk")
@@ -105,14 +105,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Settings"
 script = ExtResource("6_6mw8b")
-target_scene = ExtResource("8_aae8c")
+target_scene = ExtResource("9_qg82j")
 
 [node name="CreditsButton" type="Button" parent="GameMenu/GameMenuButtons" unique_id=1033019032]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Credits"
 script = ExtResource("6_6mw8b")
-target_scene = ExtResource("9_qg82j")
+target_scene = ExtResource("11_t1dhk")
 
 [node name="PsycheMissionLink" type="Button" parent="." unique_id=1155316679]
 custom_minimum_size = Vector2(30, 30)
