@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bo4mp5audgyic"]
+[gd_scene format=3 uid="uid://bo4mp5audgyic"]
 
 [ext_resource type="Script" uid="uid://dat1imjp8k34d" path="res://Minigames/GenesisSolarWind/Scenes/base_game_tile.gd" id="1_t5ql6"]
 [ext_resource type="Texture2D" uid="uid://b35l82h0q0o3c" path="res://Minigames/GenesisSolarWind/Src/Images/MissionTrajectory.png" id="1_y4iy6"]
+[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_d84ag"]
 [ext_resource type="Texture2D" uid="uid://b15o7brdcqmb5" path="res://Sources/Images/Placeholder.png" id="2_t5ql6"]
+[ext_resource type="Script" uid="uid://ckrca6ka7kjro" path="res://Minigames/GenesisSolarWind/Scenes/genesis_spacecraft.gd" id="4_301g5"]
+[ext_resource type="PackedScene" uid="uid://ckesh74ho2idd" path="res://Scenes/Keycap.tscn" id="6_ku7c8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5ql6"]
 size = Vector2(170, 120)
@@ -21,68 +24,85 @@ point_count = 9
 
 [sub_resource type="Curve2D" id="Curve2D_t5ql6"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 273, -25, 0, 0, 0, 0, 283, 4, 0, -19.117844, 0, 19.117844, 288, 48, 0, 0, 0, 0, 281, 99, 7.531272, 0, -7.531272, 0, 267, 122, 0, 0, 0, 0, 259, 109, 0, 0, 0, 0, 252, 88, 0, 0, 0, 0, 252, 25, -9.967963, 9.229595, 9.967963, -9.229595, 264, -8, -19.48651, 1.316656, 19.48651, -1.316656, 278, -18, -14.746548, -22.383152, 14.746548, 22.383152, 318, 30, -6.58328, -6.8466115, 0, 0, 346, 66, 0, 0, 0, 0, 360, 79, -22.646482, 0, 22.646482, 0, 393, 90, -22.383152, 10.006586, 22.383152, -10.006586, 420, 84, 0, 0, 0, 0, 454, 49, 0, 0, 0, 0, 489, -18, -15.536541, 0.78999364, 15.536541, -0.78999364, 511, -36, -0.5266624, -11.849904, 0.5266624, 11.849904, 539, -3, -1.5799873, -14.746548, 1.5799873, 14.746548, 543, 23, 10.533248, -18.169853, -10.533248, 18.169853, 531, 66, 11.586573, -6.319949, -11.586573, 6.319949, 501, 91, 14.219885, 7.1099424, -14.219885, -7.1099424, 459, 87, 9.743255, 8.426599, -9.743255, -8.426599, 416, 59, 0, 0, 0, 0, 395, 48)
+"points": PackedVector2Array(0, 0, 0, 0, 273, -25, 0, 0, 0, 0, 283, 4, 0, -19.117844, 0, 19.117844, 288, 48, 0, 0, 0, 0, 281, 99, 7.531272, 0, -7.531272, 0, 267, 122, 0, 0, 0, 0, 259, 109, 0, 0, 0, 0, 252, 88, 0, 0, 0, 0, 252, 25, -9.967963, 9.229595, 9.967963, -9.229595, 264, -8, -19.48651, 1.316656, 19.48651, -1.316656, 278, -18, -14.746548, -22.383152, 14.746548, 22.383152, 318, 30, -6.58328, -6.8466115, 0, 0, 346, 66, 0, 0, 0, 0, 360, 79, -22.646482, 0, 22.646482, 0, 393, 90, -22.383152, 10.006586, 22.383152, -10.006586, 420, 84, 0, 0, 0, 0, 454, 49, 0, 0, 0, 0, 489, -18, -15.536541, 0.78999364, 15.536541, -0.78999364, 511, -36, -5.4068294, -14.883521, 5.4068294, 14.883521, 539, -8, -0.26102328, -16.724995, 0.26102328, 16.724995, 542, 21, 10.533248, -18.169853, -10.533248, 18.169853, 532, 66, 13.961594, -5.4190793, -13.961594, 5.4190793, 501, 91, 14.219885, 7.1099424, -14.219885, -7.1099424, 459, 87, 9.743255, 8.426599, -9.743255, -8.426599, 416, 59, 0, 0, 0, 0, 395, 48)
 }
 point_count = 25
 
-[node name="BaseGameTile" type="Node2D"]
+[node name="BaseGameTile" type="Node2D" unique_id=1403132214]
 script = ExtResource("1_t5ql6")
 
-[node name="Genesis Mission Trajectory" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1733274154]
+position = Vector2(248.30554, 56.874977)
+scale = Vector2(0.61426497, 0.6168981)
+texture = ExtResource("2_d84ag")
+
+[node name="Genesis Mission Trajectory Map" type="Sprite2D" parent="." unique_id=531711872]
 visible = false
 position = Vector2(176, -81)
 scale = Vector2(0.6235011, 0.62350124)
 texture = ExtResource("1_y4iy6")
 centered = false
 
-[node name="Sun" type="Sprite2D" parent="."]
+[node name="Sun" type="Sprite2D" parent="." unique_id=1638765844]
 texture = ExtResource("2_t5ql6")
 centered = false
 
-[node name="GenesisSpacecraft" type="CharacterBody2D" parent="."]
+[node name="GenesisSpacecraft" type="CharacterBody2D" parent="." unique_id=12642340]
 position = Vector2(395, 48)
 scale = Vector2(0.34, 0.34)
+script = ExtResource("4_301g5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GenesisSpacecraft"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GenesisSpacecraft" unique_id=776315649]
 shape = SubResource("RectangleShape2D_t5ql6")
 
-[node name="Sprite2D" type="Sprite2D" parent="GenesisSpacecraft"]
+[node name="Sprite2D" type="Sprite2D" parent="GenesisSpacecraft" unique_id=324884284]
 texture = ExtResource("2_t5ql6")
 
-[node name="TestCraft" type="Sprite2D" parent="."]
+[node name="Keycap" parent="GenesisSpacecraft" unique_id=1104716233 instance=ExtResource("6_ku7c8")]
+position = Vector2(2.9411774, -185.29414)
+scale = Vector2(0.365, 0.365)
+
+[node name="HistoricalTrajectory" type="Line2D" parent="." unique_id=1463188988]
+position = Vector2(3.0517578e-05, 3.8146973e-06)
+scale = Vector2(0.9999999, 0.9999999)
+width = 3.0
+
+[node name="TestCraft" type="Sprite2D" parent="." unique_id=341864905]
 position = Vector2(394, 46)
 scale = Vector2(0.060000002, 0.060000002)
 texture = ExtResource("2_t5ql6")
 centered = false
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1497562945]
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="SubViewport"]
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="SubViewport" unique_id=7899480]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ToOrbit" type="Path2D" parent="."]
+[node name="ToOrbit" type="Path2D" parent="." unique_id=2144774435]
 position = Vector2(0, 2)
 curve = SubResource("Curve2D_301g5")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="ToOrbit"]
+[node name="PathFollow2D" type="PathFollow2D" parent="ToOrbit" unique_id=1977567748]
 position = Vector2(395, 46)
 rotation = 3.073406
+rotates = false
 loop = false
 
-[node name="EllipticalOrbit" type="Path2D" parent="."]
+[node name="EllipticalOrbit" type="Path2D" parent="." unique_id=1695293309]
 curve = SubResource("Curve2D_y4iy6")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="EllipticalOrbit"]
+[node name="PathFollow2D" type="PathFollow2D" parent="EllipticalOrbit" unique_id=1518123644]
 position = Vector2(273, -26)
-rotation = 1.1497277
+rotates = false
 
-[node name="FromOrbit" type="Path2D" parent="."]
+[node name="FromOrbit" type="Path2D" parent="." unique_id=88526583]
 curve = SubResource("Curve2D_t5ql6")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="FromOrbit"]
+[node name="PathFollow2D" type="PathFollow2D" parent="FromOrbit" unique_id=476894038]
 position = Vector2(273, -25)
-rotation = 1.2387369
+rotates = false
 loop = false
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=532399622]
+position = Vector2(243, 55)

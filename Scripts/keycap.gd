@@ -1,5 +1,9 @@
 extends Node2D
 
+# How to use:
+# - Import a copy of this scene into the place you would like your keycap.
+# - Set the keycap properties expored to the Godot editor.
+
 @export
 var unpressed_keycap: Texture2D
 @export
@@ -26,9 +30,6 @@ func _ready() -> void:
 	key_sprite.texture = unpressed_keycap
 	
 	$BlinkTimer.wait_time = blink_delay
-	
-	
-	
 
 func flip_state() -> void:
 	if pressed:

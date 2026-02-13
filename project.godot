@@ -16,14 +16,14 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Race To Psyche"
 run/main_scene="uid://cpmdovpetc8ty"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 ui="*res://Scripts/UI/UI.gd"
 Navigator="*res://Scripts/Navigator.gd"
-GlobalSettings="*res://Scenes/GlobalVariables/global_settings.gd"
+GlobalSettings="*res://Scripts/GlobalVariables/global_settings.gd"
 Settings="*res://Scripts/PlayerSettings.gd"
 
 [dotnet]

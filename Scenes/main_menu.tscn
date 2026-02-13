@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cpmdovpetc8ty"]
+[gd_scene format=3 uid="uid://cpmdovpetc8ty"]
 
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1"]
 [ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="2"]
@@ -9,9 +9,9 @@
 [ext_resource type="Shader" uid="uid://dqs4472nlo58l" path="res://Shaders/16PsycheVisualShader.tres" id="5_aae8c"]
 [ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="5_vno1p"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="6_6mw8b"]
-[ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/settings.tscn" id="8_aae8c"]
-[ext_resource type="PackedScene" uid="uid://dgf6h3ujaa6al" path="res://Scenes/game_setup_ui.tscn" id="9_16hvj"]
-[ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/credits.tscn" id="9_qg82j"]
+[ext_resource type="PackedScene" uid="uid://dgf6h3ujaa6al" path="res://Scenes/GameSetup/game_setup_ui.tscn" id="9_16hvj"]
+[ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/settings.tscn" id="9_qg82j"]
+[ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/credits.tscn" id="11_t1dhk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5egv6"]
 shader = ExtResource("3_t1dhk")
@@ -22,7 +22,7 @@ shader = ExtResource("5_aae8c")
 [sub_resource type="LabelSettings" id="LabelSettings_2sbhq"]
 font_size = 70
 
-[node name="StartScreen" type="Control"]
+[node name="StartScreen" type="Control" unique_id=1072577900]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,10 +34,10 @@ size_flags_vertical = 3
 script = ExtResource("3")
 play_target_scene = ExtResource("9_16hvj")
 
-[node name="FadeLayer" type="CanvasLayer" parent="."]
+[node name="FadeLayer" type="CanvasLayer" parent="." unique_id=689771045]
 layer = 2
 
-[node name="FadeRect" type="ColorRect" parent="FadeLayer"]
+[node name="FadeRect" type="ColorRect" parent="FadeLayer" unique_id=1854080283]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -46,28 +46,28 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="." unique_id=201404063]
 position = Vector2(577.75, 329.75)
 scale = Vector2(0.6117187, 0.6226852)
 texture = ExtResource("1")
 
-[node name="Astronaut" type="Sprite2D" parent="."]
+[node name="Astronaut" type="Sprite2D" parent="." unique_id=227890255]
 material = SubResource("ShaderMaterial_5egv6")
 position = Vector2(254.50002, 380.88046)
 scale = Vector2(2.9374993, 3.1131108)
 texture = ExtResource("2")
 
-[node name="Star" type="Sprite2D" parent="."]
+[node name="Star" type="Sprite2D" parent="." unique_id=1217485]
 position = Vector2(200, 200)
 texture = ExtResource("4")
 
-[node name="16Psyche" type="Sprite2D" parent="."]
+[node name="16Psyche" type="Sprite2D" parent="." unique_id=872566904]
 material = SubResource("ShaderMaterial_qg82j")
 position = Vector2(914, 194)
 scale = Vector2(0.38981482, 0.41296297)
 texture = ExtResource("5_vno1p")
 
-[node name="Label" type="Label" parent="16Psyche"]
+[node name="Label" type="Label" parent="16Psyche" unique_id=1801097014]
 offset_left = -51.30641
 offset_top = 152.55605
 offset_right = 673.6936
@@ -75,7 +75,7 @@ offset_bottom = 262.55603
 text = "Asteroid 16 Psyche"
 label_settings = SubResource("LabelSettings_2sbhq")
 
-[node name="GameMenu" type="Control" parent="."]
+[node name="GameMenu" type="Control" parent="." unique_id=2111835521]
 layout_mode = 1
 anchor_left = 0.4
 anchor_right = 0.6
@@ -83,7 +83,7 @@ anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GameMenuButtons" type="VBoxContainer" parent="GameMenu"]
+[node name="GameMenuButtons" type="VBoxContainer" parent="GameMenu" unique_id=1890901600]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -93,31 +93,28 @@ offset_top = -175.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="PlayButton" type="Button" parent="GameMenu/GameMenuButtons" node_paths=PackedStringArray("target_handler")]
+[node name="PlayButton" type="Button" parent="GameMenu/GameMenuButtons" unique_id=1743614122]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Play"
 script = ExtResource("6_6mw8b")
-target_handler = NodePath("../../..")
 target_scene = ExtResource("9_16hvj")
 
-[node name="SettingsButton" type="Button" parent="GameMenu/GameMenuButtons" node_paths=PackedStringArray("target_handler")]
+[node name="SettingsButton" type="Button" parent="GameMenu/GameMenuButtons" unique_id=2004235370]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Settings"
 script = ExtResource("6_6mw8b")
-target_handler = NodePath("../../..")
-target_scene = ExtResource("8_aae8c")
+target_scene = ExtResource("9_qg82j")
 
-[node name="CreditsButton" type="Button" parent="GameMenu/GameMenuButtons" node_paths=PackedStringArray("target_handler")]
+[node name="CreditsButton" type="Button" parent="GameMenu/GameMenuButtons" unique_id=1033019032]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Credits"
 script = ExtResource("6_6mw8b")
-target_handler = NodePath("../../..")
-target_scene = ExtResource("9_qg82j")
+target_scene = ExtResource("11_t1dhk")
 
-[node name="PsycheMissionLink" type="Button" parent="."]
+[node name="PsycheMissionLink" type="Button" parent="." unique_id=1155316679]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 anchors_preset = -1
@@ -131,7 +128,7 @@ icon = ExtResource("3_gtard")
 icon_alignment = 1
 expand_icon = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1269118275]
 layout_mode = 0
 offset_right = 114.0
 offset_bottom = 34.0
