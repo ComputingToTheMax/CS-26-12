@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://byv6mnyjhbotf"]
 
 [ext_resource type="Theme" uid="uid://d33wx43jvdny0" path="res://Themes/primary_game_theme.tres" id="1_glc04"]
-[ext_resource type="Script" uid="uid://buuqp7ltev2ld" path="res://Scenes/GameSetupUI.gd" id="1_pknw2"]
+[ext_resource type="Script" path="res://Scenes/GameSetupUI.gd" id="1_pknw2"]
 [ext_resource type="Texture2D" uid="uid://dj700dm2g3hel" path="res://Sources/Images/PlayerSelection/Standard 1.svg" id="2_hb04o"]
 [ext_resource type="Texture2D" uid="uid://cga61nc5ec372" path="res://Sources/Images/PlayerSelection/Standard 2.svg" id="3_ndywl"]
 [ext_resource type="Texture2D" uid="uid://csavoyffrds2n" path="res://Sources/Images/PlayerSelection/Standard 3.svg" id="4_182us"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bdrt0u0qj0o5c" path="res://Sources/Images/PlayerSelection/Wave 2.svg" id="5_cc3me"]
 [ext_resource type="Texture2D" uid="uid://b48301im34184" path="res://Sources/Images/PlayerSelection/Wave 1.svg" id="6_hb04o"]
 [ext_resource type="Texture2D" uid="uid://b6doxvtikh8pe" path="res://Sources/Images/PlayerSelection/Wave 3.svg" id="7_6mjld"]
-[ext_resource type="Script" uid="uid://7er0duyq21il" path="res://Scenes/ConfirmBtnLogic.gd" id="11_ywvoo"]
+[ext_resource type="Script" path="res://Scenes/ConfirmBtnLogic.gd" id="11_ywvoo"]
 
 [node name="GameSetupUI" type="Control"]
 layout_mode = 3

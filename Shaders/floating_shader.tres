@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" format=3 uid="uid://btd5q6cjf24tg"]
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://btd5q6cjf24tg"]
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_j08d4"]
 input_name = "time"
@@ -20,6 +20,47 @@ default_input_values = [0, 0.0, 1, 5.0, 2, 0.0]
 op_type = 0
 
 [resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+
+void vertex() {
+// Input:2
+	float n_out2p0 = TIME;
+
+
+// FloatFunc:3
+	float n_out3p0 = sin(n_out2p0);
+
+
+// Input:5
+	vec2 n_out5p0 = VERTEX;
+	float n_out5p1 = n_out5p0.r;
+	float n_out5p2 = n_out5p0.g;
+
+
+// MultiplyAdd:6
+	float n_in6p1 = 5.00000;
+	float n_out6p0 = fma(n_out3p0, n_in6p1, n_out5p1);
+
+
+// MultiplyAdd:4
+	float n_in4p1 = 5.00000;
+	float n_out4p0 = fma(n_out3p0, n_in4p1, n_out5p2);
+
+
+// VectorCompose:7
+	vec2 n_out7p0 = vec2(n_out6p0, n_out4p0);
+
+
+// Output:0
+	VERTEX = n_out7p0;
+
+
+}
+"
 mode = 1
 flags/light_only = false
 nodes/vertex/0/position = Vector2(960, 100)
