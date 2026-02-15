@@ -9,10 +9,15 @@ var rng = RandomNumberGenerator.new()
 var turn_count:=0
 var can_roll := true
 var roll:=0
+var busy:=false
+
+@export var offer_scene: PackedScene = preload("res://Scenes/UI/ConfirmSwitch.tscn")
+@export var asteroid: PackedScene = preload("res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting1.tscn")
 
 func _ready():
 	
-	
+
+
 	cell_size = Board.get("cell_size")
 	snap=cell_size
 	rng.randomize()
@@ -20,42 +25,44 @@ func _ready():
 	target = Vector2(0, round(board_size.y/2) * cell_size.y)
 	global_position = target
 	initialized=true
-	_update_turn_label()
 func roll_and_move() -> void:
 	if not initialized:
 		push_error("roll and move called too early")
 		return		
 	if not can_roll:
 		return
-
+	
 	can_roll = false  # prevents double-click spamming during the move
 
 	roll = rng.randi_range(1, 6)
-	print("rolled:", roll)
 	target.x += (roll * cell_size.x)
 	global_position = target
-
-	_is_off_board()
-	_check_red_box()
+	turn_count+=roll
+	
+	var triggered := _is_off_board() or _check_red_box()
+	if triggered:
+		await _offerGame()
 
 	can_roll = true
+	_update_turn_label()
+
 func _update_turn_label() -> void:
 	turn_label.text = "Turn: %d | Roll: %d" % [turn_count, roll]
-func _is_off_board():
-	var board = get_viewport_rect().size
-	if target.x > board.x:
-		get_tree().change_scene_to_file("res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting1.tscn")
+func _is_off_board()->bool:
+	var board = get_viewport_rect().size.x
+	return target.x >board
 
-func _check_red_box():
-	var red_positions = get_parent().red_box_positions
-	for pos in red_positions:
+func _check_red_box()->bool:
+
+	for pos in Board.red_box_positions:
 		if target.is_equal_approx(pos):
-			get_tree().change_scene_to_file("res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting1.tscn")
-			return
+			
+			return true
+	return false
 
 func _process(event):
 	if Input.is_action_just_pressed("ui_accept"):
-		rng.randomize()
+		
 		var random_int = rng.randi_range(1, 6)
 		get_parent().set_dice_result(random_int)
 		target.x += random_int * snap.x
@@ -63,3 +70,30 @@ func _process(event):
 		
 		_is_off_board()
 		_check_red_box()
+func _offerGame() -> void:
+	busy = true
+
+	var offer := offer_scene.instantiate()
+	Board.overlay_root.add_child(offer)
+	print("Waiting for offerchoice")
+	var play : bool = await offer.choice 
+	print("Offer returned:",play)
+
+	if not play:
+		busy = false
+		return
+
+	
+	var mg := asteroid.instantiate() as AT1
+	Board.game_root.add_child(mg)
+
+
+
+	var result_args : Array = await mg.finished
+	var result: Dictionary = result_args[0]
+
+
+	_result(result)
+	busy = false
+func _result(result: Dictionary) -> void:
+	print("Result:", result)

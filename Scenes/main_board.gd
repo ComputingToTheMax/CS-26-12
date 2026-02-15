@@ -1,6 +1,8 @@
 extends Node2D
 class_name MainBoard
 @export var cell_size = Vector2i(64, 64)
+@onready var overlay_root: Control = get_node_or_null("Overlay/OverlayRoot") as Control
+@onready var game_root: Control = $GameOverlay/GameRoot
 
 var board_size
 var red_box_positions = []
@@ -24,7 +26,7 @@ func initialize_board():
 			box.color = Color(1, 0, 0)
 			add_child(box)
 
-	_draw()
+	queue_redraw()
 
 func _draw():
 	var mid_y = round(board_size.y / 2) * cell_size.y

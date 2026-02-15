@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://cu2rwo8sq2yw"]
+
+[ext_resource type="Script" uid="uid://6yt6b20ucnf1" path="res://Scenes/UI/confirm_switch.gd" id="1_m27pt"]
+
+[node name="ConfirmSwitch" type="Control" unique_id=1919206113]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m27pt")
+
+[node name="BG" type="ColorRect" parent="." unique_id=1212065470]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Center" type="CenterContainer" parent="." unique_id=37449969]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=1978890992]
+custom_minimum_size = Vector2(420, 180)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Center/Panel" unique_id=1550793519]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Center/Panel/MarginContainer" unique_id=1667647846]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Center/Panel/MarginContainer/VBoxContainer" unique_id=954113005]
+layout_mode = 2
+text = "Do you want to play this minigame?
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Center/Panel/MarginContainer/VBoxContainer" unique_id=349338076]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="Center/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1549218224]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+text = "Play"
+
+[node name="Skip" type="Button" parent="Center/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1747882715]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+text = "Skip"
