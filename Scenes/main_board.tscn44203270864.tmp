@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://thfx5mw34uqr"]
+
+[ext_resource type="Script" uid="uid://c2ynb5poqt67g" path="res://Scenes/main_board.gd" id="1_6bsxh"]
+[ext_resource type="Script" uid="uid://t16dhillvlnl" path="res://Scripts/character_body_2d.gd" id="2_6bsxh"]
+[ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="3_y7j1t"]
+[ext_resource type="Script" uid="uid://bxp0ysip7hpsw" path="res://Scenes/hud_base.gd" id="4_u7eij"]
+[ext_resource type="Texture2D" uid="uid://ca758bk7k5kol" path="res://Sources/Images/Player-Idle.png" id="5_njf4n"]
+[ext_resource type="Script" uid="uid://b5k67o2lop2t3" path="res://Scenes/roll.gd" id="6_m4kfr"]
+
+[node name="MainBoard" type="Node2D" unique_id=1276912517]
+script = ExtResource("1_6bsxh")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=717135484 node_paths=PackedStringArray("Board")]
+script = ExtResource("2_6bsxh")
+Board = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1839333665]
+texture = ExtResource("3_y7j1t")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1201278052]
+layer = 20
+
+[node name="HUDBase" type="Control" parent="HUD" unique_id=1796998211]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_u7eij")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/HUDBase" unique_id=1475363653]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 89.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/HUDBase/MarginContainer" unique_id=1292748632]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Control2" type="Control" parent="HUD/HUDBase/MarginContainer/HBoxContainer" unique_id=2027770321]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/HUDBase/MarginContainer/HBoxContainer" unique_id=1084902023]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="roll" type="Button" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1479309207]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Roll"
+script = ExtResource("6_m4kfr")
+player_path = NodePath("../../../../../../CharacterBody2D")
+
+[node name="turn counter" type="Label" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1777530972]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Turn: 0"
+
+[node name="Control" type="Control" parent="HUD/HUDBase/MarginContainer/HBoxContainer" unique_id=1044080165]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/HUDBase/MarginContainer/HBoxContainer" unique_id=1863830550]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="InvBtn" type="TextureButton" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer2" unique_id=1575298845]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("5_njf4n")
+texture_hover = ExtResource("5_njf4n")
+
+[node name="Control3" type="Control" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer2" unique_id=205676030]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Overlay" type="CanvasLayer" parent="." unique_id=1119875307]
+layer = 30
+
+[node name="OverlayRoot" type="Control" parent="Overlay" unique_id=338242730]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GameOverlay" type="CanvasLayer" parent="." unique_id=213672904]
+layer = 40
+
+[node name="GameRoot" type="Control" parent="GameOverlay" unique_id=1973293713]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer2/InvBtn" to="HUD/HUDBase" method="_on_inv_btn_pressed"]

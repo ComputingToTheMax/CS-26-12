@@ -42,6 +42,8 @@ func roll_and_move() -> void:
 	var triggered := _is_off_board() or _check_red_box()
 	if triggered:
 		await _offerGame()
+	else:
+		MoneySave.add_money(3)
 
 	can_roll = true
 	_update_turn_label()

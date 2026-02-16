@@ -1,4 +1,4 @@
-﻿extends Sprite2D
+extends Sprite2D
 
 @export var move_speed: float = 200.0
 @export var next_scene_path: String = ""

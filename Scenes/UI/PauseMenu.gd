@@ -1,13 +1,15 @@
-extends Control
-
+extends CanvasLayer
+class_name pauseMe
 signal main_menu_requested
+
+
 
 func _ready() -> void:
 	visible = false
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-	$MenuPanel/VBoxContainer/ResumeButton.pressed.connect(_on_resume_pressed)
-	$MenuPanel/VBoxContainer/MainMenuButton.pressed.connect(_on_main_menu_pressed)
-
+	$Control/CenterContainer/MenuPanel/VBoxContainer/ResumeButton.pressed.connect(_on_resume_pressed)
+	$Control/CenterContainer/MenuPanel/VBoxContainer/MainMenuButton.pressed.connect(_on_main_menu_pressed)
+	$Control/CenterContainer/MenuPanel/VBoxContainer/SettingsButton.pressed.connect(_on_settings_pressed)
 
 func open() -> void:
 	visible = true
@@ -19,6 +21,7 @@ func close() -> void:
 	get_tree().paused = false
 
 
+
 func toggle() -> void:
 	if visible:
 		close()
@@ -28,7 +31,10 @@ func toggle() -> void:
 
 func _on_resume_pressed() -> void:
 	close()
-
+func _on_settings_pressed()->void:
+	close()
+	Navigator.go_to("res://Scenes/settings.tscn")
 
 func _on_main_menu_pressed() -> void:
-	emit_signal("main_menu_requested")
+	close()
+	Navigator.go_to("res://Scenes/main_menu.tscn")

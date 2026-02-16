@@ -13,9 +13,9 @@ var index: int = -1
 @export var hover_bg: Color = Color(0.761, 0.132, 0.492, 1.0)
 
 func _ready() -> void:
-	# make sure BG doesn't steal mouse input
-	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
 	bg.color = normal_bg
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
@@ -37,7 +37,3 @@ func set_slot_data(slot: Variant) -> void:
 
 	icon_rect.texture = item.icon
 	qty_label.text = str(qty) if qty > 1 else ""
-
-func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		emit_signal("slot_clicked", index, event.button_index)

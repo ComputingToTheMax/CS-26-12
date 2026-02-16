@@ -42,8 +42,8 @@ func _click_then_transition(load_scene: PackedScene):
 
 func _on_request_transition(load_scene: PackedScene) -> void:
 	await _click_then_transition(load_scene)
-func on_confirm_pressed(load_scene: PackedScene) -> void:
-	if target_scene == null:
-		push_error("StartScreen: play_target_scene not set")
+func _on_confirm_pressed() -> void:
+	if play_target_scene == null:
+		push_error("MainMenu: play_target_scene not set")
 		return
-	await _click_then_transition(load_scene)
+	await _click_then_transition(play_target_scene)

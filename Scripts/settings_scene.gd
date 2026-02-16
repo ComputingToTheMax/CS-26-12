@@ -35,16 +35,16 @@ func _on_toggle_sound_pressed():
 	# Update toggle
 	var enabled: bool = toggle_clicks()
 
-	# Update button text
 	if enabled:
 		$Background/ToggleSoundButton.text = "Disable Click Sounds"
 	else:
 		$Background/ToggleSoundButton.text = "Enable Click Sounds"
-
+func _on_back_pressed()->void:
+	Navigator.go_back()
 func _on_return_pressed():
 	play_click()
 	await get_tree().create_timer(click_player.stream.get_length()).timeout
-	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+	Navigator.go_back()
 
 func _change_resolution(height: int, width: int) -> void:
 	play_click()

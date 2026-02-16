@@ -1,25 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbx4uhnqjl7v2"]
+[gd_scene format=3 uid="uid://cbx4uhnqjl7v2"]
 
 [ext_resource type="Script" uid="uid://wvsan6sbtn7d" path="res://Scripts/settings_scene.gd" id="1_i44u3"]
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_lhmql"]
 
-[node name="SettingsScreen" type="Node2D"]
+[node name="SettingsScreen" type="Node2D" unique_id=990252595 groups=["no_pause"]]
 script = ExtResource("1_i44u3")
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="." unique_id=2006976130]
 position = Vector2(577.75, 329.75)
 scale = Vector2(0.6117187, 0.6226852)
 texture = ExtResource("2_lhmql")
 
-[node name="ReturnButton" type="Button" parent="Background"]
+[node name="ReturnButton" type="Button" parent="Background" unique_id=702705593]
 offset_left = -911.77527
 offset_top = 451.67282
 offset_right = -574.77527
 offset_bottom = 504.67282
 theme_override_font_sizes/font_size = 32
-text = "Return to Main Menu"
+text = "Return
+"
 
-[node name="ToggleSoundButton" type="Button" parent="Background"]
+[node name="ToggleSoundButton" type="Button" parent="Background" unique_id=576642616]
 offset_left = -911.77527
 offset_top = -250.0
 offset_right = -574.77527
@@ -27,7 +28,7 @@ offset_bottom = -200.0
 theme_override_font_sizes/font_size = 32
 text = "Disable Click Sound"
 
-[node name="Res360Button" type="Button" parent="."]
+[node name="Res360Button" type="Button" parent="." unique_id=1851785310]
 offset_left = 902.0
 offset_top = 272.0
 offset_right = 1022.0
@@ -35,7 +36,7 @@ offset_bottom = 314.0
 theme_override_font_sizes/font_size = 24
 text = "360p"
 
-[node name="Res480Button" type="Button" parent="."]
+[node name="Res480Button" type="Button" parent="." unique_id=938201051]
 offset_left = 903.0
 offset_top = 214.0
 offset_right = 1023.0
@@ -43,7 +44,7 @@ offset_bottom = 256.0
 theme_override_font_sizes/font_size = 24
 text = "480p"
 
-[node name="Res720Button" type="Button" parent="."]
+[node name="Res720Button" type="Button" parent="." unique_id=1356169070]
 offset_left = 903.0
 offset_top = 157.0
 offset_right = 1023.0
@@ -51,7 +52,7 @@ offset_bottom = 199.0
 theme_override_font_sizes/font_size = 24
 text = "720p"
 
-[node name="Res1080Button" type="Button" parent="."]
+[node name="Res1080Button" type="Button" parent="." unique_id=1471240525]
 offset_left = 905.0
 offset_top = 96.0
 offset_right = 1025.0

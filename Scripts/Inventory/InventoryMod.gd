@@ -24,7 +24,6 @@ func set_slot(i: int, slot: Variant) -> void:
 func add_item(item: ItemData, amount: int = 1) -> int:
 	var remaining: int = amount
 
-	# 1) fill existing stacks
 	for i in range(slot_count):
 		var s: Variant = slots[i]
 		if s == null:

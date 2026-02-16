@@ -5,4 +5,4 @@ class_name GameState
 
 func _ready() -> void:
 	add_child(inventory)
-	inventory.money = 100
+	MoneySave.add_money(100)

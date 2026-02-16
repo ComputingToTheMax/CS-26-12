@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@onready var pause_menu: Control = $CanvasLayer/PauseMenu  # the instanced PauseMenu node
+@onready var pause_menu: CanvasLayer = $CanvasLayer/PauseMenu  # the instanced PauseMenu node
 
 @onready var dialog_image: TextureRect = $DialogLayer/DialogBox/DialogContainer/DialogImage
 

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbknyef0caqfu"]
+[gd_scene format=3 uid="uid://cbknyef0caqfu"]
 
 [ext_resource type="Script" uid="uid://cqjr4bsctjp2u" path="res://Scripts/SlotButton.gd" id="1_yhht4"]
 
-[node name="SlotBtn" type="TextureButton"]
+[node name="SlotBtn" type="TextureButton" unique_id=1052370832]
 custom_minimum_size = Vector2(64, 100)
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,18 +11,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yhht4")
 
-[node name="icon" type="TextureRect" parent="."]
+[node name="icon" type="TextureRect" parent="." unique_id=1978628010]
 custom_minimum_size = Vector2(64, 80)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
-[node name="quantity" type="Label" parent="."]
+[node name="quantity" type="Label" parent="." unique_id=1674717278]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="BG" type="ColorRect" parent="."]
+[node name="BG" type="ColorRect" parent="." unique_id=433560664]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 15
