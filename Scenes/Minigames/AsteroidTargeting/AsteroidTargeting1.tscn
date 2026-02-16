@@ -1,42 +1,34 @@
-[gd_scene format=3 uid="uid://bdq7prcj1lcnj"]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" uid="uid://dxa8vvf0ft5vl" path="res://Sources/Images/AsteroidMinigame/BlackSkyBackground.png" id="1_bg"]
-[ext_resource type="Script" uid="uid://c1crwg0gwuwxx" path="res://Scenes/Minigames/AsteroidTargeting/AT1.gd" id="1_i80jr"]
-[ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="2_ast"]
-[ext_resource type="AudioStream" uid="uid://k5506rca1wus" path="res://Sources/Sounds/AsteroidMinigame/FailClick.wav" id="3_0daca"]
-[ext_resource type="Script" uid="uid://4qfccl7cabti" path="res://Scripts/AsteroidTargeting.gd" id="3_script"]
-[ext_resource type="AudioStream" uid="uid://dgbff4kx04bpc" path="res://Sources/Sounds/AsteroidMinigame/ConfirmTarget.wav" id="4_sound"]
-[ext_resource type="AudioStream" uid="uid://bg0sxfbbtqulw" path="res://Sources/Sounds/AsteroidMinigame/BackgroundMusic.ogg" id="5_7igab"]
+[ext_resource type="Texture2D" path="res://Sources/Images/AsteroidMinigame/BlackSkyBackground.png" id="1"]
+[ext_resource type="Texture2D" path="res://Sources/Images/PsycheAsteroid.png" id="2"]
+[ext_resource type="AudioStream" path="res://Sources/Sounds/AsteroidMinigame/FailClick.wav" id="3"]
+[ext_resource type="AudioStream" path="res://Sources/Sounds/AsteroidMinigame/ConfirmTarget.wav" id="4"]
+[ext_resource type="AudioStream" path="res://Sources/Sounds/AsteroidMinigame/BackgroundMusic.ogg" id="5"]
+[ext_resource type="Script" path="res://Scripts/AsteroidTargeting.gd" id="6"]
 
-[node name="AsteroidTargeting1" type="Node2D" unique_id=1080556095]
-script = ExtResource("1_i80jr")
+[node name="AsteroidTargeting1" type="Node2D"]
 
-[node name="Control" type="Control" parent="." unique_id=2115470338]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="BlackSkyBackground" type="Sprite2D" parent="Control" unique_id=549630337]
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1")
 position = Vector2(576, 324)
 scale = Vector2(2, 2)
-texture = ExtResource("1_bg")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control/BlackSkyBackground" unique_id=1455688120]
-stream = ExtResource("5_7igab")
-volume_db = -33.394
+[node name="FailClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5")
 autoplay = true
+parameters/looping = true
+volume_db = -30
 
-[node name="FailTarget" type="AudioStreamPlayer" parent="Control/BlackSkyBackground" unique_id=2023606747]
-stream = ExtResource("3_0daca")
-
-[node name="PsycheAsteroid" type="Sprite2D" parent="Control" unique_id=1226284778]
+[node name="PsycheAsteroid" type="Sprite2D" parent="."]
+texture = ExtResource("2")
 position = Vector2(576, 324)
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("2_ast")
-script = ExtResource("3_script")
+script = ExtResource("6")
+next_scene_path = "res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting2.tscn"
 
-[node name="ConfirmTargetPlayer" type="AudioStreamPlayer" parent="Control/PsycheAsteroid" unique_id=1509071106]
-stream = ExtResource("4_sound")
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PsycheAsteroid"]
+stream = ExtResource("4")
