@@ -7,8 +7,8 @@ on:
     - cron: "0 6 * * *"
 
 env:
-  # GODOT_VERSION: 4.5
-  GODOT_VERSION: 4.3
+  # GODOT_VERSION: 4.5, 4.3
+  GODOT_VERSION: 4.6.1
   EXPORT_NAME: psyche-opoly
   PROJECT_PATH: ./
 
@@ -21,7 +21,7 @@ jobs:
     # Begin Unverified Script
     # container: abarichello/godot-ci@3.6.2-stable
     # Container Name from Repository Internal File
-    container: barichello/godot-ci:4.3
+    container: barichello/godot-ci:4.6.1
 
     steps:
       - name: Checkout
