@@ -17,6 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="Race To Psyche"
 run/main_scene="uid://cpmdovpetc8ty"
 config/features=PackedStringArray("4.6", "Forward Plus")
+boot_splash/image="uid://dmsm4lpd63fya"
 config/icon="res://icon.svg"
 
 [autoload]
