@@ -2,6 +2,26 @@ extends Node
 
 # Public Global Settings Variables
 
+#
+# Game Settings
+#
+static var click_sound_enabled: bool = true
+
+
+#
+# Game State
+#
+
+
+#
+# Helper Functions
+#
+
+
+#
+# Player Settings and State
+#
+
 # Classes and Structures
 class PlayerConfiguration:
 	
@@ -93,8 +113,9 @@ static func check_if_button_in_use(button_letter:String):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	pass
+	
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
