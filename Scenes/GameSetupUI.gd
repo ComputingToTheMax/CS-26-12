@@ -22,6 +22,6 @@ func _on_confirm_pressed() -> void:
 	Settings.play_tutorial = play_checkbox.button_pressed
 
 	if Settings.play_tutorial:
-		Navigator.go_to(tutorial_scene_path)
+		Navigator.go_to_scene_by_path(tutorial_scene_path)
 	else:
-		Navigator.go_to(main_board_scene_path)
+		Navigator.go_to_scene_by_path(main_board_scene_path)
