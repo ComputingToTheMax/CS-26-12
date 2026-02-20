@@ -1,5 +1,14 @@
 name: "Godot Publish"
 description: "Publish from Godot to GitHub Pages"
+# NOTE: To update the version of Godot used for automated builds:
+# 1. Navigate to the Docker Container registry page for "abarichello/godot-ci"
+# 2. Identify a container image that corresponds the the intended build of Godot
+# 3. Update the "GODOT_VERSION" Key
+# 
+# Additional Note:
+# - If the "abarichello/godot-ci" container repository ever becomes unmaintained, these containers
+#   can be rebuilt by including a version of Godot (possibly stripped down for efficiency) that are
+#   called via script in order request a HTML build.
 on:
   workflow_dispatch:
 
@@ -7,8 +16,8 @@ on:
     - cron: "0 6 * * *"
 
 env:
-  # GODOT_VERSION: 4.5, 4.3
-  GODOT_VERSION: 4.6.1
+  # NOTE: INSERT Selected Godot Version from Step 3 Below
+  GODOT_VERSION: 4.6.1 # Previously: 4.3, 4.5
   EXPORT_NAME: psyche-opoly
   PROJECT_PATH: ./
 
@@ -19,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # Begin Unverified Script
-    # container: abarichello/godot-ci@3.6.2-stable
+    # NOTE: INSERT Container Version Below from Step 2
     # Container Name from Repository Internal File
     container: barichello/godot-ci:4.6.1
 
