@@ -3,4 +3,4 @@ extends Control
 
 
 func _on_inv_btn_pressed() -> void:
-	Navigator.go_to("res://Scenes/UI/Inventory.tscn")
+	Navigator.go_to_scene_by_path("res://Scenes/UI/Inventory.tscn")

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://wvsan6sbtn7d" path="res://Scripts/settings_scene.gd" id="1_i44u3"]
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_lhmql"]
+[ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="3_lhmql"]
 
 [node name="SettingsScreen" type="Node2D" unique_id=990252595 groups=["no_pause"]]
 script = ExtResource("1_i44u3")
@@ -19,6 +20,8 @@ offset_bottom = 504.67282
 theme_override_font_sizes/font_size = 32
 text = "Return
 "
+script = ExtResource("3_lhmql")
+target_scene_path = "res://Scenes/main_menu.tscn"
 
 [node name="ToggleSoundButton" type="Button" parent="Background" unique_id=576642616]
 offset_left = -911.77527

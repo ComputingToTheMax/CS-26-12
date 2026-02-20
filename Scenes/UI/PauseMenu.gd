@@ -33,8 +33,8 @@ func _on_resume_pressed() -> void:
 	close()
 func _on_settings_pressed()->void:
 	close()
-	Navigator.go_to("res://Scenes/settings.tscn")
+	Navigator.go_to_scene_by_path("res://Scenes/settings.tscn")
 
 func _on_main_menu_pressed() -> void:
 	close()
-	Navigator.go_to("res://Scenes/main_menu.tscn")
+	Navigator.go_to_scene_by_path("res://Scenes/main_menu.tscn")

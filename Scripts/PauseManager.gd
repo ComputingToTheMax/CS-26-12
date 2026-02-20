@@ -43,5 +43,5 @@ func _go_main_menu() -> void:
 		menu.close()
 
 
-	Navigator.go_to("res://Scenes/main_menu.tscn")
+	Navigator.go_to_scene_by_path("res://Scenes/main_menu.tscn")
 	
