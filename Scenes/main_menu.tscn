@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="5_vno1p"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="6_6mw8b"]
 [ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/settings.tscn" id="9_qg82j"]
-[ext_resource type="PackedScene" uid="uid://b7t5eepnxoou1" path="res://Scenes/GameSetup/game_setup.tscn" id="10_5egv6"]
 [ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/credits.tscn" id="11_t1dhk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5egv6"]
@@ -99,7 +98,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Play"
 script = ExtResource("6_6mw8b")
-target_scene = ExtResource("10_5egv6")
+target_scene = ExtResource("2_t1dhk")
 
 [node name="SettingsButton" type="Button" parent="GameMenu/GameMenuButtons" unique_id=2004235370]
 layout_mode = 2

@@ -86,12 +86,12 @@ func _offerGame() -> void:
 		return
 
 	
-	var mg := asteroid.instantiate() as AT1
+	var mg := asteroid.instantiate() 
 	Board.game_root.add_child(mg)
 
 
 
-	var result_args : Array = await mg.finished
+	var result_args : Array = await mg.done
 	var result: Dictionary = result_args[0]
 
 
