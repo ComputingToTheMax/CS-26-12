@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dat1imjp8k34d" path="res://Minigames/GenesisSolarWind/Scenes/base_game_tile.gd" id="1_t5ql6"]
 [ext_resource type="Texture2D" uid="uid://b35l82h0q0o3c" path="res://Minigames/GenesisSolarWind/Src/Images/MissionTrajectory.png" id="1_y4iy6"]
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_d84ag"]
-[ext_resource type="Texture2D" uid="uid://b15o7brdcqmb5" path="res://Sources/Images/Placeholder.png" id="2_t5ql6"]
 [ext_resource type="Script" uid="uid://ckrca6ka7kjro" path="res://Minigames/GenesisSolarWind/Scenes/genesis_spacecraft.gd" id="4_301g5"]
+[ext_resource type="Texture2D" uid="uid://bk74sk3eoo0vf" path="res://Minigames/GenesisSolarWind/Src/Images/GenesisRenderingNoBackground.png" id="5_5j4nw"]
 [ext_resource type="PackedScene" uid="uid://ckesh74ho2idd" path="res://Scenes/Keycap.tscn" id="6_ku7c8"]
 [ext_resource type="Script" uid="uid://nmnc78vqwahc" path="res://Minigames/GenesisSolarWind/Scripts/solar_viewport.gd" id="7_c7emo"]
 [ext_resource type="VideoStream" uid="uid://33kqs2vg1eu5" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Normal.ogv" id="7_ku7c8"]
@@ -65,7 +65,8 @@ script = ExtResource("4_301g5")
 shape = SubResource("RectangleShape2D_t5ql6")
 
 [node name="Sprite2D" type="Sprite2D" parent="GenesisSpacecraft" unique_id=324884284]
-texture = ExtResource("2_t5ql6")
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("5_5j4nw")
 
 [node name="Keycap" parent="GenesisSpacecraft" unique_id=1104716233 instance=ExtResource("6_ku7c8")]
 position = Vector2(2.9411774, -185.29414)
@@ -75,12 +76,6 @@ scale = Vector2(0.365, 0.365)
 position = Vector2(3.0517578e-05, 3.8146973e-06)
 scale = Vector2(0.9999999, 0.9999999)
 width = 3.0
-
-[node name="TestCraft" type="Sprite2D" parent="." unique_id=341864905]
-position = Vector2(394, 46)
-scale = Vector2(0.060000002, 0.060000002)
-texture = ExtResource("2_t5ql6")
-centered = false
 
 [node name="ToOrbit" type="Path2D" parent="." unique_id=2144774435]
 position = Vector2(0, 2)

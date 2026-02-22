@@ -29,7 +29,6 @@ func _process(delta: float) -> void:
 
 
 func _on_solar_video_player_finished() -> void:
-	print("Finished!")
 	
 	var player = $SolarVideoPlayer
 	
