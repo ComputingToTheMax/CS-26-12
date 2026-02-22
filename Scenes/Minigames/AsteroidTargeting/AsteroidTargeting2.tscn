@@ -30,6 +30,7 @@ position = Vector2(900, 450)
 scale = Vector2(0.08, 0.08)
 script = ExtResource("6")
 next_scene_path = "res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting3.tscn"
+is_success_object = true
 
 [node name="ConfirmSound" type="AudioStreamPlayer" parent="PsycheAsteroid"]
 stream = ExtResource("4")
