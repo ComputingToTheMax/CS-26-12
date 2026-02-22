@@ -34,14 +34,10 @@ func _spawn_menu() -> void:
 	menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	get_tree().root.add_child(menu)
 
-	# Hook main menu button to your navigator
 	menu.main_menu_requested.connect(_go_main_menu)
 
 func _go_main_menu() -> void:
-	# ensure unpaused
 	if menu:
 		menu.close()
-
-
 	Navigator.go_to_scene_by_path("res://Scenes/main_menu.tscn")
 	

@@ -18,7 +18,7 @@ func go_to_scene_by_path(target_scene_path: String, push_onto_previous_scene_sta
 		current_scene_path = current_scene_root_node.scene_file_path
 
 	if current_scene_path == target_scene_path:
-		push_warning("SceneNavigator: already in scene %s" % target_scene_path)
+		push_warning("Navigator: already in scene %s" % target_scene_path)
 		return
 
 	if push_onto_previous_scene_stack and current_scene_path != "":
@@ -49,7 +49,7 @@ func go_to_scene_by_path(target_scene_path: String, push_onto_previous_scene_sta
 	
 	var err := get_tree().change_scene_to_node(target_scene_node)
 	if err != OK:
-		push_error("SceneNavigator.go_to failed: %s (err=%d)" % [target_scene_path, err])
+		push_error("Navigator.go_to failed: %s (err=%d)" % [target_scene_path, err])
 
 
 
