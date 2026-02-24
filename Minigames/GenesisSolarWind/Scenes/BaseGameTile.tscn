@@ -3,13 +3,17 @@
 [ext_resource type="Script" uid="uid://dat1imjp8k34d" path="res://Minigames/GenesisSolarWind/Scenes/base_game_tile.gd" id="1_t5ql6"]
 [ext_resource type="Texture2D" uid="uid://b35l82h0q0o3c" path="res://Minigames/GenesisSolarWind/Src/Images/MissionTrajectory.png" id="1_y4iy6"]
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_d84ag"]
+[ext_resource type="Texture2D" uid="uid://cs76va8ew86b5" path="res://Minigames/GenesisSolarWind/Src/Images/EarthNoBackground.png" id="3_3pjip"]
 [ext_resource type="Script" uid="uid://ckrca6ka7kjro" path="res://Minigames/GenesisSolarWind/Scenes/genesis_spacecraft.gd" id="4_301g5"]
 [ext_resource type="Texture2D" uid="uid://bk74sk3eoo0vf" path="res://Minigames/GenesisSolarWind/Src/Images/GenesisRenderingNoBackground.png" id="5_5j4nw"]
 [ext_resource type="PackedScene" uid="uid://ckesh74ho2idd" path="res://Scenes/Keycap.tscn" id="6_ku7c8"]
 [ext_resource type="Script" uid="uid://nmnc78vqwahc" path="res://Minigames/GenesisSolarWind/Scripts/solar_viewport.gd" id="7_c7emo"]
 [ext_resource type="VideoStream" uid="uid://33kqs2vg1eu5" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Normal.ogv" id="7_ku7c8"]
-[ext_resource type="VideoStream" uid="uid://bfhu8uws7a7mj" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Coronal Hole.ogv" id="9_5j4nw"]
+[ext_resource type="VideoStream" uid="uid://hgglyd8j7hfb" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Coronal Hole.ogv" id="9_5j4nw"]
 [ext_resource type="VideoStream" uid="uid://fwko75pi5qm3" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Eruption.ogv" id="10_3pjip"]
+[ext_resource type="Texture2D" uid="uid://bjridk6yod4r1" path="res://Minigames/GenesisSolarWind/Src/Images/AlphaParticle.svg" id="12_thqn4"]
+[ext_resource type="Texture2D" uid="uid://bqfdnl501rov7" path="res://Minigames/GenesisSolarWind/Src/Images/Proton.svg" id="13_npol8"]
+[ext_resource type="Texture2D" uid="uid://crxplsen26bsl" path="res://Minigames/GenesisSolarWind/Src/Images/Electron.svg" id="14_7yrxx"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ku7c8"]
 viewport_path = NodePath("SolarViewport")
@@ -38,10 +42,15 @@ point_count = 25
 [node name="BaseGameTile" type="Node2D" unique_id=1403132214]
 script = ExtResource("1_t5ql6")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1733274154]
-position = Vector2(248.30554, 56.874977)
+[node name="Background" type="Sprite2D" parent="." unique_id=1733274154]
+position = Vector2(250, 65)
 scale = Vector2(0.61426497, 0.6168981)
 texture = ExtResource("2_d84ag")
+
+[node name="Earth" type="Sprite2D" parent="." unique_id=1580325001]
+position = Vector2(394.99997, 47.999996)
+scale = Vector2(0.026077433, 0.02607743)
+texture = ExtResource("3_3pjip")
 
 [node name="Genesis Mission Trajectory Map" type="Sprite2D" parent="." unique_id=531711872]
 visible = false
@@ -69,8 +78,8 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("5_5j4nw")
 
 [node name="Keycap" parent="GenesisSpacecraft" unique_id=1104716233 instance=ExtResource("6_ku7c8")]
-position = Vector2(2.9411774, -185.29414)
-scale = Vector2(0.365, 0.365)
+position = Vector2(-258.82355, 17.647064)
+scale = Vector2(0.53, 0.53)
 
 [node name="HistoricalTrajectory" type="Line2D" parent="." unique_id=1463188988]
 position = Vector2(3.0517578e-05, 3.8146973e-06)
@@ -131,5 +140,20 @@ rotation = 1.5707964
 stream = ExtResource("7_ku7c8")
 autoplay = true
 expand = true
+
+[node name="AlphaParticle" type="Sprite2D" parent="." unique_id=1145731887]
+position = Vector2(-222, -14.999999)
+scale = Vector2(0.13917525, 0.13917525)
+texture = ExtResource("12_thqn4")
+
+[node name="Proton" type="Sprite2D" parent="." unique_id=779643359]
+position = Vector2(-135, 28)
+scale = Vector2(0.14255512, 0.14255512)
+texture = ExtResource("13_npol8")
+
+[node name="Electron" type="Sprite2D" parent="." unique_id=869780560]
+position = Vector2(-198, 114.999985)
+scale = Vector2(0.143, 0.143)
+texture = ExtResource("14_7yrxx")
 
 [connection signal="finished" from="SolarViewport/SolarVideoPlayer" to="SolarViewport" method="_on_solar_video_player_finished"]

@@ -30,9 +30,24 @@ func _process(delta: float) -> void:
 
 func _on_solar_video_player_finished() -> void:
 	
+	_play_random_solar_video()
+	return
+	
 	var player = $SolarVideoPlayer
 	
 	player.stream = SUN_STATE_TO_STREAM[next_sun_state]
 	#player.stop()
 	player.play()
 	current_sun_state = next_sun_state
+	
+	
+func _play_random_solar_video() -> void:
+	
+	var player = $SolarVideoPlayer
+	var selected_state = SUN_STATE_TO_STREAM.keys().pick_random()
+	
+	player.stream = SUN_STATE_TO_STREAM[selected_state]
+	player.play()
+	current_sun_state = selected_state
+	
+	
