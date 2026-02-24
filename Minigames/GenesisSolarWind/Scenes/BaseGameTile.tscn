@@ -42,6 +42,8 @@ point_count = 25
 [sub_resource type="CircleShape2D" id="CircleShape2D_7yrxx"]
 radius = 31.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_thqn4"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_thqn4"]
 radius = 27.166155
 
@@ -150,47 +152,61 @@ stream = ExtResource("7_ku7c8")
 autoplay = true
 expand = true
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=824781716]
-position = Vector2(-323, -87)
-rect = Rect2(-14, 9, 1157, 243)
-
-[node name="AlphaParticle" type="RigidBody2D" parent="VisibleOnScreenNotifier2D" unique_id=1325041918]
-position = Vector2(323, 87)
+[node name="AlphaParticle" type="RigidBody2D" parent="." unique_id=1325041918]
 gravity_scale = 0.1
 
-[node name="AlphaParticle" type="Sprite2D" parent="VisibleOnScreenNotifier2D/AlphaParticle" unique_id=1145731887]
+[node name="AlphaParticle" type="Sprite2D" parent="AlphaParticle" unique_id=1145731887]
 position = Vector2(-158, -43.999996)
 scale = Vector2(0.13917525, 0.13917525)
 texture = ExtResource("12_thqn4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VisibleOnScreenNotifier2D/AlphaParticle" unique_id=215555864]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlphaParticle" unique_id=215555864]
 position = Vector2(-161, -41)
 shape = SubResource("CircleShape2D_7yrxx")
 
-[node name="Proton" type="RigidBody2D" parent="VisibleOnScreenNotifier2D" unique_id=1247292095]
-position = Vector2(646, 174)
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="AlphaParticle" unique_id=2073371309]
+position = Vector2(-187, -67)
+rect = Rect2(-6, -7, 65, 66)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AlphaParticle" unique_id=1792873888]
+sprite_frames = SubResource("SpriteFrames_thqn4")
+
+[node name="Proton" type="RigidBody2D" parent="." unique_id=1247292095]
+position = Vector2(323, 87)
 gravity_scale = 0.0
 
-[node name="Proton" type="Sprite2D" parent="VisibleOnScreenNotifier2D/Proton" unique_id=1279784322]
+[node name="Proton" type="Sprite2D" parent="Proton" unique_id=1279784322]
 position = Vector2(-490, -52)
 scale = Vector2(0.14255512, 0.14255512)
 texture = ExtResource("13_npol8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VisibleOnScreenNotifier2D/Proton" unique_id=1886264838]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Proton" unique_id=1886264838]
 position = Vector2(-490, -51)
 shape = SubResource("CircleShape2D_thqn4")
 
-[node name="Electron" type="RigidBody2D" parent="VisibleOnScreenNotifier2D" unique_id=1684105694]
-position = Vector2(323, 87)
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Proton" unique_id=333741651]
+position = Vector2(-507, -69)
+rect = Rect2(-12, -10, 57, 57)
+
+[node name="Electron" type="RigidBody2D" parent="." unique_id=1684105694]
 gravity_scale = 0.0
 
-[node name="Electron" type="Sprite2D" parent="VisibleOnScreenNotifier2D/Electron" unique_id=869780560]
+[node name="Electron" type="Sprite2D" parent="Electron" unique_id=869780560]
 position = Vector2(-198, 114.999985)
 scale = Vector2(0.143, 0.143)
 texture = ExtResource("14_7yrxx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VisibleOnScreenNotifier2D/Electron" unique_id=1895145517]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Electron" unique_id=1895145517]
 position = Vector2(-198, 116)
 shape = SubResource("CircleShape2D_npol8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Electron" unique_id=751734236]
+position = Vector2(-211, 103)
+rect = Rect2(-10, -10, 46, 46)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=824781716]
+visible = false
+position = Vector2(-323, -87)
+rect = Rect2(-14, 9, 1157, 243)
 
 [connection signal="finished" from="SolarViewport/SolarVideoPlayer" to="SolarViewport" method="_on_solar_video_player_finished"]
