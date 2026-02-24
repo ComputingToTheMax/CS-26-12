@@ -22,8 +22,13 @@ func _ready():
 	snap=cell_size
 	rng.randomize()
 	var board_size = Vector2i(get_viewport_rect().size)/cell_size
-	target = Vector2(0, round(board_size.y/2) * cell_size.y)
-	global_position = target
+	if playerPos.saved_position != Vector2.ZERO:
+		target = playerPos.saved_position
+		global_position = target
+		turn_count = playerPos.saved_turn_count
+	else:
+		target = Vector2(0, round(board_size.y/2) * cell_size.y)
+		global_position = target
 	initialized=true
 func roll_and_move() -> void:
 	if not initialized:
@@ -66,9 +71,10 @@ func _process(event):
 	if Input.is_action_just_pressed("ui_accept"):
 		
 		var random_int = rng.randi_range(1, 6)
-		get_parent().set_dice_result(random_int)
 		target.x += random_int * snap.x
 		global_position = target
+		playerPos.saved_position = global_position
+		playerPos.saved_turn_count = turn_count
 		
 		_is_off_board()
 		_check_red_box()
