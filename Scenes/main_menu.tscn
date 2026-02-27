@@ -2,16 +2,41 @@
 
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1"]
 [ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="2"]
-[ext_resource type="PackedScene" uid="uid://byv6mnyjhbotf" path="res://Scenes/game_setup_ui.tscn" id="2_t1dhk"]
+[ext_resource type="Script" uid="uid://bj305n2l3jng8" path="res://Scenes/GameSetupUI.gd" id="2_6dk6o"]
 [ext_resource type="Script" uid="uid://jg740726aevo" path="res://Scripts/main_menu_scene.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://dmsm4lpd63fya" path="res://Sources/Images/Psyche_Icon_Color-PNG.png" id="3_gtard"]
+[ext_resource type="Theme" uid="uid://d33wx43jvdny0" path="res://Themes/primary_game_theme.tres" id="3_jr6u5"]
 [ext_resource type="Shader" uid="uid://btd5q6cjf24tg" path="res://Shaders/floating_shader.tres" id="3_t1dhk"]
 [ext_resource type="Texture2D" uid="uid://cr5kndstdjdki" path="res://Sources/Images/StarSmall-1.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dj700dm2g3hel" path="res://Sources/Images/PlayerSelection/Standard 1.svg" id="4_6m47u"]
+[ext_resource type="Texture2D" uid="uid://b48301im34184" path="res://Sources/Images/PlayerSelection/Wave 1.svg" id="5_84iac"]
 [ext_resource type="Shader" uid="uid://dqs4472nlo58l" path="res://Shaders/16PsycheVisualShader.tres" id="5_aae8c"]
 [ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="5_vno1p"]
+[ext_resource type="Texture2D" uid="uid://cga61nc5ec372" path="res://Sources/Images/PlayerSelection/Standard 2.svg" id="6_5n0dv"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="6_6mw8b"]
+[ext_resource type="Texture2D" uid="uid://bdrt0u0qj0o5c" path="res://Sources/Images/PlayerSelection/Wave 2.svg" id="7_ne6ao"]
+[ext_resource type="Texture2D" uid="uid://csavoyffrds2n" path="res://Sources/Images/PlayerSelection/Standard 3.svg" id="8_tt8ml"]
+[ext_resource type="Texture2D" uid="uid://b6doxvtikh8pe" path="res://Sources/Images/PlayerSelection/Wave 3.svg" id="9_fmarx"]
 [ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/settings.tscn" id="9_qg82j"]
+[ext_resource type="Texture2D" uid="uid://cpfawjltxl5ie" path="res://Sources/Images/PlayerSelection/Standard 4.svg" id="10_hkdq0"]
 [ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/credits.tscn" id="11_t1dhk"]
+[ext_resource type="Texture2D" uid="uid://drlafv6f5v1o" path="res://Sources/Images/PlayerSelection/Wave 4.svg" id="11_xcoo4"]
+[ext_resource type="PackedScene" uid="uid://b7t5eepnxoou1" path="res://Scenes/GameSetup/game_setup.tscn" id="19_jw7lb"]
+
+[sub_resource type="PackedScene" id="PackedScene_6vfk8"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("GameSetupUI", "Control", "layout_mode", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "mouse_filter", "script", "VBoxContainer", "VBoxContainer", "layout_mode", "anchors_preset", "anchor_left", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "RichTextLabel", "RichTextLabel", "layout_mode", "size_flags_vertical", "theme", "bbcode_enabled", "text", "horizontal_alignment", "vertical_alignment", "HBoxContainer", "HBoxContainer", "layout_mode", "size_flags_vertical", "theme_override_constants/separation", "alignment", "OnePlayer", "TextureButton", "layout_mode", "size_flags_horizontal", "toggle_mode", "texture_normal", "texture_pressed", "ignore_texture_size", "stretch_mode", "TwoPlayers", "TextureButton", "layout_mode", "size_flags_horizontal", "toggle_mode", "texture_normal", "texture_pressed", "ignore_texture_size", "stretch_mode", "ThreePlayers", "TextureButton", "layout_mode", "size_flags_horizontal", "toggle_mode", "texture_normal", "texture_pressed", "ignore_texture_size", "stretch_mode", "FourPlayers", "TextureButton", "layout_mode", "size_flags_horizontal", "toggle_mode", "texture_normal", "texture_pressed", "ignore_texture_size", "stretch_mode", "CenterContainer", "CenterContainer", "layout_mode", "HBoxContainer2", "HBoxContainer", "layout_mode", "PlayTutorial", "CheckBox", "unique_name_in_owner", "layout_mode", "button_pressed", "text", "MarginContainer", "MarginContainer", "layout_mode", "theme_override_constants/margin_top", "confirm", "Button", "layout_mode", "text"),
+"node_count": 13,
+"node_ids": PackedInt32Array(834572310, 1263779454, 143105090, 2006910498, 924710276, 954203279, 1873833560, 1448346743, 976206766, 1543845889, 168491523, 911399768, 1582279425),
+"node_paths": [NodePath("."), NodePath("./VBoxContainer"), NodePath("./VBoxContainer"), NodePath("./VBoxContainer/HBoxContainer"), NodePath("./VBoxContainer/HBoxContainer"), NodePath("./VBoxContainer/HBoxContainer"), NodePath("./VBoxContainer/HBoxContainer"), NodePath("./VBoxContainer"), NodePath("./VBoxContainer/CenterContainer"), NodePath("./VBoxContainer/CenterContainer/HBoxContainer2"), NodePath("./VBoxContainer"), NodePath("./VBoxContainer/MarginContainer")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 8, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 0, 1073741824, 0, 11, 10, -1, 7, 12, 8, 13, 9, 14, 10, 15, 11, 16, 12, 17, 13, 18, 14, 0, 1073741825, 0, 20, 19, -1, 7, 21, 15, 22, 16, 23, 17, 24, 18, 25, 19, 26, 20, 27, 21, 0, 1073741826, 0, 29, 28, -1, 4, 30, 22, 31, 23, 32, 24, 33, 25, 0, 1073741827, 0, 35, 34, -1, 7, 36, 26, 37, 27, 38, 28, 39, 29, 40, 30, 41, 31, 42, 32, 0, 1073741828, 0, 44, 43, -1, 7, 45, 33, 46, 34, 47, 35, 48, 36, 49, 37, 50, 38, 51, 39, 0, 1073741829, 0, 53, 52, -1, 7, 54, 40, 55, 41, 56, 42, 57, 43, 58, 44, 59, 45, 60, 46, 0, 1073741830, 0, 62, 61, -1, 7, 63, 47, 64, 48, 65, 49, 66, 50, 67, 51, 68, 52, 69, 53, 0, 1073741831, 0, 71, 70, -1, 1, 72, 54, 0, 1073741832, 0, 74, 73, -1, 1, 75, 55, 0, 1073741833, 0, 77, 76, -1, 4, 78, 56, 79, 57, 80, 58, 81, 59, 0, 1073741834, 0, 83, 82, -1, 2, 84, 60, 85, 61, 0, 1073741835, 0, 87, 86, -1, 2, 88, 62, 89, 63, 0),
+"variants": [3, 15, 1.0, 1.0, 2, 2, 2, ExtResource("2_6dk6o"), 1, -1, 0.075, 0.925, 0.925, 2, 2, 2, 3, ExtResource("3_jr6u5"), true, "[b]How Many Players?[/b]", 1, 1, 2, 3, 45, 1, 2, 3, true, ExtResource("4_6m47u"), ExtResource("5_84iac"), true, 5, 2, 3, true, ExtResource("6_5n0dv"), ExtResource("7_ne6ao"), true, 5, 2, 3, true, ExtResource("8_tt8ml"), ExtResource("9_fmarx"), true, 5, 2, 3, true, ExtResource("10_hkdq0"), ExtResource("11_xcoo4"), true, 5, 2, 2, true, 2, true, "Play Tutorial", 2, 20, 2, "Confirm"],
+"version": 3
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5egv6"]
 shader = ExtResource("3_t1dhk")
@@ -32,7 +57,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3")
-play_target_scene = ExtResource("2_t1dhk")
+play_target_scene = SubResource("PackedScene_6vfk8")
 
 [node name="FadeLayer" type="CanvasLayer" parent="." unique_id=689771045]
 layer = 2
@@ -98,7 +123,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Play"
 script = ExtResource("6_6mw8b")
-target_scene = ExtResource("2_t1dhk")
+target_scene = ExtResource("19_jw7lb")
 
 [node name="SettingsButton" type="Button" parent="GameMenu/GameMenuButtons" unique_id=2004235370]
 layout_mode = 2
