@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b6doxvtikh8pe" path="res://Sources/Images/PlayerSelection/Wave 3.svg" id="7_6mjld"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="10_y3ush"]
 [ext_resource type="PackedScene" uid="uid://b66ej8u3vttls" path="res://Scenes/tutorial.tscn" id="11_d5rn2"]
+[ext_resource type="PackedScene" uid="uid://bo4mp5audgyic" path="res://Minigames/GenesisSolarWind/Scenes/GenesisSolarWindMinigameTile.tscn" id="13_1h5sy"]
 [ext_resource type="PackedScene" uid="uid://da7v2pxnl3ccx" path="res://Scenes/Minigames/alien_communication.tscn" id="13_2sgsx"]
 [ext_resource type="PackedScene" uid="uid://yvtjjujrw067" path="res://Minigames/GenesisSolarWind/Scenes/GenesisTestInstantiator.tscn" id="13_vkkjp"]
 
@@ -164,6 +165,12 @@ layout_mode = 2
 text = "Genesis Solar Wind Minigame"
 script = ExtResource("10_y3ush")
 target_scene = ExtResource("13_vkkjp")
+
+[node name="GenesisSolarWind2" type="Button" parent="VBoxContainer2" unique_id=1376425329]
+layout_mode = 2
+text = "Genesis Single Scene"
+script = ExtResource("10_y3ush")
+target_scene = ExtResource("13_1h5sy")
 
 [node name="Button" type="Button" parent="VBoxContainer2" unique_id=1823215306]
 layout_mode = 2
