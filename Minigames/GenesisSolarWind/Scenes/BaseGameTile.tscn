@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bo4mp5audgyic"]
 
-[ext_resource type="Script" uid="uid://dat1imjp8k34d" path="res://Minigames/GenesisSolarWind/Scenes/base_game_tile.gd" id="1_t5ql6"]
+[ext_resource type="Script" uid="uid://dat1imjp8k34d" path="res://Minigames/GenesisSolarWind/Scripts/base_game_tile.gd" id="1_t5ql6"]
 [ext_resource type="Texture2D" uid="uid://b35l82h0q0o3c" path="res://Minigames/GenesisSolarWind/Src/Images/MissionTrajectory.png" id="1_y4iy6"]
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_d84ag"]
 [ext_resource type="Texture2D" uid="uid://cs76va8ew86b5" path="res://Minigames/GenesisSolarWind/Src/Images/EarthNoBackground.png" id="3_3pjip"]
