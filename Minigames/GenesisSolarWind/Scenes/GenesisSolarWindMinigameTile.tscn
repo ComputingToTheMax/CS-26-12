@@ -1,19 +1,19 @@
 [gd_scene format=3 uid="uid://bo4mp5audgyic"]
 
-[ext_resource type="Script" uid="uid://dat1imjp8k34d" path="res://Minigames/GenesisSolarWind/Scripts/base_game_tile.gd" id="1_t5ql6"]
-[ext_resource type="Texture2D" uid="uid://b35l82h0q0o3c" path="res://Minigames/GenesisSolarWind/Src/Images/MissionTrajectory.png" id="1_y4iy6"]
-[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_d84ag"]
-[ext_resource type="Texture2D" uid="uid://cs76va8ew86b5" path="res://Minigames/GenesisSolarWind/Src/Images/EarthNoBackground.png" id="3_3pjip"]
-[ext_resource type="Script" uid="uid://ckrca6ka7kjro" path="res://Minigames/GenesisSolarWind/Scenes/genesis_spacecraft.gd" id="4_301g5"]
-[ext_resource type="Texture2D" uid="uid://bk74sk3eoo0vf" path="res://Minigames/GenesisSolarWind/Src/Images/GenesisRenderingNoBackground.png" id="5_5j4nw"]
-[ext_resource type="PackedScene" uid="uid://ckesh74ho2idd" path="res://Scenes/Keycap.tscn" id="6_ku7c8"]
-[ext_resource type="Script" uid="uid://nmnc78vqwahc" path="res://Minigames/GenesisSolarWind/Scripts/solar_viewport.gd" id="7_c7emo"]
-[ext_resource type="VideoStream" uid="uid://33kqs2vg1eu5" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Normal.ogv" id="7_ku7c8"]
-[ext_resource type="VideoStream" uid="uid://hgglyd8j7hfb" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Coronal Hole.ogv" id="9_5j4nw"]
-[ext_resource type="VideoStream" uid="uid://fwko75pi5qm3" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Eruption.ogv" id="10_3pjip"]
-[ext_resource type="Texture2D" uid="uid://bjridk6yod4r1" path="res://Minigames/GenesisSolarWind/Src/Images/AlphaParticle.svg" id="12_thqn4"]
-[ext_resource type="Texture2D" uid="uid://bqfdnl501rov7" path="res://Minigames/GenesisSolarWind/Src/Images/Proton.svg" id="13_npol8"]
-[ext_resource type="Texture2D" uid="uid://crxplsen26bsl" path="res://Minigames/GenesisSolarWind/Src/Images/Electron.svg" id="14_7yrxx"]
+[ext_resource type="Script" uid="uid://dat1imjp8k34d" path="res://Minigames/GenesisSolarWind/Scripts/base_game_tile.gd" id="1_kc7nk"]
+[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_un60b"]
+[ext_resource type="Texture2D" uid="uid://cs76va8ew86b5" path="res://Minigames/GenesisSolarWind/Src/Images/EarthNoBackground.png" id="3_34gd1"]
+[ext_resource type="Texture2D" uid="uid://b35l82h0q0o3c" path="res://Minigames/GenesisSolarWind/Src/Images/MissionTrajectory.png" id="4_jabtr"]
+[ext_resource type="Script" uid="uid://ckrca6ka7kjro" path="res://Minigames/GenesisSolarWind/Scenes/genesis_spacecraft.gd" id="5_igkls"]
+[ext_resource type="Texture2D" uid="uid://bk74sk3eoo0vf" path="res://Minigames/GenesisSolarWind/Src/Images/GenesisRenderingNoBackground.png" id="6_6srcd"]
+[ext_resource type="PackedScene" uid="uid://ckesh74ho2idd" path="res://Scenes/Keycap.tscn" id="7_t22to"]
+[ext_resource type="Script" uid="uid://nmnc78vqwahc" path="res://Minigames/GenesisSolarWind/Scripts/solar_viewport.gd" id="8_3dxrw"]
+[ext_resource type="VideoStream" uid="uid://33kqs2vg1eu5" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Normal.ogv" id="9_ayclc"]
+[ext_resource type="VideoStream" uid="uid://hgglyd8j7hfb" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Coronal Hole.ogv" id="10_ishca"]
+[ext_resource type="VideoStream" uid="uid://fwko75pi5qm3" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Eruption.ogv" id="11_r7e7m"]
+[ext_resource type="Texture2D" uid="uid://bjridk6yod4r1" path="res://Minigames/GenesisSolarWind/Src/Images/AlphaParticle.svg" id="12_xs1mc"]
+[ext_resource type="Texture2D" uid="uid://bqfdnl501rov7" path="res://Minigames/GenesisSolarWind/Src/Images/Proton.svg" id="13_d71lv"]
+[ext_resource type="Texture2D" uid="uid://crxplsen26bsl" path="res://Minigames/GenesisSolarWind/Src/Images/Electron.svg" id="14_0dhk7"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ku7c8"]
 viewport_path = NodePath("SolarViewport")
@@ -51,23 +51,23 @@ radius = 27.166155
 radius = 22.0
 
 [node name="BaseGameTile" type="Node2D" unique_id=1403132214]
-script = ExtResource("1_t5ql6")
+script = ExtResource("1_kc7nk")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1733274154]
 position = Vector2(250, 65)
 scale = Vector2(0.61426497, 0.6168981)
-texture = ExtResource("2_d84ag")
+texture = ExtResource("2_un60b")
 
 [node name="Earth" type="Sprite2D" parent="." unique_id=1580325001]
 position = Vector2(394.99997, 47.999996)
 scale = Vector2(0.026077433, 0.02607743)
-texture = ExtResource("3_3pjip")
+texture = ExtResource("3_34gd1")
 
 [node name="Genesis Mission Trajectory Map" type="Sprite2D" parent="." unique_id=531711872]
 visible = false
 position = Vector2(176, -81)
 scale = Vector2(0.6235011, 0.62350124)
-texture = ExtResource("1_y4iy6")
+texture = ExtResource("4_jabtr")
 centered = false
 
 [node name="Sun" type="Sprite2D" parent="." unique_id=1638765844]
@@ -79,16 +79,16 @@ centered = false
 [node name="GenesisSpacecraft" type="CharacterBody2D" parent="." unique_id=12642340]
 position = Vector2(395, 48)
 scale = Vector2(0.34, 0.34)
-script = ExtResource("4_301g5")
+script = ExtResource("5_igkls")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GenesisSpacecraft" unique_id=776315649]
 shape = SubResource("RectangleShape2D_t5ql6")
 
 [node name="Sprite2D" type="Sprite2D" parent="GenesisSpacecraft" unique_id=324884284]
 scale = Vector2(0.07, 0.07)
-texture = ExtResource("5_5j4nw")
+texture = ExtResource("6_6srcd")
 
-[node name="Keycap" parent="GenesisSpacecraft" unique_id=1104716233 instance=ExtResource("6_ku7c8")]
+[node name="Keycap" parent="GenesisSpacecraft" unique_id=1104716233 instance=ExtResource("7_t22to")]
 position = Vector2(-258.82355, 17.647064)
 scale = Vector2(0.53, 0.53)
 
@@ -127,10 +127,10 @@ position = Vector2(243, 55)
 
 [node name="SolarViewport" type="SubViewport" parent="." unique_id=781412169]
 size = Vector2i(1080, 1920)
-script = ExtResource("7_c7emo")
-sun_normal_stream = ExtResource("7_ku7c8")
-sun_coronal_hole_stream = ExtResource("9_5j4nw")
-sun_cme_stream = ExtResource("10_3pjip")
+script = ExtResource("8_3dxrw")
+sun_normal_stream = ExtResource("9_ayclc")
+sun_coronal_hole_stream = ExtResource("10_ishca")
+sun_cme_stream = ExtResource("11_r7e7m")
 
 [node name="BackgroundPlayer" type="VideoStreamPlayer" parent="SolarViewport" unique_id=467101475]
 custom_minimum_size = Vector2(1920, 1080)
@@ -138,7 +138,7 @@ offset_left = 1080.0
 offset_right = 3000.0
 offset_bottom = 1080.0
 rotation = 1.5707964
-stream = ExtResource("7_ku7c8")
+stream = ExtResource("9_ayclc")
 autoplay = true
 expand = true
 
@@ -148,17 +148,17 @@ offset_left = 1080.0
 offset_right = 3000.0
 offset_bottom = 1080.0
 rotation = 1.5707964
-stream = ExtResource("7_ku7c8")
+stream = ExtResource("9_ayclc")
 autoplay = true
 expand = true
 
 [node name="AlphaParticle" type="RigidBody2D" parent="." unique_id=1325041918]
-gravity_scale = 0.1
+gravity_scale = 0.005
 
 [node name="AlphaParticle" type="Sprite2D" parent="AlphaParticle" unique_id=1145731887]
 position = Vector2(-158, -43.999996)
 scale = Vector2(0.13917525, 0.13917525)
-texture = ExtResource("12_thqn4")
+texture = ExtResource("12_xs1mc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AlphaParticle" unique_id=215555864]
 position = Vector2(-161, -41)
@@ -178,7 +178,7 @@ gravity_scale = 0.0
 [node name="Proton" type="Sprite2D" parent="Proton" unique_id=1279784322]
 position = Vector2(-490, -52)
 scale = Vector2(0.14255512, 0.14255512)
-texture = ExtResource("13_npol8")
+texture = ExtResource("13_d71lv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Proton" unique_id=1886264838]
 position = Vector2(-490, -51)
@@ -194,7 +194,7 @@ gravity_scale = 0.0
 [node name="Electron" type="Sprite2D" parent="Electron" unique_id=869780560]
 position = Vector2(-198, 114.999985)
 scale = Vector2(0.143, 0.143)
-texture = ExtResource("14_7yrxx")
+texture = ExtResource("14_0dhk7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Electron" unique_id=1895145517]
 position = Vector2(-198, 116)
