@@ -28,6 +28,7 @@ GlobalSettings="*res://Scripts/GlobalVariables/global_settings.gd"
 Settings="*res://Scripts/PlayerSettings.gd"
 MoneySave="*uid://co0jfodd27uxj"
 PauseMenu="*uid://b7wnjbm0o6fjj"
+playerPos="*uid://c0pxd6kv02tid"
 
 [display]
 

@@ -1,5 +1,5 @@
 extends Node2D
-class_name AT1
+#class_name AT1
 signal done(result: Dictionary)
 
 func _input(event):

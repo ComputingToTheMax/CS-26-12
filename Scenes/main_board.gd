@@ -6,6 +6,7 @@ class_name MainBoard
 
 var board_size
 var red_box_positions = []
+var shop_box_positions=[]
 
 func _ready() -> void:
 	
@@ -25,6 +26,15 @@ func initialize_board():
 			box.size = Vector2(cell_size.x, cell_size.y)
 			box.color = Color(1, 0, 0)
 			add_child(box)
+		if ((x+1) % 4 == 1) && x!=0 :
+			var pos = Vector2(x * cell_size.x, mid_y)
+			shop_box_positions.append(pos)
+			
+			var box = ColorRect.new()
+			box.position = pos
+			box.size = Vector2(cell_size.x, cell_size.y)
+			box.color = Color(0, 4, 0)
+			add_child(box)		
 
 	queue_redraw()
 

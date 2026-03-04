@@ -16,4 +16,4 @@ func _on_close_pressed() -> void:
 
 func leave_shop() -> void:
 	
-	get_tree().change_scene_to_file("res://Scenes/main_board.tscn")
+	Navigator.go_back()
