@@ -18,7 +18,7 @@ func _ready() -> void:
 	# Initialize the click player if it has not been initialized already by a previous button.
 	if click_sound_player == null:
 		click_sound_player = AudioStreamPlayer.new()
-		click_sound_player.stream = load("res://Sources/Sounds/click.wav")
+		click_sound_player.stream = load("res://Sources/Sounds/Click.wav")
 		add_child(click_sound_player)
 		
 	
