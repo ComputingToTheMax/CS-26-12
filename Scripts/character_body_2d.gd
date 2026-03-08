@@ -48,7 +48,11 @@ func roll_and_move(amount: int = 0) -> void:
 	turn_count+=roll
 	var shop := _check_shop_box()
 	if shop:
-		Navigator.go_to_packed_scene(shop_scene)
+		await _open_shop()
+		can_roll=true
+		_update_turn_label()
+		return
+		
 	var triggered := _is_off_board() or _check_red_box()
 	if triggered:
 		await _offerGame()
@@ -66,14 +70,15 @@ func _open_shop() -> void:
 	busy = true
 	can_roll = false
 
-	get_tree().paused = true
-
 	var shop := shop_scene.instantiate()
+	print("shop =", shop)
+	print("shop script =", shop.get_script())
+	print("has closed =", shop.has_signal("closed"))
+
 	Board.overlay_root.add_child(shop)
 
 	await shop.closed
 
-	get_tree().paused = false
 	can_roll = true
 	busy = false
 func _update_turn_label() -> void:
@@ -96,17 +101,7 @@ func _check_red_box()->bool:
 			return true
 	return false
 
-func _process(delta: float):
-	if Input.is_action_just_pressed("ui_accept"):
-		
-		var random_int = rng.randi_range(1, 6)
-		target.x += random_int * snap.x
-		global_position = target
-		playerPos.savedPosition = global_position
-		playerPos.savedTurn = turn_count
-		
-		_is_off_board()
-		_check_red_box()
+
 func _offerGame() -> void:
 	busy = true
 

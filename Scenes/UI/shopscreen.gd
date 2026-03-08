@@ -1,6 +1,6 @@
 extends Control
-
-@onready var close_btn: BaseButton = $Panel/Root/MarginContainer/NavBar/Close
+signal closed
+@onready var close_btn: BaseButton = $Control/Panel/Root/MarginContainer/NavBar/Close
 
 func _ready() -> void:
 	close_btn.pressed.connect(_on_close_pressed)
@@ -16,4 +16,5 @@ func _on_close_pressed() -> void:
 
 func leave_shop() -> void:
 	
-	Navigator.go_back()
+	closed.emit()
+	queue_free()
