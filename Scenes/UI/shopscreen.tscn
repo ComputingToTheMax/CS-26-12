@@ -63,7 +63,7 @@ theme_override_constants/margin_bottom = 24
 
 [node name="NavBar" type="Control" parent="Control/Panel/Root/MarginContainer" unique_id=96336324]
 layout_mode = 2
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="Title" type="Label" parent="Control/Panel/Root/MarginContainer/NavBar" unique_id=103509852]
 layout_mode = 1
@@ -102,17 +102,29 @@ mouse_filter = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/Panel/Root/MarginContainer/MainShopCont/Control" unique_id=690316094]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -552.0
+offset_top = -232.5
+offset_right = -552.0
+offset_bottom = -232.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Spacer" type="Control" parent="Control/Panel/Root/MarginContainer/MainShopCont/Control/ScrollContainer" unique_id=1577306078]
+[node name="ShopGrid" type="GridContainer" parent="Control/Panel/Root/MarginContainer/MainShopCont/Control/ScrollContainer" unique_id=1391466904]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
+columns = 5
+
+[node name="purchasePrice" type="Label" parent="Control/Panel/Root/MarginContainer/MainShopCont" unique_id=1562199062]
+layout_mode = 2
 
 [node name="ShopBtns" type="HBoxContainer" parent="Control/Panel/Root/MarginContainer/MainShopCont" unique_id=1986213326]
 custom_minimum_size = Vector2(80, 80)
@@ -132,3 +144,24 @@ text = "Buy"
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "Hire"
+
+[node name="ShopInfo" type="Panel" parent="Control/Panel/Root/MarginContainer/MainShopCont" unique_id=1858876306]
+layout_mode = 2
+
+[node name="ItemLabel" type="Label" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopInfo" unique_id=1868320502]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ItemDesc" type="Label" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopInfo" unique_id=944721166]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ItemPrice" type="Label" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopInfo" unique_id=1792177929]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

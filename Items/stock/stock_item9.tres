@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bwthsbxamrnnb"]
+
+[ext_resource type="Texture2D" uid="uid://bamjytdjfn7g5" path="res://Sources/Images/star.png" id="1_271lx"]
+[ext_resource type="Script" uid="uid://bk0eid026r1p4" path="res://Scripts/Inventory/ItemData.gd" id="2_xw3k8"]
+
+[resource]
+script = ExtResource("2_xw3k8")
+id = "test_object"
+display_name = "Test Item"
+icon = ExtResource("1_271lx")
+description = "An item used for testing"
+metadata/_custom_type_script = "uid://bk0eid026r1p4"

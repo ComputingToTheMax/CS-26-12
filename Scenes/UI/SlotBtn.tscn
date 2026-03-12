@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cqjr4bsctjp2u" path="res://Scripts/SlotButton.gd" id="1_yhht4"]
 
 [node name="SlotBtn" type="TextureButton" unique_id=1052370832]
+clip_contents = true
 custom_minimum_size = Vector2(64, 100)
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,19 +12,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yhht4")
 
-[node name="icon" type="TextureRect" parent="." unique_id=1978628010]
-custom_minimum_size = Vector2(64, 80)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Content" type="Control" parent="." unique_id=365424323]
+custom_minimum_size = Vector2(90, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
-[node name="quantity" type="Label" parent="." unique_id=1674717278]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="BG" type="ColorRect" parent="." unique_id=433560664]
+[node name="BG" type="ColorRect" parent="Content" unique_id=433560664]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 15
@@ -32,4 +31,65 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.5132329, 0.5132329, 0.5132329, 1)
+
+[node name="IconControl" type="Control" parent="Content" unique_id=525329508]
+clip_contents = true
+custom_minimum_size = Vector2(90, 110)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -34.0
+offset_right = 37.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="icon" type="TextureRect" parent="Content/IconControl" unique_id=1978628010]
+clip_contents = true
+custom_minimum_size = Vector2(90, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 3
+stretch_mode = 5
+
+[node name="quantity" type="Label" parent="Content" unique_id=1674717278]
+visible = false
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Description" type="ColorRect" parent="Content" unique_id=1269513194]
+custom_minimum_size = Vector2(80, 20)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.48962224, 0.48962224, 0.48962218, 1)
+
+[node name="ItemName" type="Label" parent="Content/Description" unique_id=2046898453]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Sample Text"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true

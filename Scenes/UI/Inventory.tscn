@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dba1ue0q5qqkl" path="res://Scenes/UI/Inventory.gd" id="1_8q74i"]
 [ext_resource type="Texture2D" uid="uid://dxlsrut5ml7or" path="res://Sources/Images/MediumArrow-Left-Idle.png" id="2_oc7th"]
-[ext_resource type="Script" uid="uid://detts2cbten4t" path="res://Scenes/UI/closebtn.gd" id="3_s6pj7"]
+[ext_resource type="Texture2D" uid="uid://d32bkckb102w2" path="res://Sources/Images/AsteroidMinigame/NextButtonAsteroidMinigame.png" id="3_s6pj7"]
+[ext_resource type="Texture2D" uid="uid://1fsmagfja11e" path="res://Sources/Images/Spaceship 1.png" id="4_b6trj"]
 
 [node name="Inventory" type="Control" unique_id=229675455]
 layout_mode = 3
@@ -122,7 +123,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 50)
 layout_mode = 2
 texture_normal = ExtResource("2_oc7th")
-script = ExtResource("3_s6pj7")
 
 [node name="CenterContainer" type="CenterContainer" parent="Screen/MarginContainer/VBoxContainer/TopBar" unique_id=1310013105]
 layout_mode = 1
@@ -137,6 +137,47 @@ mouse_filter = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Inventory"
+
+[node name="spacer" type="Control" parent="Screen/MarginContainer/VBoxContainer" unique_id=1942905944]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="BottomBar" type="Control" parent="Screen/MarginContainer/VBoxContainer" unique_id=1405897074]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/MarginContainer/VBoxContainer/BottomBar" unique_id=1623566104]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="space" type="Control" parent="Screen/MarginContainer/VBoxContainer/BottomBar/HBoxContainer" unique_id=1487966679]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Total" type="Label" parent="Screen/MarginContainer/VBoxContainer/BottomBar/HBoxContainer" unique_id=1892849817]
+layout_mode = 2
+text = "Text Here
+"
+
+[node name="ConfirmSell" type="TextureButton" parent="Screen/MarginContainer/VBoxContainer/BottomBar/HBoxContainer" unique_id=933902374]
+layout_mode = 2
+texture_normal = ExtResource("3_s6pj7")
+texture_disabled = ExtResource("4_b6trj")
+
+[node name="CancelSell" type="TextureButton" parent="Screen/MarginContainer/VBoxContainer/BottomBar/HBoxContainer" unique_id=1411674107]
+layout_mode = 2
+texture_normal = ExtResource("2_oc7th")
 
 [node name="progresscontain" type="Control" parent="Screen/MarginContainer/VBoxContainer" unique_id=946735210]
 layout_mode = 2

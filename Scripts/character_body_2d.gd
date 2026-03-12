@@ -14,7 +14,7 @@ var busy:=false
 @export var shop_scene: PackedScene = preload("res://Scenes/UI/shopscreen.tscn")
 @export var offer_scene: PackedScene = preload("res://Scenes/UI/ConfirmSwitch.tscn")
 @export var asteroid: PackedScene = preload("res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting1.tscn")
-
+@onready var inventory_overlay: InventoryOverlay = Board.get_node("Overlay/OverlayRoot/Inventory")
 func _ready():
 	
 
@@ -49,10 +49,10 @@ func roll_and_move(amount: int = 0) -> void:
 	var shop := _check_shop_box()
 	if shop:
 		await _open_shop()
-		can_roll=true
+		can_roll = true
 		_update_turn_label()
 		return
-		
+			
 	var triggered := _is_off_board() or _check_red_box()
 	if triggered:
 		await _offerGame()
@@ -71,11 +71,12 @@ func _open_shop() -> void:
 	can_roll = false
 
 	var shop := shop_scene.instantiate()
-	print("shop =", shop)
-	print("shop script =", shop.get_script())
-	print("has closed =", shop.has_signal("closed"))
-
 	Board.overlay_root.add_child(shop)
+
+	var player_inventory: InventoryModel = $InventoryModel
+	var inventory_overlay: InventoryOverlay = Board.get_node("Overlay/OverlayRoot/Inventory")
+
+	shop.setup_shop(player_inventory, inventory_overlay)
 
 	await shop.closed
 
