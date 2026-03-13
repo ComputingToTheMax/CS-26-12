@@ -1,12 +1,18 @@
+class_name GenesisSolarWindMinigameTile
 extends Node2D
 
 enum CURRENT_PATH { TO_ORBIT, ELLIPTICAL_ORBIT, FROM_ORBIT, NONE=-1}
+enum SOLAR_WIND_REGIMES { FAST_CORONAL_HOLE, SLOW_INTERSTREAM, RANDOM_CME}
 
-@onready
-#var genesis_spacecraft = $TestCraft
-var genesis_spacecraft = $GenesisSpacecraft
-@onready
-var historical_trajectory = $"HistoricalTrajectory"
+@export var genesis_spacecraft:CharacterBody2D
+@onready var player_keycap = $GenesisSpacecraft/Keycap
+
+
+@export var particle:RigidBody2D
+
+
+@onready var historical_trajectory = $"HistoricalTrajectory"
+@export var particle_path:PathFollow2D
 
 @onready
 var to_orbit = $ToOrbit/PathFollow2D
@@ -17,9 +23,15 @@ var from_orbit = $FromOrbit/PathFollow2D
 
 #var current_state = CURRENT_PATH.NONE
 var current_state = CURRENT_PATH.TO_ORBIT
+var current_solar_wind_regime = SOLAR_WIND_REGIMES.SLOW_INTERSTREAM
+var next_solar_wind_regime = SOLAR_WIND_REGIMES.SLOW_INTERSTREAM
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	assert(genesis_spacecraft != null,)
+	assert(particle != null,)
+	assert(particle_path != null,)
 	
 	# Move the spacecraft to the first orbit path.
 	#genesis_spacecraft.get_parent().remove_child(genesis_spacecraft)
@@ -39,7 +51,14 @@ func _ready() -> void:
 	
 	pass
 
-
+var player:GlobalSettings.PlayerConfiguration
+# Custom initialization function to handle custom tiling logic.
+func __init(player: GlobalSettings.PlayerConfiguration, viewport_size: Vector2i):
+	self.player = player
+	
+	player_keycap.key_character = player.buttons[0]
+	pass
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
@@ -61,7 +80,7 @@ func _process(delta: float) -> void:
 				current_state = CURRENT_PATH.FROM_ORBIT
 			
 		CURRENT_PATH.FROM_ORBIT:
-			
+			player_keycap.visible = true
 			from_orbit.progress += 50 * delta
 	
 	
@@ -69,6 +88,9 @@ func _process(delta: float) -> void:
 func launch_game():
 	current_state = CURRENT_PATH.TO_ORBIT
 	
-
+func update_solar_wind_regime():
+	current_solar_wind_regime = next_solar_wind_regime
 	
 	
+func spawn_particle():
+	pass

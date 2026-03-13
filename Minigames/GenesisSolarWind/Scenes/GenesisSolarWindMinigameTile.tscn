@@ -11,6 +11,7 @@
 [ext_resource type="VideoStream" uid="uid://33kqs2vg1eu5" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Normal.ogv" id="9_ayclc"]
 [ext_resource type="VideoStream" uid="uid://hgglyd8j7hfb" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Coronal Hole.ogv" id="10_ishca"]
 [ext_resource type="VideoStream" uid="uid://fwko75pi5qm3" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Eruption.ogv" id="11_r7e7m"]
+[ext_resource type="Script" uid="uid://wjrjbkowmmmr" path="res://Minigames/GenesisSolarWind/Scenes/particle.gd" id="12_un60b"]
 [ext_resource type="Texture2D" uid="uid://bjridk6yod4r1" path="res://Minigames/GenesisSolarWind/Src/Images/AlphaParticle.svg" id="12_xs1mc"]
 [ext_resource type="Texture2D" uid="uid://bqfdnl501rov7" path="res://Minigames/GenesisSolarWind/Src/Images/Proton.svg" id="13_d71lv"]
 [ext_resource type="Texture2D" uid="uid://crxplsen26bsl" path="res://Minigames/GenesisSolarWind/Src/Images/Electron.svg" id="14_0dhk7"]
@@ -69,8 +70,17 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_7yrxx"]
 radius = 31.0
 
-[node name="BaseGameTile" type="Node2D" unique_id=1403132214]
+[sub_resource type="Curve2D" id="Curve2D_kc7nk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -316, -22, 0, -48.721615, 0, 48.721615, -248, 34, 0, 0, 0, 0, -318, 126)
+}
+point_count = 3
+
+[node name="BaseGameTile" type="Node2D" unique_id=1403132214 node_paths=PackedStringArray("genesis_spacecraft", "particle", "particle_path")]
 script = ExtResource("1_kc7nk")
+genesis_spacecraft = NodePath("GenesisSpacecraft")
+particle = NodePath("Particle")
+particle_path = NodePath("ParticlePath/PathFollow2D")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1733274154]
 position = Vector2(250, 65)
@@ -108,6 +118,7 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("6_6srcd")
 
 [node name="Keycap" parent="GenesisSpacecraft" unique_id=1104716233 instance=ExtResource("7_t22to")]
+visible = false
 position = Vector2(-258.82355, 17.647064)
 scale = Vector2(0.53, 0.53)
 
@@ -141,9 +152,6 @@ position = Vector2(273, -25)
 rotates = false
 loop = false
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=532399622]
-position = Vector2(243, 55)
-
 [node name="SolarViewport" type="SubViewport" parent="." unique_id=781412169]
 size = Vector2i(1080, 1920)
 script = ExtResource("8_3dxrw")
@@ -172,11 +180,13 @@ autoplay = true
 expand = true
 
 [node name="Particle" type="RigidBody2D" parent="." unique_id=1325041918]
-position = Vector2(-282, 35)
-gravity_scale = 0.005
+position = Vector2(-291, 44)
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("12_un60b")
 metadata/_edit_group_ = true
 
-[node name="ParticleImage" type="AnimatedSprite2D" parent="Particle" unique_id=1792873888]
+[node name="ParticleSprite" type="AnimatedSprite2D" parent="Particle" unique_id=1792873888]
 position = Vector2(-1, -1)
 scale = Vector2(0.13496932, 0.13496932)
 sprite_frames = SubResource("SpriteFrames_thqn4")
@@ -184,6 +194,7 @@ animation = &"proton"
 metadata/_edit_group_ = true
 
 [node name="AlphaParticle" type="Sprite2D" parent="Particle" unique_id=1145731887]
+visible = false
 position = Vector2(2.9999847, -4)
 scale = Vector2(0.13917525, 0.13917525)
 texture = ExtResource("12_xs1mc")
@@ -194,14 +205,21 @@ position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_7yrxx")
 metadata/_edit_group_ = true
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Particle" unique_id=2073371309]
-position = Vector2(-26, -27)
-rect = Rect2(-6, -7, 65, 66)
-metadata/_edit_group_ = true
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=824781716]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Particle" unique_id=824781716]
 visible = false
-position = Vector2(-323, -87)
-rect = Rect2(-14, 9, 1157, 243)
+position = Vector2(-32, -131)
+rect = Rect2(-14, 40, 1157, 199)
+
+[node name="ParticlePath" type="Path2D" parent="." unique_id=717350323]
+curve = SubResource("Curve2D_kc7nk")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="ParticlePath" unique_id=1140376928]
+position = Vector2(-316, -22)
+rotation = 0.10662911
+rotates = false
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=532399622]
+position = Vector2(243, 55)
 
 [connection signal="finished" from="SolarViewport/SolarVideoPlayer" to="SolarViewport" method="_on_solar_video_player_finished"]
+[connection signal="screen_exited" from="Particle/VisibleOnScreenNotifier2D" to="Particle" method="_on_visible_on_screen_notifier_2d_screen_exited"]
