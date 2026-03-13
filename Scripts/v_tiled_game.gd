@@ -15,6 +15,7 @@ func __init(target_minigame_path: String) -> void:
 func _ready() -> void:
 	
 	for player in GlobalSettings.active_players:
+		print("Creating subview!")
 		_create_subview(player)
 		
 
