@@ -141,7 +141,6 @@ func _on_shop_slot_selected(index: int, source_inventory: InventoryModel) -> voi
 	if slot == null:
 		return
 
-	# Toggle off if the same slot is clicked again
 	if selected_shop_index == index:
 		_clear_selection_display()
 		_rebuild_shop_grid()
