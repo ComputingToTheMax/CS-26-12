@@ -53,3 +53,5 @@ func _create_subview(player: GlobalSettings.PlayerConfiguration, viewport_size: 
 	
 	# Make the current subview visible.
 	current_subview.visible = true
+	
+	current_instance_of_target_scene.launch_game()
