@@ -6,6 +6,7 @@ extends Node
 # Game Settings
 #
 static var click_sound_enabled: bool = true
+static var default_background:String = "res://Sources/Images/SpaceBackgroundPlain.jpeg"
 
 
 #
@@ -15,6 +16,11 @@ static var click_sound_enabled: bool = true
 #
 # Helper Functions
 #
+
+# Returns, width, height
+static func get_window_size(screen=0) -> Vector2i:
+	return DisplayServer.window_get_size_with_decorations(screen)
+
 
 
 #
