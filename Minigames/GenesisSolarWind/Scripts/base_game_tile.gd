@@ -8,7 +8,7 @@ enum SOLAR_WIND_REGIMES { FAST_CORONAL_HOLE, SLOW_INTERSTREAM, RANDOM_CME}
 @onready var player_keycap = $GenesisSpacecraft/Keycap
 
 
-@export var particle:RigidBody2D
+@export var particle_scene:PackedScene
 
 
 @onready var historical_trajectory = $"HistoricalTrajectory"
@@ -22,15 +22,19 @@ var elliptical_orbit = $EllipticalOrbit/PathFollow2D
 var from_orbit = $FromOrbit/PathFollow2D
 
 #var current_state = CURRENT_PATH.NONE
+# TODO: Pick a pattern and remain consistent.
+# As an experiment, "current_state" is managed through class instances.
 var current_state = CURRENT_PATH.TO_ORBIT
-var current_solar_wind_regime = SOLAR_WIND_REGIMES.SLOW_INTERSTREAM
-var next_solar_wind_regime = SOLAR_WIND_REGIMES.SLOW_INTERSTREAM
+
+# Solar wind regime, however, is managed by the static class logic.
+static var current_solar_wind_regime = SOLAR_WIND_REGIMES.SLOW_INTERSTREAM
+static var next_solar_wind_regime = SOLAR_WIND_REGIMES.SLOW_INTERSTREAM
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
 	assert(genesis_spacecraft != null,)
-	assert(particle != null,)
+	assert(particle_scene != null,)
 	assert(particle_path != null,)
 	
 	# Move the spacecraft to the first orbit path.
@@ -48,6 +52,9 @@ func _ready() -> void:
 	historical_trajectory.points = points
 	
 	#Line2D.new().points.append_array()
+	
+	# Record the existance of this game tile to a static class attribute.
+	GenesisSolarWindMinigameTile.games.append(self)
 	
 	pass
 
@@ -82,15 +89,64 @@ func _process(delta: float) -> void:
 		CURRENT_PATH.FROM_ORBIT:
 			player_keycap.visible = true
 			from_orbit.progress += 50 * delta
+
+static var games = []
+# TODO: Refactor code to rely on only one declaration of this enum.
+enum ParticleTypes { ALPHA_PARTICLE=0, ELECTRON=1, PROTON=2 }
+static func launch_game():
+	
+	# Launch each child game.
+	for game in games:
+		game._launch_game()
+		
+	spawn_particle()
+	spawn_particle()
+	spawn_particle()
+		
+
+static func spawn_particle():
+	var particle_type = ParticleTypes.values().pick_random()
+	var particle_start_progress = randf()
+	var particle_direction = randf_range(0, PI/4)
+	
+	var particle_speed
+	match current_solar_wind_regime:
+		SOLAR_WIND_REGIMES.FAST_CORONAL_HOLE:
+			particle_speed = randi_range(100, 200)
+			
+		SOLAR_WIND_REGIMES.SLOW_INTERSTREAM:
+			particle_speed = randi_range(50, 100)
+			
+		SOLAR_WIND_REGIMES.RANDOM_CME:
+			particle_speed = randi_range(50, 200)
+			
 	
 	
+	for game in games:
+		game._spawn_particle(particle_type, particle_start_progress, particle_direction, particle_speed)
 	
-func launch_game():
-	current_state = CURRENT_PATH.TO_ORBIT
 	
-func update_solar_wind_regime():
+static func update_solar_wind_regime():
 	current_solar_wind_regime = next_solar_wind_regime
 	
 	
-func spawn_particle():
-	pass
+func _launch_game():
+	current_state = CURRENT_PATH.TO_ORBIT
+	
+
+	
+	
+func _spawn_particle(particle_type, particle_start_progress, particle_direction, particle_speed):
+	var new_particle = particle_scene.instantiate()
+	
+	new_particle.change_particle_type(particle_type)
+	
+	particle_path.progress_ratio = particle_start_progress
+	new_particle.position = particle_path.position
+	
+	var particle_velocity = Vector2(cos(particle_direction) * particle_speed, sin(particle_direction) * particle_speed)
+	print(particle_velocity)
+	new_particle.linear_velocity = particle_velocity
+	
+	add_child(new_particle)
+	
