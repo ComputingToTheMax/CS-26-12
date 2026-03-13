@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://dnmyv4asuqn4p"]
+
+[ext_resource type="Script" uid="uid://wjrjbkowmmmr" path="res://Minigames/GenesisSolarWind/Scenes/particle.gd" id="1_onlip"]
+[ext_resource type="Texture2D" uid="uid://bjridk6yod4r1" path="res://Minigames/GenesisSolarWind/Src/Images/AlphaParticle.svg" id="2_o7en8"]
+[ext_resource type="Texture2D" uid="uid://crxplsen26bsl" path="res://Minigames/GenesisSolarWind/Src/Images/Electron.svg" id="3_ku4c2"]
+[ext_resource type="Texture2D" uid="uid://bqfdnl501rov7" path="res://Minigames/GenesisSolarWind/Src/Images/Proton.svg" id="4_cvq8j"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3fsyc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_o7en8")
+}],
+"loop": true,
+"name": &"alpha_particle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ku4c2")
+}],
+"loop": true,
+"name": &"electron",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_cvq8j")
+}],
+"loop": true,
+"name": &"proton",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_koy78"]
+radius = 31.0
+
+[node name="Particle" type="RigidBody2D" unique_id=1409294072]
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_onlip")
+metadata/_edit_group_ = true
+
+[node name="ParticleSprite" type="AnimatedSprite2D" parent="." unique_id=741267328]
+position = Vector2(-1, -1)
+scale = Vector2(0.13496932, 0.13496932)
+sprite_frames = SubResource("SpriteFrames_3fsyc")
+animation = &"proton"
+metadata/_edit_group_ = true
+
+[node name="AlphaParticle" type="Sprite2D" parent="." unique_id=1695721279]
+visible = false
+position = Vector2(2.9999847, -4)
+scale = Vector2(0.13917525, 0.13917525)
+texture = ExtResource("2_o7en8")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1495743509]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_koy78")
+metadata/_edit_group_ = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=806099830]
+position = Vector2(-32, -131)
+rect = Rect2(-14, 40, 1157, 199)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
