@@ -18,11 +18,13 @@ func _ready() -> void:
 	var viewport_size = GlobalSettings.get_window_size()
 	viewport_size.y = (viewport_size.y - (5 * (GlobalSettings.number_of_players - 1))) / GlobalSettings.number_of_players
 	
-	print("Viewport Size:", viewport_size)
+	#print("Viewport Size:", viewport_size)
 	
 	for player in GlobalSettings.active_players:
-		print("Creating subview!")
+		#print("Creating subview!")
 		_create_subview(player, viewport_size)
+		
+	print("Instantiating a minigame scene with the following path:\t", target_minigame_path)
 		
 
 
@@ -33,8 +35,6 @@ func _process(delta: float) -> void:
 
 func _create_subview(player: GlobalSettings.PlayerConfiguration, viewport_size: Vector2i):
 	
-	
-	print("PATH!", target_minigame_path)
 	var current_instance_of_target_scene = load(target_minigame_path).instantiate()
 	
 	var current_subview = subview_template.duplicate()
@@ -44,6 +44,12 @@ func _create_subview(player: GlobalSettings.PlayerConfiguration, viewport_size: 
 	current_subview_viewport.size = viewport_size
 	current_subview_viewport.add_child(current_instance_of_target_scene)
 	
-	# Finish by making the current subview visible and adding it into the working tree.
-	current_subview.visible = true
+	# Add the current subview to the working scene tree.
 	subview_parent.add_child(current_subview)
+	
+	# This is crucial! Only initialize the target scene after it has been added, so that it's "_ready"
+	# function has been run properly.
+	current_instance_of_target_scene.__init(player, viewport_size)
+	
+	# Make the current subview visible.
+	current_subview.visible = true
