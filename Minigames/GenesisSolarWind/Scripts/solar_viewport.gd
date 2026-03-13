@@ -1,44 +1,43 @@
 extends SubViewport
 
 
-enum Sun { NORMAL, CORONAL_HOLE, CME }
+#enum Sun { NORMAL, CORONAL_HOLE, CME }
+
+#enum SOLAR_WIND_REGIMES { FAST_CORONAL_HOLE, SLOW_INTERSTREAM, RANDOM_CME}
 
 @export var sun_normal_stream: VideoStreamTheora
 @export var sun_coronal_hole_stream: VideoStreamTheora
 @export var sun_cme_stream: VideoStreamTheora
 
 @onready var SUN_STATE_TO_STREAM: Dictionary = {
-	Sun.NORMAL : sun_normal_stream,
-	Sun.CORONAL_HOLE : sun_coronal_hole_stream,
-	Sun.CME : sun_cme_stream,
+	GenesisSolarWindMinigameTile.SOLAR_WIND_REGIMES.SLOW_INTERSTREAM : sun_normal_stream,
+	GenesisSolarWindMinigameTile.SOLAR_WIND_REGIMES.FAST_CORONAL_HOLE : sun_coronal_hole_stream,
+	GenesisSolarWindMinigameTile.SOLAR_WIND_REGIMES.RANDOM_CME : sun_cme_stream,
 }
 
-var current_sun_state:Sun = Sun.NORMAL
-var next_sun_state:Sun = Sun.CME
+@onready var parent = get_parent()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-	
-	
 
 
 func _on_solar_video_player_finished() -> void:
 	
-	_play_random_solar_video()
-	return
+	#_play_random_solar_video()
+	#return
 	
 	var player = $SolarVideoPlayer
 	
-	player.stream = SUN_STATE_TO_STREAM[next_sun_state]
+	self.parent.update_solar_wind_regime()
+	player.stream = SUN_STATE_TO_STREAM[parent.current_solar_wind_regime]
 	#player.stop()
 	player.play()
-	current_sun_state = next_sun_state
 	
 	
 func _play_random_solar_video() -> void:
@@ -48,6 +47,6 @@ func _play_random_solar_video() -> void:
 	
 	player.stream = SUN_STATE_TO_STREAM[selected_state]
 	player.play()
-	current_sun_state = selected_state
+	parent.current_solar_wind_regime = selected_state
 	
 	
