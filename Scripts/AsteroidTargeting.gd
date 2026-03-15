@@ -19,7 +19,7 @@ func _process(delta):
 	_keep_inside_background()
 
 func _keep_inside_background():
-	var bg = get_tree().current_scene.get_node("Background")
+	var bg = get_parent().get_node_or_null("Background")
 	if bg == null or texture == null:
 		return
 	
