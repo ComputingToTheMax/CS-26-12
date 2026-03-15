@@ -11,6 +11,7 @@ var turn_count:=0
 var can_roll := true
 var roll:=0
 var busy:=false
+@onready var player_inventory: InventoryModel = Board.get_node("res://Scenes/UI/Inventory.gd")
 @export var shop_scene: PackedScene = preload("res://Scenes/UI/shopscreen.tscn")
 @export var offer_scene: PackedScene = preload("res://Scenes/UI/ConfirmSwitch.tscn")
 @export var asteroid: PackedScene = preload("res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting1.tscn")
@@ -121,16 +122,21 @@ func _offerGame() -> void:
 		return
 
 	var chosen_game_scene : PackedScene = minigames[rng.randi_range(0, minigames.size() - 1)]
+	if chosen_game_scene == null:
+		push_error("Chosen minigame scene is null!")
+		busy = false
+		return
 	var mg := chosen_game_scene.instantiate()
 	Board.game_root.add_child(mg)
 
 
 
-	var result_args : Array = await mg.done
-	var result: Dictionary = result_args[0]
+	var result: Dictionary = await mg.done
 
 
 	_result(result)
 	busy = false
 func _result(result: Dictionary) -> void:
 	print("Result:", result)
+	var item = player_inventory.get_item_from_db("0")
+	player_inventory.add_item(item, 1)

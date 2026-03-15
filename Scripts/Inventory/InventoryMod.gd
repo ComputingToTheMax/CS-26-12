@@ -25,6 +25,8 @@ func _ready() -> void:
 		add_item(item_db.get_item("0"), 5)
 		add_item(sampleItem, 5)
 
+func get_item_from_db(s: String)-> Variant:
+	return item_db.get_item(s)
 
 func get_slot(i: int) -> Variant:
 	if i < 0 or i >= slot_count:

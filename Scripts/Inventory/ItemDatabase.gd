@@ -1,6 +1,7 @@
 extends Node
 class_name ItemDatabase
 
+
 var items : Dictionary = {}
 
 func load_items(json_path:String):
@@ -27,6 +28,11 @@ func load_items(json_path:String):
 		item.value = item_data["Price"]
 		item.max_stack = item_data["MaxStack"]
 		item.icon = load(item_data["Icon"])
+		item.speed = item_data["Speed"]
+		item.durability = item_data["Durability"]
+		item.efficiency = item_data["Efficiency"]
+		item.time_bonus = item_data["Time bonus"]
+		item.difficulty_reduction = item_data["Difficulty reduction"]
 
 		items[item.id] = item
 

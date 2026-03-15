@@ -174,8 +174,9 @@ func _on_word_entered(text):
 		info_label.text = "Good! " + str(found_words.size()) + " / " + str(words_needed)
 
 		if found_words.size() >= words_needed:
-			var result="done"
-			emit_signal("done", [result])
+			var result := {"status":"done", "score": words_needed}
+			emit_signal("done", result)
+
 	else:
 		info_label.text = "Not a valid word"
 

@@ -32,8 +32,8 @@ func _ready() -> void:
 
 func load_ship() -> void:
 	if current_ship >= 5:
-		var result="done"
-		emit_signal("done", [result])
+		var result := {"status":"done", "score":5}
+		emit_signal("done", result)
 
 	spaceship.set_ship(current_ship, ship_targets[current_ship])
 

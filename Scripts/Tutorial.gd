@@ -58,6 +58,18 @@ var dialog_entries := [
 		"context":""
 	},
 	{
+		"text": "An item has 5 stats: 3 stats that effect it's performance in the final stretch: Speed, Durability, and Efficiency Currently you win if cbroot(total speed^3+ total durability^3+ total efficiency^3)>30",
+		"bg": "",
+		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
+		"context":""
+	},
+	{
+		"text": "The other 2 stats that effect an items performance in minigames. Difficulty reduction will make minigames slightly easier. Time bonus will give you extra time to complete minigames.",
+		"bg": "",
+		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
+		"context":""
+	},
+	{
 		"text": "Good luck, the fate of Psyche is on your hands",
 		"bg": "",
 		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
