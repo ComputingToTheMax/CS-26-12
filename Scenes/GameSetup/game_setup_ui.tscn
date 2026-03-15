@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="10_y3ush"]
 [ext_resource type="PackedScene" uid="uid://b66ej8u3vttls" path="res://Scenes/tutorial.tscn" id="11_d5rn2"]
 [ext_resource type="PackedScene" uid="uid://bo4mp5audgyic" path="res://Minigames/GenesisSolarWind/Scenes/GenesisSolarWindMinigameTile.tscn" id="13_1h5sy"]
-[ext_resource type="PackedScene" uid="uid://da7v2pxnl3ccx" path="res://Scenes/Minigames/alien_communication.tscn" id="13_2sgsx"]
+[ext_resource type="PackedScene" uid="uid://da7v2pxnl3ccx" path="res://Scenes/Minigames/alien_communication/alien_communication.tscn" id="13_2sgsx"]
 [ext_resource type="PackedScene" uid="uid://yvtjjujrw067" path="res://Minigames/GenesisSolarWind/Scenes/GenesisTestInstantiator.tscn" id="13_vkkjp"]
 
 [sub_resource type="GDScript" id="GDScript_1h5sy"]

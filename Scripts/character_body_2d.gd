@@ -14,12 +14,16 @@ var busy:=false
 @export var shop_scene: PackedScene = preload("res://Scenes/UI/shopscreen.tscn")
 @export var offer_scene: PackedScene = preload("res://Scenes/UI/ConfirmSwitch.tscn")
 @export var asteroid: PackedScene = preload("res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting1.tscn")
+@export var hanger: PackedScene = preload("res://Scenes/Minigames/hanger_madness/hanger_madness.tscn")
+@export var alien: PackedScene = preload("res://Scenes/Minigames/alien_communication/alien_communication.tscn")
 @onready var inventory_overlay: InventoryOverlay = Board.get_node("Overlay/OverlayRoot/Inventory")
-func _ready():
-	
 
+var minigames : Array
+
+func _ready():
 
 	cell_size = Board.get("cell_size")
+	minigames = [asteroid, hanger, alien]
 	snap=cell_size
 	rng.randomize()
 	var board_size = Vector2i(get_viewport_rect().size)/cell_size
@@ -116,8 +120,8 @@ func _offerGame() -> void:
 		busy = false
 		return
 
-	
-	var mg := asteroid.instantiate() 
+	var chosen_game_scene : PackedScene = minigames[rng.randi_range(0, minigames.size() - 1)]
+	var mg := chosen_game_scene.instantiate()
 	Board.game_root.add_child(mg)
 
 
