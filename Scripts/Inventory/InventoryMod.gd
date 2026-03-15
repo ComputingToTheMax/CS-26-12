@@ -15,14 +15,14 @@ func _ready() -> void:
 	item_db = ItemDatabase.new()
 	item_db.load_items("res://Items/ItemDatabase.json")
 
-    slots.resize(slot_count)
+	slots.resize(slot_count)
 	for i in range(slot_count):
 		slots[i] = null
 	print("InventoryModel Ready")
 	
 	if debug_fill_on_ready:
 		print("fill on ready true")
-	    add_item(item_db.get_item("0"), 5)
+		add_item(item_db.get_item("0"), 5)
 		add_item(sampleItem, 5)
 
 
