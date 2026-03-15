@@ -8,5 +8,7 @@ script = ExtResource("2_m0hp1")
 id = "test_object"
 display_name = "Test Item"
 icon = ExtResource("1_7ubcb")
+buy_price = 20
+sell_price = 18
 description = "An item used for testing"
 metadata/_custom_type_script = "uid://bk0eid026r1p4"
