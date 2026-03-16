@@ -5,7 +5,14 @@ const SIZE = 4
 var board = []
 var trie
 var found_words = []
-var words_needed = 10
+var words_needed = 10-CurGameState.total_time_bonus
+
+var timer_label: Label
+@onready var timer: Timer = Timer.new()
+
+var base_time := 20.0
+var time_left := 0.0
+var bonus =.5
 
 var input_box
 var board_container
@@ -138,6 +145,10 @@ func create_ui():
 	board_container = VBoxContainer.new()
 	board_container.position = Vector2(40, 40)
 	add_child(board_container)
+	timer_label = Label.new()
+	timer_label.position = Vector2(40, 300)
+	timer_label.text = "Time:"
+	add_child(timer_label)
 
 	for i in range(SIZE):
 		var row = HBoxContainer.new()
@@ -180,12 +191,35 @@ func _on_word_entered(text):
 	else:
 		info_label.text = "Not a valid word"
 
+func update_timer_label():
+	timer_label.text = "Time: " + str(int(time_left))
+	
+func _on_timer_tick():
+	time_left -= 1
+	update_timer_label()
+
+	if time_left <= 0:
+		timer.stop()
+		var result := {"status":"fail", "score": found_words.size()}
+		emit_signal("done", result)
+		
+func start_timer():
+	add_child(timer)
+
+	var bonus = CurGameState.total_time_bonus
+	time_left = base_time + (bonus * 3)
+
+	timer.wait_time = 1
+	timer.timeout.connect(_on_timer_tick)
+	timer.start()
+
+	update_timer_label()
+	
 func _ready():
 	randomize()
 
 	board = generate_board("res://Scenes//Minigames//alien_communication//letter_frequency.txt")
 	trie = build_trie("res://Scenes//Minigames//alien_communication//word_list.txt")
-
 	create_ui()
 
 	print("BOARD:")
@@ -194,3 +228,5 @@ func _ready():
 
 	var all = find_words(board, trie)
 	print("Possible words:", all.size())
+	start_timer()
+	

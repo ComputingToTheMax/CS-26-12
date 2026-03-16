@@ -4,6 +4,36 @@ signal done(result)
 @onready var spaceship: Sprite2D = $Spaceship
 @onready var label: Label = $Label
 
+var timer_label: Label
+@onready var timer: Timer = Timer.new()
+
+var base_time := 20.0
+var time_left := 0.0
+
+func update_timer_label():
+	timer_label.text = "Time: " + str(int(time_left))
+	
+func _on_timer_tick():
+	time_left -= 1
+	update_timer_label()
+
+	if time_left <= 0:
+		timer.stop()
+		var result := {"status":"fail", "score": correct_count}
+		emit_signal("done", result)
+		
+func start_timer():
+	add_child(timer)
+
+	var bonus = CurGameState.total_time_bonus
+	time_left = base_time + (bonus * 3)
+
+	timer.wait_time = 1
+	timer.timeout.connect(_on_timer_tick)
+	timer.start()
+
+	update_timer_label()
+
 var rng := RandomNumberGenerator.new()
 
 var current_ship := 0
@@ -20,6 +50,9 @@ var clues := [
 ]
 
 func _ready() -> void:
+	timer_label = Label.new()
+	timer_label.position = Vector2(20, 20)
+	timer_label.text = "Time:"
 	rng.randomize()
 
 	for i in range(5):
@@ -28,12 +61,15 @@ func _ready() -> void:
 	update_label()
 
 	load_ship()
+	start_timer()
 
 
 func load_ship() -> void:
 	if current_ship >= 5:
+		timer.stop()
 		var result := {"status":"done", "score":5}
 		emit_signal("done", result)
+		
 
 	spaceship.set_ship(current_ship, ship_targets[current_ship])
 
@@ -52,6 +88,6 @@ func _draw():
 
 func update_label() -> void:
 	var all_text := "Get five spaceships into their correct docks to pass the minigame\nCurrently you have completed %d ships\n" % correct_count
-	for i in range(5):
+	for i in range(5--CurGameState.total_time_bonus):
 		all_text += "Ship %d: %s%s\n" % [i + 1, clues[i], dock_color[ship_targets[i]-1]]
 	label.text = all_text
