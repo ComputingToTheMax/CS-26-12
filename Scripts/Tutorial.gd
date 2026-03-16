@@ -10,12 +10,12 @@ extends Node2D
 @onready var bg_rect: TextureRect = $BackgroundLayer/TextureRect
 @onready var tutorialchar: TextureRect = $BackgroundLayer/Characters/Spaceman 
 @onready var contextimg: TextureRect = $ContextLayer/Context
-
-
+@export var tutorial_type := "board"
+var dialog_entries=0
 var current_index := 0
 
 
-var dialog_entries := [
+var board_dialog := [
 	{
 		"text": "Welcome to our game about the Psyche asteroid. Press space or click to go through text boxes",
 		"bg":"",
@@ -58,6 +58,19 @@ var dialog_entries := [
 		"context":""
 	},
 	{
+		"text": "An item has 5 stats: 3 stats that effect it's performance in the final stretch: Speed, Durability, and Efficiency Currently you win if cbroot(total speed^3+ total durability^3+ total efficiency^3)>30",
+		"bg": "",
+		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
+		"context":""
+	},
+	{
+		"text": "The other 2 stats that effect an items performance in minigames. Difficulty reduction will make minigames slightly easier. Time bonus will give you extra time to complete minigames.
+	",
+		"bg": "",
+		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
+		"context":""
+	},
+	{
 		"text": "Good luck, the fate of Psyche is on your hands",
 		"bg": "",
 		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
@@ -65,7 +78,56 @@ var dialog_entries := [
 	}
 ]
 
+var alien_dialog := [
+	{
+		"text":"Your crew has happened upon an alien signal. Are they friend or foe? You must spell words to communicate with them.",
+		"bg":"",
+		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
+		"context":""
+	}
+]
+
+var hanger_dialog := [
+	{
+		"text":"Your crew has stumbled upon a shipyard. You receive a muddled signal on your transponder telling you that you must correctly sort ships according to the rules given to pass.",
+		"bg":"",
+		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
+		"context":""
+	}
+]
+
+var asteroid_dialog := [
+	{
+		"text":"Your crew has spotted the Psyche asteroid. You must click it to get closer to it but oh boy is it moving fast.",
+		"bg":"",
+		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
+		"context":""
+	}
+]
+
+var genisis_dialog := [
+	{
+		"text":"Your crew has found the genesis craft floating though space, collect different kinds of solar wind to further the mission.",
+		"bg":"",
+		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
+		"context":""
+	}
+]
+
+
 func _ready() -> void:
+	match tutorial_type:
+		"board":
+			dialog_entries = board_dialog
+
+		"alien":
+			dialog_entries = alien_dialog
+
+		"hanger":
+			dialog_entries = hanger_dialog
+
+		"asteroid":
+			dialog_entries = asteroid_dialog
 	_show_dialog_entry(current_index)
 	pause_menu.connect("main_menu_requested", Callable(self, "_on_pause_main_menu"))
 

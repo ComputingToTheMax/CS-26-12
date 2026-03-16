@@ -8,12 +8,14 @@ signal changed
 @export var debug_fill_on_ready: bool = true
 
 var slots: Array = []
-var entries: Array[ItemData]=[]
-
+var item_db : ItemDatabase
 var sampleItem: ItemData = preload("res://Items/stock/stock_item.tres")
 var sampleItem1: ItemData = preload("res://Items/stock/default.tres")
 
 func _ready() -> void:
+	item_db = ItemDatabase.new()
+	item_db.load_items("res://Items/ItemDatabase.json")
+
 	slots.resize(slot_count)
 	for i in range(slot_count):
 		slots[i] = null
@@ -53,9 +55,8 @@ func get_slot_indexes_for_category(category: int) -> Array[int]:
 	var start: int = range_info["start"]
 	var count: int = range_info["count"]
 
-	for i in range(start, start + count):
-		if i >= 0 and i < slot_count:
-			result.append(i)
+func get_item_from_db(s: String)-> Variant:
+	return item_db.get_item(s)
 
 	return result
 func get_slot(i: int) -> Variant:
