@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lnnwk0eghth3"
-path="res://.godot/imported/FailAsteroidMinigame.png-9a3d5bc891194645a6b876ce90b0fab7.ctex"
+uid="uid://dr1pdtfp6fsc8"
+path="res://.godot/imported/CloseButton.png-dbaaaeedb754f91cd1d995d283cca123.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sources/Images/AsteroidMinigame/FailAsteroidMinigame.png"
-dest_files=["res://.godot/imported/FailAsteroidMinigame.png-9a3d5bc891194645a6b876ce90b0fab7.ctex"]
+source_file="res://Sources/Images/UI/CloseButton.png"
+dest_files=["res://.godot/imported/CloseButton.png-dbaaaeedb754f91cd1d995d283cca123.ctex"]
 
 [params]
 
