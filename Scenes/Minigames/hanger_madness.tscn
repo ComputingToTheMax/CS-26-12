@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://iacrvearulxa"]
+
+[ext_resource type="Script" path="res://Scenes/Minigames/hanger_madness.gd" id="1_7e6tn"]
+[ext_resource type="Script" path="res://Scenes/Minigames/spaceship.gd" id="1_urowu"]
+
+[node name="Hanger_Madness" type="Node2D" unique_id=1663090251]
+script = ExtResource("1_7e6tn")
+
+[node name="Spaceship" type="Sprite2D" parent="." unique_id=922666198]
+script = ExtResource("1_urowu")
+
+[node name="Label" type="Label" parent="." unique_id=1025108480]
+offset_right = 40.0
+offset_bottom = 23.0
