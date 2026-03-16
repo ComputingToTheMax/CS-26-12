@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://btrq1fxsbueay"]
+
+[ext_resource type="Texture2D" uid="uid://bamjytdjfn7g5" path="res://Sources/Images/star.png" id="1_rg201"]
+[ext_resource type="Script" uid="uid://bk0eid026r1p4" path="res://Scripts/Inventory/ItemData.gd" id="2_f1d6t"]
+
+[resource]
+script = ExtResource("2_f1d6t")
+id = "test_object"
+display_name = "Parts"
+icon = ExtResource("1_rg201")
+buy_price = 80
+sell_price = 25
+description = "A different item in a different category
+"
+category = 1
+metadata/_custom_type_script = "uid://bk0eid026r1p4"

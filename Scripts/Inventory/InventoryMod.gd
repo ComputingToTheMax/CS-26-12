@@ -3,14 +3,15 @@ class_name InventoryModel
 
 signal changed
 
-@export var slot_count: int = 24
+@export var slot_count: int = 72
 @export var money: int = 0
 @export var debug_fill_on_ready: bool = true
 
 var slots: Array = []
+var entries: Array[ItemData]=[]
 
 var sampleItem: ItemData = preload("res://Items/stock/stock_item.tres")
-
+var sampleItem1: ItemData = preload("res://Items/stock/default.tres")
 
 func _ready() -> void:
 	slots.resize(slot_count)
@@ -20,9 +21,43 @@ func _ready() -> void:
 	
 	if debug_fill_on_ready:
 		print("fill on ready true")
-		add_item(sampleItem, 5)
+		add_item(sampleItem, 1)
+		add_item(sampleItem1,1)
+func get_slot_indexes_by_category(category: int) -> Array[int]:
+	var result: Array[int] = []
 
+	for i in range(slot_count):
+		var s = slots[i]
+		if s == null:
+			continue
 
+		var item: ItemData = s.get("item", null)
+		if item != null and item.category == category:
+			result.append(i)
+
+	return result
+func get_category_slot_range(category: int) -> Dictionary:
+	match category:
+		ItemData.InventoryCategory.ITEM:
+			return {"start": 0, "count": 24}
+		ItemData.InventoryCategory.PART:
+			return {"start": 24, "count": 24}
+		ItemData.InventoryCategory.MEMBER:
+			return {"start": 48, "count": 24}
+		_:
+			return {"start": 0, "count": 0}
+func get_slot_indexes_for_category(category: int) -> Array[int]:
+	var result: Array[int] = []
+	var range_info := get_category_slot_range(category)
+
+	var start: int = range_info["start"]
+	var count: int = range_info["count"]
+
+	for i in range(start, start + count):
+		if i >= 0 and i < slot_count:
+			result.append(i)
+
+	return result
 func get_slot(i: int) -> Variant:
 	if i < 0 or i >= slot_count:
 		return null
@@ -45,8 +80,9 @@ func add_item(item: ItemData, amount: int = 1) -> int:
 		return amount
 
 	var remaining: int = amount
+	var allowed_indexes: Array[int] = get_slot_indexes_for_category(item.category)
 
-	for i in range(slot_count):
+	for i in allowed_indexes:
 		var s: Variant = slots[i]
 		if s == null:
 			continue
@@ -66,7 +102,7 @@ func add_item(item: ItemData, amount: int = 1) -> int:
 				emit_signal("changed")
 				return 0
 
-	for i in range(slot_count):
+	for i in allowed_indexes:
 		if slots[i] == null:
 			var add_now: int = min(item.max_stack, remaining)
 			slots[i] = {

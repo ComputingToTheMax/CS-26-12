@@ -13,7 +13,11 @@ var slot_button_scene: PackedScene = null
 @onready var sell_total_label: Label = $Screen/MarginContainer/VBoxContainer/BottomBar/HBoxContainer/Total
 @onready var sell_confirm_btn: BaseButton = $Screen/MarginContainer/VBoxContainer/BottomBar/HBoxContainer/ConfirmSell
 @onready var sell_cancel_btn: BaseButton = $Screen/MarginContainer/VBoxContainer/BottomBar/HBoxContainer/CancelSell
-
+@onready var items_btn: BaseButton = $Screen/MarginContainer/VBoxContainer/TopBar/HBoxContainer/ItemBtn
+@onready var parts_btn: BaseButton = $Screen/MarginContainer/VBoxContainer/TopBar/HBoxContainer/PartBtn
+@onready var members_btn: BaseButton = $Screen/MarginContainer/VBoxContainer/TopBar/HBoxContainer/MemberBtn
+@onready var category_label: Label = $Screen/MarginContainer/VBoxContainer/TopBar/CenterContainer/VBoxContainer/Category
+var current_category: int = ItemData.InventoryCategory.ITEM
 enum InventoryMode {
 	NORMAL,
 	SELL
@@ -38,6 +42,14 @@ func _ready() -> void:
 	print("InventoryOverlay script path = ", get_script().resource_path)
 	print("sell_total_label = ", sell_total_label)
 	hide()
+	if items_btn != null:
+		items_btn.pressed.connect(_on_items_pressed)
+
+	if parts_btn != null:
+		parts_btn.pressed.connect(_on_parts_pressed)
+
+	if members_btn != null:
+		members_btn.pressed.connect(_on_members_pressed)
 	if money_label == null:
 		push_error("InventoryOverlay: MoneyLabel path is wrong or node is missing.")
 		return
@@ -69,6 +81,34 @@ func _ready() -> void:
 
 	_update_money(MoneySave.money)
 	MoneySave.money_changed.connect(_update_money)
+	_update_category_label()
+func _update_category_label() -> void:
+	match current_category:
+		ItemData.InventoryCategory.ITEM:
+			category_label.text = "Items"
+
+		ItemData.InventoryCategory.PART:
+			category_label.text = "Parts"
+
+		ItemData.InventoryCategory.MEMBER:
+			category_label.text = "Helpers"
+func _on_items_pressed() -> void:
+	current_category = ItemData.InventoryCategory.ITEM
+	_update_category_label()
+
+	_rebuild_grid()
+
+func _on_parts_pressed() -> void:
+	current_category = ItemData.InventoryCategory.PART
+	_update_category_label()
+
+	_rebuild_grid()
+
+func _on_members_pressed() -> void:
+	current_category = ItemData.InventoryCategory.MEMBER
+	_update_category_label()
+
+	_rebuild_grid()
 func _create_sold_popup() -> void:
 	sold_popup = AcceptDialog.new()
 	sold_popup.title = "Sale Complete"
@@ -220,43 +260,19 @@ func _update_sell_buttons() -> void:
 
 	if sell_confirm_btn != null:
 		sell_confirm_btn.disabled = not has_selection
+
 func _rebuild_grid() -> void:
-
-	print("InventoryOverlay script path in rebuild = ", get_script().resource_path)
-	print("InventoryOverlay self in rebuild = ", self)
-	print("slot_button_scene in rebuild = ", slot_button_scene)
-
-	if grid == null:
-		push_error("InventoryOverlay: GridContainer path is wrong or node is missing.")
-		return
-
-	if inventory_model == null:
-		push_error("InventoryOverlay: inventory_model is null.")
-		return
-
-	if slot_button_scene == null:
-		push_error("InventoryOverlay: slot_button_scene is null.")
-		return
-	if grid == null:
-		push_error("InventoryOverlay: GridContainer path is wrong or node is missing.")
-		return
-
-	if inventory_model == null:
-		push_error("InventoryOverlay: inventory_model is null.")
-		return
-
-	if slot_button_scene == null:
-		push_error("InventoryOverlay: slot_button_scene is null.")
-		return
 
 	for c in grid.get_children():
 		c.queue_free()
 
-	var total_slots := inventory_model.slot_count
-	columns = int(ceil(float(total_slots) / float(rows)))
+	var visible_indexes: Array[int] = inventory_model.get_slot_indexes_for_category(current_category)
+
+	var total_slots := visible_indexes.size()
+	columns = max(1, int(ceil(float(max(total_slots, 1)) / float(rows))))
 	grid.columns = columns
 
-	for i in range(inventory_model.slot_count):
+	for i in visible_indexes:
 		var slot := slot_button_scene.instantiate() as SlotButton
 		if slot == null:
 			push_error("SlotBtn.tscn failed to instance.")
