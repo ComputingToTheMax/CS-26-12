@@ -45,7 +45,7 @@ metadata/_edit_group_ = true
 position = Vector2(-1, -1)
 scale = Vector2(0.13496932, 0.13496932)
 sprite_frames = SubResource("SpriteFrames_3fsyc")
-animation = &"proton"
+animation = &"alpha_particle"
 metadata/_edit_group_ = true
 
 [node name="AlphaParticle" type="Sprite2D" parent="." unique_id=1695721279]
