@@ -24,10 +24,10 @@ func _process(delta: float) -> void:
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	print("Freeing!")
+	#print("Freeing!")
 	queue_free()
 
 func change_particle_type(particle_type:ParticleTypes):
-	print("Received Particle Type: ", particle_type, " ", PARTICLE_TYPE_TO_NAME_LIST[particle_type])
+	#print("Received Particle Type: ", particle_type, " ", PARTICLE_TYPE_TO_NAME_LIST[particle_type])
 	$ParticleSprite.play(PARTICLE_TYPE_TO_NAME_LIST[particle_type])
 	#$ParticleSprite.animation = PARTICLE_TYPE_TO_NAME_LIST[particle_type]

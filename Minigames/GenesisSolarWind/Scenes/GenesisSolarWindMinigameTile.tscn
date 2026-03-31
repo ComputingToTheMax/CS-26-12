@@ -157,4 +157,15 @@ rotates = false
 [node name="Camera2D" type="Camera2D" parent="." unique_id=532399622]
 position = Vector2(243, 55)
 
+[node name="GameTimer" type="Timer" parent="." unique_id=1014021929]
+wait_time = 30.0
+
+[node name="ChangeSolarStateTimer" type="Timer" parent="." unique_id=733711691]
+wait_time = 2.0
+
+[node name="ParticleSpawnTimer" type="Timer" parent="." unique_id=1631816965]
+wait_time = 3.0
+
 [connection signal="finished" from="SolarViewport/SolarVideoPlayer" to="SolarViewport" method="_on_solar_video_player_finished"]
+[connection signal="timeout" from="ChangeSolarStateTimer" to="." method="_on_change_solar_state_timer_timeout"]
+[connection signal="timeout" from="ParticleSpawnTimer" to="." method="_on_particle_spawn_timer_timeout"]

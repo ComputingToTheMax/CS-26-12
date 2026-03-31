@@ -97,11 +97,22 @@ static var games = []
 enum ParticleTypes { ALPHA_PARTICLE=0, ELECTRON=1, PROTON=2 }
 static func launch_game():
 	
+	if len(games) <= 0:
+		push_error("Oops, somehow this game was attempted to be launhed with ", len(games), " instances properly initialized.")
+		
+	# TODO: Handle a pause for minigame instructions and game countdown.
+	# TODO: Or maybe assume countdown has started when the game is launched and the first 3/countdown seconds are handled by the laucher?
+	
 	# Launch each child game.
 	for game in games:
 		game._launch_game()
 		
 	print("The Genesis Solar Wind Minigame has been launched!")
+	
+	# Request the first instance of the game to coordinate gameplay.
+	games[0]._coordinate_game()
+	
+	
 		
 	#spawn_particle()
 	#spawn_particle()
@@ -116,15 +127,13 @@ static func spawn_particle():
 	var particle_speed
 	match current_solar_wind_regime:
 		SOLAR_WIND_REGIMES.FAST_CORONAL_HOLE:
-			particle_speed = randi_range(400, 700)
+			particle_speed = randi_range(300, 700)
 			
 		SOLAR_WIND_REGIMES.SLOW_INTERSTREAM:
-			particle_speed = randi_range(50, 400)
+			particle_speed = randi_range(50, 300)
 			
 		SOLAR_WIND_REGIMES.RANDOM_CME:
-			particle_speed = randi_range(50, 700)
-			
-	print(GenesisSolarWindMinigameTile.games)
+			particle_speed = randi_range(50, 800)
 	
 	for game in games:
 		#print("Spawn Call!!!")
@@ -133,6 +142,50 @@ static func spawn_particle():
 	
 static func update_solar_wind_regime():
 	current_solar_wind_regime = next_solar_wind_regime
+	
+	game_coordinator._coord_update_spawn_time()
+	
+	
+
+# This function should only be called once. It instructs a single game tile instance to handle coordination and running of a minigame.
+static var game_coordinator:GenesisSolarWindMinigameTile = null
+
+@onready var game_timer = $GameTimer
+@onready var change_solar_state_timer = $ChangeSolarStateTimer
+@onready var particle_spawn_timer = $ParticleSpawnTimer
+
+func _coordinate_game():
+	if game_coordinator != null:
+		push_error("Oops! It looks like this game tile was requested multiple times to coordinate a game. Games should only have one coordinator. The current coordinator is: ", game_coordinator, "\nThis node is: ", self)
+		return
+	else:
+		game_coordinator = self
+		
+	game_timer.start()
+	change_solar_state_timer.start()
+
+func _coord_calculate_base_particle_spawn_rate():
+	var time_running_game = game_timer.wait_time - game_timer.time_left
+	
+	return (10.0 / (time_running_game + 3.5)) + 1
+	
+func _coord_update_spawn_time():
+	
+	var base_particle_spawn_rate = _coord_calculate_base_particle_spawn_rate()
+	
+	match current_solar_wind_regime:
+		SOLAR_WIND_REGIMES.FAST_CORONAL_HOLE:
+			particle_spawn_timer.wait_time = base_particle_spawn_rate
+			
+		SOLAR_WIND_REGIMES.SLOW_INTERSTREAM:
+			particle_spawn_timer.wait_time = base_particle_spawn_rate * 0.5
+			
+		SOLAR_WIND_REGIMES.RANDOM_CME:
+			particle_spawn_timer.wait_time = base_particle_spawn_rate * 0.25
+			
+	particle_spawn_timer.start()
+	
+	
 	
 	
 func _launch_game():
@@ -149,9 +202,26 @@ func _spawn_particle(particle_type, particle_start_progress, particle_direction,
 	particle_path.progress_ratio = particle_start_progress
 	new_particle.position = particle_path.position
 	
-	var particle_velocity = Vector2(cos(particle_direction) * particle_speed, sin(particle_direction) * particle_speed)
-	print(particle_velocity)
+	var particle_velocity = Vector2(cos(particle_direction) * particle_speed, sin(particle_direction) * particle_speed * 0.4)
+	#print(particle_velocity)
 	new_particle.linear_velocity = particle_velocity
 	
 	add_child(new_particle)
 	
+
+# These methods should only be triggered by the coordinator instance of the game
+func _on_change_solar_state_timer_timeout() -> void:
+	var state_selection = randf()
+	
+	if state_selection < 0.5:
+		next_solar_wind_regime = SOLAR_WIND_REGIMES.SLOW_INTERSTREAM
+	
+	elif state_selection < 0.9:
+		next_solar_wind_regime = SOLAR_WIND_REGIMES.FAST_CORONAL_HOLE
+		
+	else:
+		next_solar_wind_regime = SOLAR_WIND_REGIMES.RANDOM_CME
+
+
+func _on_particle_spawn_timer_timeout() -> void:
+	GenesisSolarWindMinigameTile.spawn_particle()
