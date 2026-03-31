@@ -6,6 +6,8 @@ var target_minigame_path:String
 @onready var subview_template = $SubViewTemplate
 @onready var subview_parent = $CenterContainer/VBoxContainer
 
+var child_game_scenes = []
+
 func __init(target_minigame_path: String) -> void:
 	self.target_minigame_path = target_minigame_path
 	
@@ -23,6 +25,10 @@ func _ready() -> void:
 	for player in GlobalSettings.active_players:
 		#print("Creating subview!")
 		_create_subview(player, viewport_size)
+		
+		
+	# Request a child to begin the game. Any child should be able to launch the game, but the first child is chosen as the default.
+	child_game_scenes[0].launch_game()
 		
 	print("Instantiating a minigame scene with the following path:\t", target_minigame_path)
 		
@@ -54,4 +60,4 @@ func _create_subview(player: GlobalSettings.PlayerConfiguration, viewport_size: 
 	# Make the current subview visible.
 	current_subview.visible = true
 	
-	current_instance_of_target_scene.launch_game()
+	child_game_scenes.append(current_instance_of_target_scene)

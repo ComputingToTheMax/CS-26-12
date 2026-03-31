@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c7fh8achroith"]
 
-[ext_resource type="Script" uid="uid://bavffhxbydbvv" path="res://Scripts/v_tiled_game.gd" id="1_fmy76"]
+[ext_resource type="Script" uid="uid://bavffhxbydbvv" path="res://Scenes/Minigames/MinigameUtilities/v_tiled_game.gd" id="1_fmy76"]
 [ext_resource type="Theme" uid="uid://d33wx43jvdny0" path="res://Themes/primary_game_theme.tres" id="3_hnxa1"]
 [ext_resource type="Script" uid="uid://d3neqwhg3nh1v" path="res://Scenes/Minigames/MinigameUtilities/sub_view_template.gd" id="3_tfhk4"]
 [ext_resource type="Script" uid="uid://bpsgv1dhiaafd" path="res://Scripts/default_background.gd" id="5_2dw62"]
