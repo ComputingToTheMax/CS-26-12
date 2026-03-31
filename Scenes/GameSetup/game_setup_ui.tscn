@@ -10,13 +10,17 @@
 [ext_resource type="Texture2D" uid="uid://b48301im34184" path="res://Sources/Images/PlayerSelection/Wave 1.svg" id="6_hb04o"]
 [ext_resource type="Texture2D" uid="uid://b6doxvtikh8pe" path="res://Sources/Images/PlayerSelection/Wave 3.svg" id="7_6mjld"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="10_y3ush"]
-[ext_resource type="PackedScene" uid="uid://b66ej8u3vttls" path="res://Scenes/tutorial.tscn" id="11_d5rn2"]
 [ext_resource type="PackedScene" uid="uid://bo4mp5audgyic" path="res://Minigames/GenesisSolarWind/Scenes/GenesisSolarWindMinigameTile.tscn" id="13_1h5sy"]
 [ext_resource type="PackedScene" uid="uid://da7v2pxnl3ccx" path="res://Scenes/Minigames/alien_communication/alien_communication.tscn" id="13_2sgsx"]
 [ext_resource type="PackedScene" uid="uid://yvtjjujrw067" path="res://Minigames/GenesisSolarWind/Scenes/GenesisTestInstantiator.tscn" id="13_vkkjp"]
 
 [sub_resource type="GDScript" id="GDScript_1h5sy"]
 script/source = "extends Control
+
+@export var tutorial_scene_path = \"res://Scenes/tutorial.tscn\"
+@export var main_board_scene_path = \"res://Scenes/main_board.tscn\"
+
+var play_tutorial:bool = true
 
 var currently_pressed_button:Node = null
 
@@ -54,6 +58,19 @@ func handle_player_count_selection(origin_node:Node):
 		currently_pressed_button.button_pressed = false
 			
 	currently_pressed_button = origin_node
+
+
+func _on_confirm_pressed() -> void:
+	Settings.play_tutorial = play_tutorial
+
+	if Settings.play_tutorial:
+		Navigator.go_to_scene_by_path(tutorial_scene_path)
+	else:
+		Navigator.go_to_scene_by_path(main_board_scene_path)
+
+
+func _on_play_tutorial_toggled(toggled_on: bool) -> void:
+	play_tutorial = toggled_on
 "
 
 [node name="GameSetupUI" type="Control" unique_id=503364807]
@@ -144,8 +161,6 @@ theme_override_constants/margin_top = 20
 [node name="confirm" type="Button" parent="VBoxContainer/MarginContainer" unique_id=924584404]
 layout_mode = 2
 text = "Confirm"
-script = ExtResource("10_y3ush")
-target_scene = ExtResource("11_d5rn2")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=61358073]
 layout_mode = 1
@@ -177,3 +192,6 @@ layout_mode = 2
 text = "Alien Communication"
 script = ExtResource("10_y3ush")
 target_scene = ExtResource("13_2sgsx")
+
+[connection signal="toggled" from="VBoxContainer/CenterContainer/HBoxContainer2/PlayTutorial" to="." method="_on_play_tutorial_toggled"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/confirm" to="." method="_on_confirm_pressed"]
