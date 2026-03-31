@@ -90,6 +90,8 @@ func _process(delta: float) -> void:
 			player_keycap.visible = true
 			from_orbit.progress += 50 * delta
 
+
+# Game state Logic
 static var games = []
 # TODO: Refactor code to rely on only one declaration of this enum.
 enum ParticleTypes { ALPHA_PARTICLE=0, ELECTRON=1, PROTON=2 }
@@ -99,9 +101,11 @@ static func launch_game():
 	for game in games:
 		game._launch_game()
 		
-	spawn_particle()
-	spawn_particle()
-	spawn_particle()
+	print("The Genesis Solar Wind Minigame has been launched!")
+		
+	#spawn_particle()
+	#spawn_particle()
+	#spawn_particle()
 		
 
 static func spawn_particle():
@@ -112,17 +116,18 @@ static func spawn_particle():
 	var particle_speed
 	match current_solar_wind_regime:
 		SOLAR_WIND_REGIMES.FAST_CORONAL_HOLE:
-			particle_speed = randi_range(100, 200)
+			particle_speed = randi_range(400, 700)
 			
 		SOLAR_WIND_REGIMES.SLOW_INTERSTREAM:
-			particle_speed = randi_range(50, 100)
+			particle_speed = randi_range(50, 400)
 			
 		SOLAR_WIND_REGIMES.RANDOM_CME:
-			particle_speed = randi_range(50, 200)
+			particle_speed = randi_range(50, 700)
 			
-	
+	print(GenesisSolarWindMinigameTile.games)
 	
 	for game in games:
+		#print("Spawn Call!!!")
 		game._spawn_particle(particle_type, particle_start_progress, particle_direction, particle_speed)
 	
 	
