@@ -22,6 +22,8 @@ func _ready() -> void:
 	
 	#print("Viewport Size:", viewport_size)
 	
+	print("Instantiating a minigame scene with the following path:\t", target_minigame_path)
+	
 	for player in GlobalSettings.active_players:
 		#print("Creating subview!")
 		_create_subview(player, viewport_size)
@@ -30,7 +32,7 @@ func _ready() -> void:
 	# Request a child to begin the game. Any child should be able to launch the game, but the first child is chosen as the default.
 	child_game_scenes[0].launch_game()
 		
-	print("Instantiating a minigame scene with the following path:\t", target_minigame_path)
+	
 		
 
 
