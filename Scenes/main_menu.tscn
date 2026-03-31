@@ -21,8 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://cpfawjltxl5ie" path="res://Sources/Images/PlayerSelection/Standard 4.svg" id="10_hkdq0"]
 [ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/credits.tscn" id="11_t1dhk"]
 [ext_resource type="Texture2D" uid="uid://drlafv6f5v1o" path="res://Sources/Images/PlayerSelection/Wave 4.svg" id="11_xcoo4"]
-[ext_resource type="PackedScene" uid="uid://bd6lm8ke5j3wb" path="res://Scenes/game_setup_ui.tscn" id="19_6dk6o"]
 [ext_resource type="Texture2D" uid="uid://cc4sfu2uhgrdr" path="res://Sources/Images/logo.png" id="20_logo"]
+[ext_resource type="PackedScene" uid="uid://b7t5eepnxoou1" path="res://Scenes/GameSetup/game_setup.tscn" id="19_6dk6o"]
 
 [sub_resource type="PackedScene" id="PackedScene_6vfk8"]
 _bundled = {
