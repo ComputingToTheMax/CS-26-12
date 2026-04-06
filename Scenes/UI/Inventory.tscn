@@ -161,9 +161,38 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Inventory"
 
-[node name="Category" type="Label" parent="Screen/MarginContainer/VBoxContainer/TopBar/CenterContainer/VBoxContainer" unique_id=73303204]
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/MarginContainer/VBoxContainer/TopBar/CenterContainer/VBoxContainer" unique_id=877128723]
+layout_mode = 2
+
+[node name="Category" type="Label" parent="Screen/MarginContainer/VBoxContainer/TopBar/CenterContainer/VBoxContainer/HBoxContainer" unique_id=73303204]
 layout_mode = 2
 horizontal_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="Screen/MarginContainer/VBoxContainer/TopBar/CenterContainer/VBoxContainer/HBoxContainer" unique_id=1592771443]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+text_overrun_behavior = 1
+fit_to_longest_item = false
+
+[node name="Control" type="Control" parent="Screen/MarginContainer/VBoxContainer" unique_id=2057682621]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Screen/MarginContainer/VBoxContainer" unique_id=512740502]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Screen/MarginContainer/VBoxContainer/CenterContainer" unique_id=221442846]
+custom_minimum_size = Vector2(600, 340)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="Screen/MarginContainer/VBoxContainer/CenterContainer/ScrollContainer" unique_id=904902361]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="spacer" type="Control" parent="Screen/MarginContainer/VBoxContainer" unique_id=1942905944]
 layout_mode = 2

@@ -200,7 +200,7 @@ func _on_buy_pressed() -> void:
 		return
 
 	var leftover := player_inventory.add_item(selected_item, 1)
-	if leftover > 0:
+	if leftover ==true:
 		shop_inventory.add_item(selected_item, 1)
 		return
 

@@ -18,7 +18,7 @@ var inventory_model: InventoryModel = null
 var interaction_mode: InteractionMode = InteractionMode.DRAG
 var marked_for_sale: bool = false
 var is_selected: bool = false
-
+var filter_enabled: bool = true
 @export var selected_bg: Color = Color(0.45, 0.7, 1.0, 1.0)
 @onready var bg: ColorRect = $Content/BG
 @onready var icon_rect: TextureRect = $Content/IconControl/icon
@@ -69,10 +69,26 @@ func _ready() -> void:
 
 	if icon_control != null:
 		icon_control.pivot_offset = icon_control.size / 2.0
+func set_filter_enabled(enabled: bool) -> void:
+	filter_enabled = enabled
+
+	# block interaction
+	mouse_filter = Control.MOUSE_FILTER_STOP if enabled else Control.MOUSE_FILTER_IGNORE
+	disabled = not enabled
+
+	# visual
+	if enabled:
+		modulate = Color(1, 1, 1, 1)
+	else:
+		modulate = Color(0.45, 0.45, 0.45, 0.85)
+
+
 func _on_mouse_entered() -> void:
+	if not filter_enabled:
+		return
+
 	if not is_dragging and bg != null and not marked_for_sale:
 		bg.color = hover_bg
-
 	if inventory_model == null:
 		return
 
@@ -92,7 +108,8 @@ func _on_pressed() -> void:
 
 	if inventory_model == null:
 		return
-
+	if not filter_enabled:
+		return
 	var slot: Variant = inventory_model.get_slot(index)
 
 	match interaction_mode:
@@ -117,6 +134,10 @@ func refresh() -> void:
 	var slot: Variant = inventory_model.get_slot(index)
 	set_slot_data(slot)
 	_apply_base_visual()
+	if filter_enabled:
+		modulate = Color(1, 1, 1, 1)
+	else:
+		modulate = Color(0.45, 0.45, 0.45, 0.85)
 
 func set_slot_data(slot: Variant) -> void:
 	if slot == null:
@@ -178,6 +199,8 @@ func _apply_base_visual() -> void:
 		tween.tween_property(icon_control, "scale", target_scale, 0.08)
 
 func _get_drag_data(at_position: Vector2) -> Variant:
+	if not filter_enabled:
+		return null
 	if interaction_mode != InteractionMode.DRAG:
 		return null
 
@@ -224,6 +247,8 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+	if not filter_enabled:
+		return false
 	if interaction_mode != InteractionMode.DRAG:
 		return false
 

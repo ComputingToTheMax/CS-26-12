@@ -3,205 +3,181 @@ class_name InventoryModel
 
 signal changed
 
-@export var slot_count: int = 72
-@export var money: int = 0
-@export var debug_fill_on_ready: bool = true
+const SLOTS_PER_CATEGORY: int = 72
+const CATEGORY_COUNT: int = 3
+
+@export var slot_count: int = SLOTS_PER_CATEGORY * CATEGORY_COUNT
 
 var slots: Array = []
-#var item_db : ItemDatabase
-var sampleItem: ItemData = preload("res://Items/stock/stock_item.tres")
-var sampleItem1: ItemData = preload("res://Items/stock/default.tres")
 
-func _ready() -> void:
-	#item_db = ItemDatabase.new()
-	#item_db.load_items("res://Items/ItemDatabase.json")
+func _init() -> void:
+	initialize()
 
+func initialize() -> void:
+	slots.clear()
 	slots.resize(slot_count)
+
 	for i in range(slot_count):
 		slots[i] = null
-	print("InventoryModel Ready")
-	
-	if debug_fill_on_ready:
-		print("fill on ready true")
-		add_item(sampleItem, 1)
-		add_item(sampleItem1,1)
-func get_slot_indexes_by_category(category: int) -> Array[int]:
-	var result: Array[int] = []
 
-	for i in range(slot_count):
-		var s = slots[i]
-		if s == null:
-			continue
+func ensure_initialized() -> void:
+	if slots.size() != slot_count:
+		initialize()
 
-		var item: ItemData = s.get("item", null)
-		if item != null and item.category == category:
-			result.append(i)
+func clear() -> void:
+	initialize()
+	changed.emit()
 
-	return result
 func get_category_slot_range(category: int) -> Dictionary:
 	match category:
 		ItemData.InventoryCategory.ITEM:
-			return {"start": 0, "count": 24}
+			return {"start": 0, "count": SLOTS_PER_CATEGORY}
 		ItemData.InventoryCategory.PART:
-			return {"start": 24, "count": 24}
+			return {"start": SLOTS_PER_CATEGORY, "count": SLOTS_PER_CATEGORY}
 		ItemData.InventoryCategory.MEMBER:
-			return {"start": 48, "count": 24}
+			return {"start": SLOTS_PER_CATEGORY * 2, "count": SLOTS_PER_CATEGORY}
 		_:
 			return {"start": 0, "count": 0}
+
+func get_slot(index: int) -> Variant:
+	ensure_initialized()
+
+	if index < 0 or index >= slot_count:
+		return null
+
+	return slots[index]
+
+func set_slot(index: int, value: Variant) -> void:
+	ensure_initialized()
+
+	if index < 0 or index >= slot_count:
+		return
+
+	slots[index] = value
+	changed.emit()
+
 func get_slot_indexes_for_category(category: int) -> Array[int]:
+	ensure_initialized()
+
 	var result: Array[int] = []
-	var range_info := get_category_slot_range(category)
+	var range_info: Dictionary = get_category_slot_range(category)
+	var start_index: int = int(range_info["start"])
+	var count: int = int(range_info["count"])
 
-	var start: int = range_info["start"]
-	var count: int = range_info["count"]
+	for i in range(start_index, start_index + count):
+		result.append(i)
 
-	for i in range(start, start + count):
-		if i >= 0 and i < slot_count:
+	return result
+
+func get_occupied_slot_indexes_for_category(category: int) -> Array[int]:
+	ensure_initialized()
+
+	var result: Array[int] = []
+	var range_info: Dictionary = get_category_slot_range(category)
+	var start_index: int = int(range_info["start"])
+	var count: int = int(range_info["count"])
+
+	for i in range(start_index, start_index + count):
+		if slots[i] != null:
 			result.append(i)
 
 	return result
-#func get_item_from_db(s: String)-> Variant:
-#	return item_db.get_item(s)
 
-func get_slot(i: int) -> Variant:
-	if i < 0 or i >= slot_count:
-		return null
-	return slots[i]
+func get_first_empty_slot_in_category(category: int) -> int:
+	ensure_initialized()
 
-func set_slot(i: int, slot: Variant) -> void:
-	if i < 0 or i >= slot_count:
-		return
-	slots[i] = slot
-	emit_signal("changed")
+	var range_info: Dictionary = get_category_slot_range(category)
+	var start_index: int = int(range_info["start"])
+	var count: int = int(range_info["count"])
 
-func clear_slot(i: int) -> void:
-	if i < 0 or i >= slot_count:
-		return
-	slots[i] = null
-	emit_signal("changed")
+	for i in range(start_index, start_index + count):
+		if slots[i] == null:
+			return i
 
-func add_item(item: ItemData, amount: int = 1) -> int:
-	if item == null or amount <= 0:
-		return amount
+	return -1
 
-	var remaining: int = amount
-	var allowed_indexes: Array[int] = get_slot_indexes_for_category(item.category)
+func add_item(item: ItemData, quantity: int = 1) -> bool:
+	ensure_initialized()
 
-	for i in allowed_indexes:
-		var s: Variant = slots[i]
-		if s == null:
+	if item == null:
+		return false
+
+	var range_info: Dictionary = get_category_slot_range(item.category)
+	var start_index: int = int(range_info["start"])
+	var count: int = int(range_info["count"])
+
+	# 1) try stacking first
+	for i in range(start_index, start_index + count):
+		var slot_data = slots[i]
+		if slot_data == null:
 			continue
 
-		var sd: Dictionary = s as Dictionary
-		var slot_item: ItemData = sd.get("item", null) as ItemData
-		var slot_qty: int = int(sd.get("qty", 0))
+		var slot_item: ItemData = slot_data.get("item", null)
+		if slot_item == null:
+			continue
 
-		if slot_item == item and slot_qty < item.max_stack:
-			var space: int = item.max_stack - slot_qty
-			var add_now: int = min(space, remaining)
+		if slot_item == item and int(slot_data.get("qty", 0)) < item.max_stack:
+			var current_qty: int = int(slot_data.get("qty", 0))
+			var space_left: int = item.max_stack - current_qty
+			var amount_to_add: int = min(space_left, quantity)
 
-			sd["qty"] = slot_qty + add_now
-			remaining -= add_now
+			slot_data["qty"] = current_qty + amount_to_add
+			quantity -= amount_to_add
 
-			if remaining == 0:
-				emit_signal("changed")
-				return 0
+			if quantity <= 0:
+				changed.emit()
+				return true
 
-	for i in allowed_indexes:
-		if slots[i] == null:
-			var add_now: int = min(item.max_stack, remaining)
-			slots[i] = {
-				"item": item,
-				"qty": add_now
-			}
-			remaining -= add_now
+	# 2) place remainder into empty slots
+	while quantity > 0:
+		var empty_index: int = get_first_empty_slot_in_category(item.category)
+		if empty_index == -1:
+			changed.emit()
+			return false
 
-			if remaining == 0:
-				emit_signal("changed")
-				return 0
+		var amount_for_slot: int = min(quantity, item.max_stack)
+		slots[empty_index] = {
+			"item": item,
+			"qty": amount_for_slot
+		}
+		quantity -= amount_for_slot
 
-	emit_signal("changed")
-	return remaining
-
-func remove_from_slot(i: int, amount: int) -> bool:
-	if i < 0 or i >= slot_count:
-		return false
-	if amount <= 0:
-		return false
-
-	var s: Variant = slots[i]
-	if s == null:
-		return false
-
-	if int(s["qty"]) < amount:
-		return false
-
-	s["qty"] = int(s["qty"]) - amount
-	if int(s["qty"]) <= 0:
-		slots[i] = null
-
-	emit_signal("changed")
+	changed.emit()
 	return true
 
-func swap_slots(a: int, b: int) -> void:
-	if a < 0 or a >= slot_count or b < 0 or b >= slot_count:
+func remove_from_slot(index: int, amount: int = 1) -> bool:
+	ensure_initialized()
+
+	if index < 0 or index >= slot_count:
+		return false
+
+	var slot_data = slots[index]
+	if slot_data == null:
+		return false
+
+	var current_qty: int = int(slot_data.get("qty", 0))
+	if current_qty <= amount:
+		slots[index] = null
+	else:
+		slot_data["qty"] = current_qty - amount
+
+	changed.emit()
+	return true
+
+func transfer_or_swap(from_index: int, to_index: int) -> void:
+	ensure_initialized()
+
+	if from_index < 0 or from_index >= slot_count:
 		return
-	if a == b:
+	if to_index < 0 or to_index >= slot_count:
+		return
+	if from_index == to_index:
 		return
 
-	var temp = slots[a]
-	slots[a] = slots[b]
-	slots[b] = temp
-	emit_signal("changed")
+	var from_slot = slots[from_index]
+	var to_slot = slots[to_index]
 
-func transfer_or_swap(from_i: int, to_i: int) -> void:
-	if from_i < 0 or from_i >= slot_count or to_i < 0 or to_i >= slot_count:
-		return
-	if from_i == to_i:
-		return
+	slots[to_index] = from_slot
+	slots[from_index] = to_slot
 
-	var from_slot: Variant = slots[from_i]
-	var to_slot: Variant = slots[to_i]
-
-	if from_slot == null:
-		return
-
-	if to_slot == null:
-		slots[to_i] = from_slot
-		slots[from_i] = null
-		emit_signal("changed")
-		return
-
-	var from_item: ItemData = from_slot["item"]
-	var to_item: ItemData = to_slot["item"]
-
-	if from_item == to_item:
-		var from_qty: int = int(from_slot["qty"])
-		var to_qty: int = int(to_slot["qty"])
-		var space: int = from_item.max_stack - to_qty
-
-		if space > 0:
-			var moved: int = min(space, from_qty)
-			to_slot["qty"] = to_qty + moved
-			from_slot["qty"] = from_qty - moved
-
-			if int(from_slot["qty"]) <= 0:
-				slots[from_i] = null
-
-			emit_signal("changed")
-			return
-
-	var temp = slots[to_i]
-	slots[to_i] = slots[from_i]
-	slots[from_i] = temp
-	emit_signal("changed")
-
-func set_money(value: int) -> void:
-	money = max(0, value)
-	emit_signal("changed")
-
-func add_money(amount: int) -> void:
-	money += amount
-	if money < 0:
-		money = 0
-	emit_signal("changed")
+	changed.emit()
