@@ -1,8 +1,16 @@
 extends Control
 
-#func _ready():
-	#$Background/ReturnButton.pressed.connect(_on_return_pressed)
-#
-#func _on_return_pressed():
-	#var start_scene = load("res://Scenes/main_menu.tscn")
-	#get_tree().change_scene_to_packed(start_scene)
+@export var scroll_speed: float = 40.0
+
+@onready var vBoxContainer: VBoxContainer = $VBoxContainer
+
+
+func _ready():
+	vBoxContainer.position.y = get_viewport_rect().size.y
+
+
+func _process(delta):
+	vBoxContainer.position.y -= scroll_speed * delta
+
+	if vBoxContainer.position.y < -vBoxContainer.size.y:
+		vBoxContainer.position.y = get_viewport_rect().size.y
