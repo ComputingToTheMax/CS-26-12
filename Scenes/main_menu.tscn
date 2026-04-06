@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cpmdovpetc8ty"]
 
-[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="1"]
+[ext_resource type="Texture2D" uid="uid://b760yqcfgp404" path="res://Sources/Images/AsteroidMinigame/BlackSpaceBackground2.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="2"]
 [ext_resource type="Script" uid="uid://bj305n2l3jng8" path="res://Scenes/GameSetup/GameSetupUI.gd" id="2_6dk6o"]
 [ext_resource type="Script" uid="uid://jg740726aevo" path="res://Scripts/main_menu_scene.gd" id="3"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/credits.tscn" id="11_t1dhk"]
 [ext_resource type="Texture2D" uid="uid://drlafv6f5v1o" path="res://Sources/Images/PlayerSelection/Wave 4.svg" id="11_xcoo4"]
 [ext_resource type="PackedScene" uid="uid://bd6lm8ke5j3wb" path="res://Scenes/game_setup_ui.tscn" id="19_6dk6o"]
+[ext_resource type="Texture2D" uid="uid://cc4sfu2uhgrdr" path="res://Sources/Images/logo.png" id="20_logo"]
 
 [sub_resource type="PackedScene" id="PackedScene_6vfk8"]
 _bundled = {
@@ -63,6 +64,7 @@ play_target_scene = SubResource("PackedScene_6vfk8")
 layer = 2
 
 [node name="FadeRect" type="ColorRect" parent="FadeLayer" unique_id=1854080283]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -72,8 +74,8 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Background" type="Sprite2D" parent="." unique_id=201404063]
-position = Vector2(577.75, 329.75)
-scale = Vector2(0.6117187, 0.6226852)
+position = Vector2(576.5, 325.00003)
+scale = Vector2(2.0121527, 2.0123456)
 texture = ExtResource("1")
 
 [node name="Astronaut" type="Sprite2D" parent="." unique_id=227890255]
@@ -153,8 +155,7 @@ icon = ExtResource("3_gtard")
 icon_alignment = 1
 expand_icon = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1269118275]
-layout_mode = 0
-offset_right = 114.0
-offset_bottom = 34.0
-text = "Psyche-opoly"
+[node name="Logo" type="Sprite2D" parent="." unique_id=1407588518]
+position = Vector2(360.00006, 129)
+scale = Vector2(0.54296875, 0.40722656)
+texture = ExtResource("20_logo")
