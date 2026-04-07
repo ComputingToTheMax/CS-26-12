@@ -106,7 +106,6 @@ func add_item(item: ItemData, quantity: int = 1) -> bool:
 	var start_index: int = int(range_info["start"])
 	var count: int = int(range_info["count"])
 
-	# 1) try stacking first
 	for i in range(start_index, start_index + count):
 		var slot_data = slots[i]
 		if slot_data == null:
@@ -128,7 +127,6 @@ func add_item(item: ItemData, quantity: int = 1) -> bool:
 				changed.emit()
 				return true
 
-	# 2) place remainder into empty slots
 	while quantity > 0:
 		var empty_index: int = get_first_empty_slot_in_category(item.category)
 		if empty_index == -1:

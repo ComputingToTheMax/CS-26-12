@@ -324,10 +324,14 @@ func enter_sell_mode(shop_ref = null) -> void:
 
 	if sell_confirm_btn != null:
 		sell_confirm_btn.show()
+		sell_confirm_btn.disabled = false
 
 	if sell_cancel_btn != null:
 		sell_cancel_btn.show()
+		sell_cancel_btn.disabled = false
 
+	current_subfilter = "All"
+	_populate_subfilter()
 	_update_sell_total()
 	_rebuild_grid()
 func exit_sell_mode() -> void:
@@ -344,6 +348,7 @@ func exit_sell_mode() -> void:
 
 	if sell_cancel_btn != null:
 		sell_cancel_btn.hide()
+		sell_cancel_btn.disabled = true
 
 	_rebuild_grid()
 
@@ -375,7 +380,6 @@ func _update_sell_buttons() -> void:
 		sell_confirm_btn.disabled = not has_selection
 
 func _rebuild_grid() -> void:
-	print("inventory model",inventory_model)
 	for c in grid.get_children():
 		c.queue_free()
 
