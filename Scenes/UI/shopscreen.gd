@@ -68,13 +68,7 @@ func _update_buy_total() -> void:
 		buy_total_label.text = "Total Cost: $" + str(selected_item.buy_price)
 func _create_shop_inventory() -> void:
 	shop_inventory = InventoryModel.new()
-	shop_inventory.debug_fill_on_ready = false
-	shop_inventory.slot_count = 10
-	add_child(shop_inventory)
 
-	shop_inventory.slots.resize(shop_inventory.slot_count)
-	for i in range(shop_inventory.slot_count):
-		shop_inventory.slots[i] = null
 func _fill_fixed_stock() -> void:
 	var stock_items: Array[ItemData] = [
 		load("res://Items/stock/stock_item1.tres") as ItemData,
@@ -126,9 +120,13 @@ func _rebuild_shop_grid() -> void:
 		slot.custom_minimum_size = slot_size
 		slot.interaction_mode = SlotButton.InteractionMode.SELECT
 		slot.is_selected = (i == selected_shop_index)
-		slot.slot_selected.connect(_on_shop_slot_selected)
-		slot.hovered_item.connect(_on_shop_slot_hovered)
-		slot.unhovered_item.connect(_on_shop_slot_unhovered)
+
+		if not slot.slot_selected.is_connected(_on_shop_slot_selected):
+			slot.slot_selected.connect(_on_shop_slot_selected)
+		if not slot.hovered_item.is_connected(_on_shop_slot_hovered):
+			slot.hovered_item.connect(_on_shop_slot_hovered)
+		if not slot.unhovered_item.is_connected(_on_shop_slot_unhovered):
+			slot.unhovered_item.connect(_on_shop_slot_unhovered)
 
 		shop_grid.add_child(slot)
 		slot.refresh()
@@ -191,17 +189,21 @@ func _on_buy_pressed() -> void:
 	if slot == null:
 		return
 
-	var price := selected_item.buy_price
+	var price: int = selected_item.buy_price
 	if MoneySave.money < price:
 		return
 
-	var removed := shop_inventory.remove_from_slot(selected_index, 1)
-	if not removed:
+	var added: bool = player_inventory.add_item(selected_item, 1)
+	if not added:
 		return
 
-	var leftover := player_inventory.add_item(selected_item, 1)
-	if leftover ==true:
-		shop_inventory.add_item(selected_item, 1)
+	var removed: bool = shop_inventory.remove_from_slot(selected_index, 1)
+	if not removed:
+		# rollback if something went wrong
+		player_inventory.remove_from_slot(
+			player_inventory.get_first_empty_slot_in_category(selected_item.category),
+			1
+		)
 		return
 
 	MoneySave.money -= price
@@ -213,7 +215,6 @@ func _on_buy_pressed() -> void:
 
 	_update_buy_total()
 	_rebuild_shop_grid()
-
 func _on_sell_pressed() -> void:
 	print("Sell pressed")
 	print("inventory_overlay = ", inventory_overlay)
@@ -236,7 +237,7 @@ func receive_sold_item(item: ItemData, qty: int) -> void:
 		return
 
 	shop_inventory.add_item(item, qty)
-
+	_rebuild_shop_grid()
 func _on_close_pressed() -> void:
 	leave_shop()
 
