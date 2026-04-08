@@ -125,7 +125,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Play"
 script = ExtResource("6_6mw8b")
-target_scene = ExtResource("9_qg82j")
+target_scene = ExtResource("19_6dk6o")
 
 [node name="SettingsButton" type="Button" parent="GameMenu/GameMenuButtons" unique_id=2004235370]
 layout_mode = 2
