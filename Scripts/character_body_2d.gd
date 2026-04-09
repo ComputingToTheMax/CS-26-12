@@ -18,13 +18,14 @@ var busy:=false
 @export var hanger: PackedScene = preload("res://Scenes/Minigames/hanger_madness/hanger_madness.tscn")
 @export var alien: PackedScene = preload("res://Scenes/Minigames/alien_communication/alien_communication.tscn")
 @onready var inventory_overlay: InventoryOverlay = Board.get_node("Overlay/OverlayRoot/Inventory")
+@export var reward_screen: PackedScene = preload("res://Scenes/reward_screen.tscn")
 
 var minigames : Array
 
 func _ready():
 
 	cell_size = Board.get("cell_size")
-	minigames = [asteroid, hanger, alien]
+	minigames = [alien]
 	snap=cell_size
 	rng.randomize()
 	var board_size = Vector2i(get_viewport_rect().size)/cell_size
@@ -110,34 +111,32 @@ func _check_red_box()->bool:
 
 func _offerGame() -> void:
 	busy = true
-
 	var offer := offer_scene.instantiate()
 	Board.overlay_root.add_child(offer)
-	print("Waiting for offerchoice")
-	var play : bool = await offer.choice 
-	print("Offer returned:",play)
-
+	var play: bool = await offer.choice
 	if not play:
 		busy = false
 		return
 
-	var chosen_game_scene : PackedScene = minigames[rng.randi_range(0, minigames.size() - 1)]
+	var chosen_game_scene: PackedScene = minigames[rng.randi_range(0, minigames.size() - 1)]
 	if chosen_game_scene == null:
 		push_error("Chosen minigame scene is null!")
 		busy = false
 		return
+
 	var mg := chosen_game_scene.instantiate()
 	Board.game_root.add_child(mg)
-
-
-
 	var result: Dictionary = await mg.done
-
-
-	_result(result)
+	await _result(result)
 	busy = false
+
 func _result(result: Dictionary) -> void:
-	print("Result:", result)
-	print("you recieved an item")
-	#var item = player_inventory.get_item_from_db("0")
-	#player_inventory.add_item(item, 1)
+	if result.get("status") == "win":
+		await _show_reward_screen()
+
+func _show_reward_screen() -> void:
+	var screen := reward_screen.instantiate()
+	var player_inventory: InventoryModel = $InventoryModel
+	screen.setup(player_inventory)
+	Board.overlay_root.add_child(screen)
+	await screen.item_chosen

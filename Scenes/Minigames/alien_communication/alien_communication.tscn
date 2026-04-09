@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://da7v2pxnl3ccx"]
 
 [ext_resource type="Script" uid="uid://bf4vhe2g47nii" path="res://Scenes/Minigames/alien_communication/alien_communication.gd" id="1_jrg4c"]
+[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_iey7s"]
 
 [node name="alien_communication" type="Node2D" unique_id=1733999619]
 script = ExtResource("1_jrg4c")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1320126985]
+texture = ExtResource("2_iey7s")
+centered = false

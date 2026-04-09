@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://gmixy1f1qstp"]
+
+[ext_resource type="Script" uid="uid://ygvdk5sbwrnn" path="res://Scenes/reward_screen.gd" id="1_esjl1"]
+
+[node name="Node2D" type="Control" unique_id=1372203683]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_esjl1")
