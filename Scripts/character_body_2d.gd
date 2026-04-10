@@ -25,7 +25,7 @@ var minigames : Array
 func _ready():
 
 	cell_size = Board.get("cell_size")
-	minigames = [alien]
+	minigames = [alien, asteroid]
 	snap=cell_size
 	rng.randomize()
 	var board_size = Vector2i(get_viewport_rect().size)/cell_size

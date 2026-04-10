@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://damhiumjctum"]
 
 [ext_resource type="Script" uid="uid://dhhooc4dw8xxn" path="res://Scripts/credits_scene.gd" id="1_gryuy"]
-[ext_resource type="Texture2D" path="res://Sources/Images/AsteroidMinigame/BlackSpaceBackground2.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://b760yqcfgp404" path="res://Sources/Images/AsteroidMinigame/BlackSpaceBackground2.png" id="2"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="3_1bamb"]
 
 [node name="Credits" type="Control" unique_id=1290088201]
@@ -33,8 +33,6 @@ offset_bottom = 2200.0
 custom_minimum_size = Vector2(920, 0)
 layout_mode = 2
 bbcode_enabled = true
-fit_content = true
-scroll_active = false
 text = "[center]Developers:[/center]
 [center]Aidek Bak[/center]
 [center]Christian Buenafe[/center]
@@ -42,27 +40,28 @@ text = "[center]Developers:[/center]
 [center]Max Tran[/center]
 
 [center]Project Sponsor:[/center]
-[center]NASA[/center]
+[center]NASA Psyche Mission[/center]
 
-[center]Project Mentor:[/center]
+[center]Project Sponsor:[/center]
 [center]Dr. Cassie Bowman[/center]
 [center]Arizona State University[/center]
 
 [center]Project Advisor:[/center]
 [center]Dr. Braxton Cuneo[/center]
 [center]Seattle University[/center]"
+fit_content = true
+scroll_active = false
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer" unique_id=221457580]
 custom_minimum_size = Vector2(920, 0)
 layout_mode = 2
 bbcode_enabled = true
+text = "[center]This work was created in partial fulfillment of Seattle University Capstone Course CPSC 4870-4890. The work is a result of the Psyche Student Collaborations component of NASA’s Psyche Mission (https://psyche.ssl.berkeley.edu/). Psyche: A Journey to a Metal World [Contract number NNM16AA09C] is part of the NASA Discovery Program mission to solar system targets. Trade names and trademarks of ASU and NASA are used in this work for identification only. Their usage does not constitute an official endorsement, either expressed or implied, by Arizona State University or National Aeronautics and Space Administration. The content is solely the responsibility of the authors and does not necessarily represent the official views of ASU or NASA.[/center]"
 fit_content = true
 scroll_active = false
-text = "[center]This work was created in partial fulfillment of Seattle University Capstone Course CPSC 4870-4890. The work is a result of the Psyche Student Collaborations component of NASA’s Psyche Mission (https://psyche.ssl.berkeley.edu/). Psyche: A Journey to a Metal World [Contract number NNM16AA09C] is part of the NASA Discovery Program mission to solar system targets. Trade names and trademarks of ASU and NASA are used in this work for identification only. Their usage does not constitute an official endorsement, either expressed or implied, by Arizona State University or National Aeronautics and Space Administration. The content is solely the responsibility of the authors and does not necessarily represent the official views of ASU or NASA.[/center]"
 
 [node name="Button" type="Button" parent="." unique_id=364262849]
 layout_mode = 0
-anchor_left = 0.0
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
