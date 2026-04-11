@@ -35,7 +35,6 @@ stream = ExtResource("6")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1290049318]
 stream = ExtResource("5")
-autoplay = true
 parameters/looping = true
 
 [node name="PsycheAsteroid" type="Sprite2D" parent="." unique_id=1999859177]
@@ -43,7 +42,6 @@ position = Vector2(786, 222)
 scale = Vector2(0.112, 0.134)
 texture = ExtResource("3")
 script = ExtResource("8")
-move_speed = 260.0
 next_scene_path = "res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting5.tscn"
 is_success_object = true
 
@@ -55,4 +53,3 @@ position = Vector2(485, 388)
 scale = Vector2(0.158, 0.169)
 texture = ExtResource("4")
 script = ExtResource("8")
-move_speed = 180.0
