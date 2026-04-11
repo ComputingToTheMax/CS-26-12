@@ -22,6 +22,10 @@ texture = ExtResource("3_y7j1t")
 [node name="InventoryModel" type="Node" parent="CharacterBody2D" unique_id=1730201470]
 script = ExtResource("4_wxlku")
 
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=2058880600]
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1201278052]
 layer = 20
 
@@ -74,7 +78,7 @@ text = "Roll 1"
 [node name="turn counter" type="Label" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1777530972]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
-text = "Turn: 0"
+text = "Turns: 0"
 
 [node name="Control" type="Control" parent="HUD/HUDBase/MarginContainer/HBoxContainer" unique_id=137122549]
 layout_mode = 2

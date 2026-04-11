@@ -39,7 +39,6 @@ func initialize_board():
 func _draw():
 	var mid_y = round(board_size.y / 2) * cell_size.y
 	
-	# Vertical lines
 	for x in range(board_size.x + 1):
 		draw_line(
 			Vector2(x * cell_size.x, mid_y),
