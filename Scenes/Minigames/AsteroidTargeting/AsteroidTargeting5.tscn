@@ -1,27 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqke7r57ak6ld"]
+[gd_scene format=3 uid="uid://cqke7r57ak6ld"]
 
 [ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="1_ugxa0"]
 [ext_resource type="Texture2D" uid="uid://b760yqcfgp404" path="res://Sources/Images/AsteroidMinigame/BlackSpaceBackground2.png" id="2_hy85a"]
 [ext_resource type="AudioStream" uid="uid://k5506rca1wus" path="res://Sources/Sounds/AsteroidMinigame/FailClick.wav" id="3_vka2x"]
 [ext_resource type="AudioStream" uid="uid://bg0sxfbbtqulw" path="res://Sources/Sounds/AsteroidMinigame/BackgroundMusic.ogg" id="4_r8cee"]
+[ext_resource type="Script" uid="uid://btei7ivqc6c2s" path="res://Scripts/AsteroidTargetingFinal.gd" id="5_final"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "targetBlink"
 length = 1.2
 loop_mode = 1
-
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:modulate:a")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0,0.6,1.2),
-"transitions": PackedFloat32Array(1,1,1),
-"values": [1.0,0.35,1.0]
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.35, 1.0]
 }
 
-[node name="AsteroidTargeting5" type="Node2D"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hy85a"]
+_data = {
+&"targetBlink": SubResource("1")
+}
 
-[node name="Control" type="Control" parent="."]
+[node name="AsteroidTargeting5" type="Node2D" unique_id=608424523]
+script = ExtResource("5_final")
+
+[node name="Control" type="Control" parent="." unique_id=1008483161]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,29 +39,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BlackSpaceBackground2" type="Sprite2D" parent="Control"]
+[node name="BlackSpaceBackground2" type="Sprite2D" parent="Control" unique_id=1902372265]
 position = Vector2(571.5, 319)
 scale = Vector2(2.0190973, 2.0308642)
 texture = ExtResource("2_hy85a")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control/BlackSpaceBackground2"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control/BlackSpaceBackground2" unique_id=254541229]
 stream = ExtResource("3_vka2x")
 
-[node name="Background Music" type="AudioStreamPlayer" parent="Control/BlackSpaceBackground2"]
+[node name="Background Music" type="AudioStreamPlayer" parent="Control/BlackSpaceBackground2" unique_id=1200477334]
 stream = ExtResource("4_r8cee")
+parameters/looping = true
 
-[node name="AsteroidOutline" type="Sprite2D" parent="."]
+[node name="AsteroidOutline" type="Sprite2D" parent="." unique_id=1851920671]
+modulate = Color(0.2, 0.9, 1, 0.6)
+z_index = -1
 position = Vector2(596, 323)
 scale = Vector2(1.18, 0.97)
 texture = ExtResource("1_ugxa0")
-modulate = Color(0.2, 0.9, 1.0, 0.6)
-z_index = -1
 
-[node name="PsycheAsteroid" type="Sprite2D" parent="."]
+[node name="PsycheAsteroid" type="Sprite2D" parent="." unique_id=814351144]
 position = Vector2(596, 323)
 scale = Vector2(1.0833695, 0.8910494)
 texture = ExtResource("1_ugxa0")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PsycheAsteroid"]
-autoplay = "targetBlink"
-anims/targetBlink = SubResource("1")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PsycheAsteroid" unique_id=1318135855]
+libraries/ = SubResource("AnimationLibrary_hy85a")
+autoplay = &"targetBlink"

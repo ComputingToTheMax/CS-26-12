@@ -10,6 +10,7 @@
 
 [node name="AsteroidTargeting1" type="Node2D" unique_id=2102988273]
 script = ExtResource("7")
+show_instruction_popup = true
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1010340407]
 position = Vector2(576, 324)

@@ -126,8 +126,13 @@ func _offerGame() -> void:
 
 	var mg := chosen_game_scene.instantiate()
 	Board.game_root.add_child(mg)
+
 	var result: Dictionary = await mg.done
 	await _result(result)
+
+	for child in Board.game_root.get_children():
+		child.queue_free()
+
 	busy = false
 
 func _result(result: Dictionary) -> void:
@@ -138,5 +143,5 @@ func _show_reward_screen() -> void:
 	var screen := reward_screen.instantiate()
 	var player_inventory: InventoryModel = $InventoryModel
 	screen.setup(player_inventory)
-	Board.overlay_root.add_child(screen)
+	Board.game_root.add_child(screen)
 	await screen.item_chosen
