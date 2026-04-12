@@ -3,7 +3,7 @@ extends HBoxContainer
 @export var player: Node
 @onready var roll: Button = $roll
 @onready var roll1: Button = $roll1
-@onready var turnCounter: Label =$"turn counter"
+
 func _ready() -> void:
 	if player == null:
 		push_error("Roll UI: player is not assigned.")

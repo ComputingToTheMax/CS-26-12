@@ -14,19 +14,12 @@ signal board_ready
 @onready var overlay_root: Control = get_node_or_null("Overlay/OverlayRoot") as Control
 @onready var game_root: Control = $GameOverlay/GameRoot
 
-var rng := RandomNumberGenerator.new()
-
-var tile_positions: Array[Vector2] = []
-var red_tile_indices: Array[int] = []
-var shop_tile_indices: Array[int] = []
-var start_tile_index: int = 0
+var board_size
+var red_box_positions = []
+var shop_box_positions=[]
 
 func _ready() -> void:
-	rng.randomize()
-	_setup_board_delayed()
-
-func _setup_board_delayed() -> void:
-	await get_tree().process_frame
+	
 	initialize_board()
 	queue_redraw()
 	board_ready.emit()
@@ -136,5 +129,28 @@ func _draw() -> void:
 		elif shop_tile_indices.has(i):
 			tile_color = Color(0.2, 0.65, 1.0)
 
-		draw_rect(rect, tile_color, true)
-		draw_rect(rect, Color.WHITE, false, 2.0)
+func _draw():
+	var mid_y = round(board_size.y / 2) * cell_size.y
+	
+	# Vertical lines
+	for x in range(board_size.x + 1):
+		draw_line(
+			Vector2(x * cell_size.x, mid_y),
+			Vector2(x * cell_size.x, mid_y + cell_size.y),
+			Color.WHITE,
+			2.0
+		)
+
+	draw_line(
+		Vector2(0, mid_y),
+		Vector2(board_size.x * cell_size.x, mid_y),
+		Color.WHITE,
+		2.0
+	)
+
+	draw_line(
+		Vector2(0, mid_y + cell_size.y),
+		Vector2(board_size.x * cell_size.x, mid_y + cell_size.y),
+		Color.WHITE,
+		2.0
+	)
