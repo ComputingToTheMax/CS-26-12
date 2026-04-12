@@ -22,7 +22,7 @@ var can_roll: bool = true
 var roll: int = 0
 var busy: bool = false
 var current_tile_index: int = 0
-
+var turn:int =0
 var minigames: Array = []
 
 func _ready() -> void:
@@ -47,7 +47,15 @@ func _ready() -> void:
 
 	initialized = true
 	_update_turn_label()
+func _animate_to_tile(tile_index: int, duration: float = 0.2) -> void:
+	var destination: Vector2 = Board.get_tile_center(tile_index)
 
+	var tween := create_tween()
+	tween.tween_property(self, "global_position", destination, duration) \
+		.set_trans(Tween.TRANS_CUBIC) \
+		.set_ease(Tween.EASE_OUT)
+
+	await tween.finished
 func roll_and_move(amount: int = 0) -> void:
 	if not initialized:
 		push_error("roll_and_move called too early")
@@ -74,11 +82,10 @@ func roll_and_move(amount: int = 0) -> void:
 
 	spaces_moved_total += roll
 	current_tile_index = destination_index
-	global_position = Board.get_tile_center(current_tile_index)
+
+	await _animate_to_tile(current_tile_index, 0.2)
 
 	_update_turn_label()
-
-	await get_tree().create_timer(0.4).timeout
 
 	var landed_on_shop: bool = Board.is_shop_tile(current_tile_index)
 	var landed_on_red: bool = Board.is_red_tile(current_tile_index)
@@ -113,8 +120,8 @@ func _open_shop() -> void:
 	await shop.closed
 
 func _update_turn_label() -> void:
-	turn_label.text = "Spaces: %d | Roll: %d | Tile: %d" % [spaces_moved_total, roll, current_tile_index]
-
+	turn_label.text = "Turn: %d | Roll: %d | Tile: %d" % [turn, roll, current_tile_index]
+	turn+=1
 func _offerGame() -> void:
 	var offer := offer_scene.instantiate()
 	Board.overlay_root.add_child(offer)

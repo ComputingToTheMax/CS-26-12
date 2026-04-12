@@ -10,7 +10,7 @@ signal board_ready
 @export var min_special_spacing: int = 2
 @export var red_tile_target: int = 4
 @export var shop_tile_target: int = 3
-
+@export var min_shop_spacing: int=12
 @onready var overlay_root: Control = get_node_or_null("Overlay/OverlayRoot") as Control
 @onready var game_root: Control = $GameOverlay/GameRoot
 
@@ -58,11 +58,10 @@ func _generate_special_tiles() -> void:
 
 	var red_count: int = 0
 	var shop_count: int = 0
-
 	for idx in usable_indices:
 		if red_count >= red_tile_target:
 			break
-		if _can_place_special(idx):
+		if _can_place_special(idx, "red"):
 			red_tile_indices.append(idx)
 			red_count += 1
 
@@ -73,14 +72,13 @@ func _generate_special_tiles() -> void:
 			break
 		if red_tile_indices.has(idx):
 			continue
-		if _can_place_special(idx):
+		if _can_place_special(idx, "shop"):
 			shop_tile_indices.append(idx)
 			shop_count += 1
-
 	red_tile_indices.sort()
 	shop_tile_indices.sort()
 
-func _can_place_special(index: int) -> bool:
+func _can_place_special(index: int, tile_type: String) -> bool:
 	if index == start_tile_index:
 		return false
 
@@ -89,8 +87,12 @@ func _can_place_special(index: int) -> bool:
 			return false
 
 	for shop_idx in shop_tile_indices:
-		if abs(index - shop_idx) < min_special_spacing:
-			return false
+		if tile_type == "shop":
+			if abs(index - shop_idx) < min_shop_spacing:
+				return false
+		else:
+			if abs(index - shop_idx) < min_special_spacing:
+				return false
 
 	return true
 
