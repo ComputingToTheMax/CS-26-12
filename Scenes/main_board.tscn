@@ -22,6 +22,10 @@ texture = ExtResource("3_y7j1t")
 [node name="InventoryModel" type="Node" parent="CharacterBody2D" unique_id=1730201470]
 script = ExtResource("4_wxlku")
 
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1379799832]
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1201278052]
 layer = 20
 

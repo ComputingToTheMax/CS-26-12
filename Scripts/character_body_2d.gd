@@ -20,7 +20,15 @@ var busy:=false
 @onready var inventory_overlay: InventoryOverlay = Board.get_node("Overlay/OverlayRoot/Inventory")
 @export var reward_screen: PackedScene = preload("res://Scenes/reward_screen.tscn")
 
-var minigames : Array
+var initialized: bool = false
+var rng := RandomNumberGenerator.new()
+var spaces_moved_total: int = 0
+var can_roll: bool = true
+var roll: int = 0
+var busy: bool = false
+var current_tile_index: int = 0
+var turn:int =0
+var minigames: Array = []
 
 func _ready():
 
@@ -28,16 +36,29 @@ func _ready():
 	minigames = [alien, asteroid]
 	snap=cell_size
 	rng.randomize()
-	var board_size = Vector2i(get_viewport_rect().size)/cell_size
-	if playerPos.savedPosition != Vector2.ZERO:
-		target = playerPos.savedPosition
-		global_position = target
-		turn_count = playerPos.savedTurn
-	else:
-		target = Vector2(0, round(board_size.y/2) * cell_size.y)
-		global_position = target
-	initialized=true
 
+	if Board.get_tile_count() == 0:
+		await Board.board_ready
+
+	current_tile_index = 0
+	spaces_moved_total = 0
+	global_position = Board.get_start_center()
+
+	if camera_node:
+		camera_node.enabled = true
+		camera_node.position = Vector2.ZERO
+
+	initialized = true
+	_update_turn_label()
+func _animate_to_tile(tile_index: int, duration: float = 0.2) -> void:
+	var destination: Vector2 = Board.get_tile_center(tile_index)
+
+	var tween := create_tween()
+	tween.tween_property(self, "global_position", destination, duration) \
+		.set_trans(Tween.TRANS_CUBIC) \
+		.set_ease(Tween.EASE_OUT)
+
+	await tween.finished
 func roll_and_move(amount: int = 0) -> void:
 	if not initialized:
 		push_error("roll and move called too early")
@@ -58,9 +79,22 @@ func roll_and_move(amount: int = 0) -> void:
 		can_roll = true
 		_update_turn_label()
 		return
-			
-	var triggered := _is_off_board() or _check_red_box()
-	if triggered:
+
+	var destination_index: int = (current_tile_index + roll) % board_count
+
+	spaces_moved_total += roll
+	current_tile_index = destination_index
+
+	await _animate_to_tile(current_tile_index, 0.2)
+
+	_update_turn_label()
+
+	var landed_on_shop: bool = Board.is_shop_tile(current_tile_index)
+	var landed_on_red: bool = Board.is_red_tile(current_tile_index)
+
+	if landed_on_shop:
+		await _open_shop()
+	elif landed_on_red:
 		await _offerGame()
 	else:
 		MoneySave.add_money(3)
@@ -89,26 +123,8 @@ func _open_shop() -> void:
 	can_roll = true
 	busy = false
 func _update_turn_label() -> void:
-	turn_label.text = "Turn: %d | Roll: %d" % [turn_count, roll]
-func _is_off_board()->bool:
-	var board = get_viewport_rect().size.x
-	return target.x >board
-func _check_shop_box()->bool:
-	for pos in Board.shop_box_positions:
-		if target.is_equal_approx(pos):
-			
-			return true
-	return false
-
-func _check_red_box()->bool:
-
-	for pos in Board.red_box_positions:
-		if target.is_equal_approx(pos):
-			
-			return true
-	return false
-
-
+	turn_label.text = "Turn: %d | Roll: %d | Tile: %d" % [turn, roll, current_tile_index]
+	turn+=1
 func _offerGame() -> void:
 	busy = true
 	var offer := offer_scene.instantiate()
