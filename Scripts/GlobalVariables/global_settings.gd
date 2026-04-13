@@ -53,12 +53,16 @@ class PlayerConfiguration:
 				
 		return selected_button
 		
+	func get_action_name(button_index:int):
+		var action_name: String = "Player" + str(self.id) + "Key" + str(button_index)
+		return action_name
+		
 	func update_button_keycode(button_index:int):
 		
 		# Action (Named with a String) -> Multiple InputEvents/InputEventKeys can be registered.
 		# This mirrors the structure of manually created events using the graphical user interface under Project > Project Settings > Input Map.
 		
-		var action_name: String = "Player" + str(self.id) + "Key" + str(button_index)
+		var action_name: String = get_action_name(button_index)
 		
 		# TODO: Determine if you truly do have to erase and re-add the input map each time you update a keycode.
 		var previous_input_event = self.button_inputevents[button_index]
