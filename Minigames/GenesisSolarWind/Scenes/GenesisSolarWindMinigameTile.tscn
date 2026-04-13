@@ -12,6 +12,7 @@
 [ext_resource type="VideoStream" uid="uid://33kqs2vg1eu5" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Normal.ogv" id="9_ayclc"]
 [ext_resource type="VideoStream" uid="uid://hgglyd8j7hfb" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Coronal Hole.ogv" id="10_ishca"]
 [ext_resource type="VideoStream" uid="uid://fwko75pi5qm3" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Eruption.ogv" id="11_r7e7m"]
+[ext_resource type="PackedScene" uid="uid://babvh353lkwy4" path="res://Minigames/GenesisSolarWind/Scenes/GenesisHud.tscn" id="13_fslk0"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ku7c8"]
 viewport_path = NodePath("SolarViewport")
@@ -44,6 +45,7 @@ _data = {
 point_count = 3
 
 [node name="BaseGameTile" type="Node2D" unique_id=1403132214 node_paths=PackedStringArray("genesis_spacecraft", "particle_path")]
+position = Vector2(340, 271)
 script = ExtResource("1_kc7nk")
 genesis_spacecraft = NodePath("GenesisSpacecraft")
 particle_scene = ExtResource("2_ldy0v")
@@ -165,6 +167,8 @@ wait_time = 2.0
 
 [node name="ParticleSpawnTimer" type="Timer" parent="." unique_id=1631816965]
 wait_time = 3.0
+
+[node name="GenesisHud" parent="." unique_id=1066594632 instance=ExtResource("13_fslk0")]
 
 [connection signal="finished" from="SolarViewport/SolarVideoPlayer" to="SolarViewport" method="_on_solar_video_player_finished"]
 [connection signal="timeout" from="ChangeSolarStateTimer" to="." method="_on_change_solar_state_timer_timeout"]
