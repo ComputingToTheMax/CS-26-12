@@ -1,23 +1,18 @@
 extends CharacterBody2D
 class_name Player
+
 @export var Board: MainBoard
-@export var cell_size : Vector2i
-@onready var snap:Vector2i
+@export var cell_size: Vector2i
+
 @onready var turn_label: Label = get_parent().get_node("HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer/turn counter")
-var initialized:= false
-var target
-var rng = RandomNumberGenerator.new()
-var turn_count:=0
-var can_roll := true
-var roll:=0
-var busy:=false
-#@onready var player_inventory: InventoryModel = Board.get_node("res://Scenes/UI/Inventory.gd")
+@onready var inventory_overlay: InventoryOverlay = Board.get_node("Overlay/OverlayRoot/Inventory")
+@onready var camera_node: Camera2D = $Camera2D
+
 @export var shop_scene: PackedScene = preload("res://Scenes/UI/shopscreen.tscn")
 @export var offer_scene: PackedScene = preload("res://Scenes/UI/ConfirmSwitch.tscn")
 @export var asteroid: PackedScene = preload("res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting1.tscn")
 @export var hanger: PackedScene = preload("res://Scenes/Minigames/hanger_madness/hanger_madness.tscn")
 @export var alien: PackedScene = preload("res://Scenes/Minigames/alien_communication/alien_communication.tscn")
-@onready var inventory_overlay: InventoryOverlay = Board.get_node("Overlay/OverlayRoot/Inventory")
 @export var reward_screen: PackedScene = preload("res://Scenes/reward_screen.tscn")
 
 var initialized: bool = false
@@ -30,11 +25,13 @@ var current_tile_index: int = 0
 var turn:int =0
 var minigames: Array = []
 
-func _ready():
+func _ready() -> void:
+	if Board == null:
+		push_error("Player Board reference is missing.")
+		return
 
-	cell_size = Board.get("cell_size")
-	minigames = [alien, asteroid]
-	snap=cell_size
+	cell_size = Board.cell_size
+	minigames = [alien]
 	rng.randomize()
 
 	if Board.get_tile_count() == 0:
@@ -61,23 +58,24 @@ func _animate_to_tile(tile_index: int, duration: float = 0.2) -> void:
 	await tween.finished
 func roll_and_move(amount: int = 0) -> void:
 	if not initialized:
-		push_error("roll and move called too early")
-		return		
-	if not can_roll:
+		push_error("roll_and_move called too early")
 		return
-	can_roll = false 
-	if(amount==0):
+
+	if not can_roll or busy:
+		return
+
+	can_roll = false
+	busy = true
+
+	if amount == 0:
 		roll = rng.randi_range(1, 6)
 	else:
-		roll=amount
-	target.x += (roll * cell_size.x)
-	global_position = target
-	turn_count+=roll
-	var shop := _check_shop_box()
-	if shop:
-		await _open_shop()
+		roll = amount
+
+	var board_count: int = Board.get_tile_count()
+	if board_count <= 0:
 		can_roll = true
-		_update_turn_label()
+		busy = false
 		return
 
 	var destination_index: int = (current_tile_index + roll) % board_count
@@ -100,12 +98,17 @@ func roll_and_move(amount: int = 0) -> void:
 		MoneySave.add_money(3)
 
 	can_roll = true
-	_update_turn_label()
+	busy = false
+
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if busy:
 		return
+
 	if event.is_action_pressed("ui_accept"):
 		roll_and_move()
+
 func _open_shop() -> void:
 	busy = true
 	can_roll = false
@@ -150,7 +153,6 @@ func _offerGame() -> void:
 		child.queue_free()
 
 	busy = false
-
 func _result(result: Dictionary) -> void:
 	if result.get("status") == "win":
 		await _show_reward_screen()
@@ -159,5 +161,5 @@ func _show_reward_screen() -> void:
 	var screen := reward_screen.instantiate()
 	var player_inventory: InventoryModel = $InventoryModel
 	screen.setup(player_inventory)
-	Board.game_root.add_child(screen)
+	Board.overlay_root.add_child(screen)
 	await screen.item_chosen
