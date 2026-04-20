@@ -10,18 +10,18 @@ Aiden Bak | Christian Buenafe | Avery Feingold | Max Tran
 
 ### How do I play?
 
-At this exciting moment in our project's development, two options are available to get started with out game:
+At this exciting moment in our project's development, two options are available to get started with our game:
 
-1. Load the game online through [our team's site](https://computingtothemax.github.io/CS-26-12/). (Recommended and Beginner-Friendly)
+1. COMING SOON: Load the game online through [our team's site](). (Recommended and Beginner-Friendly)
 
 2. Download and open our game code in the [Godot Game Engine](https://godotengine.org/). (Advanced; this method however, allows you to see how we've built the game)
 
 
 
 
-#### Option 1: Load the Game Online
+#### COMING SOON: Option 1: Load the Game Online
 
-Visit [our team's site](https://computingtothemax.github.io/CS-26-12/) to start playing right in your browser. At the moment, we aren't archiving playable versions of the game, so the version you access will be the latest available one.
+Visit [our team's site]() to start playing right in your browser. At the moment, we aren't archiving playable versions of the game, so the version you access will be the latest available one.
 
 
 #### Option 2: Download and Open Game Code in the [Godot Game Engine](https://godotengine.org/)
@@ -64,7 +64,9 @@ To run tests:
 
 1. At the bottom of the page after opening the project, find the “GUT” button. 
 
-2. Once open, click the “Run All” button which will pop open a window showing a test summary 
+2. Once open, click the “Run All” button which will pop open a window showing a test summary
+
+---
 
 This work was created in partial fulfillment of Seattle University Capstone Course “CPSC  4870-4890″. 
 The work is a result of the Psyche Student Collaborations component of NASA’s Psyche Mission (https://psyche.ssl.berkeley.edu/). 
