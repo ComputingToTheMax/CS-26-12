@@ -4,7 +4,11 @@ extends Node2D
 enum CURRENT_PATH { TO_ORBIT, ELLIPTICAL_ORBIT, FROM_ORBIT, NONE=-1}
 enum SOLAR_WIND_REGIMES { FAST_CORONAL_HOLE, SLOW_INTERSTREAM, RANDOM_CME}
 
-@export var genesis_spacecraft:CharacterBody2D
+const particle_type = preload("res://Minigames/GenesisSolarWind/Scenes/particle.gd")
+
+@export var target_score:int = 10
+
+@export var genesis_spacecraft:Node2D
 @onready var player_keycap = $GenesisSpacecraft/Keycap
 
 
@@ -29,6 +33,10 @@ var current_state = CURRENT_PATH.TO_ORBIT
 # Solar wind regime, however, is managed by the static class logic.
 static var current_solar_wind_regime = SOLAR_WIND_REGIMES.SLOW_INTERSTREAM
 static var next_solar_wind_regime = SOLAR_WIND_REGIMES.SLOW_INTERSTREAM
+
+var current_score = 0
+var current_speed = 50
+var game_ending = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -59,11 +67,16 @@ func _ready() -> void:
 	pass
 
 var player:GlobalSettings.PlayerConfiguration
+var slower_button_action_name
+var faster_button_action_name
 # Custom initialization function to handle custom tiling logic.
 func __init(player: GlobalSettings.PlayerConfiguration, viewport_size: Vector2i):
 	self.player = player
 	
-	player_keycap.key_character = player.buttons[0]
+	slower_button_action_name = player.get_action_name(0)
+	faster_button_action_name = player.get_action_name(1)
+	
+	player_keycap.key_character = player.buttons[1]
 	pass
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -80,15 +93,36 @@ func _process(delta: float) -> void:
 				current_state = CURRENT_PATH.ELLIPTICAL_ORBIT
 			
 		CURRENT_PATH.ELLIPTICAL_ORBIT:
-			elliptical_orbit.progress += 50 * delta
+			elliptical_orbit.progress += current_speed * delta
 			
-			if(elliptical_orbit.progress_ratio >= 0.99):
+			if game_ending and (elliptical_orbit.progress_ratio >= 0.99):
 				genesis_spacecraft.reparent(from_orbit, true)
 				current_state = CURRENT_PATH.FROM_ORBIT
 			
 		CURRENT_PATH.FROM_ORBIT:
 			player_keycap.visible = true
-			from_orbit.progress += 50 * delta
+			from_orbit.progress += current_speed * delta
+			
+	# Version 1, where you can hold keys for repeated velocity adjustments.
+	#if Input.is_action_pressed(slower_button_action_name):
+		#if current_speed > 6:
+			#current_speed -= 5
+	#
+	## If the game is ending, require players to repeatedly press the speed up key.
+	#if game_ending:
+		#if Input.is_action_just_pressed(slower_button_action_name):
+			#current_speed += 5
+	#else:
+		#if Input.is_action_pressed(faster_button_action_name):
+			#current_speed += 5
+			
+			
+	if Input.is_action_just_pressed(slower_button_action_name):
+		if current_speed > 5:
+			current_speed -= 4
+
+	if Input.is_action_just_pressed(faster_button_action_name):
+		current_speed += 4
 
 
 # Game state Logic
@@ -225,3 +259,21 @@ func _on_change_solar_state_timer_timeout() -> void:
 
 func _on_particle_spawn_timer_timeout() -> void:
 	GenesisSolarWindMinigameTile.spawn_particle()
+
+
+func _on_genesis_spacecraft_body_entered(body: Node2D) -> void:
+	
+	if body is particle_type:
+		body.disappear()
+		
+	current_score += 1
+	
+	if current_score >= target_score:
+		game_ending = true
+		player_keycap.visible = true
+		
+		# Disable Spacecraft-Particle Collisions
+		# Assume our spacecraft has a "disable_collisions" method.
+		genesis_spacecraft.disable_collisions()
+	
+	pass # Replace with function body.
