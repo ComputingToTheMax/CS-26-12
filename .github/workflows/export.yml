@@ -16,6 +16,10 @@ on:
   # schedule:
   #   - cron: "0 6 * * *"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   # NOTE: INSERT Selected Godot Version from Step 3 Below
   GODOT_VERSION: 4.6.1 # Previously: 4.3, 4.5
