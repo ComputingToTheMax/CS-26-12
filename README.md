@@ -12,16 +12,16 @@ Aiden Bak | Christian Buenafe | Avery Feingold | Max Tran
 
 At this exciting moment in our project's development, two options are available to get started with our game:
 
-1. COMING SOON: Load the game online through [our team's site](). (Recommended and Beginner-Friendly)
+1. Load the game online through [our team's site](https://missiontopsyche-platinum.github.io/platinum_24f_game_psycheopoly-su/). (Recommended and Beginner-Friendly)
 
 2. Download and open our game code in the [Godot Game Engine](https://godotengine.org/). (Advanced; this method however, allows you to see how we've built the game)
 
 
 
 
-#### COMING SOON: Option 1: Load the Game Online
+#### Option 1: Load the Game Online
 
-Visit [our team's site]() to start playing right in your browser. At the moment, we aren't archiving playable versions of the game, so the version you access will be the latest available one.
+Visit [our team's site](https://missiontopsyche-platinum.github.io/platinum_24f_game_psycheopoly-su/) to start playing right in your browser. At the moment, we aren't archiving playable versions of the game, so the version you access will be the latest available one.
 
 
 #### Option 2: Download and Open Game Code in the [Godot Game Engine](https://godotengine.org/)
