@@ -3,7 +3,7 @@ class_name InventoryOverlay
 const SLOT_BUTTON_SCENE_PATH := "res://Scenes/UI/SlotBtn.tscn"
 var slot_button_scene: PackedScene = null
 @export var rows: int = 3
-@export var slot_size: Vector2 = Vector2(90, 110)
+@export var slot_size: Vector2 = Vector2(85, 110)
 
 @onready var close_btn := $Screen/MarginContainer/VBoxContainer/TopBar/HBoxContainer/Closebtn as BaseButton
 #@onready var grid := $Screen/InvPanel/CenterContainer/MarginContainer/GridContainer as GridContainer
@@ -25,7 +25,7 @@ enum InventoryMode {
 	NORMAL,
 	SELL
 }
-
+var selected_index: int = -1
 var current_mode: InventoryMode = InventoryMode.NORMAL
 var marked_for_sale: Dictionary = {} # { index: true }
 var sell_target_shop = null
@@ -84,81 +84,155 @@ func _ready() -> void:
 	MoneySave.money_changed.connect(_update_money)
 	_update_category_label()
 	_populate_subfilter()
+
+
+
+
 func _slot_matches_current_filter(slot_data: Variant) -> bool:
-	if slot_data == null:
-		return true
-
-	var item: ItemData = slot_data.get("item", null)
-	if item == null:
-		return true
-
-	if item.category != current_category:
-		return false
-
 	if current_subfilter == "All":
 		return true
 
+	if slot_data == null:
+		return false
+
+	var item = slot_data.get("item", null)
+	if item == null:
+		return false
+
+	var category := _get_item_category(item)
+	if category != current_category:
+		return false
+
 	match current_category:
 		ItemData.InventoryCategory.ITEM:
-			return _matches_item_subfilter(item)
+			return _get_item_subfilter(item) == _subfilter_string_to_item_enum(current_subfilter)
 
 		ItemData.InventoryCategory.PART:
-			return _matches_part_subfilter(item)
+			return _get_part_subfilter(item) == _subfilter_string_to_part_enum(current_subfilter)
 
 		ItemData.InventoryCategory.MEMBER:
-			return _matches_member_subfilter(item)
+			return _get_member_subfilter(item) == _subfilter_string_to_member_enum(current_subfilter)
 
 	return true
-func _matches_item_subfilter(item: ItemData) -> bool:
+func _subfilter_string_to_part_enum(name: String) -> int:
+	match name:
+		"Engine": return ItemData.PartSubfilter.ENGINE
+		"Engine Housing": return ItemData.PartSubfilter.ENGINE_HOUSING
+		"Wing": return ItemData.PartSubfilter.WING
+		"Fuel Tank": return ItemData.PartSubfilter.FUEL_TANK
+		"Nose Cone": return ItemData.PartSubfilter.NOSE_CONE
+		"Body Panels": return ItemData.PartSubfilter.BODY_PANELS
+		"Electrical Components": return ItemData.PartSubfilter.ELECTRICAL_COMPONENTS
+	return ItemData.PartSubfilter.NONE
+
+
+func _subfilter_string_to_item_enum(name: String) -> int:
+	match name:
+		"Iron": return ItemData.ItemSubfilter.IRON
+		"Copper": return ItemData.ItemSubfilter.COPPER
+		"Carbon Fiber": return ItemData.ItemSubfilter.CARBON_FIBER
+		"Steel": return ItemData.ItemSubfilter.STEEL
+		"Silicone": return ItemData.ItemSubfilter.SILICONE
+		"Water": return ItemData.ItemSubfilter.WATER
+	return ItemData.ItemSubfilter.NONE
+
+
+func _subfilter_string_to_member_enum(name: String) -> int:
+	match name:
+		"Economy": return ItemData.MemberSubfilter.ECONOMY
+		"Buff": return ItemData.MemberSubfilter.BUFF
+		"Support": return ItemData.MemberSubfilter.SUPPORT
+		"Luck": return ItemData.MemberSubfilter.LUCK
+	return ItemData.MemberSubfilter.NONE
+func _get_item_category(item) -> int:
+	if item is PartInstance:
+		return item.category
+	if item is ItemData:
+		return item.category
+	return ItemData.InventoryCategory.ITEM
+
+
+func _get_item_subfilter(item) -> int:
+	if item is PartInstance:
+		return item.item_subfilter
+	if item is ItemData:
+		return item.item_subfilter
+	return ItemData.ItemSubfilter.NONE
+
+
+func _get_part_subfilter(item) -> int:
+	if item is PartInstance:
+		return item.part_subfilter
+	if item is ItemData:
+		return item.part_subfilter
+	return ItemData.PartSubfilter.NONE
+
+
+func _get_member_subfilter(item) -> int:
+	if item is PartInstance:
+		return item.member_subfilter
+	if item is ItemData:
+		return item.member_subfilter
+	return ItemData.MemberSubfilter.NONE
+
+
+func _matches_item_subfilter(item) -> bool:
 	match current_subfilter:
 		"All":
 			return true
 		"Iron":
-			return item.item_subfilter == ItemData.ItemSubfilter.IRON
+			return _get_item_subfilter(item) == ItemData.ItemSubfilter.IRON
 		"Copper":
-			return item.item_subfilter == ItemData.ItemSubfilter.COPPER
+			return _get_item_subfilter(item) == ItemData.ItemSubfilter.COPPER
 		"Carbon Fiber":
-			return item.item_subfilter == ItemData.ItemSubfilter.CARBON_FIBER
+			return _get_item_subfilter(item) == ItemData.ItemSubfilter.CARBON_FIBER
 		"Steel":
-			return item.item_subfilter == ItemData.ItemSubfilter.STEEL
+			return _get_item_subfilter(item) == ItemData.ItemSubfilter.STEEL
 		"Silicone":
-			return item.item_subfilter == ItemData.ItemSubfilter.SILICONE
+			return _get_item_subfilter(item) == ItemData.ItemSubfilter.SILICONE
 		"Water":
-			return item.item_subfilter == ItemData.ItemSubfilter.WATER
+			return _get_item_subfilter(item) == ItemData.ItemSubfilter.WATER
 		_:
 			return true
-func _matches_part_subfilter(item: ItemData) -> bool:
+
+
+func _matches_part_subfilter(item) -> bool:
 	match current_subfilter:
 		"All":
 			return true
 		"Engine":
-			return item.part_subfilter == ItemData.PartSubfilter.ENGINE
+			return _get_part_subfilter(item) == ItemData.PartSubfilter.ENGINE
+		"Engine Housing":
+			return _get_part_subfilter(item) == ItemData.PartSubfilter.ENGINE_HOUSING
 		"Wing":
-			return item.part_subfilter == ItemData.PartSubfilter.WING
+			return _get_part_subfilter(item) == ItemData.PartSubfilter.WING
 		"Fuel Tank":
-			return item.part_subfilter == ItemData.PartSubfilter.FUEL_TANK
+			return _get_part_subfilter(item) == ItemData.PartSubfilter.FUEL_TANK
 		"Nose Cone":
-			return item.part_subfilter == ItemData.PartSubfilter.NOSE_CONE
+			return _get_part_subfilter(item) == ItemData.PartSubfilter.NOSE_CONE
 		"Body Panels":
-			return item.part_subfilter == ItemData.PartSubfilter.BODY_PANELS
+			return _get_part_subfilter(item) == ItemData.PartSubfilter.BODY_PANELS
 		"Electrical Components":
-			return item.part_subfilter == ItemData.PartSubfilter.ELECTRICAL_COMPONENTS
+			return _get_part_subfilter(item) == ItemData.PartSubfilter.ELECTRICAL_COMPONENTS
 		_:
 			return true
-func _matches_member_subfilter(item: ItemData) -> bool:
+
+
+func _matches_member_subfilter(item) -> bool:
 	match current_subfilter:
 		"All":
 			return true
 		"Economy":
-			return item.member_subfilter == ItemData.MemberSubfilter.ECONOMY
+			return _get_member_subfilter(item) == ItemData.MemberSubfilter.ECONOMY
 		"Buff":
-			return item.member_subfilter == ItemData.MemberSubfilter.BUFF
+			return _get_member_subfilter(item) == ItemData.MemberSubfilter.BUFF
 		"Support":
-			return item.member_subfilter == ItemData.MemberSubfilter.SUPPORT
+			return _get_member_subfilter(item) == ItemData.MemberSubfilter.SUPPORT
 		"Luck":
-			return item.member_subfilter == ItemData.MemberSubfilter.LUCK
+			return _get_member_subfilter(item) == ItemData.MemberSubfilter.LUCK
 		_:
 			return true
+
 func _on_subfilter_select(index: int) -> void:
 	current_subfilter = subfilter.get_item_text(index)
 	_rebuild_grid()
@@ -181,6 +255,7 @@ func _populate_subfilter() -> void:
 		ItemData.InventoryCategory.PART:
 			subfilter.add_item("All")
 			subfilter.add_item("Engine")
+			subfilter.add_item("Engine Housing")
 			subfilter.add_item("Wing")
 			subfilter.add_item("Fuel Tank")
 			subfilter.add_item("Nose Cone")
@@ -365,9 +440,15 @@ func _update_sell_total() -> void:
 			if slot == null:
 				continue
 
-			var item: ItemData = slot["item"]
-			var qty: int = int(slot["qty"])
-			total += item.sell_price * qty
+			var slot_item = slot.get("item", null)
+			if slot_item == null:
+				continue
+
+			if slot_item is PartInstance:
+				total += slot_item.shop_price
+			elif slot_item is ItemData:
+				var qty: int = int(slot.get("qty", 1))
+				total += slot_item.sell_price * qty
 
 	if sell_total_label != null:
 		sell_total_label.text = "Total Profit: $" + str(total)
@@ -378,7 +459,20 @@ func _update_sell_buttons() -> void:
 
 	if sell_confirm_btn != null:
 		sell_confirm_btn.disabled = not has_selection
+func _on_slot_selected(index: int, source_inventory: InventoryModel) -> void:
+	if source_inventory == null:
+		return
 
+	var slot_data: Variant = source_inventory.get_slot(index)
+	if slot_data == null:
+		return
+
+	if selected_index == index:
+		selected_index = -1
+	else:
+		selected_index = index
+
+	_rebuild_grid()
 func _rebuild_grid() -> void:
 	for c in grid.get_children():
 		c.queue_free()
@@ -393,7 +487,7 @@ func _rebuild_grid() -> void:
 	grid.columns = 6
 
 	for i in range(start_index, start_index + count):
-		var slot := slot_button_scene.instantiate() as SlotButton
+		var slot: SlotButton = slot_button_scene.instantiate() as SlotButton
 		if slot == null:
 			push_error("SlotBtn.tscn failed to instance.")
 			return
@@ -401,27 +495,31 @@ func _rebuild_grid() -> void:
 		slot.index = i
 		slot.inventory_model = inventory_model
 		slot.custom_minimum_size = slot_size
-		slot.marked_for_sale = marked_for_sale.has(i)
 
 		match current_mode:
 			InventoryMode.SELL:
 				slot.interaction_mode = SlotButton.InteractionMode.SELL
+				slot.marked_for_sale = marked_for_sale.has(i)
+				slot.is_selected = marked_for_sale.has(i)
+
 				if not slot.sell_toggled.is_connected(_on_slot_sell_toggled):
 					slot.sell_toggled.connect(_on_slot_sell_toggled)
-			_:
-				slot.interaction_mode = SlotButton.InteractionMode.DRAG
 
-		if not slot.hovered_item.is_connected(show_hover_tooltip):
-			slot.hovered_item.connect(show_hover_tooltip)
-		if not slot.unhovered_item.is_connected(hide_hover_tooltip):
-			slot.unhovered_item.connect(hide_hover_tooltip)
+			_:
+				slot.interaction_mode = SlotButton.InteractionMode.SELECT
+				slot.is_selected = (i == selected_index)
+				slot.marked_for_sale = false
+
+		if not slot.slot_selected.is_connected(_on_slot_selected):
+			slot.slot_selected.connect(_on_slot_selected)
 
 		grid.add_child(slot)
-		slot.refresh()
 
-		var slot_data = inventory_model.get_slot(i)
-		var is_match := _slot_matches_current_filter(slot_data)
+		var slot_data: Variant = inventory_model.get_slot(i)
+		var is_match: bool = _slot_matches_current_filter(slot_data)
 		slot.set_filter_enabled(is_match)
+
+		slot.call_deferred("refresh")
 
 	if current_mode == InventoryMode.SELL:
 		_update_sell_total()
@@ -444,39 +542,38 @@ func _on_sell_confirm_pressed() -> void:
 	if inventory_model == null:
 		return
 
-	if marked_for_sale.is_empty():
-		return
+	var total_profit: int = 0
+	var indices_to_clear: Array[int] = []
 
-	var indexes: Array = marked_for_sale.keys()
-	indexes.sort()
-	indexes.reverse()
-
-	var total := 0
-
-	for i in indexes:
-		var slot = inventory_model.get_slot(int(i))
+	for i in marked_for_sale.keys():
+		var slot_index: int = int(i)
+		var slot = inventory_model.get_slot(slot_index)
 		if slot == null:
 			continue
 
-		var item: ItemData = slot["item"]
-		var qty: int = int(slot["qty"])
-		total += item.sell_price * qty
+		var slot_item = slot.get("item", null)
+		if slot_item == null:
+			continue
 
-		if sell_target_shop != null and sell_target_shop.has_method("receive_sold_item"):
-			sell_target_shop.receive_sold_item(item, qty)
+		if slot_item is PartInstance:
+			total_profit += slot_item.shop_price
+		elif slot_item is ItemData:
+			var qty: int = int(slot.get("qty", 1))
+			total_profit += slot_item.sell_price * qty
 
-		inventory_model.remove_from_slot(int(i), qty)
+		indices_to_clear.append(slot_index)
 
-	MoneySave.money += total
+	if total_profit > 0:
+		MoneySave.add_money(total_profit)
 
-	_show_sold_popup(total)
+	for slot_index in indices_to_clear:
+		inventory_model.set_slot(slot_index, null)
 
-	var shop_ref = sell_target_shop
-	exit_sell_mode()
-	hide()
+	marked_for_sale.clear()
+	selected_index = -1
 
-	if shop_ref != null:
-		shop_ref.show()
+	_update_sell_total()
+	_rebuild_grid()
 func _on_sell_cancel_pressed() -> void:
 	var shop_ref = sell_target_shop
 	exit_sell_mode()

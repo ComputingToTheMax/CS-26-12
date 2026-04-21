@@ -27,7 +27,21 @@ func ensure_initialized() -> void:
 func clear() -> void:
 	initialize()
 	changed.emit()
+func add_part_instance(part_instance: PartInstance) -> bool:
+	if part_instance == null:
+		return false
 
+	var slot_index := get_first_empty_slot_in_category(ItemData.InventoryCategory.PART)
+	if slot_index == -1:
+		return false
+
+	slots[slot_index] = {
+		"item": part_instance,
+		"item_data": part_instance.item_data
+	}
+
+	changed.emit()
+	return true
 func get_category_slot_range(category: int) -> Dictionary:
 	match category:
 		ItemData.InventoryCategory.ITEM:

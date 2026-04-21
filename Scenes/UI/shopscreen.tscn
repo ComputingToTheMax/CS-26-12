@@ -118,7 +118,36 @@ mouse_filter = 2
 columns = 5
 
 [node name="purchasePrice" type="Label" parent="Control/Panel/Root/MarginContainer/MainShopCont" unique_id=1562199062]
+visible = false
 layout_mode = 2
+
+[node name="ShopInfo" type="Panel" parent="Control/Panel/Root/MarginContainer/MainShopCont" unique_id=1858876306]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopInfo" unique_id=637926155]
+layout_mode = 0
+offset_right = 410.0
+offset_bottom = 304.0
+
+[node name="ItemPrice" type="Label" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopInfo/HBoxContainer" unique_id=1792177929]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopInfo/HBoxContainer" unique_id=738256115]
+layout_mode = 2
+
+[node name="ItemLabel" type="Label" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopInfo/HBoxContainer/VBoxContainer" unique_id=1868320502]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ItemDesc" type="RichTextLabel" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopInfo/HBoxContainer/VBoxContainer" unique_id=73999118]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+size_flags_vertical = 3
+scroll_active = false
 
 [node name="ShopBtns" type="HBoxContainer" parent="Control/Panel/Root/MarginContainer/MainShopCont" unique_id=1986213326]
 custom_minimum_size = Vector2(80, 80)
@@ -138,24 +167,3 @@ text = "Buy"
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "Hire"
-
-[node name="ShopInfo" type="Panel" parent="Control/Panel/Root/MarginContainer/MainShopCont" unique_id=1858876306]
-layout_mode = 2
-
-[node name="ItemLabel" type="Label" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopInfo" unique_id=1868320502]
-unique_name_in_owner = true
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="ItemDesc" type="Label" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopInfo" unique_id=944721166]
-unique_name_in_owner = true
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="ItemPrice" type="Label" parent="Control/Panel/Root/MarginContainer/MainShopCont/ShopInfo" unique_id=1792177929]
-unique_name_in_owner = true
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
