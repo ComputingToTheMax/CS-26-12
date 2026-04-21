@@ -10,10 +10,11 @@ description: "Publish from Godot to GitHub Pages"
 #   can be rebuilt by including a version of Godot (possibly stripped down for efficiency) that are
 #   called via script in order request a HTML build.
 on:
+  push:
   workflow_dispatch:
 
-  schedule:
-    - cron: "0 6 * * *"
+  # schedule:
+  #   - cron: "0 6 * * *"
 
 env:
   # NOTE: INSERT Selected Godot Version from Step 3 Below
