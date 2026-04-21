@@ -1,10 +1,9 @@
 extends Control
 
-signal item_chosen(item: ItemData)
+signal item_chosen(part_instance: PartInstance)
 
-var _temp_inventory: InventoryModel
-var _temp_slots: Array[int] = []
-var _picked := false
+var _reward_parts: Array[PartInstance] = []
+var _picked: bool = false
 var _database: ItemDatabase
 var _player_inventory: InventoryModel
 var _buttons: Array[Button] = []
@@ -13,15 +12,19 @@ var _hint_label: Label
 
 func setup(player_inventory: InventoryModel) -> void:
 	_player_inventory = player_inventory
-	
+
 func _ready() -> void:
+	randomize()
+
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	anchor_right = 1.0
 	anchor_bottom = 1.0
 	grow_horizontal = Control.GROW_DIRECTION_BOTH
 	grow_vertical = Control.GROW_DIRECTION_BOTH
+
 	_database = ItemDatabase.new()
-	_database.load_items("res://Items/ItemDatabase.json")
+	_database.load_items("")
+
 	_build_ui()
 	_populate_rewards()
 
@@ -36,7 +39,7 @@ func _build_ui() -> void:
 	add_child(center)
 
 	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(520, 280)
+	panel.custom_minimum_size = Vector2(760, 360)
 	center.add_child(panel)
 
 	var vbox := VBoxContainer.new()
@@ -61,7 +64,7 @@ func _build_ui() -> void:
 	inner_vbox.add_child(_title_label)
 
 	_hint_label = Label.new()
-	_hint_label.text = "Tap an item to claim it."
+	_hint_label.text = "Tap a part to claim it."
 	_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_hint_label.add_theme_font_size_override("font_size", 14)
 	inner_vbox.add_child(_hint_label)
@@ -73,7 +76,7 @@ func _build_ui() -> void:
 
 	for i in range(3):
 		var btn := Button.new()
-		btn.custom_minimum_size = Vector2(140, 120)
+		btn.custom_minimum_size = Vector2(220, 240)
 		btn.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		btn.visible = false
 		btn.pressed.connect(_on_item_picked.bind(i))
@@ -81,58 +84,59 @@ func _build_ui() -> void:
 		_buttons.append(btn)
 
 func _populate_rewards() -> void:
-	print("Populating rewards, db item count: ", _database.items.size())
-	_temp_inventory = InventoryModel.new()
+	_reward_parts.clear()
 
-	var all_ids: Array = _database.items.keys()
-	all_ids.shuffle()
-	var chosen_ids: Array = all_ids.slice(0, min(3, all_ids.size()))
+	var valid_part_ids: Array = []
 
-	for id in chosen_ids:
+	for id in _database.items.keys():
 		var item: ItemData = _database.get_item(id)
 		if item == null:
-			push_error("RewardScreen: item '%s' not found" % id)
 			continue
 
-		var slot_index := _temp_inventory.get_first_empty_slot_in_category(ItemData.InventoryCategory.ITEM)
-		if slot_index == -1:
-			push_error("RewardScreen: no empty slot available")
-			continue
-		_temp_slots.append(slot_index)
-		_temp_inventory.add_item(item, 1)
+		if item.category == ItemData.InventoryCategory.PART:
+			valid_part_ids.append(id)
 
-	print("Temp slots filled: ", _temp_slots)
+	valid_part_ids.shuffle()
 
-	for i in range(_buttons.size()):
-		if i >= _temp_slots.size():
-			continue
-		var slot_data = _temp_inventory.get_slot(_temp_slots[i])
-		print("Slot ", i, " data: ", slot_data)
-		if slot_data == null:
-			continue
-		var item: ItemData = slot_data.get("item", null)
+	var chosen_count: int = min(3, valid_part_ids.size())
+
+	for i in range(chosen_count):
+		var item: ItemData = _database.get_item(valid_part_ids[i])
 		if item == null:
 			continue
-		_buttons[i].text = item.display_name + "\n\n" + item.description
+
+		var reward: PartInstance = RewardGen.make_random_part(item)
+		_reward_parts.append(reward)
+
+	for i in range(_buttons.size()):
+		if i >= _reward_parts.size():
+			_buttons[i].visible = false
+			continue
+
+		var reward: PartInstance = _reward_parts[i]
+		_buttons[i].text = "%s\n\n%s\n\n%s" % [
+			reward.get_display_name(),
+			reward.get_description(),
+			reward.get_stat_text()
+		]
 		_buttons[i].visible = true
 
 func _on_item_picked(index: int) -> void:
 	if _picked:
 		return
+	if index < 0 or index >= _reward_parts.size():
+		return
+
 	_picked = true
 
-	var slot_data = _temp_inventory.get_slot(_temp_slots[index])
-	var item: ItemData = slot_data.get("item", null) if slot_data else null
+	var reward: PartInstance = _reward_parts[index]
 
-	for slot_index in _temp_slots:
-		_temp_inventory.set_slot(slot_index, null)
-
-	if item != null and _player_inventory != null:
-		var success := _player_inventory.add_item(item, 1)
+	if reward != null and _player_inventory != null:
+		var success: bool = _player_inventory.add_part_instance(reward)
 		if not success:
-			print("Inventory full, could not add: ", item.display_name)
+			print("Inventory full, could not add: ", reward.get_display_name())
 		else:
-			print("Claimed: ", item.display_name)
+			print("Claimed: ", reward.get_display_name(), " [", reward.get_rarity_name(), "]")
 
-	item_chosen.emit(item)
+	item_chosen.emit(reward)
 	queue_free()
