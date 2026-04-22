@@ -73,6 +73,7 @@ jobs:
   _02_publish_to_github_pages:
     needs: _01_export_godot_project_to_web
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
 
     # Permissions for Test GitHub Pages Deployment
     permissions:
