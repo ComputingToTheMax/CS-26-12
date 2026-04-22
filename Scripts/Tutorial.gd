@@ -1,167 +1,136 @@
 extends Node2D
 
-
-@onready var pause_menu: CanvasLayer = $CanvasLayer/PauseMenu  # the instanced PauseMenu node
-
-@onready var dialog_image: TextureRect = $DialogLayer/DialogBox/DialogContainer/DialogImage
-
+@onready var pause_menu: CanvasLayer = $CanvasLayer/PauseMenu
 @onready var dialog_label: Label = $DialogLayer/DialogBox/DialogContainer/DialogText
-
-@onready var bg_rect: TextureRect = $BackgroundLayer/TextureRect
-@onready var tutorialchar: TextureRect = $BackgroundLayer/Characters/Spaceman 
+@onready var bg_rect: TextureRect = $BackgroundLayer/Background
+@onready var tutorialchar: TextureRect = $BackgroundLayer/Characters/Spaceman
 @onready var contextimg: TextureRect = $ContextLayer/Context
 @export var tutorial_type := "board"
-var dialog_entries=0
-var current_index := 0
 
+var dialog_entries: Array = []
+var current_index := 0
 
 var board_dialog := [
 	{
-		"text": "Welcome to our game about the Psyche asteroid. Press space or click to go through text boxes",
-		"bg":"",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":""
+		"text": "Welcome to Psyche-Opoly. This game is inspired by NASA's Psyche mission, but it is not a literal simulation of the real mission. Press Space or left click to move through the tutorial.",
+		"bg": "",
+		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
+		"context": ""
 	},
 	{
-		"text": "In this game you will race around our psyche-themed board trying to reach psyche before any of your competitors. You do this by rolling dice which can be rolled by pressing space",
+		"text": "Your goal is to collect every ship part needed to finish your spacecraft. When you have all seven ship parts, the game will end and go to credits.",
 		"bg": "",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":"res://Sources/Images/boardexample.png"
-	},{
-		"text": "There are many spaces to land on to help you advance your journey",
-		"bg": "",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":"res://Sources/Images/boardexample.png"
+		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
+		"context": "res://Sources/Images/boardexample.png"
 	},
 	{
-		"text": "There are many minigames scattered around the board that when landed on will give you a challenge to complete",
+		"text": "There is also a turn limit. After 15 full trips around the board, the game will end and go to credits even if your ship is not complete yet.",
 		"bg": "",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":"res://Sources/Images/boardexample.png"
+		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
+		"context": "res://Sources/Images/boardexample.png"
 	},
 	{
-		"text": "By scoring well on minigames you can gain powerful items or money",
+		"text": "Press Space or click the Roll button on your turn to move. Landing on different tiles can give you money, open shops, or trigger minigames.",
 		"bg": "",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":""
+		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
+		"context": "res://Sources/Images/boardexample.png"
 	},
 	{
-		"text": "You can spend your money at shops to buy powerful items, or to hire people to help you along your journey",
+		"text": "Red minigame tiles can launch a challenge. Winning minigames can earn you ship parts and other useful rewards.",
 		"bg": "",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":""
+		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
+		"context": "res://Sources/Images/boardexample.png"
 	},
 	{
-		"text": "Items and People will give you stats that will help you win the game, and some people will give you benifits in minigames",
+		"text": "Shops let you spend money on parts and helpers. Keep collecting ship parts from shops and minigame rewards until your spacecraft is complete.",
 		"bg": "",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":""
+		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
+		"context": ""
 	},
 	{
-		"text": "An item has 5 stats: 3 stats that effect it's performance in the final stretch: Speed, Durability, and Efficiency Currently you win if cbroot(total speed^3+ total durability^3+ total efficiency^3)>30",
+		"text": "Some minigames allow multiple players, so choose the right player count before starting the board.",
 		"bg": "",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":""
+		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
+		"context": ""
 	},
 	{
-		"text": "The other 2 stats that effect an items performance in minigames. Difficulty reduction will make minigames slightly easier. Time bonus will give you extra time to complete minigames.
-	",
+		"text": "Good luck. Build the full ship before 15 laps are up and complete your mission.",
 		"bg": "",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":""
-	},
-	{
-		"text": "Good luck, the fate of Psyche is on your hands",
-		"bg": "",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":""
+		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
+		"context": ""
 	}
 ]
 
 var alien_dialog := [
 	{
-		"text":"Your crew has happened upon an alien signal. Are they friend or foe? You must spell words to communicate with them.",
-		"bg":"",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":""
+		"text": "Your crew has intercepted an alien signal. Type valid words using only the letters shown on the board before time runs out.",
+		"bg": "",
+		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
+		"context": ""
 	}
 ]
 
 var hanger_dialog := [
 	{
-		"text":"Your crew has stumbled upon a shipyard. You receive a muddled signal on your transponder telling you that you must correctly sort ships according to the rules given to pass.",
-		"bg":"",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":""
+		"text": "Your crew found a shipyard. Sort the ships correctly according to the rules to clear the challenge.",
+		"bg": "",
+		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
+		"context": ""
 	}
 ]
 
 var asteroid_dialog := [
 	{
-		"text":"Your crew has spotted the Psyche asteroid. You must click it to get closer to it but oh boy is it moving fast.",
-		"bg":"",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":""
+		"text": "Your crew has spotted the Psyche asteroid. Click the moving asteroid to keep advancing through the encounter.",
+		"bg": "",
+		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
+		"context": ""
 	}
 ]
 
 var genisis_dialog := [
 	{
-		"text":"Your crew has found the genesis craft floating though space, collect different kinds of solar wind to further the mission.",
-		"bg":"",
-		"tutorialchar":"res://Sources/Images/SpacemanCharacter1.png",
-		"context":""
+		"text": "Your crew has found the Genesis craft drifting through space. Collect different kinds of solar wind to help the mission.",
+		"bg": "",
+		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
+		"context": ""
 	}
 ]
-
 
 func _ready() -> void:
 	match tutorial_type:
 		"board":
 			dialog_entries = board_dialog
-
 		"alien":
 			dialog_entries = alien_dialog
-
 		"hanger":
 			dialog_entries = hanger_dialog
-
 		"asteroid":
 			dialog_entries = asteroid_dialog
+		"genesis":
+			dialog_entries = genisis_dialog
+		_:
+			dialog_entries = board_dialog
+
 	_show_dialog_entry(current_index)
 	pause_menu.connect("main_menu_requested", Callable(self, "_on_pause_main_menu"))
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		pause_menu.toggle()
 		get_viewport().set_input_as_handled()
+		return
+
 	if event.is_action_pressed("ui_accept"):
 		advance_dialog()
+		return
+
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		advance_dialog()
-func _set_context(path: Variant) -> void:
-	if contextimg == null:
-		return
 
-	if path == null or String(path) == "":
-		contextimg.texture = null
-		contextimg.visible = false
-		return
-
-	var tex := load(String(path)) as Texture2D
-	if tex == null:
-		contextimg.texture = null
-		contextimg.visible = false
-		return
-
-	contextimg.texture = tex
-	contextimg.visible = true
-
-		
-func _set_tex(rect: TextureRect, path: Variant, label: String) -> void:
+func _set_tex(rect: TextureRect, path: Variant, label_name: String) -> void:
 	if rect == null:
-		push_error("TextureRect is NULL for: " + label + " (node path is wrong or node doesn't exist)")
+		push_error("TextureRect is NULL for: " + label_name)
 		return
 
 	if path == null or String(path) == "":
@@ -171,28 +140,32 @@ func _set_tex(rect: TextureRect, path: Variant, label: String) -> void:
 
 	var tex := load(String(path)) as Texture2D
 	if tex == null:
-		push_error("Failed to load texture for " + label + " at: " + String(path))
+		push_error("Failed to load texture for " + label_name + " at: " + String(path))
 		rect.texture = null
 		rect.visible = false
 		return
 
 	rect.texture = tex
 	rect.visible = true
+
 func _on_pause_main_menu() -> void:
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://StartScreen.tscn")
+	Navigator.go_to_scene_by_path("res://Scenes/main_menu.tscn")
+
 func _show_dialog_entry(index: int) -> void:
+	if index < 0 or index >= dialog_entries.size():
+		return
+
 	var entry: Dictionary = dialog_entries[index]
-
 	dialog_label.text = entry.get("text", "")
-
 	_set_tex(bg_rect, entry.get("bg", ""), "BG")
 	_set_tex(tutorialchar, entry.get("tutorialchar", ""), "Char")
-	_set_tex(contextimg, entry.get("context",""),"Con")
-func advance_dialog():
+	_set_tex(contextimg, entry.get("context", ""), "Context")
+
+func advance_dialog() -> void:
 	current_index += 1
 
 	if current_index < dialog_entries.size():
 		_show_dialog_entry(current_index)
 	else:
-		get_tree().change_scene_to_file("res://Scenes/main_board.tscn")
+		Navigator.go_to_scene_by_path("res://Scenes/main_board.tscn")

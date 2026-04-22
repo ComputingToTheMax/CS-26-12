@@ -6,9 +6,20 @@ signal changed
 const SLOTS_PER_CATEGORY: int = 72
 const CATEGORY_COUNT: int = 3
 
+const REQUIRED_SHIP_PART_TYPES: Array[int] = [
+	ItemData.PartSubfilter.ENGINE,
+	ItemData.PartSubfilter.WING,
+	ItemData.PartSubfilter.FUEL_TANK,
+	ItemData.PartSubfilter.NOSE_CONE,
+	ItemData.PartSubfilter.BODY_PANELS,
+	ItemData.PartSubfilter.ELECTRICAL_COMPONENTS,
+	ItemData.PartSubfilter.ENGINE_HOUSING
+]
+
 @export var slot_count: int = SLOTS_PER_CATEGORY * CATEGORY_COUNT
 
 var slots: Array = []
+var ending_triggered: bool = false
 
 func _init() -> void:
 	initialize()
@@ -20,6 +31,8 @@ func initialize() -> void:
 	for i in range(slot_count):
 		slots[i] = null
 
+	ending_triggered = false
+
 func ensure_initialized() -> void:
 	if slots.size() != slot_count:
 		initialize()
@@ -27,11 +40,12 @@ func ensure_initialized() -> void:
 func clear() -> void:
 	initialize()
 	changed.emit()
+
 func add_part_instance(part_instance: PartInstance) -> bool:
 	if part_instance == null:
 		return false
 
-	var slot_index := get_first_empty_slot_in_category(ItemData.InventoryCategory.PART)
+	var slot_index: int = get_first_empty_slot_in_category(ItemData.InventoryCategory.PART)
 	if slot_index == -1:
 		return false
 
@@ -41,7 +55,9 @@ func add_part_instance(part_instance: PartInstance) -> bool:
 	}
 
 	changed.emit()
+	_check_for_ship_completion()
 	return true
+
 func get_category_slot_range(category: int) -> Dictionary:
 	match category:
 		ItemData.InventoryCategory.ITEM:
@@ -69,6 +85,7 @@ func set_slot(index: int, value: Variant) -> void:
 
 	slots[index] = value
 	changed.emit()
+	_check_for_ship_completion()
 
 func get_slot_indexes_for_category(category: int) -> Array[int]:
 	ensure_initialized()
@@ -121,7 +138,7 @@ func add_item(item: ItemData, quantity: int = 1) -> bool:
 	var count: int = int(range_info["count"])
 
 	for i in range(start_index, start_index + count):
-		var slot_data = slots[i]
+		var slot_data: Variant = slots[i]
 		if slot_data == null:
 			continue
 
@@ -139,12 +156,14 @@ func add_item(item: ItemData, quantity: int = 1) -> bool:
 
 			if quantity <= 0:
 				changed.emit()
+				_check_for_ship_completion()
 				return true
 
 	while quantity > 0:
 		var empty_index: int = get_first_empty_slot_in_category(item.category)
 		if empty_index == -1:
 			changed.emit()
+			_check_for_ship_completion()
 			return false
 
 		var amount_for_slot: int = min(quantity, item.max_stack)
@@ -155,6 +174,7 @@ func add_item(item: ItemData, quantity: int = 1) -> bool:
 		quantity -= amount_for_slot
 
 	changed.emit()
+	_check_for_ship_completion()
 	return true
 
 func remove_from_slot(index: int, amount: int = 1) -> bool:
@@ -163,7 +183,7 @@ func remove_from_slot(index: int, amount: int = 1) -> bool:
 	if index < 0 or index >= slot_count:
 		return false
 
-	var slot_data = slots[index]
+	var slot_data: Variant = slots[index]
 	if slot_data == null:
 		return false
 
@@ -186,10 +206,56 @@ func transfer_or_swap(from_index: int, to_index: int) -> void:
 	if from_index == to_index:
 		return
 
-	var from_slot = slots[from_index]
-	var to_slot = slots[to_index]
+	var from_slot: Variant = slots[from_index]
+	var to_slot: Variant = slots[to_index]
 
 	slots[to_index] = from_slot
 	slots[from_index] = to_slot
 
 	changed.emit()
+	_check_for_ship_completion()
+
+func get_collected_ship_part_types() -> Array[int]:
+	ensure_initialized()
+
+	var collected: Dictionary = {}
+	var part_indexes: Array[int] = get_occupied_slot_indexes_for_category(ItemData.InventoryCategory.PART)
+
+	for index in part_indexes:
+		var slot_data: Variant = slots[index]
+		if slot_data == null:
+			continue
+
+		var part_instance: PartInstance = slot_data.get("item", null)
+		if part_instance == null:
+			continue
+
+		collected[part_instance.part_subfilter] = true
+
+	var result: Array[int] = []
+	for key in collected.keys():
+		result.append(int(key))
+
+	result.sort()
+	return result
+
+func has_all_required_ship_parts() -> bool:
+	var collected: Array[int] = get_collected_ship_part_types()
+
+	for required_type in REQUIRED_SHIP_PART_TYPES:
+		if not collected.has(required_type):
+			return false
+
+	return true
+
+func _check_for_ship_completion() -> void:
+	if ending_triggered:
+		return
+
+	if not has_all_required_ship_parts():
+		return
+
+	ending_triggered = true
+
+	if has_node("/root/Navigator"):
+		Navigator.call_deferred("go_to_scene_by_path", "res://Scenes/credits.tscn")

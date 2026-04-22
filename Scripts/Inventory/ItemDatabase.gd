@@ -3,6 +3,26 @@ class_name ItemDatabase
 
 @export_file("*.json") var item_data_json: String = "res://Items/ItemDatabase_updated.json"
 
+const SHIP_PART_ICON_BY_SUBFILTER := {
+	ItemData.PartSubfilter.ENGINE: "res://Sources/Images/Parts/engine.png",
+	ItemData.PartSubfilter.WING: "res://Sources/Images/Parts/fin.png",
+	ItemData.PartSubfilter.FUEL_TANK: "res://Sources/Images/Parts/tank.png",
+	ItemData.PartSubfilter.NOSE_CONE: "res://Sources/Images/Parts/cone.png",
+	ItemData.PartSubfilter.BODY_PANELS: "res://Sources/Images/Parts/panel.png",
+	ItemData.PartSubfilter.ELECTRICAL_COMPONENTS: "res://Sources/Images/Parts/wire.png",
+	ItemData.PartSubfilter.ENGINE_HOUSING: "res://Sources/Images/Parts/cockpit.png"
+}
+
+const REQUIRED_SHIP_PART_SETUP := [
+	{"id": "0", "subfilter": ItemData.PartSubfilter.ENGINE},
+	{"id": "1", "subfilter": ItemData.PartSubfilter.WING},
+	{"id": "2", "subfilter": ItemData.PartSubfilter.FUEL_TANK},
+	{"id": "3", "subfilter": ItemData.PartSubfilter.NOSE_CONE},
+	{"id": "4", "subfilter": ItemData.PartSubfilter.BODY_PANELS},
+	{"id": "5", "subfilter": ItemData.PartSubfilter.ELECTRICAL_COMPONENTS},
+	{"id": "6", "subfilter": ItemData.PartSubfilter.ENGINE_HOUSING}
+]
+
 var items_by_id: Dictionary = {}
 var all_items: Array[ItemData] = []
 
@@ -24,7 +44,7 @@ func load_items(path: String = "") -> void:
 		push_error("ItemDatabase: JSON file not found: %s" % item_data_json)
 		return
 
-	var file := FileAccess.open(item_data_json, FileAccess.READ)
+	var file: FileAccess = FileAccess.open(item_data_json, FileAccess.READ)
 	if file == null:
 		push_error("ItemDatabase: Failed to open JSON file: %s" % item_data_json)
 		return
@@ -32,7 +52,7 @@ func load_items(path: String = "") -> void:
 	var json_text: String = file.get_as_text()
 	file.close()
 
-	var json := JSON.new()
+	var json: JSON = JSON.new()
 	var parse_result: int = json.parse(json_text)
 	if parse_result != OK:
 		push_error("ItemDatabase: JSON parse error in %s at line %d: %s" % [
@@ -42,25 +62,28 @@ func load_items(path: String = "") -> void:
 		])
 		return
 
-	var root = json.data
+	var root: Variant = json.data
 	if typeof(root) != TYPE_DICTIONARY:
 		push_error("ItemDatabase: Root JSON is not a dictionary.")
 		return
 
 	var items_array: Array = root.get("items", [])
-	for entry in items_array:
-		if typeof(entry) != TYPE_DICTIONARY:
+	for entry_variant in items_array:
+		if typeof(entry_variant) != TYPE_DICTIONARY:
 			continue
 
-		var item := _build_item_from_json(entry)
+		var entry: Dictionary = entry_variant
+		var item: ItemData = _build_item_from_json(entry)
 		if item == null:
 			continue
 
 		all_items.append(item)
 		items_by_id[item.id] = item
 
+	_apply_mvp_ship_part_mapping()
+
 func _build_item_from_json(entry: Dictionary) -> ItemData:
-	var item := ItemData.new()
+	var item: ItemData = ItemData.new()
 
 	item.id = str(entry.get("ID", ""))
 	item.display_name = str(entry.get("Name", ""))
@@ -74,7 +97,7 @@ func _build_item_from_json(entry: Dictionary) -> ItemData:
 
 	var icon_path: String = str(entry.get("Icon", ""))
 	if icon_path != "":
-		var tex = load(icon_path)
+		var tex: Variant = load(icon_path)
 		if tex is Texture2D:
 			item.icon = tex
 
@@ -90,6 +113,49 @@ func _build_item_from_json(entry: Dictionary) -> ItemData:
 	item.acceleration = _to_float(entry.get("Acceleration", 0))
 
 	return item
+
+func _apply_mvp_ship_part_mapping() -> void:
+	for setup_variant in REQUIRED_SHIP_PART_SETUP:
+		var setup: Dictionary = setup_variant
+		var item_id: String = str(setup.get("id", ""))
+		var subfilter: int = int(setup.get("subfilter", ItemData.PartSubfilter.NONE))
+
+		var item: ItemData = get_item_by_id(item_id)
+		if item == null:
+			continue
+
+		item.category = ItemData.InventoryCategory.PART
+		item.part_subfilter = subfilter
+		item.icon = _load_ship_part_icon(subfilter)
+
+	for item in all_items:
+		if item == null:
+			continue
+
+		if item.category != ItemData.InventoryCategory.PART:
+			continue
+
+		if item.part_subfilter == ItemData.PartSubfilter.NONE:
+			item.part_subfilter = ItemData.PartSubfilter.BODY_PANELS
+
+		if item.icon == null or item.icon.resource_path == "res://Sources/Images/star.png":
+			item.icon = _load_ship_part_icon(item.part_subfilter)
+
+func _load_ship_part_icon(subfilter: int) -> Texture2D:
+	var icon_path: String = str(SHIP_PART_ICON_BY_SUBFILTER.get(
+		subfilter,
+		"res://Sources/Images/Parts/panel.png"
+	))
+
+	var tex: Variant = load(icon_path)
+	if tex is Texture2D:
+		return tex
+
+	var fallback: Variant = load("res://Sources/Images/Placeholder.png")
+	if fallback is Texture2D:
+		return fallback
+
+	return null
 
 func get_item_by_id(id: String) -> ItemData:
 	return items_by_id.get(id, null)
@@ -111,7 +177,7 @@ func get_parts_by_subfilter(part_subfilter: int) -> Array[ItemData]:
 			results.append(item)
 	return results
 
-func _to_int(value, default_value: int = 0) -> int:
+func _to_int(value: Variant, default_value: int = 0) -> int:
 	match typeof(value):
 		TYPE_INT:
 			return value
@@ -124,7 +190,7 @@ func _to_int(value, default_value: int = 0) -> int:
 				return int(float(value))
 	return default_value
 
-func _to_float(value, default_value: float = 0.0) -> float:
+func _to_float(value: Variant, default_value: float = 0.0) -> float:
 	match typeof(value):
 		TYPE_INT:
 			return float(value)
