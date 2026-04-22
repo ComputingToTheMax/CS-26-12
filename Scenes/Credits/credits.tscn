@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://damhiumjctum"]
 
-[ext_resource type="Script" uid="uid://dhhooc4dw8xxn" path="res://Scripts/credits_scene.gd" id="1_gryuy"]
+[ext_resource type="Script" uid="uid://dhhooc4dw8xxn" path="res://Scenes/Credits/credits_scene.gd" id="1_gryuy"]
 [ext_resource type="Texture2D" uid="uid://b760yqcfgp404" path="res://Sources/Images/AsteroidMinigame/BlackSpaceBackground2.png" id="2"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="3_1bamb"]
+[ext_resource type="Script" uid="uid://dmnhpclvoeh81" path="res://Scenes/Credits/godot_license.gd" id="3_ut8rr"]
 
 [node name="Credits" type="Control" unique_id=1290088201]
 layout_mode = 3
@@ -12,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gryuy")
+scroll_speed = 300.0
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1384651065]
 layout_mode = 1
@@ -23,52 +25,78 @@ grow_vertical = 2
 texture = ExtResource("2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=872485752]
-layout_mode = 0
-offset_left = 180.0
-offset_top = 720.0
-offset_right = 1100.0
-offset_bottom = 2200.0
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 1.05
+anchor_right = 0.9
+anchor_bottom = 1.05
+grow_horizontal = 2
+theme_override_constants/separation = 57
+metadata/_edit_group_ = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=1053069381]
+[node name="ProjectInformation" type="RichTextLabel" parent="VBoxContainer" unique_id=1053069381]
 custom_minimum_size = Vector2(920, 0)
 layout_mode = 2
+size_flags_vertical = 4
 bbcode_enabled = true
 text = "[center]Developers:[/center]
-[center]Aidek Bak[/center]
-[center]Christian Buenafe[/center]
-[center]Avery Feingold[/center]
-[center]Max Tran[/center]
+[center]Aiden Bak | Seattle University[/center]
+[center]Christian Buenafe | Seattle University[/center]
+[center]Avery Feingold | Seattle University[/center]
+[center]Max Tran | Seattle University[/center]
 
 [center]Project Sponsor:[/center]
-[center]NASA Psyche Mission[/center]
+[center]NASA Psyche Capstone[/center]
 
 [center]Project Sponsor:[/center]
-[center]Dr. Cassie Bowman[/center]
-[center]Arizona State University[/center]
+[center]Dr. Cassie Bowman | Arizona State University[/center]
+[center][/center]
 
 [center]Project Advisor:[/center]
-[center]Dr. Braxton Cuneo[/center]
-[center]Seattle University[/center]"
+[center]Dr. Braxton Cuneo | Seattle University[/center]
+[center][/center]"
 fit_content = true
 scroll_active = false
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1472693064]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer" unique_id=221457580]
 custom_minimum_size = Vector2(920, 0)
 layout_mode = 2
+size_flags_vertical = 4
 bbcode_enabled = true
 text = "[center]This work was created in partial fulfillment of Seattle University Capstone Course CPSC 4870-4890. The work is a result of the Psyche Student Collaborations component of NASA’s Psyche Mission (https://psyche.ssl.berkeley.edu/). Psyche: A Journey to a Metal World [Contract number NNM16AA09C] is part of the NASA Discovery Program mission to solar system targets. Trade names and trademarks of ASU and NASA are used in this work for identification only. Their usage does not constitute an official endorsement, either expressed or implied, by Arizona State University or National Aeronautics and Space Administration. The content is solely the responsibility of the authors and does not necessarily represent the official views of ASU or NASA.[/center]"
 fit_content = true
 scroll_active = false
 
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=490540608]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="GodotLicense" type="RichTextLabel" parent="VBoxContainer" unique_id=1471308825]
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+script = ExtResource("3_ut8rr")
+
 [node name="Button" type="Button" parent="." unique_id=364262849]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -50.0
-offset_right = 193.0
-offset_bottom = -19.0
+offset_left = 26.0
+offset_top = -635.0
+offset_right = 102.0
+offset_bottom = -604.0
 grow_vertical = 0
-text = "Return to Main Menu"
+text = "⬅️ Back"
 script = ExtResource("3_1bamb")
 target_scene_path = "res://Scenes/main_menu.tscn"
