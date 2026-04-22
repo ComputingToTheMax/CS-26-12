@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+const MAX_BOARD_ITERATIONS: int = 15
+
 @export var Board: MainBoard
 @export var cell_size: Vector2i
 
@@ -23,6 +25,7 @@ var busy: bool = false
 var current_tile_index: int = 0
 var turn: int = 0
 var minigames: Array[PackedScene] = []
+var ending_triggered: bool = false
 
 func _ready() -> void:
 	if Board == null:
@@ -67,7 +70,7 @@ func roll_and_move(amount: int = 0) -> void:
 		push_error("roll_and_move called too early")
 		return
 
-	if not can_roll or busy:
+	if not can_roll or busy or ending_triggered:
 		return
 
 	can_roll = false
@@ -93,6 +96,10 @@ func roll_and_move(amount: int = 0) -> void:
 
 	_update_turn_label()
 
+	if _has_reached_iteration_limit():
+		_trigger_credits_end()
+		return
+
 	var landed_on_shop: bool = Board.is_shop_tile(current_tile_index)
 	var landed_on_red: bool = Board.is_red_tile(current_tile_index)
 
@@ -107,7 +114,7 @@ func roll_and_move(amount: int = 0) -> void:
 	busy = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if busy:
+	if busy or ending_triggered:
 		return
 
 	if event.is_action_pressed("ui_accept"):
@@ -127,11 +134,21 @@ func _open_shop() -> void:
 
 	await shop.closed
 
+	if ending_triggered:
+		return
+
 	can_roll = true
 	busy = false
 
 func _update_turn_label() -> void:
-	turn_label.text = "Turn: %d | Roll: %d | Tile: %d" % [turn, roll, current_tile_index]
+	var board_iterations: int = _get_board_iterations_completed()
+	turn_label.text = "Turn: %d | Roll: %d | Tile: %d | Laps: %d/%d" % [
+		turn,
+		roll,
+		current_tile_index,
+		board_iterations,
+		MAX_BOARD_ITERATIONS
+	]
 	turn += 1
 
 func _set_board_ui_visible(is_visible: bool) -> void:
@@ -185,10 +202,10 @@ func _offer_game() -> void:
 
 	await get_tree().process_frame
 
-	_set_board_ui_visible(true)
-
-	busy = false
-	can_roll = true
+	if not ending_triggered:
+		_set_board_ui_visible(true)
+		busy = false
+		can_roll = true
 
 func _result(result: Dictionary) -> void:
 	if result.get("status") == "win":
@@ -201,4 +218,34 @@ func _show_reward_screen() -> void:
 	Board.overlay_root.add_child(screen)
 	Board.overlay_root.visible = true
 	await screen.item_chosen
+
+	if ending_triggered:
+		return
+
 	Board.overlay_root.visible = false
+
+func _get_board_iterations_completed() -> int:
+	var board_count: int = Board.get_tile_count()
+	if board_count <= 0:
+		return 0
+
+	return int(spaces_moved_total / board_count)
+
+func _has_reached_iteration_limit() -> bool:
+	return _get_board_iterations_completed() >= MAX_BOARD_ITERATIONS
+
+func _trigger_credits_end() -> void:
+	if ending_triggered:
+		return
+
+	ending_triggered = true
+	can_roll = false
+	busy = true
+
+	_set_board_ui_visible(false)
+
+	for child in Board.game_root.get_children():
+		child.queue_free()
+
+	if has_node("/root/Navigator"):
+		Navigator.call_deferred("go_to_scene_by_path", "res://Scenes/credits.tscn")

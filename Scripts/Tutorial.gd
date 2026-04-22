@@ -18,7 +18,13 @@ var board_dialog := [
 		"context": ""
 	},
 	{
-		"text": "Your goal is to travel across the Psyche-themed board and build up the best mission possible before the final stretch.",
+		"text": "Your goal is to collect every ship part needed to finish your spacecraft. When you have all seven ship parts, the game will end and go to credits.",
+		"bg": "",
+		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
+		"context": "res://Sources/Images/boardexample.png"
+	},
+	{
+		"text": "There is also a turn limit. After 15 full trips around the board, the game will end and go to credits even if your ship is not complete yet.",
 		"bg": "",
 		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
 		"context": "res://Sources/Images/boardexample.png"
@@ -30,13 +36,13 @@ var board_dialog := [
 		"context": "res://Sources/Images/boardexample.png"
 	},
 	{
-		"text": "Red minigame tiles can launch a challenge. Winning minigames can earn you useful rewards to improve your mission.",
+		"text": "Red minigame tiles can launch a challenge. Winning minigames can earn you ship parts and other useful rewards.",
 		"bg": "",
 		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
 		"context": "res://Sources/Images/boardexample.png"
 	},
 	{
-		"text": "Shops let you spend money on parts and helpers. Those rewards can improve how your mission performs later in the game.",
+		"text": "Shops let you spend money on parts and helpers. Keep collecting ship parts from shops and minigame rewards until your spacecraft is complete.",
 		"bg": "",
 		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
 		"context": ""
@@ -48,7 +54,7 @@ var board_dialog := [
 		"context": ""
 	},
 	{
-		"text": "Good luck. Build the best mission you can and make it to Psyche.",
+		"text": "Good luck. Build the full ship before 15 laps are up and complete your mission.",
 		"bg": "",
 		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
 		"context": ""
@@ -57,7 +63,7 @@ var board_dialog := [
 
 var alien_dialog := [
 	{
-		"text": "Your crew has intercepted an alien signal. Type valid words from the letter grid to communicate before time runs out.",
+		"text": "Your crew has intercepted an alien signal. Type valid words using only the letters shown on the board before time runs out.",
 		"bg": "",
 		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
 		"context": ""

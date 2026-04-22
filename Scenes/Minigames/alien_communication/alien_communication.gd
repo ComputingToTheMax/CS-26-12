@@ -30,33 +30,30 @@ class Trie:
 
 	func insert(word: String) -> void:
 		var node: TrieNode = root
-		for c: String in word:
-			if not node.children.has(c):
-				node.children[c] = TrieNode.new()
-			node = node.children[c] as TrieNode
+		for c in word:
+			var char_key: String = str(c)
+			if not node.children.has(char_key):
+				node.children[char_key] = TrieNode.new()
+			node = node.children[char_key] as TrieNode
 		node.is_word = true
 
 	func has_prefix(prefix: String) -> bool:
 		var node: TrieNode = root
-		for c: String in prefix:
-			if not node.children.has(c):
+		for c in prefix:
+			var char_key: String = str(c)
+			if not node.children.has(char_key):
 				return false
-			node = node.children[c] as TrieNode
+			node = node.children[char_key] as TrieNode
 		return true
 
 	func is_word(word: String) -> bool:
 		var node: TrieNode = root
-		for c: String in word:
-			if not node.children.has(c):
+		for c in word:
+			var char_key: String = str(c)
+			if not node.children.has(char_key):
 				return false
-			node = node.children[c] as TrieNode
+			node = node.children[char_key] as TrieNode
 		return node.is_word
-
-var DIRS: Array[Vector2] = [
-	Vector2(-1, -1), Vector2(-1, 0), Vector2(-1, 1),
-	Vector2(0, -1), Vector2(0, 1),
-	Vector2(1, -1), Vector2(1, 0), Vector2(1, 1)
-]
 
 func _ready() -> void:
 	randomize()
@@ -90,7 +87,7 @@ func load_frequencies(path: String) -> Array[String]:
 			percent = float(percent_text)
 
 		var count: int = maxi(1, int(round(percent * 10.0)))
-		for i: int in range(count):
+		for i in range(count):
 			letters.append(letter)
 
 	file.close()
@@ -104,9 +101,9 @@ func generate_board(freq_file: String) -> Array:
 	var letters: Array[String] = load_frequencies(freq_file)
 	var generated_board: Array = []
 
-	for i: int in range(SIZE):
+	for i in range(SIZE):
 		var row: Array[String] = []
-		for j: int in range(SIZE):
+		for j in range(SIZE):
 			var r: int = randi() % letters.size()
 			row.append(letters[r])
 		generated_board.append(row)
@@ -118,15 +115,15 @@ func build_trie(word_file: String) -> Trie:
 
 	if not FileAccess.file_exists(word_file):
 		push_error("Missing alien word file: " + word_file)
-		for fallback_word: String in ["STAR", "MARS", "MOON", "ROVER", "SOLAR", "SPACE", "ALIEN", "ORBIT"]:
-			built_trie.insert(fallback_word)
+		for fallback_word in ["STAR", "MARS", "MOON", "ROVER", "SOLAR", "SPACE", "ALIEN", "ORBIT"]:
+			built_trie.insert(str(fallback_word))
 		return built_trie
 
 	var file: FileAccess = FileAccess.open(word_file, FileAccess.READ)
 	if file == null:
 		push_error("Could not open alien word file: " + word_file)
-		for fallback_word: String in ["STAR", "MARS", "MOON", "ROVER", "SOLAR", "SPACE", "ALIEN", "ORBIT"]:
-			built_trie.insert(fallback_word)
+		for fallback_word in ["STAR", "MARS", "MOON", "ROVER", "SOLAR", "SPACE", "ALIEN", "ORBIT"]:
+			built_trie.insert(str(fallback_word))
 		return built_trie
 
 	while not file.eof_reached():
@@ -178,7 +175,7 @@ func _create_ui() -> void:
 	layout.add_child(title)
 
 	info_label = Label.new()
-	info_label.text = "Find %d valid words from the grid." % words_needed
+	info_label.text = "Find %d valid words from the letters on the screen." % words_needed
 	info_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	info_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	info_label.add_theme_font_size_override("font_size", 18)
@@ -190,14 +187,14 @@ func _create_ui() -> void:
 	board_container.add_theme_constant_override("separation", 8)
 	layout.add_child(board_container)
 
-	for i: int in range(SIZE):
+	for i in range(SIZE):
 		var row_box: HBoxContainer = HBoxContainer.new()
 		row_box.alignment = BoxContainer.ALIGNMENT_CENTER
 		row_box.add_theme_constant_override("separation", 8)
 		board_container.add_child(row_box)
 
 		var row_data: Array = board[i]
-		for j: int in range(SIZE):
+		for j in range(SIZE):
 			var letter_panel: PanelContainer = PanelContainer.new()
 			letter_panel.custom_minimum_size = Vector2(84, 84)
 			row_box.add_child(letter_panel)
@@ -231,6 +228,34 @@ func _create_ui() -> void:
 
 	input_box.call_deferred("grab_focus")
 
+func _build_board_letter_counts() -> Dictionary:
+	var counts: Dictionary = {}
+
+	for row_variant in board:
+		var row: Array = row_variant
+		for letter_variant in row:
+			var letter: String = str(letter_variant).to_upper()
+			if not counts.has(letter):
+				counts[letter] = 0
+			counts[letter] = int(counts[letter]) + 1
+
+	return counts
+
+func can_form_word_from_board(word: String) -> bool:
+	var remaining: Dictionary = _build_board_letter_counts()
+
+	for c in word:
+		var letter: String = str(c).to_upper()
+
+		if not remaining.has(letter):
+			return false
+
+		remaining[letter] = int(remaining[letter]) - 1
+		if int(remaining[letter]) < 0:
+			return false
+
+	return true
+
 func _on_word_entered(text: String) -> void:
 	var word: String = text.strip_edges().to_upper()
 	input_box.text = ""
@@ -242,6 +267,10 @@ func _on_word_entered(text: String) -> void:
 
 	if word in found_words:
 		info_label.text = "Already found: " + word
+		return
+
+	if not can_form_word_from_board(word):
+		info_label.text = "Word cannot be formed from the letters on the board."
 		return
 
 	if trie.is_word(word):
