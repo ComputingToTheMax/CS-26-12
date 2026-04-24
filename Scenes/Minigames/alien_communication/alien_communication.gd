@@ -5,10 +5,14 @@ signal done(result: Dictionary)
 const SIZE: int = 4
 const FREQ_PATH: String = "res://Scenes/Minigames/alien_communication/letter_frequency.txt"
 const WORD_PATH: String = "res://Scenes/Minigames/alien_communication/word_list.txt"
+const MAX_BOARD_ATTEMPTS: int = 80
+
+static var last_board_signature: String = ""
 
 var board: Array = []
 var trie: Trie
 var found_words: Array[String] = []
+var all_words: Array = []
 var words_needed: int = 3
 
 var timer_label: Label
@@ -55,12 +59,29 @@ class Trie:
 			node = node.children[char_key] as TrieNode
 		return node.is_word
 
+var DIRS: Array[Vector2i] = [
+	Vector2i(-1, -1), Vector2i(-1, 0), Vector2i(-1, 1),
+	Vector2i(0, -1),                  Vector2i(0, 1),
+	Vector2i(1, -1),  Vector2i(1, 0),  Vector2i(1, 1)
+]
+
 func _ready() -> void:
 	randomize()
-	board = generate_board(FREQ_PATH)
+
+	_set_words_needed()
 	trie = build_trie(WORD_PATH)
+	_generate_playable_board()
+
 	_create_ui()
 	_start_timer()
+
+func _set_words_needed() -> void:
+	var reduction: int = 0
+
+	if has_node("/root/CurGameState"):
+		reduction = CurGameState.total_difficulty_reduction
+
+	words_needed = maxi(1, 3 - reduction)
 
 func load_frequencies(path: String) -> Array[String]:
 	if not FileAccess.file_exists(path):
@@ -79,14 +100,17 @@ func load_frequencies(path: String) -> Array[String]:
 		if line == "":
 			continue
 
-		var letter: String = line.left(1)
+		var letter: String = line.left(1).to_upper()
 		var percent_text: String = line.substr(1).strip_edges()
+		percent_text = percent_text.replace("%", "").strip_edges()
+
 		var percent: float = 1.0
 
 		if percent_text.is_valid_float():
 			percent = float(percent_text)
 
 		var count: int = maxi(1, int(round(percent * 10.0)))
+
 		for i in range(count):
 			letters.append(letter)
 
@@ -103,36 +127,128 @@ func generate_board(freq_file: String) -> Array:
 
 	for i in range(SIZE):
 		var row: Array[String] = []
+
 		for j in range(SIZE):
 			var r: int = randi() % letters.size()
 			row.append(letters[r])
+
 		generated_board.append(row)
 
 	return generated_board
+
+func _generate_playable_board() -> void:
+	var best_board: Array = []
+	var best_words: Array = []
+	var attempt: int = 0
+
+	while attempt < MAX_BOARD_ATTEMPTS:
+		var possible_board: Array = generate_board(FREQ_PATH)
+		var possible_words: Array = find_words(possible_board, trie)
+		var signature: String = _get_board_signature(possible_board)
+
+		if possible_words.size() > best_words.size():
+			best_board = possible_board
+			best_words = possible_words
+
+		if possible_words.size() >= words_needed and signature != last_board_signature:
+			board = possible_board
+			all_words = possible_words
+			last_board_signature = signature
+			return
+
+		attempt += 1
+
+	if not best_board.is_empty():
+		board = best_board
+		all_words = best_words
+		last_board_signature = _get_board_signature(board)
+	else:
+		board = generate_board(FREQ_PATH)
+		all_words = find_words(board, trie)
+		last_board_signature = _get_board_signature(board)
+
+	if all_words.size() < words_needed:
+		words_needed = maxi(1, all_words.size())
+
+func _get_board_signature(board_to_check: Array) -> String:
+	var signature: String = ""
+
+	for row_variant in board_to_check:
+		var row: Array = row_variant
+
+		for letter_variant in row:
+			signature += str(letter_variant).to_upper()
+
+	return signature
 
 func build_trie(word_file: String) -> Trie:
 	var built_trie: Trie = Trie.new()
 
 	if not FileAccess.file_exists(word_file):
 		push_error("Missing alien word file: " + word_file)
+
 		for fallback_word in ["STAR", "MARS", "MOON", "ROVER", "SOLAR", "SPACE", "ALIEN", "ORBIT"]:
 			built_trie.insert(str(fallback_word))
+
 		return built_trie
 
 	var file: FileAccess = FileAccess.open(word_file, FileAccess.READ)
 	if file == null:
 		push_error("Could not open alien word file: " + word_file)
+
 		for fallback_word in ["STAR", "MARS", "MOON", "ROVER", "SOLAR", "SPACE", "ALIEN", "ORBIT"]:
 			built_trie.insert(str(fallback_word))
+
 		return built_trie
 
 	while not file.eof_reached():
-		var word: String = file.get_line().strip_edges().to_upper()
+		var word: String = _clean_word(file.get_line())
+
 		if word.length() >= 3:
 			built_trie.insert(word)
 
 	file.close()
 	return built_trie
+
+func find_words(board_to_search: Array, trie_to_search: Trie) -> Array:
+	var found: Dictionary = {}
+	var visited: Array = []
+
+	for i in range(SIZE):
+		visited.append([])
+
+		for j in range(SIZE):
+			visited[i].append(false)
+
+	for i in range(SIZE):
+		for j in range(SIZE):
+			_dfs(board_to_search, i, j, "", trie_to_search, visited, found)
+
+	var keys: Array = found.keys()
+	keys.sort()
+	return keys
+
+func _dfs(board_to_search: Array, x: int, y: int, current: String, trie_to_search: Trie, visited: Array, found: Dictionary) -> void:
+	if x < 0 or y < 0 or x >= SIZE or y >= SIZE:
+		return
+
+	if visited[x][y]:
+		return
+
+	current += str(board_to_search[x][y]).to_upper()
+
+	if not trie_to_search.has_prefix(current):
+		return
+
+	if trie_to_search.is_word(current):
+		found[current] = true
+
+	visited[x][y] = true
+
+	for direction in DIRS:
+		_dfs(board_to_search, x + direction.x, y + direction.y, current, trie_to_search, visited, found)
+
+	visited[x][y] = false
 
 func _create_ui() -> void:
 	var canvas: CanvasLayer = CanvasLayer.new()
@@ -194,6 +310,7 @@ func _create_ui() -> void:
 		board_container.add_child(row_box)
 
 		var row_data: Array = board[i]
+
 		for j in range(SIZE):
 			var letter_panel: PanelContainer = PanelContainer.new()
 			letter_panel.custom_minimum_size = Vector2(84, 84)
@@ -228,36 +345,22 @@ func _create_ui() -> void:
 
 	input_box.call_deferred("grab_focus")
 
-func _build_board_letter_counts() -> Dictionary:
-	var counts: Dictionary = {}
+func _clean_word(text: String) -> String:
+	var cleaned: String = text.strip_edges().to_upper()
+	cleaned = cleaned.replace(" ", "")
 
-	for row_variant in board:
-		var row: Array = row_variant
-		for letter_variant in row:
-			var letter: String = str(letter_variant).to_upper()
-			if not counts.has(letter):
-				counts[letter] = 0
-			counts[letter] = int(counts[letter]) + 1
+	var result: String = ""
 
-	return counts
+	for c in cleaned:
+		var letter: String = str(c)
 
-func can_form_word_from_board(word: String) -> bool:
-	var remaining: Dictionary = _build_board_letter_counts()
+		if letter >= "A" and letter <= "Z":
+			result += letter
 
-	for c in word:
-		var letter: String = str(c).to_upper()
-
-		if not remaining.has(letter):
-			return false
-
-		remaining[letter] = int(remaining[letter]) - 1
-		if int(remaining[letter]) < 0:
-			return false
-
-	return true
+	return result
 
 func _on_word_entered(text: String) -> void:
-	var word: String = text.strip_edges().to_upper()
+	var word: String = _clean_word(text)
 	input_box.text = ""
 	input_box.call_deferred("grab_focus")
 
@@ -265,15 +368,15 @@ func _on_word_entered(text: String) -> void:
 		info_label.text = "Enter a word from the grid."
 		return
 
+	if word.length() < 3:
+		info_label.text = "Word must be at least 3 letters."
+		return
+
 	if word in found_words:
 		info_label.text = "Already found: " + word
 		return
 
-	if not can_form_word_from_board(word):
-		info_label.text = "Word cannot be formed from the letters on the board."
-		return
-
-	if trie.is_word(word):
+	if word in all_words:
 		found_words.append(word)
 		words_found_label.text = "Words found: " + ", ".join(found_words)
 		info_label.text = "Good. %d / %d words found." % [found_words.size(), words_needed]
@@ -281,7 +384,7 @@ func _on_word_entered(text: String) -> void:
 		if found_words.size() >= words_needed:
 			_finish("win")
 	else:
-		info_label.text = "Not a valid word."
+		info_label.text = "Not a valid word from this board."
 
 func _start_timer() -> void:
 	timer = Timer.new()
@@ -291,6 +394,7 @@ func _start_timer() -> void:
 	timer.timeout.connect(_on_timer_tick)
 
 	var time_bonus: int = 0
+
 	if has_node("/root/CurGameState"):
 		time_bonus = CurGameState.total_time_bonus
 
