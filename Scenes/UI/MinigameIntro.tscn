@@ -1,0 +1,214 @@
+[gd_scene format=3 uid="uid://qe0dtief2euq"]
+
+[ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_7sqi1"]
+[ext_resource type="PackedScene" uid="uid://d1jbsh7ox37wt" path="res://Scenes/UI/PauseMenu.tscn" id="3_facg5"]
+
+[sub_resource type="GDScript" id="GDScript_rpj4g"]
+script/source = "extends Node2D
+
+signal intro_finished
+
+@onready var pause_menu: CanvasLayer = $CanvasLayer/PauseMenu
+@onready var dialog_label: Label = $DialogLayer/DialogBox/DialogContainer/DialogText
+@onready var bg_rect: TextureRect = $BackgroundLayer/Background
+@onready var tutorialchar: TextureRect = $BackgroundLayer/Characters/Spaceman
+@onready var contextimg: TextureRect = $ContextLayer/Context
+
+@export var minigame_key: String = \"\"
+
+const MINIGAME_DIALOGS: Dictionary = {
+	\"AsteroidTargeting1\": {
+		\"dialog\": [
+			{
+				\"text\": \"Your crew has spotted the Psyche asteroid. Click the moving asteroid to keep advancing through the encounter.\",
+				\"bg\": \"\",
+				\"tutorialchar\": \"res://Sources/Images/SpacemanCharacter1.png\",
+				\"context\": \"\"
+			},
+		],
+	},
+	\"alien_communication\": {
+		\"dialog\": [
+			{
+				\"text\": \"Your crew has intercepted an alien signal. Type valid words using only the letters shown on the board before time runs out.\",
+				\"bg\": \"\",
+				\"tutorialchar\": \"res://Sources/Images/SpacemanCharacter1.png\",
+				\"context\": \"\"
+			}
+		],
+	},
+}
+
+var dialog_entries: Array = []
+var current_index: int = 0
+
+func _ready() -> void:
+	if MINIGAME_DIALOGS.has(minigame_key):
+		dialog_entries = MINIGAME_DIALOGS[minigame_key][\"dialog\"]
+	else:
+		push_error(\"MinigameIntro: unknown minigame_key '%s'\" % minigame_key)
+		intro_finished.emit()
+		return
+
+	_show_dialog_entry(current_index)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(\"ui_accept\"):
+		advance_dialog()
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		advance_dialog()
+
+func _set_tex(rect: TextureRect, path: Variant, label_name: String) -> void:
+	if rect == null:
+		push_error(\"TextureRect is NULL for: \" + label_name)
+		return
+	if path == null or String(path) == \"\":
+		rect.texture = null
+		rect.visible = false
+		return
+	var tex := load(String(path)) as Texture2D
+	if tex == null:
+		push_error(\"Failed to load texture for \" + label_name + \" at: \" + String(path))
+		rect.texture = null
+		rect.visible = false
+		return
+	rect.texture = tex
+	rect.visible = true
+
+func _show_dialog_entry(index: int) -> void:
+	if index < 0 or index >= dialog_entries.size():
+		return
+	var entry: Dictionary = dialog_entries[index]
+	dialog_label.text = entry.get(\"text\", \"\")
+	_set_tex(bg_rect, entry.get(\"bg\", \"\"), \"BG\")
+	_set_tex(tutorialchar, entry.get(\"tutorialchar\", \"\"), \"Char\")
+	_set_tex(contextimg, entry.get(\"context\", \"\"), \"Context\")
+
+func advance_dialog() -> void:
+	current_index += 1
+	if current_index < dialog_entries.size():
+		_show_dialog_entry(current_index)
+	else:
+		intro_finished.emit()
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aj4rq"]
+bg_color = Color(0.17436922, 0.6423982, 0.89108616, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5132329, 0.51323295, 0.51323265, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="DialogScreen" type="Node2D" unique_id=460706751]
+script = SubResource("GDScript_rpj4g")
+
+[node name="SpaceBackgroundPlain" type="Sprite2D" parent="." unique_id=681861410]
+position = Vector2(595, 354)
+texture = ExtResource("2_7sqi1")
+
+[node name="DialogLayer" type="CanvasLayer" parent="." unique_id=2140598984]
+layer = 10
+
+[node name="DialogBox" type="Panel" parent="DialogLayer" unique_id=2112951413]
+custom_minimum_size = Vector2(0, 180)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -241.0
+offset_right = 9.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_aj4rq")
+
+[node name="NameText" type="Label" parent="DialogLayer/DialogBox" unique_id=1543688595]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -61.0
+offset_right = -854.0
+offset_bottom = 3.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "Mission Control:"
+vertical_alignment = 1
+
+[node name="DialogContainer" type="MarginContainer" parent="DialogLayer/DialogBox" unique_id=222488173]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="DialogText" type="Label" parent="DialogLayer/DialogBox/DialogContainer" unique_id=1632793411]
+clip_contents = true
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Hello
+Text here
+anything works"
+autowrap_mode = 3
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1091549039]
+layer = 10
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=921090249 instance=ExtResource("3_facg5")]
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=277178420]
+layer = 0
+
+[node name="Background" type="TextureRect" parent="BackgroundLayer" unique_id=571201887]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Characters" type="Control" parent="BackgroundLayer" unique_id=2004247273]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Spaceman" type="TextureRect" parent="BackgroundLayer/Characters" unique_id=1577054093]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 104.0
+offset_top = 153.0
+offset_right = 266.0
+offset_bottom = 344.0
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ContextLayer" type="CanvasLayer" parent="." unique_id=1092614350]
+layer = 5
+
+[node name="Context" type="TextureRect" parent="ContextLayer" unique_id=1710408367]
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -264.0
+offset_top = 58.0
+offset_right = 314.0
+offset_bottom = 358.0
+grow_horizontal = 2
+expand_mode = 1
+stretch_mode = 5
