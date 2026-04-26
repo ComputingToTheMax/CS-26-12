@@ -122,6 +122,7 @@ grow_vertical = 0
 
 [node name="PlayButton" type="Button" parent="GameMenu/GameMenuButtons" unique_id=1743614122]
 layout_mode = 2
+theme = ExtResource("3_jr6u5")
 theme_override_font_sizes/font_size = 32
 text = "Play"
 script = ExtResource("6_6mw8b")
