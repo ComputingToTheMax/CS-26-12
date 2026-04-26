@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bdqngjdx3nre1"]
+
+[ext_resource type="Texture2D" uid="uid://bk74sk3eoo0vf" path="res://Minigames/GenesisSolarWind/Src/Images/GenesisRenderingNoBackground.png" id="1_5pu7v"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gk3p8"]
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5pu7v"]
+
+[node name="Coin" type="Node3D" unique_id=1451926600]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=319370672]
+mesh = SubResource("CylinderMesh_gk3p8")
+
+[node name="Sprite3D" type="Sprite3D" parent="MeshInstance3D" unique_id=778376131]
+transform = Transform3D(0.03, 0, 0, 0, -1.3113416e-09, -0.03, 0, 0.03, -1.3113416e-09, 0, 0.051, 0)
+material_overlay = SubResource("StandardMaterial3D_5pu7v")
+texture = ExtResource("1_5pu7v")
