@@ -47,6 +47,7 @@ enabled=PackedStringArray("res://addons/gut/plugin.cfg")
 
 timers/tooltip_delay_sec=0.0
 timers/tooltip_delay_sec.editor_hint=0.14
+theme/custom_font="uid://dksr8ntt2mvn2"
 
 [input]
 
