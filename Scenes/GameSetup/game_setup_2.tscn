@@ -1,0 +1,212 @@
+[gd_scene format=3 uid="uid://085emeti05rs"]
+
+[ext_resource type="Script" uid="uid://cme8odfqm8geb" path="res://Scenes/GameSetup/game_setup_2.gd" id="1_j2bkf"]
+[ext_resource type="Theme" uid="uid://cq22sdrr66eho" path="res://Themes/primary_game_theme.res" id="2_okjav"]
+[ext_resource type="PackedScene" uid="uid://b6mprb2wjh47y" path="res://Scenes/GameSetup/player_card.tscn" id="3_vc0qs"]
+[ext_resource type="Texture2D" uid="uid://jsebyqnin6ak" path="res://Scenes/GameSetup/Images/TokenTray.png" id="4_1dmt7"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sn5x1"]
+load_path = "res://.godot/imported/Start.svg-b0adccf835b8a9acc77418af324066d0.ctex"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ypne3"]
+
+[node name="GameSetup2_tscn" type="Node2D" unique_id=1147239988]
+script = ExtResource("1_j2bkf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=870953538]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=76159705]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control" unique_id=1669085250]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control" unique_id=69760729]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer" unique_id=1030843683]
+layout_mode = 2
+
+[node name="LeftPanel" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer" unique_id=193211614]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel" unique_id=452453545]
+layout_mode = 2
+theme_override_constants/margin_right = 30
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/MarginContainer2" unique_id=1153016346]
+layout_mode = 2
+theme = ExtResource("2_okjav")
+theme_type_variation = &"BigHeader"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Who's Playing?"
+
+[node name="PlayerCardMargin" type="MarginContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel" unique_id=465075291]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin" unique_id=1916275011]
+layout_mode = 2
+
+[node name="PlayerCard1" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer" unique_id=220406832]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard1" unique_id=1569524933]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayerCard" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard1" unique_id=1030897 instance=ExtResource("3_vc0qs")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerCard2" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer" unique_id=1347782507]
+layout_mode = 2
+
+[node name="PlayerCard" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard2" unique_id=337562230 instance=ExtResource("3_vc0qs")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard2" unique_id=2104903446]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayerCard3" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer" unique_id=47874312]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard3" unique_id=1279699133]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayerCard" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard3" unique_id=542819282 instance=ExtResource("3_vc0qs")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerCard4" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer" unique_id=1711354348]
+layout_mode = 2
+
+[node name="PlayerCard" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard4" unique_id=1102632496 instance=ExtResource("3_vc0qs")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard4" unique_id=1792125991]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Control/MarginContainer/HBoxContainer" unique_id=1056986764]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightPanel" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer" unique_id=565719181]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel" unique_id=1157211948]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/MarginContainer" unique_id=2055772769]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_1dmt7")
+
+[node name="Spacer" type="Control" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel" unique_id=1105090625]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel" unique_id=1326013430]
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_sn5x1")
+
+[node name="Tutorial Button" type="Control" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/TextureRect" unique_id=915214406]
+layout_mode = 1
+anchor_right = 0.292
+anchor_bottom = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/TextureRect/Tutorial Button" unique_id=397690152]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/TextureRect/Tutorial Button/MarginContainer" unique_id=198458003]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/TextureRect/Tutorial Button/MarginContainer/VBoxContainer" unique_id=1472126404]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("2_okjav")
+theme_type_variation = &"HelperText"
+text = "Play
+Tutorial"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/TextureRect/Tutorial Button/MarginContainer/VBoxContainer" unique_id=169129464]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/TextureRect/Tutorial Button/MarginContainer/VBoxContainer/CenterContainer" unique_id=1112322324]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_okjav")
+
+[node name="StartButtonBackground" type="Control" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/TextureRect" unique_id=1756455438]
+layout_mode = 1
+anchor_left = 0.288
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/TextureRect/StartButtonBackground" unique_id=1736803910]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_okjav")
+theme_type_variation = &"BigHeader"
+text = "Start!"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/TextureRect/StartButtonBackground" unique_id=1937663138]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ypne3")
