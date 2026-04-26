@@ -177,15 +177,6 @@ layout_mode = 2
 [node name="2dCoinView9" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/HFlowContainer" unique_id=290204071 instance=ExtResource("5_okjav")]
 layout_mode = 2
 
-[node name="2dCoinView10" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/HFlowContainer" unique_id=1274773004 instance=ExtResource("5_okjav")]
-layout_mode = 2
-
-[node name="2dCoinView11" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/HFlowContainer" unique_id=559654936 instance=ExtResource("5_okjav")]
-layout_mode = 2
-
-[node name="2dCoinView12" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/HFlowContainer" unique_id=1852829363 instance=ExtResource("5_okjav")]
-layout_mode = 2
-
 [node name="Spacer" type="Control" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/RightPanel" unique_id=1105090625]
 layout_mode = 2
 size_flags_horizontal = 3
