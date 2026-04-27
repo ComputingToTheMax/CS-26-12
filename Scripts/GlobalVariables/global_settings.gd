@@ -6,6 +6,8 @@ extends Node
 # Game Settings
 #
 static var click_sound_enabled: bool = true
+var master_volume: float = 1.0
+var minigame_intros_enabled: bool = true
 static var default_background:String = "res://Sources/Images/SpaceBackgroundPlain.jpeg"
 
 

@@ -7,6 +7,8 @@ extends Node2D
 @onready var contextimg: TextureRect = $ContextLayer/Context
 @export var tutorial_type := "board"
 
+signal intro_finished
+
 var dialog_entries: Array = []
 var current_index := 0
 
@@ -101,16 +103,17 @@ func _ready() -> void:
 	match tutorial_type:
 		"board":
 			dialog_entries = board_dialog
-		"alien":
+		"alien_communication":
 			dialog_entries = alien_dialog
 		"hanger":
 			dialog_entries = hanger_dialog
-		"asteroid":
+		"AsteroidTargeting1":
 			dialog_entries = asteroid_dialog
 		"genesis":
 			dialog_entries = genisis_dialog
 		_:
-			dialog_entries = board_dialog
+			push_error("tutorial.gd: unrecognized tutorial_type '%s'" % tutorial_type)
+			dialog_entries = []
 
 	_show_dialog_entry(current_index)
 	pause_menu.connect("main_menu_requested", Callable(self, "_on_pause_main_menu"))
@@ -157,10 +160,25 @@ func _show_dialog_entry(index: int) -> void:
 		return
 
 	var entry: Dictionary = dialog_entries[index]
-	dialog_label.text = entry.get("text", "")
+	
+	if dialog_label == null:
+		push_error("dialog_label is null!")
+	else:
+		dialog_label.text = entry.get("text", "")
+	
 	_set_tex(bg_rect, entry.get("bg", ""), "BG")
 	_set_tex(tutorialchar, entry.get("tutorialchar", ""), "Char")
 	_set_tex(contextimg, entry.get("context", ""), "Context")
+
+# Add this helper to walk up the tree and find what's invisible
+func _check_visibility_chain(node: Node) -> String:
+	var result := ""
+	var current: Node = node
+	while current != null:
+		if current is CanvasItem:
+			result = "%s(visible=%s) -> " % [current.name, (current as CanvasItem).visible] + result
+		current = current.get_parent()
+	return result
 
 func advance_dialog() -> void:
 	current_index += 1
@@ -168,4 +186,7 @@ func advance_dialog() -> void:
 	if current_index < dialog_entries.size():
 		_show_dialog_entry(current_index)
 	else:
-		Navigator.go_to_scene_by_path("res://Scenes/main_board.tscn")
+		if get_parent() == get_tree().root:
+			Navigator.go_to_scene_by_path("res://Scenes/main_board.tscn")
+		else:
+			intro_finished.emit()
