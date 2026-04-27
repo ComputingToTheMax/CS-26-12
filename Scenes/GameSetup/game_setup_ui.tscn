@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cp4lvaq8e06p3"]
+
+[ext_resource type="Script" uid="uid://bj305n2l3jng8" path="res://Scenes/GameSetup/game_setup_1.gd" id="1_d62c1"]
+
+[node name="GameSetupUI" type="Control" unique_id=503364807]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d62c1")
