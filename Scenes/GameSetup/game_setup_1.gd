@@ -38,6 +38,8 @@ func handle_player_count_selection(origin_node: BaseButton) -> void:
 
 func _on_confirm_pressed() -> void:
 	Settings.play_tutorial = play_tutorial
+	
+	print("Going!")
 
 	if Settings.play_tutorial:
 		Navigator.go_to_scene_by_path(tutorial_scene_path)
