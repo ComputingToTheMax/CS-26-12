@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://cpfawjltxl5ie" path="res://Sources/Images/PlayerSelection/Standard 4.svg" id="10_hkdq0"]
 [ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/Credits/credits.tscn" id="11_t1dhk"]
 [ext_resource type="Texture2D" uid="uid://drlafv6f5v1o" path="res://Sources/Images/PlayerSelection/Wave 4.svg" id="11_xcoo4"]
+[ext_resource type="Theme" uid="uid://cq22sdrr66eho" path="res://Themes/primary_game_theme.res" id="18_6m47u"]
 [ext_resource type="PackedScene" uid="uid://b7t5eepnxoou1" path="res://Scenes/GameSetup/game_setup_1.tscn" id="19_6dk6o"]
 [ext_resource type="Texture2D" uid="uid://cc4sfu2uhgrdr" path="res://Sources/Images/logo.png" id="20_logo"]
 
@@ -47,6 +48,8 @@ shader = ExtResource("5_aae8c")
 
 [sub_resource type="LabelSettings" id="LabelSettings_2sbhq"]
 font_size = 70
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_84iac"]
 
 [node name="StartScreen" type="Control" unique_id=1072577900 groups=["no_pause"]]
 layout_mode = 3
@@ -119,10 +122,11 @@ anchor_bottom = 1.0
 offset_top = -175.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 14
 
 [node name="PlayButton" type="Button" parent="GameMenu/GameMenuButtons" unique_id=1743614122]
 layout_mode = 2
-theme = ExtResource("3_jr6u5")
+theme = ExtResource("18_6m47u")
 theme_override_font_sizes/font_size = 32
 text = "Play"
 script = ExtResource("6_6mw8b")
@@ -130,6 +134,7 @@ target_scene = ExtResource("19_6dk6o")
 
 [node name="SettingsButton" type="Button" parent="GameMenu/GameMenuButtons" unique_id=2004235370]
 layout_mode = 2
+theme = ExtResource("18_6m47u")
 theme_override_font_sizes/font_size = 32
 text = "Settings"
 script = ExtResource("6_6mw8b")
@@ -137,6 +142,7 @@ target_scene = ExtResource("9_qg82j")
 
 [node name="CreditsButton" type="Button" parent="GameMenu/GameMenuButtons" unique_id=1033019032]
 layout_mode = 2
+theme = ExtResource("18_6m47u")
 theme_override_font_sizes/font_size = 32
 text = "Credits"
 script = ExtResource("6_6mw8b")
@@ -152,6 +158,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_84iac")
 icon = ExtResource("3_gtard")
 icon_alignment = 1
 expand_icon = true
