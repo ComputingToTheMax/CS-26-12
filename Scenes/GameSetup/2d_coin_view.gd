@@ -4,7 +4,7 @@ extends Control
 
 var mouse_inside = false
 @onready var positioning_node = %PositioningNode
-@onready var click_panel = $Panel
+@onready var click_panel = %Panel
 @onready var coin = %Coin
 
 var coin_radius = -1
@@ -41,10 +41,13 @@ func _input(event):
 			
 			# As control nodes do not have a "to_local" function, a Node2D has been added as a child of the clickable panel
 			# and is used to translate click coordinates into a local space.
-			var local_position = positioning_node.to_local(event.position)
+
+			# Calculate the local mouse position relative to the center of the panel container surrounding the panel.
+			var local_position = click_panel.get_local_mouse_position() - Vector2(click_panel.size.x/2, click_panel.size.y/2)
+
 			var vector_for_rotation = Vector3(-1 * local_position[1], 0, 1 * local_position[0]).normalized()
 			
-			var rotation_vector = maximum_rotation * vector_for_rotation * (max(coin_radius, vector_for_rotation.length())/coin_radius)
+			var rotation_vector = maximum_rotation * vector_for_rotation * (min(1, local_position.length()/coin_radius))
 			
 			# print(rotation_vector)
 			

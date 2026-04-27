@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://085emeti05rs"]
 
-[ext_resource type="Script" uid="uid://cme8odfqm8geb" path="res://Scenes/GameSetup/game_setup_2.gd" id="1_j2bkf"]
+[ext_resource type="Script" path="res://Scenes/GameSetup/game_setup_2.gd" id="1_j2bkf"]
 [ext_resource type="Theme" uid="uid://cq22sdrr66eho" path="res://Themes/primary_game_theme.res" id="2_okjav"]
 [ext_resource type="PackedScene" uid="uid://b6mprb2wjh47y" path="res://Scenes/GameSetup/player_card.tscn" id="3_vc0qs"]
 [ext_resource type="Texture2D" uid="uid://jsebyqnin6ak" path="res://Scenes/GameSetup/Images/TokenTray.png" id="4_1dmt7"]
