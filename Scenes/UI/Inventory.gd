@@ -38,6 +38,7 @@ var current_subfilter: String = "All"
 var inventory_model: InventoryModel = null
 var columns: int = 1
 func _ready() -> void:
+	
 	slot_button_scene = load(SLOT_BUTTON_SCENE_PATH) as PackedScene
 	print("grid node",grid)
 	hide()

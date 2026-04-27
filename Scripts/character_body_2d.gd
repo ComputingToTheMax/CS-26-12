@@ -15,6 +15,7 @@ const MAX_BOARD_ITERATIONS: int = 15
 @export var asteroid: PackedScene = preload("res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting1.tscn")
 @export var alien: PackedScene = preload("res://Scenes/Minigames/alien_communication/alien_communication.tscn")
 @export var reward_screen: PackedScene = preload("res://Scenes/reward_screen.tscn")
+@export var tutorial_scene: PackedScene = preload("res://Scenes/tutorial.tscn")
 
 var initialized: bool = false
 var rng := RandomNumberGenerator.new()
@@ -166,15 +167,6 @@ func _offer_game() -> void:
 	busy = true
 	can_roll = false
 
-	var offer := offer_scene.instantiate()
-	Board.overlay_root.add_child(offer)
-	var play: bool = await offer.choice
-
-	if not play:
-		busy = false
-		can_roll = true
-		return
-
 	if minigames.is_empty():
 		push_error("No minigames configured.")
 		busy = false
@@ -187,8 +179,31 @@ func _offer_game() -> void:
 		busy = false
 		can_roll = true
 		return
+	var scene_key: String = chosen_game_scene.resource_path.get_file().get_basename()
+	var offer := offer_scene.instantiate()
+	Board.overlay_root.add_child(offer)
+	offer.setup(scene_key)
+	var play: bool = await offer.choice
+
+	if not play:
+		busy = false
+		can_roll = true
+		return
+		
 
 	_set_board_ui_visible(false)
+
+	if GlobalSettings.minigame_intros_enabled:
+		var canvas := CanvasLayer.new()
+		Board.add_child(canvas)
+		
+		var intro := tutorial_scene.instantiate()
+		intro.tutorial_type = scene_key
+		canvas.add_child(intro)
+		
+		await intro.intro_finished
+		
+		canvas.queue_free()
 
 	var mg := chosen_game_scene.instantiate()
 	Board.game_root.add_child(mg)

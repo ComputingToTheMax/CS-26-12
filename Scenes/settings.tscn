@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://wvsan6sbtn7d" path="res://Scripts/settings_scene.gd" id="1_i44u3"]
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_lhmql"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="3_lhmql"]
+[ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="4_j2dne"]
+[ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="5_6kysc"]
 
 [node name="SettingsScreen" type="Node2D" unique_id=990252595 groups=["no_pause"]]
 script = ExtResource("1_i44u3")
@@ -13,10 +15,10 @@ scale = Vector2(0.6117187, 0.6226852)
 texture = ExtResource("2_lhmql")
 
 [node name="ReturnButton" type="Button" parent="Background" unique_id=702705593]
-offset_left = -911.77527
-offset_top = 451.67282
-offset_right = -574.77527
-offset_bottom = 504.67282
+offset_left = -900.0
+offset_top = 450.0
+offset_right = -563.0
+offset_bottom = 503.0
 theme_override_font_sizes/font_size = 32
 text = "Return
 "
@@ -24,41 +26,55 @@ script = ExtResource("3_lhmql")
 target_scene_path = "res://Scenes/main_menu.tscn"
 
 [node name="ToggleSoundButton" type="Button" parent="Background" unique_id=576642616]
-offset_left = -911.77527
-offset_top = -250.0
-offset_right = -574.77527
-offset_bottom = -200.0
+offset_left = -900.0
+offset_top = -198.736
+offset_right = -563.0
+offset_bottom = -145.736
 theme_override_font_sizes/font_size = 32
 text = "Disable Click Sound"
 
-[node name="Res360Button" type="Button" parent="." unique_id=1851785310]
-offset_left = 902.0
-offset_top = 272.0
-offset_right = 1022.0
-offset_bottom = 314.0
-theme_override_font_sizes/font_size = 24
-text = "360p"
+[node name="ToggleMinigameIntro" type="Button" parent="Background" unique_id=2109623741]
+offset_left = -900.0
+offset_top = 22.885
+offset_right = -533.0
+offset_bottom = 75.885
+theme_override_font_sizes/font_size = 32
+text = "Disable Minigame Intro"
 
-[node name="Res480Button" type="Button" parent="." unique_id=938201051]
-offset_left = 903.0
-offset_top = 214.0
-offset_right = 1023.0
-offset_bottom = 256.0
-theme_override_font_sizes/font_size = 24
-text = "480p"
+[node name="Label" type="Label" parent="Background" unique_id=1213956689]
+offset_left = -850.0
+offset_top = -418.751
+offset_right = -611.0
+offset_bottom = -373.751
+theme_override_font_sizes/font_size = 32
+text = "Change volume"
 
-[node name="Res720Button" type="Button" parent="." unique_id=1356169070]
-offset_left = 903.0
-offset_top = 157.0
-offset_right = 1023.0
-offset_bottom = 199.0
-theme_override_font_sizes/font_size = 24
-text = "720p"
+[node name="Label2" type="Label" parent="Background" unique_id=1913216985]
+offset_left = 183.49939
+offset_top = 205.96283
+offset_right = 555.4994
+offset_bottom = 250.96283
+theme_override_font_sizes/font_size = 32
+text = "To infinity and beyond..."
 
-[node name="Res1080Button" type="Button" parent="." unique_id=1471240525]
-offset_left = 905.0
-offset_top = 96.0
-offset_right = 1025.0
-offset_bottom = 138.0
-theme_override_font_sizes/font_size = 24
-text = "1080p"
+[node name="VolumeSlider" type="HSlider" parent="Background" unique_id=1458514102]
+modulate = Color(1, 1, 0.2784314, 1)
+self_modulate = Color(1, 1, 0.21960784, 1)
+offset_left = -862.73303
+offset_top = -385.02597
+offset_right = -677.73303
+offset_bottom = -286.02597
+
+[node name="PsycheAsteroid" type="Sprite2D" parent="Background" unique_id=1659039698]
+position = Vector2(740.9452, -330.4238)
+scale = Vector2(0.31520042, 0.31520042)
+texture = ExtResource("4_j2dne")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Background" unique_id=990918522]
+position = Vector2(619.9745, 307.13757)
+scale = Vector2(3.9506176, 3.9506176)
+texture = ExtResource("5_6kysc")
+
+[node name="Label" type="Label" parent="Background/Sprite2D2" unique_id=740628764]
+offset_right = 40.0
+offset_bottom = 23.0

@@ -5,6 +5,8 @@ signal main_menu_requested
 
 
 func _ready() -> void:
+	layer = 400
+	add_to_group("pause_menu")
 	visible = false
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	$Control/CenterContainer/MenuPanel/VBoxContainer/ResumeButton.pressed.connect(_on_resume_pressed)
