@@ -5,7 +5,7 @@ signal main_menu_requested
 
 
 func _ready() -> void:
-	layer = 200
+	layer = 400
 	add_to_group("pause_menu")
 	visible = false
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
