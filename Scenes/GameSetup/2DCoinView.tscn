@@ -3,12 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bdqngjdx3nre1" path="res://Scenes/GameSetup/Coin.tscn" id="1_ce7qm"]
 [ext_resource type="Script" uid="uid://cqedvkql1djel" path="res://Scenes/GameSetup/2d_coin_view.gd" id="1_si1m4"]
 [ext_resource type="Script" path="res://Scenes/GameSetup/2dcoinview_coin.gd" id="3_mac4j"]
-[ext_resource type="Texture2D" uid="uid://cr5kndstdjdki" path="res://Sources/Images/StarSmall-1.png" id="4_1kout"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mac4j"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_ce7qm"]
-viewport_path = NodePath("SubViewportContainer/SubViewport")
 
 [node name="2dCoinView" type="Control" unique_id=1999495920]
 custom_minimum_size = Vector2(100, 100)
@@ -20,7 +16,9 @@ offset_right = -652.0
 offset_bottom = -148.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 6
 script = ExtResource("1_si1m4")
+maximum_rotation = 50
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=252553563]
 layout_mode = 1
@@ -42,11 +40,11 @@ render_target_update_mode = 4
 unique_name_in_owner = true
 script = ExtResource("3_mac4j")
 
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=1696128565]
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=2103914341]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.92, 0)
 current = true
 
-[node name="Panel" type="Panel" parent="." unique_id=1625951783]
+[node name="InteractionArea" type="Panel" parent="." unique_id=1625951783]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -56,19 +54,8 @@ anchor_right = 0.878
 anchor_bottom = 0.878
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_mac4j")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Panel" unique_id=1237053791]
-
-[node name="PositioningNode" type="Sprite2D" parent="Panel/CanvasLayer" unique_id=702213050]
-unique_name_in_owner = true
-visible = false
-position = Vector2(250, 248.5)
-texture = ExtResource("4_1kout")
-
-[node name="Coin" type="Sprite2D" parent="." unique_id=350475712]
-visible = false
-texture = SubResource("ViewportTexture_ce7qm")
-
-[connection signal="mouse_entered" from="Panel" to="." method="_on_panel_mouse_entered"]
-[connection signal="mouse_exited" from="Panel" to="." method="_on_panel_mouse_exited"]
+[connection signal="mouse_entered" from="InteractionArea" to="." method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="InteractionArea" to="." method="_on_panel_mouse_exited"]
