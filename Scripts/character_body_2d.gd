@@ -167,14 +167,6 @@ func _offer_game() -> void:
 	busy = true
 	can_roll = false
 
-	if offer_scene == null:
-		push_error("offer_scene is not assigned!")
-		busy = false
-		can_roll = true
-		return
-
-	_configure_minigames()
-
 	if minigames.is_empty():
 		push_error("No minigames configured.")
 		busy = false
@@ -182,48 +174,35 @@ func _offer_game() -> void:
 		return
 
 	var chosen_game_scene: PackedScene = minigames[rng.randi_range(0, minigames.size() - 1)]
-
 	if chosen_game_scene == null:
 		push_error("Chosen minigame scene is null.")
 		busy = false
 		can_roll = true
 		return
-
 	var scene_key: String = chosen_game_scene.resource_path.get_file().get_basename()
-
-	if Board.overlay_root != null:
-		Board.overlay_root.visible = true
-
 	var offer := offer_scene.instantiate()
 	Board.overlay_root.add_child(offer)
-
-	if offer.has_method("setup"):
-		offer.setup(scene_key)
-	elif offer.has_method("setup_prompt"):
-		offer.setup_prompt("Do you want to play this minigame?", "Play", "Skip")
-	else:
-		offer.title_text = "Do you want to play this minigame?"
-		offer.play_text = "Play"
-		offer.skip_text = "Skip"
-
+	offer.setup(scene_key)
 	var play: bool = await offer.choice
 
 	if not play:
 		busy = false
 		can_roll = true
 		return
+		
 
 	_set_board_ui_visible(false)
 
 	if GlobalSettings.minigame_intros_enabled:
 		var canvas := CanvasLayer.new()
 		Board.add_child(canvas)
-
+		
 		var intro := tutorial_scene.instantiate()
 		intro.tutorial_type = scene_key
 		canvas.add_child(intro)
-
+		
 		await intro.intro_finished
+		
 		canvas.queue_free()
 
 	var mg := chosen_game_scene.instantiate()
@@ -242,6 +221,7 @@ func _offer_game() -> void:
 		_set_board_ui_visible(true)
 		busy = false
 		can_roll = true
+
 func _result(result: Dictionary) -> void:
 	if result.get("status") == "win":
 		await _show_reward_screen()
