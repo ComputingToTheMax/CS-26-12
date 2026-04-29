@@ -12,8 +12,10 @@ const MINIGAME_NAMES: Dictionary = {
 	"alien_communication": "Alien Communication",
 }
 
-var panel_final_position: Vector2
-var panel_start_position: Vector2
+@onready var center: CenterContainer = get_node_or_null("Center") as CenterContainer
+
+var panel_final_position: Vector2 = Vector2.ZERO
+var panel_start_position: Vector2 = Vector2.ZERO
 var is_closing: bool = false
 var minigame_key: String = ""
 
@@ -23,27 +25,69 @@ func setup(name_key: String) -> void:
 	title_label.text = "Do you want to play %s?" % display_name
 
 func _ready() -> void:
+	var viewport_size: Vector2 = get_viewport_rect().size
+
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	set_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	if not play_btn.pressed.is_connected(_on_play_pressed):
+
+	if center != null:
+		center.set_anchors_preset(Control.PRESET_FULL_RECT)
+		center.set_offsets_preset(Control.PRESET_FULL_RECT)
+		center.position = Vector2.ZERO
+		center.size = viewport_size
+
+	if panel_mover == null:
+		panel_mover = center
+
+	setup_prompt(title_text, play_text, skip_text)
+
+	if play_btn != null and not play_btn.pressed.is_connected(_on_play_pressed):
 		play_btn.pressed.connect(_on_play_pressed)
 	if not skip_btn.pressed.is_connected(_on_skip_pressed):
 		skip_btn.pressed.connect(_on_skip_pressed)
-	blur.modulate.a = 0.0
+
+	if blur != null:
+		blur.set_anchors_preset(Control.PRESET_FULL_RECT)
+		blur.set_offsets_preset(Control.PRESET_FULL_RECT)
+		blur.modulate.a = 0.0
+
 	await get_tree().process_frame
-	panel_final_position = panel_mover.position
-	var panel_height: float = panel_mover.size.y
-	if panel_height <= 0.0:
-		panel_height = 300.0
+	await get_tree().process_frame
+
+	position = Vector2.ZERO
+	global_position = Vector2.ZERO
+	size = get_viewport_rect().size
+
+	if center != null:
+		center.position = Vector2.ZERO
+		center.size = get_viewport_rect().size
+
+	panel_final_position = panel_mover.position if panel_mover != null else Vector2.ZERO
+
+	var panel_height: float = 300.0
+	var panel := get_node_or_null("Center/Control/Panel") as Control
+
+	if panel != null and panel.size.y > 0.0:
+		panel_height = panel.size.y
+	elif panel_mover != null and panel_mover.size.y > 0.0:
+		panel_height = panel_mover.size.y
+
 	panel_start_position = Vector2(panel_final_position.x, -panel_height - 40.0)
-	panel_mover.position = panel_start_position
+
+	if panel_mover != null:
+		panel_mover.position = panel_start_position
+
 	var tween := create_tween()
 	tween.set_parallel(true)
-	tween.tween_property(blur, "modulate:a", 1.0, 0.2)
-	tween.tween_property(panel_mover, "position", panel_final_position, 0.28) \
-		.set_trans(Tween.TRANS_CUBIC) \
-		.set_ease(Tween.EASE_OUT)
+
+	if blur != null:
+		tween.tween_property(blur, "modulate:a", 1.0, 0.2)
+
+	if panel_mover != null:
+		tween.tween_property(panel_mover, "position", panel_final_position, 0.28) \
+			.set_trans(Tween.TRANS_CUBIC) \
+			.set_ease(Tween.EASE_OUT)
 
 func close_overlay(play_value: bool) -> void:
 	if is_closing:
