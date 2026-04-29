@@ -27,27 +27,25 @@ var current_tile_index: int = 0
 var turn: int = 0
 var minigames: Array[PackedScene] = []
 var ending_triggered: bool = false
-var active_offer: Control = null
+
 func _ready() -> void:
 	if Board == null:
 		push_error("Player Board reference is missing.")
 		return
-	if offer_scene == null:
-		offer_scene = preload("res://Scenes/UI/ConfirmSwitch.tscn")
+
 	cell_size = Board.cell_size
 	minigames.clear()
 
+	if asteroid != null:
+		minigames.append(asteroid)
+
+	if alien != null:
+		minigames.append(alien)
+
 	rng.randomize()
-	_configure_minigames()
 
-
-	if Board.has_method("get_total_drawn_tile_count"):
-		if Board.get_total_drawn_tile_count() == 0:
-			await Board.board_ready
-	elif Board.get_tile_count() == 0:
+	if Board.get_tile_count() == 0:
 		await Board.board_ready
-
-	await get_tree().process_frame
 
 	current_tile_index = 0
 	spaces_moved_total = 0
@@ -61,7 +59,7 @@ func _ready() -> void:
 	_update_turn_label()
 
 func _animate_to_tile(tile_index: int, duration: float = 0.2) -> void:
-	var destination: Vector2 = Board.get_tile_center_global(tile_index) if Board.has_method("get_tile_center_global") else Board.get_tile_center(tile_index)
+	var destination: Vector2 = Board.get_tile_center(tile_index)
 
 	var tween := create_tween()
 	tween.tween_property(self, "global_position", destination, duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
@@ -79,30 +77,22 @@ func roll_and_move(amount: int = 0) -> void:
 	can_roll = false
 	busy = true
 
-	roll = rng.randi_range(1, 6) if amount == 0 else amount
+	if amount == 0:
+		roll = rng.randi_range(1, 6)
+	else:
+		roll = amount
 
-	var steps_remaining: int = roll
+	var board_count: int = Board.get_tile_count()
+	if board_count <= 0:
+		can_roll = true
+		busy = false
+		return
 
-	while steps_remaining > 0:
-		var next_tile_index: int = Board.get_next_tile_index(current_tile_index)
+	var destination_index: int = (current_tile_index + roll) % board_count
 
-		if next_tile_index == current_tile_index:
-			if Board.should_show_path_choice(current_tile_index):
-				await Board.request_branch_choice(current_tile_index)
-				next_tile_index = Board.get_next_tile_index(current_tile_index)
-			else:
-				break
+	spaces_moved_total += roll
+	current_tile_index = destination_index
 
-		if next_tile_index == current_tile_index:
-			break
-
-		current_tile_index = next_tile_index
-		spaces_moved_total += 1
-		steps_remaining -= 1
-
-
-		if Board.should_show_path_choice(current_tile_index):
-			await Board.request_branch_choice(current_tile_index)
 	await _animate_to_tile(current_tile_index, 0.2)
 
 	_update_turn_label()
@@ -111,16 +101,19 @@ func roll_and_move(amount: int = 0) -> void:
 		_trigger_credits_end()
 		return
 
+	var landed_on_shop: bool = Board.is_shop_tile(current_tile_index)
+	var landed_on_red: bool = Board.is_red_tile(current_tile_index)
 
-	if Board.is_shop_tile(current_tile_index):
+	if landed_on_shop:
 		await _open_shop()
-	elif Board.is_red_tile(current_tile_index):
+	elif landed_on_red:
 		await _offer_game()
 	else:
 		MoneySave.add_money(3)
 
 	can_roll = true
 	busy = false
+
 func _unhandled_input(event: InputEvent) -> void:
 	if busy or ending_triggered:
 		return
@@ -131,16 +124,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _open_shop() -> void:
 	busy = true
 	can_roll = false
-	if shop_scene == null:
-		shop_scene = load("res://Scenes/UI/shopscreen.tscn")
-
-	if shop_scene == null:
-		push_error("shop_scene is not assigned and could not be loaded.")
-		busy = false
-		can_roll = true
-		return
-	if Board.overlay_root != null:
-		Board.overlay_root.visible = true
 
 	var shop := shop_scene.instantiate()
 	Board.overlay_root.add_child(shop)
@@ -179,20 +162,7 @@ func _set_board_ui_visible(is_visible: bool) -> void:
 
 	if inventory_overlay != null and not is_visible:
 		inventory_overlay.hide()
-func _configure_minigames() -> void:
-	minigames.clear()
 
-	if asteroid == null:
-		asteroid = load("res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting1.tscn")
-
-	if alien == null:
-		alien = load("res://Scenes/Minigames/alien_communication/alien_communication.tscn")
-
-	if asteroid != null:
-		minigames.append(asteroid)
-
-	if alien != null:
-		minigames.append(alien)
 func _offer_game() -> void:
 	busy = true
 	can_roll = false

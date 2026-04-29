@@ -1,9 +1,6 @@
 extends Control
 signal choice(play: bool)
 
-@export var title_text: String = "Do you want to play this minigame?"
-@export var play_text: String = "Play"
-@export var skip_text: String = "Skip"
 @onready var play_btn: Button = $Center/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/Play
 @onready var skip_btn: Button = $Center/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/Skip
 @onready var blur: ColorRect = $BG
@@ -27,32 +24,11 @@ func setup(name_key: String) -> void:
 	var display_name: String = MINIGAME_NAMES.get(name_key, name_key)
 	title_label.text = "Do you want to play %s?" % display_name
 
-func setup_prompt(new_title: String, new_play_text: String, new_skip_text: String) -> void:
-	title_text = new_title
-	play_text = new_play_text
-	skip_text = new_skip_text
-
-	var title_label := _find_title_label()
-	if title_label != null:
-		title_label.text = title_text
-		title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-
-	var p_btn := _find_button("Play")
-	if p_btn != null:
-		p_btn.text = play_text
-
-	var s_btn := _find_button("Skip")
-	if s_btn != null:
-		s_btn.text = skip_text
-
 func _ready() -> void:
 	var viewport_size: Vector2 = get_viewport_rect().size
 
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	set_offsets_preset(Control.PRESET_FULL_RECT)
-	position = Vector2.ZERO
-	global_position = Vector2.ZERO
-	size = viewport_size
 	mouse_filter = Control.MOUSE_FILTER_STOP
 
 	if center != null:
@@ -68,8 +44,7 @@ func _ready() -> void:
 
 	if play_btn != null and not play_btn.pressed.is_connected(_on_play_pressed):
 		play_btn.pressed.connect(_on_play_pressed)
-
-	if skip_btn != null and not skip_btn.pressed.is_connected(_on_skip_pressed):
+	if not skip_btn.pressed.is_connected(_on_skip_pressed):
 		skip_btn.pressed.connect(_on_skip_pressed)
 
 	if blur != null:
@@ -120,13 +95,6 @@ func close_overlay(play_value: bool) -> void:
 	is_closing = true
 	var tween := create_tween()
 	tween.set_parallel(true)
-	if blur != null:
-		tween.tween_property(blur, "modulate:a", 0.0, 0.18)
-	if panel_mover != null:
-		tween.tween_property(panel_mover, "position", panel_start_position, 0.22) \
-			.set_trans(Tween.TRANS_CUBIC) \
-			.set_ease(Tween.EASE_IN)
-
 	tween.tween_property(blur, "modulate:a", 0.0, 0.18)
 	tween.tween_property(panel_mover, "position", panel_start_position, 0.22) \
 		.set_trans(Tween.TRANS_CUBIC) \
@@ -140,26 +108,3 @@ func _on_play_pressed() -> void:
 
 func _on_skip_pressed() -> void:
 	await close_overlay(false)
-
-func _find_title_label() -> Label:
-	var paths := [
-		"Center/Control/Panel/MarginContainer/VBoxContainer/Title",
-		"Center/Panel/MarginContainer/VBoxContainer/Title",
-		"Center/Panel/MarginContainer/VBoxContainer/Label"
-	]
-	for p in paths:
-		var n := get_node_or_null(p)
-		if n is Label:
-			return n
-	return null
-
-func _find_button(button_name: String) -> Button:
-	var paths := [
-		"Center/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/%s" % button_name,
-		"Center/Panel/MarginContainer/VBoxContainer/HBoxContainer/%s" % button_name
-	]
-	for p in paths:
-		var n := get_node_or_null(p)
-		if n is Button:
-			return n
-	return null
