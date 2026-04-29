@@ -161,5 +161,5 @@ func _on_item_picked(index: int) -> void:
 		else:
 			print("Claimed: ", item.display_name)
 
-	item_chosen.emit(item)
+	item_chosen.emit(reward)
 	queue_free()
