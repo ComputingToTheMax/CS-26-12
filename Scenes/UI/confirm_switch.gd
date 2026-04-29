@@ -15,11 +15,7 @@ const MINIGAME_NAMES: Dictionary = {
 	"alien_communication": "Alien Communication",
 }
 
-@onready var blur: ColorRect = get_node_or_null("BG") as ColorRect
 @onready var center: CenterContainer = get_node_or_null("Center") as CenterContainer
-@onready var panel_mover: Control = get_node_or_null("Center/Control") as Control
-@onready var play_btn: Button = _find_button("Play")
-@onready var skip_btn: Button = _find_button("Skip")
 
 var panel_final_position: Vector2 = Vector2.ZERO
 var panel_start_position: Vector2 = Vector2.ZERO
@@ -51,6 +47,7 @@ func setup_prompt(new_title: String, new_play_text: String, new_skip_text: Strin
 
 func _ready() -> void:
 	var viewport_size: Vector2 = get_viewport_rect().size
+
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	set_offsets_preset(Control.PRESET_FULL_RECT)
 	position = Vector2.ZERO
@@ -70,7 +67,6 @@ func _ready() -> void:
 	setup_prompt(title_text, play_text, skip_text)
 
 	if play_btn != null and not play_btn.pressed.is_connected(_on_play_pressed):
-	if not play_btn.pressed.is_connected(_on_play_pressed):
 		play_btn.pressed.connect(_on_play_pressed)
 
 	if skip_btn != null and not skip_btn.pressed.is_connected(_on_skip_pressed):
@@ -87,6 +83,7 @@ func _ready() -> void:
 	position = Vector2.ZERO
 	global_position = Vector2.ZERO
 	size = get_viewport_rect().size
+
 	if center != null:
 		center.position = Vector2.ZERO
 		center.size = get_viewport_rect().size
@@ -95,25 +92,23 @@ func _ready() -> void:
 
 	var panel_height: float = 300.0
 	var panel := get_node_or_null("Center/Control/Panel") as Control
+
 	if panel != null and panel.size.y > 0.0:
 		panel_height = panel.size.y
+	elif panel_mover != null and panel_mover.size.y > 0.0:
+		panel_height = panel_mover.size.y
 
 	panel_start_position = Vector2(panel_final_position.x, -panel_height - 40.0)
+
 	if panel_mover != null:
 		panel_mover.position = panel_start_position
 
-	blur.modulate.a = 0.0
-	await get_tree().process_frame
-	panel_final_position = panel_mover.position
-	var panel_height: float = panel_mover.size.y
-	if panel_height <= 0.0:
-		panel_height = 300.0
-	panel_start_position = Vector2(panel_final_position.x, -panel_height - 40.0)
-	panel_mover.position = panel_start_position
 	var tween := create_tween()
 	tween.set_parallel(true)
+
 	if blur != null:
 		tween.tween_property(blur, "modulate:a", 1.0, 0.2)
+
 	if panel_mover != null:
 		tween.tween_property(panel_mover, "position", panel_final_position, 0.28) \
 			.set_trans(Tween.TRANS_CUBIC) \
