@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://b6mprb2wjh47y"]
 
-[ext_resource type="Script" uid="uid://cn41dalbgirvm" path="res://Scenes/GameSetup/player_card.gd" id="1_5ycel"]
+[ext_resource type="Script" path="res://Scenes/GameSetup/player_card.gd" id="1_5ycel"]
 [ext_resource type="Texture2D" uid="uid://curmlx3l2blbo" path="res://Scenes/GameSetup/Images/BluePlayerSelect.svg" id="1_ykakd"]
 [ext_resource type="Texture2D" uid="uid://b1u6c1y7dbfas" path="res://Scenes/GameSetup/Images/UnconfiguredPlayer.svg" id="2_kuscj"]
 [ext_resource type="Texture2D" uid="uid://bdx8kx66kodcl" path="res://Scenes/GameSetup/Images/GreenPlayerSelect.svg" id="3_4gpx5"]
 [ext_resource type="Texture2D" uid="uid://cd7wseynu571f" path="res://Scenes/GameSetup/Images/PurplePlayerSelect.svg" id="4_5ycel"]
 [ext_resource type="Texture2D" uid="uid://dn1j2autwdevq" path="res://Scenes/GameSetup/Images/RedPlayerSelect.svg" id="5_5lwxj"]
+[ext_resource type="Script" uid="uid://c01arwkghbdhk" path="res://Scenes/GameSetup/coin_slot.gd" id="7_5lwxj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ykakd"]
 animations = [{
@@ -113,6 +114,7 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("7_5lwxj")
 
 [node name="Spacer" type="Control" parent="CardBackground/CardForeground/VBoxContainer/HBoxContainer" unique_id=1632117256]
 layout_mode = 2

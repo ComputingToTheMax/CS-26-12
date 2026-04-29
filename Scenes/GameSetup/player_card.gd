@@ -41,3 +41,6 @@ func _process(delta: float) -> void:
 #
 
 @onready var coin_slot = %CoinSlot
+func _coin_inserted():
+	pass
+	
