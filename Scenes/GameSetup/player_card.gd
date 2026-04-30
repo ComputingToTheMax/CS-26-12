@@ -4,8 +4,13 @@ extends VBoxContainer
 # Code Handling Card Creation
 #
 
+@export var unconfigured_card_background:Texture2D
+@export var configured_card_background:Texture2D
+
 @onready var card_background = %CardBackground
 @onready var card_foreground = %CardForeground
+
+@onready var mission_icon_display = %MissionIcon
 
 static var card_number:int = 0
 
@@ -55,4 +60,7 @@ func handle_inserted_token(token:DiscoveryToken):
 
 # Handle tokens dropped on the coin slot.
 func _on_coin_slot_token_dropped(token: DiscoveryToken) -> void:
-	pass # Replace with function body.
+	card_foreground.texture = configured_card_background
+	GlobalSettings.set_number_of_players(GlobalSettings.get_number_of_active_players() + 1)
+
+	mission_icon_display.texture = load(token.image_texture)
