@@ -1,13 +1,20 @@
 class_name DiscoveryToken
 extends Control
 
+@export var token_mission:String
+@onready var image_texture = %Coin/Coin/Graphic.texture.resource_path
+
+# Coin Variables
+
 @export var maximum_rotation:int = 35
 @export var coin_image = null
 
 var mouse_inside = false
-@onready var positioning_node = %PositioningNode
 @onready var click_panel = %InteractionArea
 @onready var coin = %Coin
+
+# The target top scene to reparent coins to after they have been moved.
+@onready var top_scene = %TopScene
 
 var coin_radius = -1
 var maximum_length = -1
@@ -15,18 +22,26 @@ var maximum_length = -1
 var _coin_dropped = false
 var _follow_mouse = false
 var local_click_location
+var current_rotation
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
 	# Determine the current radius of the coin
 	coin_radius = click_panel.size.x / 2
-
+	
+	# Center the coin so that 
+	pivot_offset = size / 2.0
 	
 	pass # Replace with function body.
 	
 func set_coin_image(filepath):
 	pass
+	
+func drop_coin():
+	_coin_dropped = true
+	
+	var scale_tween = create_tween().tween_property(self, "scale", Vector2.ZERO, 0.3).set_ease(Tween.EASE_IN)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,6 +51,9 @@ func _process(delta: float) -> void:
 		# To make the drag position follow the mouse from where a click occurs, adjust for the size of the coin and the local click position.
 		position = get_global_mouse_position() - Vector2(size.x/2, size.y/2) - local_click_location
 
+	#if _coin_dropped == true:
+		#if scale.x > 0:
+			#scale -= scale * 0.2 * delta
 
 func _on_panel_mouse_entered() -> void:
 	mouse_inside = true
@@ -46,9 +64,15 @@ func _on_panel_mouse_exited() -> void:
 	
 	
 func _input(event):
+	
+	
 	if (mouse_inside) and (event is InputEventMouseButton) and (event.button_index == MOUSE_BUTTON_LEFT):
 		
 		if event.pressed == true:
+		
+			if (top_scene != null) and (get_parent() != top_scene):
+				reparent(top_scene)
+			
 			#print(event)
 			
 			# As control nodes do not have a "to_local" function, a Node2D has been added as a child of the clickable panel
@@ -65,13 +89,23 @@ func _input(event):
 			# print(rotation_vector)
 			
 			coin.set_target_rotation(rotation_vector)
+			current_rotation = rotation_vector
 			
 			_follow_mouse = true
 			
-		else:
-			_follow_mouse = false
-			coin.set_target_rotation(Vector3())
+	if (event is InputEventMouseButton) and (event.button_index == MOUSE_BUTTON_LEFT) and (event.pressed == false):
+		_follow_mouse = false
+		coin.set_target_rotation(Vector3())
+		click_panel.mouse_filter = Control.MOUSE_FILTER_PASS
 			
+		
+func rotate_to_side():
+	coin.set_target_rotation(Vector3(0, 0, -90))
+	
+func rotate_to_click_position():
+	coin.set_target_rotation(current_rotation)
+	
+	
 			
 func _get_drag_data(at_position: Vector2) -> Variant:
 	print("Dragging!")
@@ -88,7 +122,9 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 	
 	#set_drag_preview(preview)
 	
-	
-	
+	click_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return self
 	
+func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+	print("A DiscoveryToken can't drop to itself.")
+	return false

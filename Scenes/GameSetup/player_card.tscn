@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b6mprb2wjh47y"]
 
-[ext_resource type="Script" path="res://Scenes/GameSetup/player_card.gd" id="1_5ycel"]
+[ext_resource type="Script" uid="uid://cn41dalbgirvm" path="res://Scenes/GameSetup/player_card.gd" id="1_5ycel"]
 [ext_resource type="Texture2D" uid="uid://curmlx3l2blbo" path="res://Scenes/GameSetup/Images/BluePlayerSelect.svg" id="1_ykakd"]
 [ext_resource type="Texture2D" uid="uid://b1u6c1y7dbfas" path="res://Scenes/GameSetup/Images/UnconfiguredPlayer.svg" id="2_kuscj"]
 [ext_resource type="Texture2D" uid="uid://bdx8kx66kodcl" path="res://Scenes/GameSetup/Images/GreenPlayerSelect.svg" id="3_4gpx5"]
@@ -110,24 +110,31 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="Spacer2" type="Control" parent="CardBackground/CardForeground/VBoxContainer/HBoxContainer" unique_id=669252056]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
 [node name="CoinSlot" type="Control" parent="CardBackground/CardForeground/VBoxContainer/HBoxContainer" unique_id=1461379409]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+mouse_default_cursor_shape = 7
 script = ExtResource("7_5lwxj")
+
+[node name="CenterContainer" type="CenterContainer" parent="CardBackground/CardForeground/VBoxContainer/HBoxContainer/CoinSlot" unique_id=381901950]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Spacer" type="Control" parent="CardBackground/CardForeground/VBoxContainer/HBoxContainer" unique_id=1632117256]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="Spacer2" type="Control" parent="CardBackground/CardForeground/VBoxContainer/HBoxContainer" unique_id=669252056]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Spacer3" type="Control" parent="CardBackground/CardForeground/VBoxContainer/HBoxContainer" unique_id=1153105774]
-layout_mode = 2
-size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.5
 
 [node name="Spacer" type="Control" parent="CardBackground/CardForeground/VBoxContainer" unique_id=1672346005]
 layout_mode = 2
 size_flags_vertical = 3
+
+[connection signal="token_dropped" from="CardBackground/CardForeground/VBoxContainer/HBoxContainer/CoinSlot" to="." method="_on_coin_slot_token_dropped"]

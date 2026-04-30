@@ -44,3 +44,15 @@ func _process(delta: float) -> void:
 func _coin_inserted():
 	pass
 	
+
+func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+	if data is DiscoveryToken:
+		data.rotate_to_click_position()
+	return false
+	
+func handle_inserted_token(token:DiscoveryToken):
+	pass
+
+# Handle tokens dropped on the coin slot.
+func _on_coin_slot_token_dropped(token: DiscoveryToken) -> void:
+	pass # Replace with function body.

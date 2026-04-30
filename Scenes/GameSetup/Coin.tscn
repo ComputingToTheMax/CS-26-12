@@ -33,14 +33,14 @@ height = 0.1
 
 [node name="Coin" type="Node3D" unique_id=1451926600]
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1961361906]
+[node name="Coin" type="MeshInstance3D" parent="." unique_id=1961361906]
 mesh = SubResource("CylinderMesh_5pu7v")
 
-[node name="Sprite3D" type="Sprite3D" parent="MeshInstance3D3" unique_id=778376131]
+[node name="Graphic" type="Sprite3D" parent="Coin" unique_id=778376131]
 transform = Transform3D(0.03, 0, 0, 0, -1.3113416e-09, -0.03, 0, 0.03, -1.3113416e-09, 0, 0.051, 0)
 texture = ExtResource("1_5pu7v")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=319370672]
+[node name="FullyRoundCoin" type="MeshInstance3D" parent="." unique_id=319370672]
 visible = false
 mesh = SubResource("CylinderMesh_gk3p8")
 
