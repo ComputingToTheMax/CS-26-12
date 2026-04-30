@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://085emeti05rs"]
 
-[ext_resource type="Script" path="res://Scenes/GameSetup/game_setup_2.gd" id="1_j2bkf"]
+[ext_resource type="Script" uid="uid://cme8odfqm8geb" path="res://Scenes/GameSetup/game_setup_2.gd" id="1_j2bkf"]
 [ext_resource type="Theme" uid="uid://cq22sdrr66eho" path="res://Themes/primary_game_theme.res" id="2_okjav"]
+[ext_resource type="Script" uid="uid://dn6h2pvmtjcxr" path="res://Scenes/GameSetup/player_card_manager.gd" id="3_1dmt7"]
 [ext_resource type="PackedScene" uid="uid://b6mprb2wjh47y" path="res://Scenes/GameSetup/player_card.tscn" id="3_vc0qs"]
 [ext_resource type="Texture2D" uid="uid://jsebyqnin6ak" path="res://Scenes/GameSetup/Images/TokenTray.png" id="4_1dmt7"]
 [ext_resource type="PackedScene" uid="uid://c8fpamm7fxfa5" path="res://Scenes/GameSetup/2DCoinView.tscn" id="5_okjav"]
@@ -70,55 +71,17 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 30
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin" unique_id=1916275011]
+[node name="PlayerCardManager" type="HBoxContainer" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin" unique_id=1916275011]
 layout_mode = 2
+script = ExtResource("3_1dmt7")
 
-[node name="PlayerCard1" type="VBoxContainer" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer" unique_id=220406832]
-layout_mode = 2
-
-[node name="Spacer" type="Control" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard1" unique_id=1569524933]
+[node name="Spacer" type="Control" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/PlayerCardManager" unique_id=1569524933]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlayerCard" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard1" unique_id=1030897 instance=ExtResource("3_vc0qs")]
+[node name="PlayerCardScene" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/PlayerCardManager" unique_id=1030897 instance=ExtResource("3_vc0qs")]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="PlayerCard2" type="VBoxContainer" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer" unique_id=1347782507]
-layout_mode = 2
-
-[node name="PlayerCard" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard2" unique_id=337562230 instance=ExtResource("3_vc0qs")]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Spacer" type="Control" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard2" unique_id=2104903446]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PlayerCard3" type="VBoxContainer" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer" unique_id=47874312]
-layout_mode = 2
-
-[node name="Spacer" type="Control" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard3" unique_id=1279699133]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PlayerCard" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard3" unique_id=542819282 instance=ExtResource("3_vc0qs")]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="PlayerCard4" type="VBoxContainer" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer" unique_id=1711354348]
-layout_mode = 2
-
-[node name="PlayerCard" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard4" unique_id=1102632496 instance=ExtResource("3_vc0qs")]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Spacer" type="Control" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/HBoxContainer/PlayerCard4" unique_id=1792125991]
-layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Spacer" type="Control" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer" unique_id=1056986764]
@@ -268,3 +231,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ypne3")
+
+[connection signal="toggled" from="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/TextureRect/Tutorial Button/MarginContainer/VBoxContainer/CenterContainer/CheckBox" to="." method="_on_tutorial_selection_toggled"]
+[connection signal="pressed" from="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/TextureRect/StartButtonBackground/StartButton" to="." method="_on_start_button_pressed"]
