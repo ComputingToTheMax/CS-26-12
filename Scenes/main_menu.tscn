@@ -22,8 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/Credits/credits.tscn" id="11_t1dhk"]
 [ext_resource type="Texture2D" uid="uid://drlafv6f5v1o" path="res://Sources/Images/PlayerSelection/Wave 4.svg" id="11_xcoo4"]
 [ext_resource type="Theme" uid="uid://cq22sdrr66eho" path="res://Themes/primary_game_theme.res" id="18_6m47u"]
-[ext_resource type="PackedScene" uid="uid://b7t5eepnxoou1" path="res://Scenes/GameSetup/game_setup_1.tscn" id="19_6dk6o"]
 [ext_resource type="Texture2D" uid="uid://cc4sfu2uhgrdr" path="res://Sources/Images/logo.png" id="20_logo"]
+[ext_resource type="PackedScene" uid="uid://085emeti05rs" path="res://Scenes/GameSetup/game_setup_2.tscn" id="21_6m47u"]
 
 [sub_resource type="PackedScene" id="PackedScene_6vfk8"]
 _bundled = {
@@ -234,7 +234,7 @@ theme = ExtResource("18_6m47u")
 theme_override_font_sizes/font_size = 32
 text = "Play"
 script = ExtResource("6_6mw8b")
-target_scene = ExtResource("19_6dk6o")
+target_scene = ExtResource("21_6m47u")
 
 [node name="SettingsButton" type="Button" parent="GameMenu/ButtonBlock/MarginContainer/GameMenuButtons" unique_id=2004235370]
 layout_mode = 2
