@@ -18,7 +18,7 @@ func _ready():
 	tween.tween_property(fade_rect,"color:a",0.0,0.4)
 
 	# Link to external Psyche Resources
-	$PsycheMissionLink.pressed.connect(_on_external_link_pressed)
+	%PsycheMissionLink.pressed.connect(_on_external_link_pressed)
 
 
 	

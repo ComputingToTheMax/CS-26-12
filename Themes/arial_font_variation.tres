@@ -1,0 +1,13 @@
+[gd_resource type="FontVariation" format=3 uid="uid://dksr8ntt2mvn2"]
+
+[sub_resource type="SystemFont" id="SystemFont_5isk4"]
+font_names = PackedStringArray("Arial")
+font_weight = 550
+
+[resource]
+base_font = SubResource("SystemFont_5isk4")
+variation_embolden = 0.3
+opentype_features = {
+1667329140: 0
+}
+spacing_glyph = -1
