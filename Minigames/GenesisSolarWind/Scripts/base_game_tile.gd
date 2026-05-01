@@ -1,5 +1,5 @@
 class_name GenesisSolarWindMinigameTile
-extends Node2D
+extends Control
 
 enum CURRENT_PATH { TO_ORBIT, ELLIPTICAL_ORBIT, FROM_ORBIT, NONE=-1}
 enum SOLAR_WIND_REGIMES { FAST_CORONAL_HOLE, SLOW_INTERSTREAM, RANDOM_CME}
@@ -15,7 +15,7 @@ const particle_type = preload("res://Minigames/GenesisSolarWind/Scenes/particle.
 @export var particle_scene:PackedScene
 
 
-@onready var historical_trajectory = $"HistoricalTrajectory"
+@onready var historical_trajectory = %HistoricalTrajectory
 @export var particle_path:PathFollow2D
 
 @onready
@@ -71,6 +71,7 @@ var slower_button_action_name
 var faster_button_action_name
 # Custom initialization function to handle custom tiling logic.
 func __init(player: GlobalSettings.PlayerConfiguration, viewport_size: Vector2i):
+	print("Genesis has appeared!")
 	self.player = player
 	
 	slower_button_action_name = player.get_action_name(0)
