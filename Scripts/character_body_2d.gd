@@ -28,6 +28,7 @@ var turn: int = 0
 var minigames: Array[PackedScene] = []
 var ending_triggered: bool = false
 var active_offer: Control = null
+
 func _ready() -> void:
 	if Board == null:
 		push_error("Player Board reference is missing.")
@@ -39,7 +40,6 @@ func _ready() -> void:
 
 	rng.randomize()
 	_configure_minigames()
-
 
 	if Board.has_method("get_total_drawn_tile_count"):
 		if Board.get_total_drawn_tile_count() == 0:
@@ -100,9 +100,9 @@ func roll_and_move(amount: int = 0) -> void:
 		spaces_moved_total += 1
 		steps_remaining -= 1
 
-
 		if Board.should_show_path_choice(current_tile_index):
 			await Board.request_branch_choice(current_tile_index)
+
 	await _animate_to_tile(current_tile_index, 0.2)
 
 	_update_turn_label()
@@ -110,7 +110,6 @@ func roll_and_move(amount: int = 0) -> void:
 	if _has_reached_iteration_limit():
 		_trigger_credits_end()
 		return
-
 
 	if Board.is_shop_tile(current_tile_index):
 		await _open_shop()
@@ -121,6 +120,7 @@ func roll_and_move(amount: int = 0) -> void:
 
 	can_roll = true
 	busy = false
+
 func _unhandled_input(event: InputEvent) -> void:
 	if busy or ending_triggered:
 		return
@@ -131,6 +131,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _open_shop() -> void:
 	busy = true
 	can_roll = false
+
 	if shop_scene == null:
 		shop_scene = load("res://Scenes/UI/shopscreen.tscn")
 
@@ -139,6 +140,7 @@ func _open_shop() -> void:
 		busy = false
 		can_roll = true
 		return
+
 	if Board.overlay_root != null:
 		Board.overlay_root.visible = true
 
@@ -179,6 +181,7 @@ func _set_board_ui_visible(is_visible: bool) -> void:
 
 	if inventory_overlay != null and not is_visible:
 		inventory_overlay.hide()
+
 func _configure_minigames() -> void:
 	minigames.clear()
 
@@ -193,6 +196,7 @@ func _configure_minigames() -> void:
 
 	if alien != null:
 		minigames.append(alien)
+
 func _offer_game() -> void:
 	busy = true
 	can_roll = false
@@ -272,9 +276,13 @@ func _offer_game() -> void:
 		_set_board_ui_visible(true)
 		busy = false
 		can_roll = true
+
 func _result(result: Dictionary) -> void:
 	if result.get("status") == "win":
-		await _show_reward_screen()
+		# await _show_reward_screen()
+
+		# TEMPORARY: skip reward screen
+		print("Reward screen disabled - returning to board")
 
 func _show_reward_screen() -> void:
 	var screen := reward_screen.instantiate()
