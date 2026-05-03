@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-const MAX_BOARD_ITERATIONS: int = 15
+const MAX_BOARD_ITERATIONS: int = 1
 
 @export var Board: MainBoard
 @export var cell_size: Vector2i
@@ -321,4 +321,4 @@ func _trigger_credits_end() -> void:
 		child.queue_free()
 
 	if has_node("/root/Navigator"):
-		Navigator.call_deferred("go_to_scene_by_path", "res://Scenes/credits.tscn")
+		Navigator.call_deferred("go_to_scene_by_path", "res://Scenes/Credits/credits.tscn")
