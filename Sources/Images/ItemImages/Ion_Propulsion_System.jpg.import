@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://m8d4xygfoofx"
-path="res://.godot/imported/Ion_Propulsion_System.jpg-32e3312f75dc4d97b4214b23cd1f8b7d.ctex"
+path.s3tc="res://.godot/imported/Ion_Propulsion_System.jpg-32e3312f75dc4d97b4214b23cd1f8b7d.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Sources/Images/ItemImages/Ion_Propulsion_System.jpg"
-dest_files=["res://.godot/imported/Ion_Propulsion_System.jpg-32e3312f75dc4d97b4214b23cd1f8b7d.ctex"]
+dest_files=["res://.godot/imported/Ion_Propulsion_System.jpg-32e3312f75dc4d97b4214b23cd1f8b7d.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

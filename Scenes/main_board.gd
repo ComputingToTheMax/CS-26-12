@@ -13,6 +13,7 @@ signal board_ready
 @export var min_shop_spacing: int=12
 @onready var overlay_root: Control = get_node_or_null("Overlay/OverlayRoot") as Control
 @onready var game_root: Control = $GameOverlay/GameRoot
+@onready var quest_label: Label = $quest as Label
 
 var rng := RandomNumberGenerator.new()
 
@@ -24,6 +25,28 @@ var start_tile_index: int = 0
 func _ready() -> void:
 	rng.randomize()
 	_setup_board_delayed()
+	_refresh_quest_display()
+	
+func _refresh_quest_display() -> void:
+
+	if quest_label == null:
+		return
+
+	QuestManager.check_all()
+
+	var lines: PackedStringArray = []
+	for i in range(1, 4):
+		var q: Quest = QuestManager.get_quest(i)
+		if q == null:
+			lines.append("Quest %d: not yet generated" % i)
+			continue
+
+		var status: String = "COMPLETE" if q.is_complete else "incomplete"
+		var line: String = "Quest %d — %s\n%s\n[%s]" % [i, q.title, q.description, status]
+		lines.append(line)
+
+	var full_text: String = "\n\n".join(lines)
+	quest_label.text = full_text
 
 func _setup_board_delayed() -> void:
 	await get_tree().process_frame

@@ -184,22 +184,20 @@ func _get_board_signature(board_to_check: Array) -> String:
 func build_trie(word_file: String) -> Trie:
 	var built_trie: Trie = Trie.new()
 
-	if not FileAccess.file_exists(word_file):
-		push_error("Missing alien word file: " + word_file)
-
-		for fallback_word in ["STAR", "MARS", "MOON", "ROVER", "SOLAR", "SPACE", "ALIEN", "ORBIT"]:
-			built_trie.insert(str(fallback_word))
-
-		return built_trie
-
 	var file: FileAccess = FileAccess.open(word_file, FileAccess.READ)
 	if file == null:
-		push_error("Could not open alien word file: " + word_file)
-
+		push_error("Could not open word file (error %d): %s" % [FileAccess.get_open_error(), word_file])
 		for fallback_word in ["STAR", "MARS", "MOON", "ROVER", "SOLAR", "SPACE", "ALIEN", "ORBIT"]:
 			built_trie.insert(str(fallback_word))
-
 		return built_trie
+
+	while not file.eof_reached():
+		var word: String = _clean_word(file.get_line())
+		if word.length() >= 3:
+			built_trie.insert(word)
+
+	file.close()
+	return built_trie
 
 	while not file.eof_reached():
 		var word: String = _clean_word(file.get_line())

@@ -67,6 +67,7 @@ func _animate_to_tile(tile_index: int, duration: float = 0.2) -> void:
 	await tween.finished
 
 func roll_and_move(amount: int = 0) -> void:
+	Board._refresh_quest_display()
 	if not initialized:
 		push_error("roll_and_move called too early")
 		return
@@ -140,6 +141,7 @@ func _open_shop() -> void:
 
 	can_roll = true
 	busy = false
+	Board._refresh_quest_display()
 
 func _update_turn_label() -> void:
 	var board_iterations: int = _get_board_iterations_completed()
@@ -238,6 +240,7 @@ func _show_reward_screen() -> void:
 		return
 
 	Board.overlay_root.visible = false
+	Board._refresh_quest_display()
 
 func _get_board_iterations_completed() -> int:
 	var board_count: int = Board.get_tile_count()
