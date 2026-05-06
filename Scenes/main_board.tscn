@@ -131,4 +131,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="quest" type="Label" parent="." unique_id=339254253]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [connection signal="pressed" from="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer2/InvBtn" to="HUD/HUDBase" method="_on_inv_btn_pressed"]
