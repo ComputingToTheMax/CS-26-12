@@ -209,15 +209,20 @@ func _gain_random_part() -> void:
 	var base_item: ItemData = valid_parts[rng.randi_range(0, valid_parts.size() - 1)]
 	var part_instance: PartInstance = RewardGen.make_random_part(base_item)
 
+	# 🔑 THIS is the important part
+	var range_info: Dictionary = player_inventory.get_category_slot_range(ItemData.InventoryCategory.PART)
+	var start: int = int(range_info["start"])
+	var count: int = int(range_info["count"])
+
 	var empty_index: int = -1
 
-	for i in range(player_inventory.slots.size()):
+	for i in range(start, start + count):
 		if player_inventory.get_slot(i) == null:
 			empty_index = i
 			break
 
 	if empty_index == -1:
-		push_warning("Inventory is full. Could not add random part.")
+		push_warning("No empty PART slots available.")
 		return
 
 	player_inventory.set_slot(empty_index, {
@@ -225,13 +230,17 @@ func _gain_random_part() -> void:
 		"item_data": base_item
 	})
 
-	print("Gained random part: ", part_instance)
+	print("Gained part in PART slot: ", empty_index)
 func _lose_random_part() -> void:
 	var player_inventory: InventoryModel = $InventoryModel
 
+	var range_info: Dictionary = player_inventory.get_category_slot_range(ItemData.InventoryCategory.PART)
+	var start: int = int(range_info["start"])
+	var count: int = int(range_info["count"])
+
 	var valid_slots: Array[int] = []
 
-	for i in range(player_inventory.slots.size()):
+	for i in range(start, start + count):
 		var slot = player_inventory.get_slot(i)
 
 		if slot == null:
@@ -246,14 +255,13 @@ func _lose_random_part() -> void:
 			valid_slots.append(i)
 
 	if valid_slots.is_empty():
-		print("Chance card tried to steal a part, but player has no parts.")
+		print("No parts to remove.")
 		return
 
 	var chosen_index: int = valid_slots[rng.randi_range(0, valid_slots.size() - 1)]
 
 	player_inventory.set_slot(chosen_index, null)
 
-	print("Removed random part from slot: ", chosen_index)
 func roll_and_move(amount: int = 0) -> void:
 	if not initialized:
 		push_error("roll_and_move called too early")
