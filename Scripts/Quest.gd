@@ -112,3 +112,22 @@ func print_quests() -> String:
 		Type.STAT:
 			return "[Quest] %s reach %.0f total %s" % [title, required_stat_value, target_stat]
 	return "[Quest] unknown"
+
+func get_progress_text(inventory: InventoryModel) -> String:
+	if inventory == null:
+		return "No inventory"
+
+	match type:
+		Type.MISSION:
+			var current: int = inventory.get_count_by_mission(target_mission)
+			return "%d / %d items from %s" % [current, required_count, target_mission]
+
+		Type.SUBFILTER:
+			var current: int = inventory.get_count_by_subfilter(_subfilter_to_enum(target_subfilter))
+			return "%d / %d %s parts" % [current, required_count, target_subfilter.replace("_", " ").capitalize()]
+
+		Type.STAT:
+			var current: float = inventory.get_total_stat(target_stat)
+			return "%.1f / %.0f total %s" % [current, required_stat_value, target_stat]
+
+	return ""

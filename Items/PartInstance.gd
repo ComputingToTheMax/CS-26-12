@@ -70,9 +70,14 @@ func get_total_stats() -> float:
 	return aerodynamics + weight + cost + repairability + acceleration
 func get_category()->int:
 	return part_subfilter
+
+func get_mission()->String:
+	return item_data.mission
+
 func get_stat_text() -> String:
-	return "[%s]\nAerodynamics: %.1f\nWeight: %.1f\nCost: %.1f\nRepairability: %.1f\nAcceleration: %.1f\nTotal: %.1f\nPrice: %d coins" % [
+	return "[%s]\nMission: [%s]\nAerodynamics: %.1f\nWeight: %.1f\nCost: %.1f\nRepairability: %.1f\nAcceleration: %.1f\nTotal: %.1f\nPrice: %d coins" % [
 		get_rarity_name(),
+		get_mission(),
 		aerodynamics,
 		weight,
 		cost,

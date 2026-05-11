@@ -216,7 +216,8 @@ func _show_item_details(item: ItemData, instance: PartInstance) -> void:
 		return
 
 	if instance != null:
-		item_price_label.text = "Aerodynamics: %.1f\nWeight: %.1f\nCost: %.1f\nRepairability: %.1f\nAcceleration: %.1f\nTotal: %.1f" % [
+		item_price_label.text = "Mission: [%s]\nAerodynamics: %.1f\nWeight: %.1f\nCost: %.1f\nRepairability: %.1f\nAcceleration: %.1f\nTotal: %.1f" % [
+			instance.get_mission(),
 			instance.aerodynamics,
 			instance.weight,
 			instance.cost,

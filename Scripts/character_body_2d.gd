@@ -16,6 +16,7 @@ const MAX_BOARD_ITERATIONS: int = 15
 @export var alien: PackedScene = preload("res://Scenes/Minigames/alien_communication/alien_communication.tscn")
 @export var reward_screen: PackedScene = preload("res://Scenes/reward_screen.tscn")
 @export var tutorial_scene: PackedScene = preload("res://Scenes/tutorial.tscn")
+@export var end_screen: PackedScene = preload("res://Scenes/UI/EndScreen.tscn")
 
 var initialized: bool = false
 var rng := RandomNumberGenerator.new()
@@ -250,7 +251,7 @@ func _get_board_iterations_completed() -> int:
 	return int(spaces_moved_total / board_count)
 
 func _has_reached_iteration_limit() -> bool:
-	return _get_board_iterations_completed() >= MAX_BOARD_ITERATIONS
+	return _get_board_iterations_completed() >= 2
 
 func _trigger_credits_end() -> void:
 	if ending_triggered:
@@ -264,6 +265,25 @@ func _trigger_credits_end() -> void:
 
 	for child in Board.game_root.get_children():
 		child.queue_free()
+		
+	var any_complete: bool = (
+		QuestManager.is_quest_1_complete() or
+		QuestManager.is_quest_2_complete() or
+		QuestManager.is_quest_3_complete()
+	)
 
-	if has_node("/root/Navigator"):
-		Navigator.call_deferred("go_to_scene_by_path", "res://Scenes/credits.tscn")
+	await _show_end_screen(any_complete)
+
+func _show_end_screen(won: bool) -> void:
+	if end_screen == null:
+		push_error("Player: end_screen PackedScene not assigned.")
+		if has_node("/root/Navigator"):
+			Navigator.call_deferred("go_to_scene_by_path", "res://Scenes/Credits/credits.tscn")
+		return
+
+	if Board.overlay_root != null:
+		Board.overlay_root.visible = true
+
+	var screen := end_screen.instantiate()
+	Board.overlay_root.add_child(screen)
+	screen.setup(won)
