@@ -1,8 +1,10 @@
-[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://dksr8ntt2mvn2"]
+[gd_resource type="FontVariation" format=3 uid="uid://dksr8ntt2mvn2"]
 
 [ext_resource type="FontFile" uid="uid://c6c7gnx36opr0" path="res://addons/gut/fonts/AnonymousPro-Regular.ttf" id="1_regular"]
 
 [resource]
 base_font = ExtResource("1_regular")
 variation_embolden = 0.3
-spacing_glyph = 0
+opentype_features = {
+1667329140: 0
+}
