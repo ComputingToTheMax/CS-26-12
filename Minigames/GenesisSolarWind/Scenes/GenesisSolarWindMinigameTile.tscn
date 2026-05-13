@@ -4,13 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://dnmyv4asuqn4p" path="res://Minigames/GenesisSolarWind/Scenes/Particle.tscn" id="2_ldy0v"]
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_un60b"]
 [ext_resource type="Texture2D" uid="uid://cs76va8ew86b5" path="res://Minigames/GenesisSolarWind/Src/Images/EarthNoBackground.png" id="3_34gd1"]
+[ext_resource type="Script" uid="uid://b5prwcypcnncr" path="res://Minigames/GenesisSolarWind/Scripts/Node2DToControl/particle_path.gd" id="4_34gd1"]
 [ext_resource type="Texture2D" uid="uid://b35l82h0q0o3c" path="res://Minigames/GenesisSolarWind/Src/Images/MissionTrajectory.png" id="4_jabtr"]
 [ext_resource type="Script" uid="uid://cfpwiq4s7dwco" path="res://Minigames/GenesisSolarWind/Scenes/genesis_spacecraft.gd" id="5_igkls"]
 [ext_resource type="Texture2D" uid="uid://bk74sk3eoo0vf" path="res://Minigames/GenesisSolarWind/Src/Images/GenesisRenderingNoBackground.png" id="6_6srcd"]
 [ext_resource type="PackedScene" uid="uid://ckesh74ho2idd" path="res://Scenes/Keycap.tscn" id="7_t22to"]
 [ext_resource type="Script" uid="uid://nmnc78vqwahc" path="res://Minigames/GenesisSolarWind/Scripts/solar_viewport.gd" id="8_3dxrw"]
 [ext_resource type="VideoStream" uid="uid://33kqs2vg1eu5" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Normal.ogv" id="9_ayclc"]
+[ext_resource type="Script" uid="uid://dnb47nm81105f" path="res://Minigames/GenesisSolarWind/Scripts/Node2DToControl/genesis_paths.gd" id="9_un60b"]
 [ext_resource type="VideoStream" uid="uid://hgglyd8j7hfb" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Coronal Hole.ogv" id="10_ishca"]
+[ext_resource type="Script" uid="uid://bwpskb880tlxy" path="res://Minigames/GenesisSolarWind/Scenes/delete.gd" id="10_un60b"]
 [ext_resource type="VideoStream" uid="uid://fwko75pi5qm3" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Eruption.ogv" id="11_r7e7m"]
 [ext_resource type="PackedScene" uid="uid://babvh353lkwy4" path="res://Minigames/GenesisSolarWind/Scenes/GenesisHud.tscn" id="13_fslk0"]
 
@@ -19,12 +22,18 @@ viewport_path = NodePath("SolarViewport")
 
 [sub_resource type="Curve2D" id="Curve2D_kc7nk"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -316, -22, 0, -48.721615, 0, 48.721615, -248, 34, 0, 0, 0, 0, -318, 126)
+"points": PackedVector2Array(0, 0, 0, 0, -316, -22, 0, -48.721615, 0, 48.721615, -273, 40, 0, 0, 0, 0, -318, 126)
 }
 point_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5ql6"]
 size = Vector2(170, 120)
+
+[sub_resource type="Curve2D" id="Curve2D_301g5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 395, 46, -10.702338, 0.8918615, 10.702338, -0.8918615, 378, 47, 10.405051, -2.2296538, -10.405051, 2.2296538, 353, 54, 22.296537, -1.1891487, -22.296537, 1.1891487, 323, 58, 12.337418, 6.2430305, -12.337418, -6.2430305, 293, 50, 5.2025256, 8.621327, -5.2025256, -8.621327, 273, 34, 1.040505, 10.999625, -1.040505, -10.999625, 263, 7, -2.2704523, 9.783231, 2.2704523, -9.783231, 264, -11, 0, 0, 0, 0, 266, -29, -15.228832, -6.276125, 15.228832, 6.276125, 270, -31, 0, 0, 0, 0, 273, -28)
+}
+point_count = 11
 
 [sub_resource type="Curve2D" id="Curve2D_y4iy6"]
 _data = {
@@ -38,13 +47,7 @@ _data = {
 }
 point_count = 25
 
-[sub_resource type="Curve2D" id="Curve2D_301g5"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 395, 46, -10.702338, 0.8918615, 10.702338, -0.8918615, 378, 47, 10.405051, -2.2296538, -10.405051, 2.2296538, 353, 54, 22.296537, -1.1891487, -22.296537, 1.1891487, 323, 58, 12.337418, 6.2430305, -12.337418, -6.2430305, 293, 50, 5.2025256, 8.621327, -5.2025256, -8.621327, 273, 34, 1.040505, 10.999625, -1.040505, -10.999625, 263, 7, -2.2704523, 9.783231, 2.2704523, -9.783231, 264, -11, 0, 0, 0, 0, 266, -29, -15.228832, -6.276125, 15.228832, 6.276125, 270, -31, 0, 0, 0, 0, 273, -28)
-}
-point_count = 11
-
-[node name="BaseGameTile" type="Control" unique_id=1041601590 node_paths=PackedStringArray("genesis_spacecraft", "particle_path")]
+[node name="Camera2D" type="Control" unique_id=1041601590 node_paths=PackedStringArray("genesis_spacecraft", "particle_path")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,7 +60,7 @@ script = ExtResource("1_kc7nk")
 target_score = 2
 genesis_spacecraft = NodePath("VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisSpacecraft")
 particle_scene = ExtResource("2_ldy0v")
-particle_path = NodePath("VBoxContainer/CenterGame/Left/VBoxContainer/Sun/ParticlePath/PathFollow2D")
+particle_path = NodePath("VBoxContainer/CenterGame/Left/VBoxContainer/Sun/ParticlePath/ParticlePath/PathFollow2D")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1729733366]
 layout_mode = 1
@@ -106,16 +109,21 @@ texture = SubResource("ViewportTexture_fslk0")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="ParticlePath" type="Path2D" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun" unique_id=717350323]
-position = Vector2(1311.7142, 109.57143)
-scale = Vector2(4.071429, 4.0714283)
-curve = SubResource("Curve2D_kc7nk")
-metadata/_edit_group_ = true
+[node name="ParticlePath" type="Node2D" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun" unique_id=255487451]
+script = ExtResource("4_34gd1")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun/ParticlePath" unique_id=1140376928]
+[node name="ParticlePath" type="Path2D" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun/ParticlePath" unique_id=717350323]
+position = Vector2(319, 23)
+curve = SubResource("Curve2D_kc7nk")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun/ParticlePath/ParticlePath" unique_id=1140376928]
 position = Vector2(-316, -22)
-rotation = 0.10662911
 rotates = false
+
+[node name="Left-Center" type="Control" parent="VBoxContainer/CenterGame" unique_id=1114112663]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
 
 [node name="Center" type="Control" parent="VBoxContainer/CenterGame" unique_id=659912863]
 layout_mode = 2
@@ -141,24 +149,22 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="Genesis Mission Trajectory Map" type="TextureRect" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth" unique_id=371832997]
-self_modulate = Color(1, 1, 1, 0.45882353)
+self_modulate = Color(1, 1, 1, 0.3882353)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -115.5
+offset_top = -102.0
+offset_right = 115.5
+offset_bottom = 102.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_jabtr")
 
-[node name="HistoricalTrajectory" type="Line2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map" unique_id=1463188988]
-unique_name_in_owner = true
-self_modulate = Color(0, 0, 0, 1)
-position = Vector2(-53.5, -126)
-scale = Vector2(0.9999999, 0.9999999)
-width = 3.0
-
 [node name="GenesisSpacecraft" type="Area2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map" unique_id=868293509]
-position = Vector2(341.49994, -78)
+position = Vector2(342.16, 200)
+rotation = 3.1415927
 scale = Vector2(0.34, 0.34)
 script = ExtResource("5_igkls")
 
@@ -170,23 +176,49 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("6_6srcd")
 
 [node name="Keycap" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisSpacecraft" unique_id=1104716233 instance=ExtResource("7_t22to")]
+unique_name_in_owner = true
 visible = false
 position = Vector2(-258.82355, 17.647064)
 scale = Vector2(0.53, 0.53)
 
-[node name="EllipticalOrbit" type="Path2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map" unique_id=1695293309]
-position = Vector2(-53.50003, -126)
+[node name="GenesisPaths" type="Node2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map" unique_id=612131366]
+script = ExtResource("9_un60b")
+
+[node name="HistoricalTrajectory" type="Line2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisPaths" unique_id=1463188988]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 1)
+use_parent_material = true
+position = Vector2(0.5, -1)
+scale = Vector2(0.9999999, 0.9999999)
+width = 3.0
+
+[node name="ToOrbit" type="Path2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisPaths" unique_id=2144774435]
+position = Vector2(-396.5, -49)
+curve = SubResource("Curve2D_301g5")
+script = ExtResource("10_un60b")
+
+[node name="ToOrbit" type="PathFollow2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisPaths/ToOrbit" unique_id=1977567748]
+unique_name_in_owner = true
+position = Vector2(395, 46)
+rotation = 3.073406
+rotates = false
+loop = false
+
+[node name="EllipticalOrbit" type="Path2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisPaths" unique_id=1695293309]
+position = Vector2(-396.5, -49)
 curve = SubResource("Curve2D_y4iy6")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/EllipticalOrbit" unique_id=1518123644]
+[node name="EllipticalOrbit" type="PathFollow2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisPaths/EllipticalOrbit" unique_id=1518123644]
+unique_name_in_owner = true
 position = Vector2(273, -26)
 rotates = false
 
-[node name="FromOrbit" type="Path2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map" unique_id=88526583]
-position = Vector2(-53.50003, -126)
+[node name="FromOrbit" type="Path2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisPaths" unique_id=88526583]
+position = Vector2(-396.5, -49)
 curve = SubResource("Curve2D_t5ql6")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/FromOrbit" unique_id=476894038]
+[node name="FromOrbit" type="PathFollow2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisPaths/FromOrbit" unique_id=476894038]
+unique_name_in_owner = true
 position = Vector2(273, -25)
 rotates = false
 loop = false
@@ -198,27 +230,12 @@ size_flags_vertical = 3
 [node name="Right" type="Control" parent="VBoxContainer/CenterGame" unique_id=1723399447]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.6
+size_flags_stretch_ratio = 0.4
 
 [node name="BottomSpacer" type="Control" parent="VBoxContainer" unique_id=1133717589]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="Earth" type="Sprite2D" parent="." unique_id=1580325001]
-position = Vector2(394.99997, 47.999996)
-scale = Vector2(0.026077433, 0.02607743)
-texture = ExtResource("3_34gd1")
-
-[node name="ToOrbit" type="Path2D" parent="." unique_id=2144774435]
-position = Vector2(274.99997, -9)
-curve = SubResource("Curve2D_301g5")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="ToOrbit" unique_id=1977567748]
-position = Vector2(395, 46)
-rotation = 3.073406
-rotates = false
-loop = false
 
 [node name="SolarViewport" type="SubViewport" parent="." unique_id=781412169]
 size = Vector2i(1080, 1920)
@@ -246,10 +263,6 @@ rotation = 1.5707964
 stream = ExtResource("9_ayclc")
 autoplay = true
 expand = true
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=532399622]
-visible = false
-position = Vector2(243, 55)
 
 [node name="GameTimer" type="Timer" parent="." unique_id=1014021929]
 wait_time = 30.0
