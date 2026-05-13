@@ -17,14 +17,14 @@ func __init(current_tree, target_minigame_path: String) -> void:
 	
 	# DEBUG: During direct scene testing, assign a default number of players if a number of players
 	#        yet to be set.
-	if GlobalSettings.number_of_players == 0:
-		GlobalSettings.set_number_of_players(1)
+	GlobalSettings.ensure_player_configuration_is_set()
 		
 	# Ensure that the game is visible at the root.
 	if get_parent() == current_tree.root:
 		print("The game should already be visible at the root, so no further work is required!")
 	# If the game is not yet visible, add it to the root.
 	else:
+		
 		current_tree.root.add_child.call_deferred(self)
 	
 	
@@ -66,6 +66,8 @@ func _create_subview(player: GlobalSettings.PlayerConfiguration, viewport_size: 
 	
 	# Create an instance of the target game scene tile.
 	var current_instance_of_target_scene = load(target_minigame_path).instantiate()
+	#current_instance_of_target_scene.set_process(false)
+	#return
 	
 	# The Subview Version
 	## Create an instance of the subview template in which to put the target game tile.
@@ -85,7 +87,9 @@ func _create_subview(player: GlobalSettings.PlayerConfiguration, viewport_size: 
 	
 	# This is crucial! Only initialize the target scene after it has been added, so that it's "_ready"
 	# function has been run properly.
-	current_instance_of_target_scene.__init(player, viewport_size)
+	print("Initializing with player:", player)
+	#current_instance_of_target_scene.__init(player, viewport_size)
+	current_instance_of_target_scene.__init(player)
 	
 	# Make the current subview visible.
 	#current_subview.visible = true
