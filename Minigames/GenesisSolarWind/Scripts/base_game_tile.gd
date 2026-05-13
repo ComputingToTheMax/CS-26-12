@@ -9,7 +9,7 @@ const particle_type = preload("res://Minigames/GenesisSolarWind/Scenes/particle.
 @export var target_score:int = 10
 
 @export var genesis_spacecraft:Node2D
-@onready var player_keycap = $GenesisSpacecraft/Keycap
+@onready var player_keycap = %Keycap
 
 
 @export var particle_scene:PackedScene
@@ -19,11 +19,11 @@ const particle_type = preload("res://Minigames/GenesisSolarWind/Scenes/particle.
 @export var particle_path:PathFollow2D
 
 @onready
-var to_orbit = $ToOrbit/PathFollow2D
+var to_orbit = %ToOrbit
 @onready
-var elliptical_orbit = $EllipticalOrbit/PathFollow2D
+var elliptical_orbit = %EllipticalOrbit
 @onready
-var from_orbit = $FromOrbit/PathFollow2D
+var from_orbit = %FromOrbit
 
 #var current_state = CURRENT_PATH.NONE
 # TODO: Pick a pattern and remain consistent.
@@ -41,6 +41,14 @@ var game_ending = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
+	# Statically keep track of all available game instances.
+	GenesisSolarWindMinigameTile.games.append(self)
+	
+	# Make sure player configuration data is set.
+	if !GlobalSettings.ensure_player_configuration_is_set():
+		self.__init(GlobalSettings.players[0])
+		self.launch_game()
+	
 	assert(genesis_spacecraft != null,)
 	assert(particle_scene != null,)
 	assert(particle_path != null,)
@@ -48,7 +56,8 @@ func _ready() -> void:
 	# Move the spacecraft to the first orbit path.
 	#genesis_spacecraft.get_parent().remove_child(genesis_spacecraft)
 	#to_orbit.call_deferred("add_child", genesis_spacecraft)
-	genesis_spacecraft.reparent(to_orbit)
+	genesis_spacecraft.reparent(to_orbit, false)
+	genesis_spacecraft.global_position = to_orbit.global_position
 	#to_orbit.add_child(genesis_spacecraft)
 	
 	
@@ -61,17 +70,15 @@ func _ready() -> void:
 	
 	#Line2D.new().points.append_array()
 	
-	# Record the existance of this game tile to a static class attribute.
-	GenesisSolarWindMinigameTile.games.append(self)
 	
-	pass
+	
 
 var player:GlobalSettings.PlayerConfiguration
 var slower_button_action_name
 var faster_button_action_name
 # Custom initialization function to handle custom tiling logic.
-func __init(player: GlobalSettings.PlayerConfiguration, viewport_size: Vector2i):
-	print("Genesis has appeared!")
+#func __init(player: GlobalSettings.PlayerConfiguration, viewport_size: Vector2i):
+func __init(player: GlobalSettings.PlayerConfiguration):
 	self.player = player
 	
 	slower_button_action_name = player.get_action_name(0)
@@ -104,6 +111,13 @@ func _process(delta: float) -> void:
 			player_keycap.visible = true
 			from_orbit.progress += current_speed * delta
 			
+			if from_orbit.progress_ratio >= 0.9:
+				var genesis_tween = create_tween()
+				genesis_tween.tween_property(self, "current_speed", 10, 0.7).set_ease(Tween.EASE_IN)
+				genesis_tween.parallel().tween_property(genesis_spacecraft, "scale", Vector2.ZERO, 0.7).set_ease(Tween.EASE_OUT)
+				GlobalUtilities.fade_out(genesis_spacecraft, 0.9, genesis_tween.parallel())
+				
+			
 	# Version 1, where you can hold keys for repeated velocity adjustments.
 	#if Input.is_action_pressed(slower_button_action_name):
 		#if current_speed > 6:
@@ -133,7 +147,11 @@ enum ParticleTypes { ALPHA_PARTICLE=0, ELECTRON=1, PROTON=2 }
 static func launch_game():
 	
 	if len(games) <= 0:
-		push_error("Oops, somehow this game was attempted to be launhed with ", len(games), " instances properly initialized.")
+		push_error("Oops, somehow this game was attempted to be launched with ", len(games), " instances properly initialized.")
+		
+	#print("Here are the registered games:")
+	#for game in games:
+		#print(game)
 		
 	# TODO: Handle a pause for minigame instructions and game countdown.
 	# TODO: Or maybe assume countdown has started when the game is launched and the first 3/countdown seconds are handled by the laucher?
@@ -146,8 +164,6 @@ static func launch_game():
 	
 	# Request the first instance of the game to coordinate gameplay.
 	games[0]._coordinate_game()
-	
-	
 		
 	#spawn_particle()
 	#spawn_particle()
@@ -177,7 +193,7 @@ static func spawn_particle():
 	
 static func update_solar_wind_regime():
 	current_solar_wind_regime = next_solar_wind_regime
-	
+	#print("Coordinator", game_coordinator, "Self")
 	game_coordinator._coord_update_spawn_time()
 	
 	
@@ -195,6 +211,7 @@ func _coordinate_game():
 		return
 	else:
 		game_coordinator = self
+		print("A game coordinator has been selected:", self)
 		
 	game_timer.start()
 	change_solar_state_timer.start()
@@ -235,7 +252,8 @@ func _spawn_particle(particle_type, particle_start_progress, particle_direction,
 	new_particle.change_particle_type(particle_type)
 	
 	particle_path.progress_ratio = particle_start_progress
-	new_particle.position = particle_path.position
+	#new_particle.position = particle_path.position
+	new_particle.global_position = particle_path.global_position
 	
 	var particle_velocity = Vector2(cos(particle_direction) * particle_speed, sin(particle_direction) * particle_speed * 0.4)
 	#print(particle_velocity)
