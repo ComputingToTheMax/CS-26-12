@@ -13,7 +13,6 @@
 [ext_resource type="VideoStream" uid="uid://33kqs2vg1eu5" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Normal.ogv" id="9_ayclc"]
 [ext_resource type="Script" uid="uid://dnb47nm81105f" path="res://Minigames/GenesisSolarWind/Scripts/Node2DToControl/genesis_paths.gd" id="9_un60b"]
 [ext_resource type="VideoStream" uid="uid://hgglyd8j7hfb" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Coronal Hole.ogv" id="10_ishca"]
-[ext_resource type="Script" uid="uid://bwpskb880tlxy" path="res://Minigames/GenesisSolarWind/Scenes/delete.gd" id="10_un60b"]
 [ext_resource type="VideoStream" uid="uid://fwko75pi5qm3" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Eruption.ogv" id="11_r7e7m"]
 [ext_resource type="PackedScene" uid="uid://babvh353lkwy4" path="res://Minigames/GenesisSolarWind/Scenes/GenesisHud.tscn" id="13_fslk0"]
 
@@ -34,6 +33,19 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 395, 46, -10.702338, 0.8918615, 10.702338, -0.8918615, 378, 47, 10.405051, -2.2296538, -10.405051, 2.2296538, 353, 54, 22.296537, -1.1891487, -22.296537, 1.1891487, 323, 58, 12.337418, 6.2430305, -12.337418, -6.2430305, 293, 50, 5.2025256, 8.621327, -5.2025256, -8.621327, 273, 34, 1.040505, 10.999625, -1.040505, -10.999625, 263, 7, -2.2704523, 9.783231, 2.2704523, -9.783231, 264, -11, 0, 0, 0, 0, 266, -29, -15.228832, -6.276125, 15.228832, 6.276125, 270, -31, 0, 0, 0, 0, 273, -28)
 }
 point_count = 11
+
+[sub_resource type="GDScript" id="GDScript_un60b"]
+script/source = "extends Path2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	self.get_viewport_rect()
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [sub_resource type="Curve2D" id="Curve2D_y4iy6"]
 _data = {
@@ -149,14 +161,14 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="Genesis Mission Trajectory Map" type="TextureRect" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth" unique_id=371832997]
-self_modulate = Color(1, 1, 1, 0.3882353)
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -115.5
+offset_left = -116.0
 offset_top = -102.0
-offset_right = 115.5
+offset_right = 117.0
 offset_bottom = 102.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -195,7 +207,7 @@ width = 3.0
 [node name="ToOrbit" type="Path2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisPaths" unique_id=2144774435]
 position = Vector2(-396.5, -49)
 curve = SubResource("Curve2D_301g5")
-script = ExtResource("10_un60b")
+script = SubResource("GDScript_un60b")
 
 [node name="ToOrbit" type="PathFollow2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisPaths/ToOrbit" unique_id=1977567748]
 unique_name_in_owner = true
