@@ -14,7 +14,7 @@ expanded_output_ports = [0]
 input_name = "vertex"
 
 [sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_8lawg"]
-default_input_values = [0, 0.0, 1, 5.0, 2, 0.0]
+default_input_values = [0, 0.0, 1, 10.0, 2, 0.0]
 
 [sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_rria3"]
 op_type = 0
@@ -34,5 +34,5 @@ nodes/vertex/5/position = Vector2(120, 60)
 nodes/vertex/6/node = SubResource("VisualShaderNodeMultiplyAdd_8lawg")
 nodes/vertex/6/position = Vector2(680, 20)
 nodes/vertex/7/node = SubResource("VisualShaderNodeVectorCompose_rria3")
-nodes/vertex/7/position = Vector2(740, 60)
+nodes/vertex/7/position = Vector2(866.6667, 53.333332)
 nodes/vertex/connections = PackedInt32Array(2, 0, 3, 0, 5, 2, 4, 2, 5, 1, 6, 2, 3, 0, 6, 0, 3, 0, 4, 0, 6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)

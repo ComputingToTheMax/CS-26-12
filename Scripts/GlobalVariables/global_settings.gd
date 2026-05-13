@@ -114,6 +114,7 @@ class PlayerConfiguration:
 
 
 # Setup and Configuration
+static var current_maximum_number_of_players:int = 1
 
 static var number_of_players = 0
 static var next_player_id = 0

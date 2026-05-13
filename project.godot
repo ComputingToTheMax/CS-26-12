@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Race To Psyche"
 run/main_scene="uid://cpmdovpetc8ty"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/image="uid://dmsm4lpd63fya"
 config/icon="res://icon.svg"
 
@@ -30,7 +30,6 @@ MoneySave="*uid://co0jfodd27uxj"
 PauseMenu="*uid://b7wnjbm0o6fjj"
 playerPos="*uid://c0pxd6kv02tid"
 CurGameState="*uid://chymtq8s0hi28"
-QuestManager="*uid://bo3cysswmv8iq"
 
 [display]
 
@@ -48,6 +47,7 @@ enabled=PackedStringArray("res://addons/gut/plugin.cfg")
 
 timers/tooltip_delay_sec=0.0
 timers/tooltip_delay_sec.editor_hint=0.14
+theme/custom_font="uid://dksr8ntt2mvn2"
 
 [input]
 
@@ -60,3 +60,9 @@ pause={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+

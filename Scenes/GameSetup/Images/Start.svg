@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 321 93" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-808.434582,-536.02473)">
+        <g>
+            <g transform="matrix(0.665555,0,0,0.748476,676.875512,177.999019)">
+                <path d="M679.749,504.43L679.749,576.489C679.749,590.889 666.602,602.579 650.408,602.579L343.738,602.579L343.738,478.34L650.408,478.34C666.602,478.34 679.749,490.03 679.749,504.43Z" style="fill:rgb(94,193,89);"/>
+            </g>
+            <g transform="matrix(0.26574,0,0,0.748476,717.089668,177.999019)">
+                <path d="M679.749,478.34L679.749,602.579L414.3,602.579C375.355,602.579 343.738,591.354 343.738,577.527L343.738,503.646C343.738,489.679 375.675,478.34 415.014,478.34L679.749,478.34Z" style="fill:rgb(94,193,89);"/>
+            </g>
+            <g transform="matrix(0.373786,0,0,0.373786,527.548124,358.529986)">
+                <text x="823.962px" y="541.165px" style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:50px;fill:white;">P<tspan x="855.112px 866.803px 892.411px " y="541.165px 541.165px 541.165px ">lay</tspan></text>
+                <g transform="matrix(50,0,0,50,954.197245,598.660587)">
+                </g>
+                <text x="789.983px" y="598.661px" style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:50px;fill:white;">T<tspan x="814.614px 842.956px 857.406px 885.748px 903.006px 914.698px 940.306px " y="598.661px 598.661px 598.661px 598.661px 598.661px 598.661px 598.661px ">utorial</tspan></text>
+            </g>
+            <g transform="matrix(1.609165,0,0,1.609165,-387.123102,-259.527596)">
+                <g transform="matrix(50,0,0,50,933.17332,541.16547)">
+                </g>
+                <text x="811.007px" y="541.165px" style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:50px;fill:white;">S<tspan x="842.157px 856.607px 882.215px 902.073px 916.523px " y="541.165px 541.165px 541.165px 541.165px 541.165px ">tart!</tspan></text>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -31,7 +31,6 @@ signal branch_prompt_closed(chose_branch: bool, next_index: int)
 
 @onready var overlay_root: Control = get_node_or_null("Overlay/OverlayRoot") as Control
 @onready var game_root: Control = $GameOverlay/GameRoot
-@onready var quest_label: Label = $quest as Label
 
 var rng := RandomNumberGenerator.new()
 

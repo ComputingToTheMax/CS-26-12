@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://yvtjjujrw067"]
+
+[ext_resource type="Script" uid="uid://ct3mux65ysw6e" path="res://Minigames/GenesisSolarWind/Scenes/genesis_solar_wind_minigame.gd" id="1_3rb4u"]
+[ext_resource type="PackedScene" uid="uid://c7fh8achroith" path="res://Scenes/Minigames/MinigameUtilities/VTiledGame.tscn" id="2_h6p5d"]
+
+[node name="GenesisTestInstantiator" type="Node2D" unique_id=2045035726]
+script = ExtResource("1_3rb4u")
+target_scene_path = "res://Minigames/GenesisSolarWind/Scenes/GenesisSolarWindMinigameTile.tscn"
+stacking_handler_scene = ExtResource("2_h6p5d")

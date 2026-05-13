@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://b7t5eepnxoou1"]
+
+[ext_resource type="Theme" uid="uid://d33wx43jvdny0" path="res://Themes/primary_game_theme.tres" id="1_hy7bk"]
+[ext_resource type="Script" uid="uid://bj305n2l3jng8" path="res://Scenes/GameSetup/game_setup_1.gd" id="1_vyxba"]
+[ext_resource type="Texture2D" uid="uid://dj700dm2g3hel" path="res://Sources/Images/PlayerSelection/Standard 1.svg" id="2_vyxba"]
+[ext_resource type="Texture2D" uid="uid://b48301im34184" path="res://Sources/Images/PlayerSelection/Wave 1.svg" id="3_surmn"]
+[ext_resource type="Texture2D" uid="uid://cga61nc5ec372" path="res://Sources/Images/PlayerSelection/Standard 2.svg" id="4_oonpb"]
+[ext_resource type="Texture2D" uid="uid://bdrt0u0qj0o5c" path="res://Sources/Images/PlayerSelection/Wave 2.svg" id="5_g1ls5"]
+[ext_resource type="Texture2D" uid="uid://csavoyffrds2n" path="res://Sources/Images/PlayerSelection/Standard 3.svg" id="6_unlyg"]
+[ext_resource type="Texture2D" uid="uid://b6doxvtikh8pe" path="res://Sources/Images/PlayerSelection/Wave 3.svg" id="7_7bt4b"]
+[ext_resource type="Texture2D" uid="uid://cpfawjltxl5ie" path="res://Sources/Images/PlayerSelection/Standard 4.svg" id="8_mx6bh"]
+[ext_resource type="Texture2D" uid="uid://drlafv6f5v1o" path="res://Sources/Images/PlayerSelection/Wave 4.svg" id="9_kb3c1"]
+[ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="10_pckjr"]
+[ext_resource type="PackedScene" uid="uid://yvtjjujrw067" path="res://Minigames/GenesisSolarWind/Scenes/GenesisSolarWindMinigame.tscn" id="11_tprhj"]
+[ext_resource type="PackedScene" uid="uid://bo4mp5audgyic" path="res://Minigames/GenesisSolarWind/Scenes/GenesisSolarWindMinigameTile.tscn" id="12_dolva"]
+[ext_resource type="PackedScene" uid="uid://da7v2pxnl3ccx" path="res://Scenes/Minigames/alien_communication/alien_communication.tscn" id="13_6i3ng"]
+
+[node name="GameSetup" type="Control" unique_id=291582995]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameSetupUI" type="CanvasLayer" parent="." unique_id=78530944]
+
+[node name="Control" type="Control" parent="GameSetupUI" unique_id=1088404336]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vyxba")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameSetupUI/Control" unique_id=1064755525]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.075
+anchor_right = 0.925
+anchor_bottom = 0.925
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameSetupUI/Control/VBoxContainer" unique_id=885523475]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_hy7bk")
+bbcode_enabled = true
+text = "[b]How Many Players?[/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerCountButtons" type="HBoxContainer" parent="GameSetupUI/Control/VBoxContainer" unique_id=1756482109]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 45
+alignment = 1
+
+[node name="1" type="TextureButton" parent="GameSetupUI/Control/VBoxContainer/PlayerCountButtons" unique_id=445344025]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+texture_normal = ExtResource("2_vyxba")
+texture_pressed = ExtResource("3_surmn")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="2" type="TextureButton" parent="GameSetupUI/Control/VBoxContainer/PlayerCountButtons" unique_id=1525436368]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+texture_normal = ExtResource("4_oonpb")
+texture_pressed = ExtResource("5_g1ls5")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="3" type="TextureButton" parent="GameSetupUI/Control/VBoxContainer/PlayerCountButtons" unique_id=768540411]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+texture_normal = ExtResource("6_unlyg")
+texture_pressed = ExtResource("7_7bt4b")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="4" type="TextureButton" parent="GameSetupUI/Control/VBoxContainer/PlayerCountButtons" unique_id=825625245]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+texture_normal = ExtResource("8_mx6bh")
+texture_pressed = ExtResource("9_kb3c1")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="CenterContainer" type="CenterContainer" parent="GameSetupUI/Control/VBoxContainer" unique_id=1639462241]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GameSetupUI/Control/VBoxContainer/CenterContainer" unique_id=930723324]
+layout_mode = 2
+
+[node name="PlayTutorial" type="CheckBox" parent="GameSetupUI/Control/VBoxContainer/CenterContainer/HBoxContainer2" unique_id=1816751525]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "Play Tutorial"
+
+[node name="MarginContainer" type="MarginContainer" parent="GameSetupUI/Control/VBoxContainer" unique_id=718763655]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="confirm" type="Button" parent="GameSetupUI/Control/VBoxContainer/MarginContainer" unique_id=1744274041]
+layout_mode = 2
+text = "Confirm"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GameSetupUI/Control" unique_id=1450240531]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -266.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="GameSetupUI/Control/VBoxContainer2" unique_id=1645700292]
+layout_mode = 2
+text = "For Testing: Direct Minigame Links"
+
+[node name="GenesisSolarWind" type="Button" parent="GameSetupUI/Control/VBoxContainer2" unique_id=184884436]
+layout_mode = 2
+text = "Genesis Solar Wind Minigame"
+script = ExtResource("10_pckjr")
+target_scene = ExtResource("11_tprhj")
+
+[node name="GenesisSolarWind2" type="Button" parent="GameSetupUI/Control/VBoxContainer2" unique_id=2073425535]
+layout_mode = 2
+text = "Genesis Single Scene"
+script = ExtResource("10_pckjr")
+target_scene = ExtResource("12_dolva")
+
+[node name="Button" type="Button" parent="GameSetupUI/Control/VBoxContainer2" unique_id=527506062]
+layout_mode = 2
+text = "Alien Communication"
+script = ExtResource("10_pckjr")
+target_scene = ExtResource("13_6i3ng")
+
+[connection signal="toggled" from="GameSetupUI/Control/VBoxContainer/CenterContainer/HBoxContainer2/PlayTutorial" to="GameSetupUI/Control" method="_on_play_tutorial_toggled"]
+[connection signal="pressed" from="GameSetupUI/Control/VBoxContainer/MarginContainer/confirm" to="GameSetupUI/Control" method="_on_confirm_pressed"]
