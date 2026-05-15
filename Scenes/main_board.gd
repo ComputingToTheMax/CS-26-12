@@ -58,6 +58,30 @@ var _active_prompt_root_index: int = -1
 func _ready() -> void:
 	rng.randomize()
 	_setup_board_delayed()
+        _refresh_quest_display()
+        
+func _refresh_quest_display() -> void:
+        if quest_label == null:
+                return
+        QuestManager.check_all()
+        var inv: InventoryModel = get_node_or_null("/root/MainBoard/CharacterBody2D/InventoryModel")
+        var lines: PackedStringArray = []
+        for i in range(1, 4):
+                var q: Quest = QuestManager.get_quest(i)
+                if q == null:
+                        lines.append("Quest %d: not yet generated" % i)
+                        continue
+                var status: String = "COMPLETE" if q.is_complete else "incomplete"
+                var progress: String = q.get_progress_text(inv) if inv != null else "inventory unavailable"
+                var line: String = "Quest %d — %s\n%s\nProgress: %s  [%s]" % [
+                        i,
+                        q.title,
+                        q.description,
+                        progress,
+                        status
+                ]
+                lines.append(line)
+        quest_label.text = "\n\n".join(lines)
 
 func _setup_board_delayed() -> void:
 	await get_tree().process_frame
