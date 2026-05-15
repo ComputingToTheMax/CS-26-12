@@ -9,13 +9,6 @@ var _title_label: Label
 var _hint_label: Label
 var _money_label: Label
 var _chosen_items: Array[ItemData] = []
-var _chosen_parts: Array[PartInstance] = []
-
-var _hover_tooltip: Panel = null
-var _hover_name_label: Label = null
-var _hover_stats_label: Label = null
-var _hover_desc_label: Label = null
-var _hover_mission_label: Label = null
 
 func setup(player_inventory: InventoryModel) -> void:
 	_player_inventory = player_inventory
@@ -29,116 +22,7 @@ func _ready() -> void:
 	_database = ItemDatabase.new()
 	_database.load_items("res://Items/ItemDatabase.json")
 	_build_ui()
-	_create_hover_tooltip()
 	_populate_rewards()
-
-func _process(_delta: float) -> void:
-	if _hover_tooltip != null and _hover_tooltip.visible:
-		_update_hover_tooltip_position()
-
-func _create_hover_tooltip() -> void:
-	_hover_tooltip = Panel.new()
-	_hover_tooltip.name = "RewardHoverTooltip"
-	_hover_tooltip.visible = false
-	_hover_tooltip.custom_minimum_size = Vector2(240, 120)
-	_hover_tooltip.z_index = 1000
-	_hover_tooltip.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(_hover_tooltip)
-
-	var vbox := VBoxContainer.new()
-	vbox.set_anchors_preset(Control.PRESET_FULL_RECT)
-	vbox.offset_left = 10
-	vbox.offset_top = 10
-	vbox.offset_right = -10
-	vbox.offset_bottom = -10
-	_hover_tooltip.add_child(vbox)
-
-	_hover_name_label = Label.new()
-	_hover_name_label.add_theme_font_size_override("font_size", 15)
-	_hover_name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	vbox.add_child(_hover_name_label)
-
-	_hover_stats_label = Label.new()
-	_hover_stats_label.add_theme_font_size_override("font_size", 12)
-	_hover_stats_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	vbox.add_child(_hover_stats_label)
-
-	_hover_desc_label = Label.new()
-	_hover_desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_hover_desc_label.add_theme_font_size_override("font_size", 12)
-	_hover_desc_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_hover_desc_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	vbox.add_child(_hover_desc_label)
-
-	_hover_mission_label = Label.new()
-	_hover_mission_label.add_theme_font_size_override("font_size", 11)
-	_hover_mission_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_hover_mission_label.visible = false
-	vbox.add_child(_hover_mission_label)
-
-func _show_hover_tooltip(item: ItemData, part: PartInstance) -> void:
-	if item == null or _hover_tooltip == null:
-		return
-
-	if part != null:
-		_hover_name_label.text = "%s [%s][%s]" % [
-			item.display_name,
-			part.get_rarity_name(),
-			part.get_category()
-		]
-		_hover_stats_label.text = (
-			"Aerodynamics: %.1f\nWeight: %.1f\nCost: %.1f\nRepairability: %.1f\nAcceleration: %.1f\nTotal: %.1f"
-		) % [
-			part.aerodynamics,
-			part.weight,
-			part.cost,
-			part.repairability,
-			part.acceleration,
-			part.get_total_stats()
-		]
-		_hover_desc_label.text = item.description
-	else:
-		_hover_name_label.text = item.display_name
-		_hover_stats_label.text = (
-			"Aerodynamics: %.1f\nWeight: %.1f\nCost: %.1f\nRepairability: %.1f\nAcceleration: %.1f"
-		) % [
-			item.aerodynamics,
-			item.weight,
-			item.cost,
-			item.repairability,
-			item.acceleration
-		]
-		_hover_desc_label.text = item.description
-
-	if item.mission != null and item.mission.strip_edges() != "":
-		_hover_mission_label.text = "Mission: " + item.mission
-		_hover_mission_label.visible = true
-	else:
-		_hover_mission_label.visible = false
-
-	_hover_tooltip.show()
-	_update_hover_tooltip_position()
-
-func _hide_hover_tooltip() -> void:
-	if _hover_tooltip != null:
-		_hover_tooltip.hide()
-
-func _update_hover_tooltip_position() -> void:
-	if _hover_tooltip == null:
-		return
-
-	var mouse_pos := get_global_mouse_position()
-	var offset := Vector2(16, 16)
-	var desired_pos := mouse_pos + offset
-	var viewport_rect := get_viewport_rect()
-	var tooltip_size := _hover_tooltip.size
-
-	if desired_pos.x + tooltip_size.x > viewport_rect.size.x:
-		desired_pos.x = mouse_pos.x - tooltip_size.x - 16
-	if desired_pos.y + tooltip_size.y > viewport_rect.size.y:
-		desired_pos.y = mouse_pos.y - tooltip_size.y - 16
-
-	_hover_tooltip.global_position = desired_pos
 
 func _build_ui() -> void:
 	var overlay := ColorRect.new()
@@ -151,7 +35,7 @@ func _build_ui() -> void:
 	add_child(center)
 
 	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(580, 340)
+	panel.custom_minimum_size = Vector2(560, 320)
 	center.add_child(panel)
 
 	var vbox := VBoxContainer.new()
@@ -159,8 +43,10 @@ func _build_ui() -> void:
 	panel.add_child(vbox)
 
 	var margin := MarginContainer.new()
-	for side in ["margin_top", "margin_bottom", "margin_left", "margin_right"]:
-		margin.add_theme_constant_override(side, 24)
+	margin.add_theme_constant_override("margin_top", 24)
+	margin.add_theme_constant_override("margin_bottom", 24)
+	margin.add_theme_constant_override("margin_left", 24)
+	margin.add_theme_constant_override("margin_right", 24)
 	vbox.add_child(margin)
 
 	var inner_vbox := VBoxContainer.new()
@@ -174,28 +60,29 @@ func _build_ui() -> void:
 	inner_vbox.add_child(_title_label)
 
 	_hint_label = Label.new()
+	_hint_label.text = "Click an item to claim it."
 	_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_hint_label.add_theme_font_size_override("font_size", 14)
 	inner_vbox.add_child(_hint_label)
 	
-	var winnings := randi_range(5, 10)
-	_hint_label.text = "You won %d dollars! Hover items to inspect, click to claim." % winnings
+	_money_label = Label.new()
+	var winnings = randi_range(5,10)
+	_hint_label.text = "You won " + str(winnings) + " dollars"
 	MoneySave.add_money(winnings)
-
+	
 	var hbox := HBoxContainer.new()
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	hbox.add_theme_constant_override("separation", 24)
-	hbox.name = "ItemHBox"
 	inner_vbox.add_child(hbox)
 
-func _create_item_display(item: ItemData, part: PartInstance, index: int) -> Control:
+	hbox.name = "ItemHBox"
+
+func _create_item_display(item: ItemData, index: int) -> Control:
+
 	var btn := Button.new()
-	btn.custom_minimum_size = Vector2(150, 190)
+	btn.custom_minimum_size = Vector2(150, 200)
 	btn.flat = false
 	btn.pressed.connect(_on_item_picked.bind(index))
-
-	btn.mouse_entered.connect(_show_hover_tooltip.bind(item, part))
-	btn.mouse_exited.connect(_hide_hover_tooltip)
 
 	var vbox := VBoxContainer.new()
 	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -212,16 +99,12 @@ func _create_item_display(item: ItemData, part: PartInstance, index: int) -> Con
 	if item.icon != null:
 		icon_rect.texture = item.icon
 	vbox.add_child(icon_rect)
-
-	var name_label := Label.new()
 	
-	if part != null:
-		name_label.text = "%s\n[%s]" % [item.display_name, part.get_rarity_name()]
-	else:
-		name_label.text = item.display_name
+	var name_label := Label.new()
+	name_label.text = item.display_name
 	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	name_label.add_theme_font_size_override("font_size", 13)
+	name_label.add_theme_font_size_override("font_size", 14)
 	name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	vbox.add_child(name_label)
 
@@ -232,17 +115,10 @@ func _populate_rewards() -> void:
 	all_items.shuffle()
 	var chosen: Array[ItemData] = all_items.slice(0, min(3, all_items.size()))
 
-	_chosen_parts.clear()
-
 	for item in chosen:
 		if item == null:
 			continue
 		_chosen_items.append(item)
-
-		if item.category == ItemData.InventoryCategory.PART:
-			_chosen_parts.append(RewardGen.make_random_part(item))
-		else:
-			_chosen_parts.append(null)
 
 	print("Items chosen: ", _chosen_items.size())
 
@@ -255,8 +131,7 @@ func _populate_rewards() -> void:
 		var item: ItemData = _chosen_items[i]
 		if item == null:
 			continue
-		var part: PartInstance = _chosen_parts[i] if i < _chosen_parts.size() else null
-		var display := _create_item_display(item, part, i)
+		var display := _create_item_display(item, i)
 		hbox.add_child(display)
 
 func _find_node_by_name(node: Node, target_name: String) -> Node:
@@ -273,26 +148,18 @@ func _on_item_picked(index: int) -> void:
 		return
 	_picked = true
 
-	_hide_hover_tooltip()
-
 	if index >= _chosen_items.size():
 		push_error("RewardScreen: picked index out of range")
 		return
 
 	var item: ItemData = _chosen_items[index]
-	var part: PartInstance = _chosen_parts[index] if index < _chosen_parts.size() else null
 
-	if _player_inventory != null:
-		var success := false
-		if part != null:
-			success = _player_inventory.add_part_instance(part)
-		elif item != null:
-			success = _player_inventory.add_item(item, 1)
-
+	if item != null and _player_inventory != null:
+		var success := _player_inventory.add_item(item, 1)
 		if not success:
-			print("Inventory full, could not add: ", item.display_name if item else "unknown")
+			print("Inventory full, could not add: ", item.display_name)
 		else:
-			print("Claimed: ", item.display_name if item else "unknown")
+			print("Claimed: ", item.display_name)
 
 	item_chosen.emit(item)
 	queue_free()
