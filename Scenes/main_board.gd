@@ -20,6 +20,13 @@ signal branch_prompt_closed(chose_branch: bool, next_index: int)
 @export var min_shop_spacing: int = 12
 @export var min_shop_distance_from_start: int = 15
 
+@export var branch_tile_texture: Texture2D
+@export var red_tile_texture: Texture2D
+@export var shop_tile_texture: Texture2D
+@export var event_tile_texture: Texture2D
+@export var treasure_tile_texture: Texture2D
+@export var chance_tile_texture: Texture2D
+
 @export var branches_enabled: bool = true
 @export var branch_count: int = 3
 @export var min_branch_start_distance: int = 25
@@ -164,10 +171,10 @@ func _generate_special_tiles() -> void:
 	_place_special_tiles(usable_indices, "red", red_tile_target)
 	usable_indices.shuffle()
 	_place_special_tiles(usable_indices, "event", event_tile_target)
-	usable_indices.shuffle()
-	_place_special_tiles(usable_indices, "treasure", treasure_tile_target)
-	usable_indices.shuffle()
-	_place_special_tiles(usable_indices, "shop", shop_tile_target)
+	#usable_indices.shuffle()
+	#_place_special_tiles(usable_indices, "treasure", treasure_tile_target)
+	#usable_indices.shuffle()
+	#_place_special_tiles(usable_indices, "shop", shop_tile_target)
 	usable_indices.shuffle()
 	_place_special_tiles(usable_indices,"chance",chance_tile_target)
 	
@@ -475,11 +482,21 @@ func move_index_by_steps(current_index: int, steps: int) -> int:
 	return index
 
 func _draw() -> void:
-	if tile_positions.is_empty():
-		return
 	_draw_path_lines()
 	_draw_tiles()
+func _draw_tile_texture(texture: Texture2D, rect: Rect2) -> void:
+	var img := texture.get_image()
+	var used_rect := img.get_used_rect()
 
+	if used_rect.size.x <= 0 or used_rect.size.y <= 0:
+		draw_texture_rect(texture, rect, true)
+		return
+
+	var source_rect := Rect2(used_rect.position, used_rect.size)
+
+	var draw_rect := rect.grow(-2)
+
+	draw_texture_rect_region(texture, draw_rect, source_rect)
 func _draw_path_lines() -> void:
 	for i in range(tile_count - 1):
 		draw_line(get_tile_center(i), get_tile_center(i + 1), Color(0.85, 0.85, 0.85), 6.0)
@@ -494,29 +511,56 @@ func _draw_path_lines() -> void:
 			draw_line(get_tile_center(int(tiles[b])), get_tile_center(int(tiles[b + 1])), Color(0.85, 0.85, 0.85), 6.0)
 		if rejoin_index >= 0:
 			draw_line(get_tile_center(int(tiles[tiles.size() - 1])), get_tile_center(rejoin_index), Color(0.85, 0.85, 0.85), 6.0)
+func _draw_texture_tile(texture: Texture2D, rect: Rect2) -> void:
+	var img := texture.get_image()
 
+	# This crops out transparent padding from the PNG.
+	var used := img.get_used_rect()
+
+	if used.size.x <= 0 or used.size.y <= 0:
+		return
+
+	var src := Rect2(used.position, used.size)
+
+	# Draw slightly inside the square so it does not cover the border.
+	var dst := rect.grow(-2)
+
+	draw_texture_rect_region(texture, dst, src)
 func _draw_tiles() -> void:
 	for i in range(tile_positions.size()):
 		var pos: Vector2 = tile_positions[i]
 		var rect := Rect2(pos, Vector2(cell_size))
+
 		var tile_color := Color(0.45, 0.45, 0.45)
+		var texture: Texture2D = null
+
+		# COLOR TILES
 		if i == start_tile_index:
 			tile_color = Color(0.2, 0.85, 0.2)
-		elif branch_roots.has(i):
-			tile_color = Color(1.0, 0.75, 0.15)
 		elif branch_rejoins.has(i):
 			tile_color = Color(1.0, 0.75, 0.15)
-		elif red_tile_indices.has(i):
-			tile_color = Color(0.9, 0.2, 0.2)
-		elif shop_tile_indices.has(i):
-			tile_color = Color(0.2, 0.65, 1.0)
-		elif event_tile_indices.has(i):
-			tile_color = Color(0.65, 0.35, 1.0)
-		elif treasure_tile_indices.has(i):
-			tile_color = Color(1.0, 0.85, 0.2)
-		elif chance_tile_indices.has(i):
-			tile_color= Color(0.7,0.6,0.9)
 		elif all_branch_indices.has(i):
 			tile_color = Color(0.35, 0.55, 0.75)
+		elif branch_roots.has(i):
+			texture=branch_tile_texture
+
+		# TEXTURE TILES
+		elif red_tile_indices.has(i):
+			texture = red_tile_texture
+		elif shop_tile_indices.has(i):
+			texture = shop_tile_texture
+		#elif event_tile_indices.has(i):
+		#	texture = event_tile_texture
+		#elif treasure_tile_indices.has(i):
+		#	texture = treasure_tile_texture
+		elif chance_tile_indices.has(i):
+			texture = chance_tile_texture
+
+
 		draw_rect(rect, tile_color, true)
-		draw_rect(rect, Color.WHITE, false, 2.0)
+
+		if texture != null:
+			_draw_texture_tile(texture, rect)
+
+		if texture == null:
+			draw_rect(rect, Color.WHITE, false, 2.0)
