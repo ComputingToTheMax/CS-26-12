@@ -24,7 +24,6 @@ config/icon="res://icon.svg"
 
 ui="*res://Scripts/UI/UI.gd"
 Navigator="*res://Scripts/Navigator.gd"
-GlobalSettings="*res://Scripts/GlobalVariables/global_settings.gd"
 Settings="*res://Scripts/PlayerSettings.gd"
 MoneySave="*uid://co0jfodd27uxj"
 PauseMenu="*uid://b7wnjbm0o6fjj"
@@ -34,6 +33,7 @@ QuestManager="*uid://bo3cysswmv8iq"
 Audio="*uid://cdwbtxfo0sn4m"
 GameTheme="*uid://puffnybb4spu"
 StageManager="*uid://cp6tbet07cvsh"
+GlobalSettings="*uid://cewj5y0q4j6ae"
 
 [display]
 
