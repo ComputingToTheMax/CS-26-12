@@ -111,14 +111,17 @@ func _show_chance_prompt(message: String) -> void:
 	var prompt := offer_scene.instantiate()
 	Board.overlay_root.add_child(prompt)
 
-	if prompt.has_method("setup_prompt"):
-		prompt.setup_prompt(message, "OK", "Skip")
+	if prompt.has_method("setup_check_prompt"):
+		prompt.setup_check_prompt(message)
+	elif prompt.has_method("setup_prompt"):
+		prompt.setup_prompt(message, "OK", "")
 	elif prompt.has_method("setup"):
 		prompt.setup("Chance Card")
 	else:
-		push_warning("Chance prompt scene does not have setup_prompt().")
+		push_warning("Chance prompt scene does not have a setup function.")
 
 	await prompt.choice
+
 func _apply_chance_effect(effect: Dictionary) -> void:
 	var effect_type: String = str(effect["type"])
 
