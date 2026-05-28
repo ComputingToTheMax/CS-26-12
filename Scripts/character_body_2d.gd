@@ -266,6 +266,7 @@ func _lose_random_part() -> void:
 	player_inventory.set_slot(chosen_index, null)
 
 func roll_and_move(amount: int = 0) -> void:
+	Board._refresh_quest_display()
 	if not initialized:
 		push_error("roll_and_move called too early")
 		return
@@ -358,6 +359,7 @@ func _open_shop() -> void:
 
 	can_roll = true
 	busy = false
+	Board._refresh_quest_display()
 
 func _update_turn_label() -> void:
 	var board_iterations: int = _get_board_iterations_completed()
@@ -380,6 +382,8 @@ func _set_board_ui_visible(is_visible: bool) -> void:
 
 	if inventory_overlay != null and not is_visible:
 		inventory_overlay.hide()
+
+	Board.set_quest_bar_visible(is_visible)
 
 func _configure_minigames() -> void:
 	minigames.clear()
@@ -495,6 +499,7 @@ func _show_reward_screen() -> void:
 		return
 
 	Board.overlay_root.visible = false
+	Board._refresh_quest_display()
 
 func _get_board_iterations_completed() -> int:
 	var board_count: int = Board.get_tile_count()

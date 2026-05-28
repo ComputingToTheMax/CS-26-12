@@ -141,4 +141,27 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="QuestBar" type="HBoxContainer" parent="GameOverlay" unique_id=339254253]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Quest1" type="Label" parent="GameOverlay/QuestBar" unique_id=435761289]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+autowrap_mode = 3
+
+[node name="Quest2" type="Label" parent="GameOverlay/QuestBar" unique_id=835940217]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+autowrap_mode = 3
+
+[node name="Quest3" type="Label" parent="GameOverlay/QuestBar" unique_id=953178460]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+autowrap_mode = 3
+
 [connection signal="pressed" from="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer2/InvBtn" to="HUD/HUDBase" method="_on_inv_btn_pressed"]
