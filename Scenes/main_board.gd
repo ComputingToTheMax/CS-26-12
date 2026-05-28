@@ -38,6 +38,7 @@ signal branch_prompt_closed(chose_branch: bool, next_index: int)
 
 @onready var overlay_root: Control = get_node_or_null("Overlay/OverlayRoot") as Control
 @onready var game_root: Control = $GameOverlay/GameRoot
+@onready var quest_bar: HBoxContainer = $GameOverlay/QuestBar as HBoxContainer
 
 var rng := RandomNumberGenerator.new()
 
@@ -65,6 +66,39 @@ var _active_prompt_root_index: int = -1
 func _ready() -> void:
 	rng.randomize()
 	_setup_board_delayed()
+	if quest_bar != null:
+		quest_bar.anchor_left = 0.0
+		quest_bar.anchor_right = 1.0
+		quest_bar.anchor_top = 1.0
+		quest_bar.anchor_bottom = 1.0
+		quest_bar.offset_left = 10.0
+		quest_bar.offset_right = -10.0
+		quest_bar.offset_top = -160.0
+		quest_bar.offset_bottom = -10.0
+		quest_bar.add_theme_constant_override("separation", 16)
+	_refresh_quest_display()
+
+func _refresh_quest_display() -> void:
+	if quest_bar == null:
+		return
+	QuestManager.check_all()
+	var labels: Array = quest_bar.get_children()
+	for i in range(3):
+		if i >= labels.size():
+			break
+		var label: Label = labels[i] as Label
+		if label == null:
+			continue
+		var q: Quest = QuestManager.get_quest(i + 1)
+		if q == null:
+			label.text = "Quest %d: not yet generated" % (i + 1)
+		else:
+			var status: String = "COMPLETE" if q.is_complete else "incomplete"
+			label.text = "Quest %d — %s\n%s\n[%s]" % [i + 1, q.title, q.description, status]
+
+func set_quest_bar_visible(v: bool) -> void:
+	if quest_bar != null:
+		quest_bar.visible = v
 
 func _setup_board_delayed() -> void:
 	await get_tree().process_frame
