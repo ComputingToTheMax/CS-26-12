@@ -534,7 +534,6 @@ func _draw_tiles() -> void:
 		var tile_color := Color(0.45, 0.45, 0.45)
 		var texture: Texture2D = null
 
-		# COLOR TILES
 		if i == start_tile_index:
 			tile_color = Color(0.2, 0.85, 0.2)
 		elif branch_rejoins.has(i):
@@ -542,25 +541,20 @@ func _draw_tiles() -> void:
 		elif all_branch_indices.has(i):
 			tile_color = Color(0.35, 0.55, 0.75)
 		elif branch_roots.has(i):
-			texture=branch_tile_texture
+			tile_color = Color(0.35, 0.55, 0.75)
 
-		# TEXTURE TILES
-		elif red_tile_indices.has(i):
+		if red_tile_indices.has(i):
 			texture = red_tile_texture
 		elif shop_tile_indices.has(i):
 			texture = shop_tile_texture
-		#elif event_tile_indices.has(i):
-		#	texture = event_tile_texture
-		#elif treasure_tile_indices.has(i):
-		#	texture = treasure_tile_texture
 		elif chance_tile_indices.has(i):
 			texture = chance_tile_texture
-
+		elif branch_roots.has(i):
+			texture = branch_tile_texture
 
 		draw_rect(rect, tile_color, true)
 
 		if texture != null:
 			_draw_texture_tile(texture, rect)
 
-		if texture == null:
-			draw_rect(rect, Color.WHITE, false, 2.0)
+		draw_rect(rect, Color.WHITE, false, 2.0)
