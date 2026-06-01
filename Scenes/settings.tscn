@@ -23,7 +23,7 @@ theme_override_font_sizes/font_size = 32
 text = "Return
 "
 script = ExtResource("3_lhmql")
-target_scene_path = "res://Scenes/main_menu.tscn"
+target_scene_path = "res://Scenes/MainMenu/main_menu_2.tscn"
 
 [node name="ToggleSoundButton" type="Button" parent="Background" unique_id=576642616]
 offset_left = -900.0
