@@ -11,7 +11,7 @@ func _ready():
 	add_child(click_player)
 
 	# Load the click sound file
-	click_player.stream = load("res://Sources/Sounds/click.wav")
+	click_player.stream = load("res://Sources/Sounds/Click.wav")
 	click_player.volume_db = -80.0
 
 	fade_rect.color.a=1.0
