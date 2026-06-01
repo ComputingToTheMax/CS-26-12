@@ -1,29 +1,29 @@
-[gd_scene format=3 uid="uid://cpmdovpetc8ty"]
+[gd_scene format=3 uid="uid://dp206yg02bi8s"]
 
-[ext_resource type="Texture2D" uid="uid://b760yqcfgp404" path="res://Sources/Images/AsteroidMinigame/BlackSpaceBackground2.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="2"]
-[ext_resource type="Script" uid="uid://bj305n2l3jng8" path="res://Scenes/GameSetup/game_setup_1.gd" id="2_6dk6o"]
-[ext_resource type="Script" uid="uid://jg740726aevo" path="res://Scripts/main_menu_scene.gd" id="3"]
-[ext_resource type="Texture2D" uid="uid://dmsm4lpd63fya" path="res://Sources/Images/Psyche_Icon_Color-PNG.png" id="3_gtard"]
-[ext_resource type="Theme" uid="uid://d33wx43jvdny0" path="res://Themes/primary_game_theme.tres" id="3_jr6u5"]
-[ext_resource type="Shader" uid="uid://btd5q6cjf24tg" path="res://Shaders/floating_shader.tres" id="3_t1dhk"]
-[ext_resource type="Texture2D" uid="uid://cr5kndstdjdki" path="res://Sources/Images/StarSmall-1.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://dj700dm2g3hel" path="res://Sources/Images/PlayerSelection/Standard 1.svg" id="4_6m47u"]
-[ext_resource type="Texture2D" uid="uid://b48301im34184" path="res://Sources/Images/PlayerSelection/Wave 1.svg" id="5_84iac"]
-[ext_resource type="Shader" uid="uid://dqs4472nlo58l" path="res://Shaders/16PsycheVisualShader.tres" id="5_aae8c"]
-[ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="5_vno1p"]
-[ext_resource type="Texture2D" uid="uid://cga61nc5ec372" path="res://Sources/Images/PlayerSelection/Standard 2.svg" id="6_5n0dv"]
-[ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="6_6mw8b"]
-[ext_resource type="Texture2D" uid="uid://bdrt0u0qj0o5c" path="res://Sources/Images/PlayerSelection/Wave 2.svg" id="7_ne6ao"]
-[ext_resource type="Texture2D" uid="uid://csavoyffrds2n" path="res://Sources/Images/PlayerSelection/Standard 3.svg" id="8_tt8ml"]
-[ext_resource type="Texture2D" uid="uid://b6doxvtikh8pe" path="res://Sources/Images/PlayerSelection/Wave 3.svg" id="9_fmarx"]
-[ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/settings.tscn" id="9_qg82j"]
-[ext_resource type="Texture2D" uid="uid://cpfawjltxl5ie" path="res://Sources/Images/PlayerSelection/Standard 4.svg" id="10_hkdq0"]
-[ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/Credits/credits.tscn" id="11_t1dhk"]
-[ext_resource type="Texture2D" uid="uid://drlafv6f5v1o" path="res://Sources/Images/PlayerSelection/Wave 4.svg" id="11_xcoo4"]
-[ext_resource type="Theme" uid="uid://cq22sdrr66eho" path="res://Themes/primary_game_theme.res" id="18_6m47u"]
-[ext_resource type="Texture2D" uid="uid://cc4sfu2uhgrdr" path="res://Sources/Images/logo.png" id="20_logo"]
-[ext_resource type="PackedScene" uid="uid://085emeti05rs" path="res://Scenes/GameSetup/game_setup_2.tscn" id="21_6m47u"]
+[ext_resource type="Script" uid="uid://jg740726aevo" path="res://Scripts/main_menu_scene.gd" id="1_4hia1"]
+[ext_resource type="Script" uid="uid://bj305n2l3jng8" path="res://Scenes/GameSetup/game_setup_1.gd" id="2_emhx8"]
+[ext_resource type="Theme" uid="uid://d33wx43jvdny0" path="res://Themes/primary_game_theme.tres" id="3_olghv"]
+[ext_resource type="Texture2D" uid="uid://dj700dm2g3hel" path="res://Sources/Images/PlayerSelection/Standard 1.svg" id="4_fmmb7"]
+[ext_resource type="Texture2D" uid="uid://b48301im34184" path="res://Sources/Images/PlayerSelection/Wave 1.svg" id="5_pgdsx"]
+[ext_resource type="Texture2D" uid="uid://cga61nc5ec372" path="res://Sources/Images/PlayerSelection/Standard 2.svg" id="6_m0242"]
+[ext_resource type="Texture2D" uid="uid://bdrt0u0qj0o5c" path="res://Sources/Images/PlayerSelection/Wave 2.svg" id="7_ldibx"]
+[ext_resource type="Texture2D" uid="uid://csavoyffrds2n" path="res://Sources/Images/PlayerSelection/Standard 3.svg" id="8_ur66q"]
+[ext_resource type="Texture2D" uid="uid://b6doxvtikh8pe" path="res://Sources/Images/PlayerSelection/Wave 3.svg" id="9_k6axu"]
+[ext_resource type="Texture2D" uid="uid://cpfawjltxl5ie" path="res://Sources/Images/PlayerSelection/Standard 4.svg" id="10_soaxm"]
+[ext_resource type="Texture2D" uid="uid://drlafv6f5v1o" path="res://Sources/Images/PlayerSelection/Wave 4.svg" id="11_yujbh"]
+[ext_resource type="Texture2D" uid="uid://b760yqcfgp404" path="res://Sources/Images/AsteroidMinigame/BlackSpaceBackground2.png" id="12_0y4ql"]
+[ext_resource type="Shader" uid="uid://btd5q6cjf24tg" path="res://Shaders/floating_shader.tres" id="13_e8gen"]
+[ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="14_h67rt"]
+[ext_resource type="Texture2D" uid="uid://cr5kndstdjdki" path="res://Sources/Images/StarSmall-1.png" id="15_48x4q"]
+[ext_resource type="Shader" uid="uid://dqs4472nlo58l" path="res://Shaders/16PsycheVisualShader.tres" id="16_rq8cy"]
+[ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="17_v7yj8"]
+[ext_resource type="Texture2D" uid="uid://cc4sfu2uhgrdr" path="res://Sources/Images/logo.png" id="18_mwucu"]
+[ext_resource type="Theme" uid="uid://cq22sdrr66eho" path="res://Themes/primary_game_theme.res" id="19_0g48w"]
+[ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="20_co8y8"]
+[ext_resource type="PackedScene" uid="uid://085emeti05rs" path="res://Scenes/GameSetup/game_setup_2.tscn" id="21_gwwnx"]
+[ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/settings.tscn" id="22_3cdni"]
+[ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/Credits/credits.tscn" id="23_rocsw"]
+[ext_resource type="Texture2D" uid="uid://dmsm4lpd63fya" path="res://Sources/Images/Psyche_Icon_Color-PNG.png" id="24_r34qw"]
 
 [sub_resource type="PackedScene" id="PackedScene_6vfk8"]
 _bundled = {
@@ -36,15 +36,15 @@ _bundled = {
 "node_ids": PackedInt32Array(834572310, 1263779454, 143105090, 2006910498, 924710276, 954203279, 1873833560, 1448346743, 976206766, 1543845889, 168491523, 911399768, 1582279425),
 "node_paths": [NodePath("."), NodePath("./VBoxContainer"), NodePath("./VBoxContainer"), NodePath("./VBoxContainer/HBoxContainer"), NodePath("./VBoxContainer/HBoxContainer"), NodePath("./VBoxContainer/HBoxContainer"), NodePath("./VBoxContainer/HBoxContainer"), NodePath("./VBoxContainer"), NodePath("./VBoxContainer/CenterContainer"), NodePath("./VBoxContainer/CenterContainer/HBoxContainer2"), NodePath("./VBoxContainer"), NodePath("./VBoxContainer/MarginContainer")],
 "nodes": PackedInt32Array(-1, -1, 1, 0, -1, 8, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 0, 1073741824, 0, 11, 10, -1, 7, 12, 8, 13, 9, 14, 10, 15, 11, 16, 12, 17, 13, 18, 14, 0, 1073741825, 0, 20, 19, -1, 7, 21, 15, 22, 16, 23, 17, 24, 18, 25, 19, 26, 20, 27, 21, 0, 1073741826, 0, 29, 28, -1, 4, 30, 22, 31, 23, 32, 24, 33, 25, 0, 1073741827, 0, 35, 34, -1, 7, 36, 26, 37, 27, 38, 28, 39, 29, 40, 30, 41, 31, 42, 32, 0, 1073741828, 0, 44, 43, -1, 7, 45, 33, 46, 34, 47, 35, 48, 36, 49, 37, 50, 38, 51, 39, 0, 1073741829, 0, 53, 52, -1, 7, 54, 40, 55, 41, 56, 42, 57, 43, 58, 44, 59, 45, 60, 46, 0, 1073741830, 0, 62, 61, -1, 7, 63, 47, 64, 48, 65, 49, 66, 50, 67, 51, 68, 52, 69, 53, 0, 1073741831, 0, 71, 70, -1, 1, 72, 54, 0, 1073741832, 0, 74, 73, -1, 1, 75, 55, 0, 1073741833, 0, 77, 76, -1, 4, 78, 56, 79, 57, 80, 58, 81, 59, 0, 1073741834, 0, 83, 82, -1, 2, 84, 60, 85, 61, 0, 1073741835, 0, 87, 86, -1, 2, 88, 62, 89, 63, 0),
-"variants": [3, 15, 1.0, 1.0, 2, 2, 2, ExtResource("2_6dk6o"), 1, -1, 0.075, 0.925, 0.925, 2, 2, 2, 3, ExtResource("3_jr6u5"), true, "[b]How Many Players?[/b]", 1, 1, 2, 3, 45, 1, 2, 3, true, ExtResource("4_6m47u"), ExtResource("5_84iac"), true, 5, 2, 3, true, ExtResource("6_5n0dv"), ExtResource("7_ne6ao"), true, 5, 2, 3, true, ExtResource("8_tt8ml"), ExtResource("9_fmarx"), true, 5, 2, 3, true, ExtResource("10_hkdq0"), ExtResource("11_xcoo4"), true, 5, 2, 2, true, 2, true, "Play Tutorial", 2, 20, 2, "Confirm"],
+"variants": [3, 15, 1.0, 1.0, 2, 2, 2, ExtResource("2_emhx8"), 1, -1, 0.075, 0.925, 0.925, 2, 2, 2, 3, ExtResource("3_olghv"), true, "[b]How Many Players?[/b]", 1, 1, 2, 3, 45, 1, 2, 3, true, ExtResource("4_fmmb7"), ExtResource("5_pgdsx"), true, 5, 2, 3, true, ExtResource("6_m0242"), ExtResource("7_ldibx"), true, 5, 2, 3, true, ExtResource("8_ur66q"), ExtResource("9_k6axu"), true, 5, 2, 3, true, ExtResource("10_soaxm"), ExtResource("11_yujbh"), true, 5, 2, 2, true, 2, true, "Play Tutorial", 2, 20, 2, "Confirm"],
 "version": 3
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5egv6"]
-shader = ExtResource("3_t1dhk")
+shader = ExtResource("13_e8gen")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qg82j"]
-shader = ExtResource("5_aae8c")
+shader = ExtResource("16_rq8cy")
 
 [sub_resource type="LabelSettings" id="LabelSettings_2sbhq"]
 font_size = 35
@@ -60,7 +60,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("3")
+script = ExtResource("1_4hia1")
 play_target_scene = SubResource("PackedScene_6vfk8")
 
 [node name="FadeLayer" type="CanvasLayer" parent="." unique_id=689771045]
@@ -83,25 +83,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1")
+texture = ExtResource("12_0y4ql")
 
 [node name="Astronaut (Sprite2D)" type="Sprite2D" parent="." unique_id=227890255]
 visible = false
 material = SubResource("ShaderMaterial_5egv6")
 position = Vector2(254.50002, 380.88046)
 scale = Vector2(2.9374993, 3.1131108)
-texture = ExtResource("2")
+texture = ExtResource("14_h67rt")
 
 [node name="Star" type="Sprite2D" parent="." unique_id=1217485]
 position = Vector2(200, 200)
-texture = ExtResource("4")
+texture = ExtResource("15_48x4q")
 
 [node name="16Psyche" type="Sprite2D" parent="." unique_id=872566904]
 visible = false
 material = SubResource("ShaderMaterial_qg82j")
 position = Vector2(914, 194)
 scale = Vector2(0.38981482, 0.41296297)
-texture = ExtResource("5_vno1p")
+texture = ExtResource("17_v7yj8")
 
 [node name="Label" type="Label" parent="16Psyche" unique_id=1801097014]
 offset_left = -51.30641
@@ -127,7 +127,7 @@ size_flags_stretch_ratio = 2.0
 [node name="GameLogo" type="TextureRect" parent="PsycheAsteroid/VBoxContainer" unique_id=28937935]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("20_logo")
+texture = ExtResource("18_mwucu")
 expand_mode = 1
 stretch_mode = 4
 
@@ -168,7 +168,7 @@ size_flags_stretch_ratio = 1.5
 [node name="TextureRect" type="TextureRect" parent="GameMenu/UpperBlock/HBoxContainer" unique_id=511335666]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("5_vno1p")
+texture = ExtResource("17_v7yj8")
 expand_mode = 1
 stretch_mode = 4
 
@@ -184,7 +184,7 @@ offset_top = -20.0
 offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
-theme = ExtResource("18_6m47u")
+theme = ExtResource("19_0g48w")
 text = "Asteroid 16 Psyche"
 label_settings = SubResource("LabelSettings_2sbhq")
 vertical_alignment = 2
@@ -214,7 +214,7 @@ size_flags_horizontal = 3
 material = SubResource("ShaderMaterial_5egv6")
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("2")
+texture = ExtResource("14_h67rt")
 expand_mode = 1
 stretch_mode = 4
 
@@ -230,28 +230,28 @@ theme_override_constants/separation = 14
 
 [node name="PlayButton" type="Button" parent="GameMenu/ButtonBlock/MarginContainer/GameMenuButtons" unique_id=1743614122]
 layout_mode = 2
-theme = ExtResource("18_6m47u")
+theme = ExtResource("19_0g48w")
 theme_override_font_sizes/font_size = 32
 text = "Play"
-script = ExtResource("6_6mw8b")
-target_scene = ExtResource("21_6m47u")
+script = ExtResource("20_co8y8")
+target_scene = ExtResource("21_gwwnx")
 reset_game_on_press = true
 
 [node name="SettingsButton" type="Button" parent="GameMenu/ButtonBlock/MarginContainer/GameMenuButtons" unique_id=2004235370]
 layout_mode = 2
-theme = ExtResource("18_6m47u")
+theme = ExtResource("19_0g48w")
 theme_override_font_sizes/font_size = 32
 text = "Settings"
-script = ExtResource("6_6mw8b")
-target_scene = ExtResource("9_qg82j")
+script = ExtResource("20_co8y8")
+target_scene = ExtResource("22_3cdni")
 
 [node name="CreditsButton" type="Button" parent="GameMenu/ButtonBlock/MarginContainer/GameMenuButtons" unique_id=1033019032]
 layout_mode = 2
-theme = ExtResource("18_6m47u")
+theme = ExtResource("19_0g48w")
 theme_override_font_sizes/font_size = 32
 text = "Credits"
-script = ExtResource("6_6mw8b")
-target_scene = ExtResource("11_t1dhk")
+script = ExtResource("20_co8y8")
+target_scene = ExtResource("23_rocsw")
 
 [node name="RightButtonPadding" type="Control" parent="GameMenu/ButtonBlock" unique_id=588748314]
 layout_mode = 2
@@ -282,7 +282,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_84iac")
-icon = ExtResource("3_gtard")
+icon = ExtResource("24_r34qw")
 icon_alignment = 1
 expand_icon = true
 
@@ -290,4 +290,4 @@ expand_icon = true
 visible = false
 position = Vector2(360.00006, 129)
 scale = Vector2(0.54296875, 0.40722656)
-texture = ExtResource("20_logo")
+texture = ExtResource("18_mwucu")

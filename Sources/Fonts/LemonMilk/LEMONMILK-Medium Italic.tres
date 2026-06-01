@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" format=3 uid="uid://dtw4sxqvsyr5k"]
+
+[ext_resource type="FontFile" uid="uid://g7mo5oft3ksi" path="res://Sources/Fonts/LemonMilk/LEMONMILK-MediumItalic.otf" id="1_rm6cl"]
+
+[resource]
+base_font = ExtResource("1_rm6cl")

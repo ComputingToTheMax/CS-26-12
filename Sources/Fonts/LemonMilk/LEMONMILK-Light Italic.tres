@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" format=3 uid="uid://bqtxnak3el31"]
+
+[ext_resource type="FontFile" uid="uid://c001is2atxpq2" path="res://Sources/Fonts/LemonMilk/LEMONMILK-LightItalic.otf" id="1_ulikh"]
+
+[resource]
+base_font = ExtResource("1_ulikh")
