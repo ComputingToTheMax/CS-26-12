@@ -22,10 +22,13 @@
 [ext_resource type="Texture2D" uid="uid://cc4sfu2uhgrdr" path="res://Sources/Images/logo.png" id="20_flg3m"]
 [ext_resource type="Theme" uid="uid://cq22sdrr66eho" path="res://Themes/primary_game_theme.res" id="21_pgl5d"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="22_25pk5"]
+[ext_resource type="Texture2D" uid="uid://b1jreamxbqyvb" path="res://Sources/Icons/rocket.svg" id="22_oabop"]
 [ext_resource type="PackedScene" uid="uid://085emeti05rs" path="res://Scenes/GameSetup/game_setup_2.tscn" id="23_clwl7"]
 [ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/settings.tscn" id="24_k0rfa"]
 [ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/Credits/credits.tscn" id="25_50b1j"]
+[ext_resource type="Texture2D" uid="uid://xur3ghc7kwj0" path="res://Sources/Icons/cog.svg" id="25_g31n2"]
 [ext_resource type="Texture2D" uid="uid://dmsm4lpd63fya" path="res://Sources/Images/Psyche_Icon_Color-PNG.png" id="26_vcwvx"]
+[ext_resource type="Texture2D" uid="uid://du3sqg15p6yr3" path="res://Sources/Icons/heart.svg" id="27_logkf"]
 [ext_resource type="Texture2D" uid="uid://dmx2fpdu3penv" path="res://Scenes/MainMenu/Images/Overlay.png" id="27_m5n0w"]
 
 [sub_resource type="PackedScene" id="PackedScene_6vfk8"]
@@ -250,8 +253,12 @@ theme_override_constants/separation = 14
 [node name="PlayButton" type="Button" parent="GameMenu/ButtonBlock/MarginContainer/GameMenuButtons" unique_id=1743614122]
 layout_mode = 2
 theme = ExtResource("21_pgl5d")
+theme_type_variation = &"BigButton"
 theme_override_font_sizes/font_size = 32
 text = "Play"
+icon = ExtResource("22_oabop")
+icon_alignment = 2
+expand_icon = true
 script = ExtResource("22_25pk5")
 target_scene = ExtResource("23_clwl7")
 reset_game_on_press = true
@@ -261,6 +268,9 @@ layout_mode = 2
 theme = ExtResource("21_pgl5d")
 theme_override_font_sizes/font_size = 32
 text = "Settings"
+icon = ExtResource("25_g31n2")
+icon_alignment = 2
+expand_icon = true
 script = ExtResource("22_25pk5")
 target_scene = ExtResource("24_k0rfa")
 
@@ -269,6 +279,9 @@ layout_mode = 2
 theme = ExtResource("21_pgl5d")
 theme_override_font_sizes/font_size = 32
 text = "Credits"
+icon = ExtResource("27_logkf")
+icon_alignment = 2
+expand_icon = true
 script = ExtResource("22_25pk5")
 target_scene = ExtResource("25_50b1j")
 
@@ -346,6 +359,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("27_m5n0w")
 expand_mode = 1
 stretch_mode = 4
