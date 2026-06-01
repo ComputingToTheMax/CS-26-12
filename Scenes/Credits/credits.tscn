@@ -40,20 +40,22 @@ custom_minimum_size = Vector2(920, 0)
 layout_mode = 2
 size_flags_vertical = 4
 bbcode_enabled = true
-text = "[center]Developers:[/center]
+text = "[center][font_size=32][b]The Crew[/b][/font_size][/center]
+
+[center][font_size=20][b]Developers[/b][/font_size][/center]
 [center]May Bak | Seattle University[/center]
 [center]Christian Buenafe | Seattle University[/center]
 [center]Avery Feingold | Seattle University[/center]
 [center]Max Tran | Seattle University[/center]
 
-[center]Project Sponsor:[/center]
+[center][font_size=20][b]Project Sponsor[/b][/font_size][/center]
 [center]NASA Psyche Capstone[/center]
 
-[center]Project Sponsor:[/center]
+[center][font_size=20][b]Project Sponsor Contact[/b][/font_size][/center]
 [center]Dr. Cassie Bowman | Arizona State University[/center]
 [center][/center]
 
-[center]Project Advisor:[/center]
+[center][font_size=20][b]Project Advisor[/b][/font_size][/center]
 [center]Dr. Braxton Cuneo | Seattle University[/center]
 [center][/center]"
 fit_content = true
@@ -64,7 +66,36 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer" unique_id=221457580]
+[node name="ProjectInformation2" type="RichTextLabel" parent="VBoxContainer" unique_id=1529615037]
+custom_minimum_size = Vector2(920, 0)
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center][font_size=32][b]Resource Credits[/b][/font_size][/center]
+
+[center][font_size=20][b]Fonts[/b][/font_size][/center]
+[center]LEMON MILK font by MARSNEV[/center]
+[center]www.marsnev.com[/center]
+[center][/center]
+
+[center][font_size=20][b]Images[/b][/font_size][/center]
+[center]...[/center]
+[center][/center]
+
+[center][font_size=20][b]SectionB[/b][/font_size][/center]
+[center][/center]
+
+[center][font_size=20][b]SectionC[/b][/font_size][/center]
+[center][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=490540608]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PsycheCapstoneDisclaimer" type="RichTextLabel" parent="VBoxContainer" unique_id=221457580]
 custom_minimum_size = Vector2(920, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -73,7 +104,7 @@ text = "[center]This work was created in partial fulfillment of Seattle Universi
 fit_content = true
 scroll_active = false
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=490540608]
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer" unique_id=742665591]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
