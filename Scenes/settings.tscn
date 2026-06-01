@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://wvsan6sbtn7d" path="res://Scripts/settings_scene.gd" id="1_i44u3"]
 [ext_resource type="Texture2D" uid="uid://dh1lxoawqexr1" path="res://Sources/Images/SpaceBackgroundPlain.jpeg" id="2_lhmql"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="3_lhmql"]
+[ext_resource type="Texture2D" uid="uid://bl28wqma1yqya" path="res://Sources/Icons/mouse-pointer-click.svg" id="4_6vr2p"]
 [ext_resource type="Texture2D" uid="uid://cf8ufdh4svodq" path="res://Sources/Images/PsycheAsteroid.png" id="4_j2dne"]
 [ext_resource type="Texture2D" uid="uid://drfn575l1epwe" path="res://Sources/Images/SpacemanCharacter1.png" id="5_6kysc"]
+[ext_resource type="Texture2D" uid="uid://b358juljej20k" path="res://Sources/Icons/message-square-text.svg" id="5_f60ng"]
 
 [node name="SettingsScreen" type="Node2D" unique_id=990252595 groups=["no_pause"]]
 script = ExtResource("1_i44u3")
@@ -28,18 +30,22 @@ target_scene_path = "res://Scenes/MainMenu/main_menu_2.tscn"
 [node name="ToggleSoundButton" type="Button" parent="Background" unique_id=576642616]
 offset_left = -900.0
 offset_top = -198.736
-offset_right = -563.0
-offset_bottom = -145.736
+offset_right = -427.89282
+offset_bottom = -131.736
 theme_override_font_sizes/font_size = 32
 text = "Disable Click Sound"
+icon = ExtResource("4_6vr2p")
+expand_icon = true
 
 [node name="ToggleMinigameIntro" type="Button" parent="Background" unique_id=2109623741]
 offset_left = -900.0
 offset_top = 22.885
-offset_right = -533.0
-offset_bottom = 75.885
+offset_right = -351.06012
+offset_bottom = 89.885
 theme_override_font_sizes/font_size = 32
 text = "Disable Minigame Intro"
+icon = ExtResource("5_f60ng")
+expand_icon = true
 
 [node name="Label" type="Label" parent="Background" unique_id=1213956689]
 offset_left = -850.0
