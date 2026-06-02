@@ -3,7 +3,7 @@ class_name PauseManager
 
 @export var pause_menu_scene: PackedScene = preload("res://Scenes/UI/PauseMenu.tscn")
 @export var pause_disabled_scenes: Array[String] = [
-	"res://Scenes/main_menu.tscn",
+	"res://Scenes/MainMenu/main_menu_2.tscn",
 	"res://Scenes/settings.tscn"
 ]
 var menu: pauseMe
@@ -39,5 +39,7 @@ func _spawn_menu() -> void:
 func _go_main_menu() -> void:
 	if menu:
 		menu.close()
-	Navigator.go_to_scene_by_path("res://Scenes/main_menu.tscn")
+	Navigator.scenes_in_memory.clear()
+	Navigator.previous_scene_stack.clear()
+	get_tree().change_scene_to_file("res://Scenes/MainMenu/main_menu_2.tscn")
 	

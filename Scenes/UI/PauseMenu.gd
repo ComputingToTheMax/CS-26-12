@@ -39,4 +39,4 @@ func _on_settings_pressed()->void:
 
 func _on_main_menu_pressed() -> void:
 	close()
-	Navigator.go_to_scene_by_path("res://Scenes/main_menu.tscn")
+	emit_signal("main_menu_requested")

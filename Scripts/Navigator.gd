@@ -4,7 +4,7 @@ class_name SceneNavigator
 var scenes_in_memory: Dictionary[String, Node] = {}
 
 var previous_scene_stack: Array[String] = []
-@export var fallback_scene: String = "res://Scenes/main_menu.tscn"
+@export var fallback_scene: String = "res://Scenes/MainMenu/main_menu_2.tscn"
 
 func go_to_packed_scene(target_scene: PackedScene, push_onto_previous_scene_stack=true, retain_in_memory:bool=true):
 	var target_scene_path = target_scene.resource_path

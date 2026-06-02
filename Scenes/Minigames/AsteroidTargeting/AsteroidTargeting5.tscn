@@ -49,6 +49,7 @@ stream = ExtResource("3_vka2x")
 
 [node name="Background Music" type="AudioStreamPlayer" parent="Control/BlackSpaceBackground2" unique_id=1200477334]
 stream = ExtResource("4_r8cee")
+volume_db = -16.48
 parameters/looping = true
 
 [node name="AsteroidOutline" type="Sprite2D" parent="." unique_id=1851920671]
