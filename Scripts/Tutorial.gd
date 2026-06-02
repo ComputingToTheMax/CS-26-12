@@ -153,7 +153,9 @@ func _set_tex(rect: TextureRect, path: Variant, label_name: String) -> void:
 
 func _on_pause_main_menu() -> void:
 	get_tree().paused = false
-	Navigator.go_to_scene_by_path("res://Scenes/main_menu.tscn")
+	Navigator.scenes_in_memory.clear()
+	Navigator.previous_scene_stack.clear()
+	get_tree().change_scene_to_file("res://Scenes/MainMenu/main_menu_2.tscn")
 
 func _show_dialog_entry(index: int) -> void:
 	if index < 0 or index >= dialog_entries.size():
