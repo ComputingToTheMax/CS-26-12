@@ -19,4 +19,4 @@ func _process(delta: float) -> void:
 	if (lastElement.global_position.y + lastElement.size.y + 50) < 0:
 		credits_finished = true
 		await get_tree().create_timer(0.5).timeout
-		$Button.emit_signal("pressed")
+		$ReturnButton.emit_signal("pressed")
