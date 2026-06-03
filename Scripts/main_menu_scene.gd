@@ -6,6 +6,9 @@ var target_scene: PackedScene
 #signal request_transition
 @export var play_target_scene: PackedScene
 func _ready():
+	
+	Audio.play_audio("LiftOff!!")
+	
 	# Create the audio player
 	click_player = AudioStreamPlayer.new()
 	add_child(click_player)
