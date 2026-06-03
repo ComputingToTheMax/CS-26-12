@@ -1,8 +1,8 @@
 extends HBoxContainer
 
 @export var player: Node
-@onready var roll: Button = $roll
-@onready var roll1: Button = $roll1
+@onready var roll: TextureButton = $roll
+@onready var roll1: TextureButton = $roll1
 
 func _ready() -> void:
 	if player == null:

@@ -4,8 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://ca758bk7k5kol" path="res://Sources/Images/Player-Idle.png" id="2_e51wb"]
 [ext_resource type="Texture2D" uid="uid://dxlsrut5ml7or" path="res://Sources/Images/MediumArrow-Left-Idle.png" id="2_oc7th"]
 [ext_resource type="Texture2D" uid="uid://cr1ekmexvsbl0" path="res://Sources/Images/Player-Click.png" id="3_lwp4u"]
-[ext_resource type="Texture2D" uid="uid://d32bkckb102w2" path="res://Sources/Images/AsteroidMinigame/NextButtonAsteroidMinigame.png" id="3_s6pj7"]
-[ext_resource type="Texture2D" uid="uid://1fsmagfja11e" path="res://Sources/Images/Spaceship 1.png" id="4_b6trj"]
+[ext_resource type="Texture2D" uid="uid://dr1pdtfp6fsc8" path="res://Sources/Images/UI/CloseButton.png" id="5_fv6l5"]
+[ext_resource type="Script" uid="uid://bkp1ge84kr67m" path="res://Scripts/UI/TextBtnEffect.gd" id="5_lwp4u"]
+[ext_resource type="Texture2D" uid="uid://c6snwdh8irybb" path="res://Sources/Images/UI/ConfirmButton.png" id="7_0txfk"]
+[ext_resource type="Texture2D" uid="uid://b564aaw8ri5kn" path="res://Sources/Images/UI/CancelButton.png" id="8_7e3i3"]
 
 [node name="Inventory" type="Control" unique_id=229675455]
 layout_mode = 3
@@ -114,14 +116,17 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="ItemBtn" type="TextureButton" parent="Screen/MarginContainer/VBoxContainer/TopBar/HBoxContainer" unique_id=798263142]
+visible = false
 layout_mode = 2
 texture_normal = ExtResource("2_e51wb")
 
 [node name="PartBtn" type="TextureButton" parent="Screen/MarginContainer/VBoxContainer/TopBar/HBoxContainer" unique_id=499239263]
+visible = false
 layout_mode = 2
 texture_normal = ExtResource("3_lwp4u")
 
 [node name="MemberBtn" type="TextureButton" parent="Screen/MarginContainer/VBoxContainer/TopBar/HBoxContainer" unique_id=942186296]
+visible = false
 layout_mode = 2
 texture_normal = ExtResource("2_oc7th")
 
@@ -140,7 +145,9 @@ text = "Money: "
 unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 50)
 layout_mode = 2
-texture_normal = ExtResource("2_oc7th")
+texture_normal = ExtResource("5_fv6l5")
+stretch_mode = 6
+script = ExtResource("5_lwp4u")
 
 [node name="CenterContainer" type="CenterContainer" parent="Screen/MarginContainer/VBoxContainer/TopBar" unique_id=1310013105]
 layout_mode = 1
@@ -233,12 +240,15 @@ text = "Text Here
 
 [node name="ConfirmSell" type="TextureButton" parent="Screen/MarginContainer/VBoxContainer/BottomBar/HBoxContainer" unique_id=933902374]
 layout_mode = 2
-texture_normal = ExtResource("3_s6pj7")
-texture_disabled = ExtResource("4_b6trj")
+texture_normal = ExtResource("7_0txfk")
+stretch_mode = 6
+script = ExtResource("5_lwp4u")
 
 [node name="CancelSell" type="TextureButton" parent="Screen/MarginContainer/VBoxContainer/BottomBar/HBoxContainer" unique_id=1411674107]
 layout_mode = 2
-texture_normal = ExtResource("2_oc7th")
+texture_normal = ExtResource("8_7e3i3")
+stretch_mode = 6
+script = ExtResource("5_lwp4u")
 
 [node name="progresscontain" type="Control" parent="Screen/MarginContainer/VBoxContainer" unique_id=946735210]
 visible = false

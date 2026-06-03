@@ -9,9 +9,11 @@
 [ext_resource type="Script" uid="uid://bxp0ysip7hpsw" path="res://Scenes/hud_base.gd" id="4_u7eij"]
 [ext_resource type="Script" uid="uid://d017tj3jo7b21" path="res://Scripts/Inventory/InventoryMod.gd" id="4_wxlku"]
 [ext_resource type="Texture2D" uid="uid://b6vjj0nt5rs8g" path="res://Sources/Images/BoardTiles/chanceSpace3.png" id="5_fhpg6"]
-[ext_resource type="Texture2D" uid="uid://ca758bk7k5kol" path="res://Sources/Images/Player-Idle.png" id="5_njf4n"]
 [ext_resource type="Script" uid="uid://b5k67o2lop2t3" path="res://Scenes/roll.gd" id="6_m4kfr"]
 [ext_resource type="PackedScene" uid="uid://cxllthmye7w1s" path="res://Scenes/UI/Inventory.tscn" id="8_cvtiy"]
+[ext_resource type="Script" uid="uid://bkp1ge84kr67m" path="res://Scripts/UI/TextBtnEffect.gd" id="11_gwpjv"]
+[ext_resource type="Texture2D" uid="uid://cf3m128uodgo0" path="res://Sources/Images/UI/RollButton.png" id="11_sxgxj"]
+[ext_resource type="Texture2D" uid="uid://bq07lxoecesnw" path="res://Sources/Images/UI/InventoryButton.png" id="13_sxgxj"]
 
 [node name="MainBoard" type="Node2D" unique_id=1276912517]
 script = ExtResource("1_6bsxh")
@@ -25,12 +27,6 @@ chance_tile_texture = ExtResource("5_fhpg6")
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=717135484 node_paths=PackedStringArray("Board")]
 script = ExtResource("2_6bsxh")
 Board = NodePath("..")
-cell_size = null
-shop_scene = null
-offer_scene = null
-asteroid = null
-alien = null
-reward_screen = null
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1839333665]
 texture = ExtResource("3_y7j1t")
@@ -80,16 +76,18 @@ size_flags_vertical = 4
 script = ExtResource("6_m4kfr")
 player = NodePath("../../../../../CharacterBody2D")
 
-[node name="roll" type="Button" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1479309207]
+[node name="roll" type="TextureButton" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer" unique_id=35404217]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "Roll"
+texture_normal = ExtResource("11_sxgxj")
+stretch_mode = 6
+script = ExtResource("11_gwpjv")
 
-[node name="roll1" type="Button" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1510673430]
+[node name="roll1" type="TextureButton" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer" unique_id=341732147]
 layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "Roll 1"
+texture_normal = ExtResource("11_sxgxj")
+stretch_mode = 6
+script = ExtResource("11_gwpjv")
 
 [node name="turn counter" type="Label" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer" unique_id=1777530972]
 layout_mode = 2
@@ -107,8 +105,9 @@ size_flags_horizontal = 4
 [node name="InvBtn" type="TextureButton" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer2" unique_id=1575298845]
 unique_name_in_owner = true
 layout_mode = 2
-texture_normal = ExtResource("5_njf4n")
-texture_hover = ExtResource("5_njf4n")
+texture_normal = ExtResource("13_sxgxj")
+stretch_mode = 6
+script = ExtResource("11_gwpjv")
 
 [node name="Control3" type="Control" parent="HUD/HUDBase/MarginContainer/HBoxContainer/HBoxContainer2" unique_id=205676030]
 custom_minimum_size = Vector2(10, 0)
@@ -142,7 +141,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="QuestBar" type="HBoxContainer" parent="GameOverlay" unique_id=339254253]
-layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 

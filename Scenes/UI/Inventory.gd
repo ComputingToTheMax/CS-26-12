@@ -52,17 +52,7 @@ func _ready() -> void:
 	hide()
 	current_category = ItemData.InventoryCategory.PART
 
-	if items_btn != null:
-		items_btn.hide()
-		items_btn.disabled = true
-
-	if members_btn != null:
-		members_btn.hide()
-		members_btn.disabled = true
-
-	if parts_btn != null:
-		parts_btn.hide()
-		parts_btn.disabled = true
+	
 	if money_label == null:
 		push_error("InventoryOverlay: MoneyLabel path is wrong or node is missing.")
 		return
@@ -84,13 +74,12 @@ func _ready() -> void:
 		sell_total_label.hide()
 
 	if sell_confirm_btn != null:
-		#sell_confirm_btn.text = "Sell"
-		sell_confirm_btn.disabled = true
+		_set_button_enabled(sell_confirm_btn, false)
 		sell_confirm_btn.hide()
 		sell_confirm_btn.pressed.connect(_on_sell_confirm_pressed)
 
 	if sell_cancel_btn != null:
-		#sell_cancel_btn.text = "Cancel"
+		_set_button_enabled(sell_cancel_btn, false)
 		sell_cancel_btn.hide()
 		sell_cancel_btn.pressed.connect(_on_sell_cancel_pressed)
 
@@ -111,6 +100,21 @@ func _ready() -> void:
 		bg.modulate.a = 0.0
 	visible = false
 	inventory_ready_for_animation = true
+func _set_button_enabled(button: BaseButton, enabled: bool) -> void:
+	if button == null:
+		return
+
+	if button.has_method("set_enabled"):
+		button.call("set_enabled", enabled)
+		return
+
+	button.disabled = not enabled
+
+	if button is TextureButton:
+		if enabled:
+			button.self_modulate = Color.WHITE
+		else:
+			button.self_modulate = Color(0.45, 0.45, 0.45, 0.55)
 func toggle_inventory() -> void:
 	if is_opening_or_closing:
 		return
@@ -452,17 +456,18 @@ func enter_sell_mode(shop_ref = null) -> void:
 	current_mode = InventoryMode.SELL
 	sell_target_shop = shop_ref
 	marked_for_sale.clear()
+	selected_index = -1
 
 	if sell_total_label != null:
 		sell_total_label.show()
 
 	if sell_confirm_btn != null:
 		sell_confirm_btn.show()
-		sell_confirm_btn.disabled = false
+		_set_button_enabled(sell_confirm_btn, false)
 
 	if sell_cancel_btn != null:
 		sell_cancel_btn.show()
-		sell_cancel_btn.disabled = false
+		_set_button_enabled(sell_cancel_btn, false)
 
 	current_subfilter = "All"
 	_populate_subfilter()
@@ -472,20 +477,20 @@ func exit_sell_mode() -> void:
 	current_mode = InventoryMode.NORMAL
 	sell_target_shop = null
 	marked_for_sale.clear()
+	selected_index = -1
 
 	if sell_total_label != null:
 		sell_total_label.hide()
 
 	if sell_confirm_btn != null:
+		_set_button_enabled(sell_confirm_btn, false)
 		sell_confirm_btn.hide()
-		sell_confirm_btn.disabled = true
 
 	if sell_cancel_btn != null:
+		_set_button_enabled(sell_cancel_btn, false)
 		sell_cancel_btn.hide()
-		sell_cancel_btn.disabled = true
 
 	_rebuild_grid()
-
 func _update_money(amount: int) -> void:
 	if money_label != null:
 		money_label.text = "Money: " + str(amount)
@@ -517,7 +522,10 @@ func _update_sell_buttons() -> void:
 	var has_selection := not marked_for_sale.is_empty()
 
 	if sell_confirm_btn != null:
-		sell_confirm_btn.disabled = not has_selection
+		_set_button_enabled(sell_confirm_btn, has_selection)
+
+	if sell_cancel_btn != null:
+		_set_button_enabled(sell_cancel_btn, has_selection)
 func _on_slot_selected(index: int, source_inventory: InventoryModel) -> void:
 	if source_inventory == null:
 		return
@@ -634,13 +642,14 @@ func _on_sell_confirm_pressed() -> void:
 	_update_sell_total()
 	_rebuild_grid()
 func _on_sell_cancel_pressed() -> void:
-	var shop_ref = sell_target_shop
-	exit_sell_mode()
+	if marked_for_sale.is_empty():
+		return
 
-	await close_inventory()
+	marked_for_sale.clear()
+	selected_index = -1
 
-	if shop_ref != null:
-		shop_ref.show()
+	_update_sell_total()
+	_rebuild_grid()
 func _on_close_pressed() -> void:
 	hide_hover_tooltip()
 
