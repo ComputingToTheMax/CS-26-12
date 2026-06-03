@@ -30,7 +30,6 @@
 [ext_resource type="Texture2D" uid="uid://dmsm4lpd63fya" path="res://Sources/Images/Psyche_Icon_Color-PNG.png" id="26_vcwvx"]
 [ext_resource type="Texture2D" uid="uid://du3sqg15p6yr3" path="res://Sources/Icons/heart.svg" id="27_logkf"]
 [ext_resource type="Texture2D" uid="uid://dmx2fpdu3penv" path="res://Scenes/MainMenu/Images/Overlay.png" id="27_m5n0w"]
-[ext_resource type="AudioStream" uid="uid://bg0sxfbbtqulw" path="res://Sources/Sounds/AsteroidMinigame/BackgroundMusic.ogg" id="31_g31n2"]
 
 [sub_resource type="PackedScene" id="PackedScene_6vfk8"]
 _bundled = {
@@ -364,7 +363,3 @@ mouse_filter = 2
 texture = ExtResource("27_m5n0w")
 expand_mode = 1
 stretch_mode = 4
-
-[node name="BackgroundAudio" type="AudioStreamPlayer" parent="." unique_id=1655035965]
-stream = ExtResource("31_g31n2")
-autoplay = true
