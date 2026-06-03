@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cdwbtxfo0sn4m"]
+
+[ext_resource type="AudioStream" uid="uid://dnwpen1xwmkfy" path="res://Sources/Sounds/Soundtracks/Discover-Opoly OST - Lift Off!!.wav" id="1_sjuyx"]
+[ext_resource type="Script" uid="uid://dukliiyyhivaq" path="res://Scripts/GlobalVariables/audio.gd" id="1_xq3j3"]
+[ext_resource type="Script" uid="uid://bq41y0fske4s2" path="res://Scripts/GlobalVariables/audio_loop.gd" id="2_1tac3"]
+
+[node name="Audio" type="Node" unique_id=564560327]
+script = ExtResource("1_xq3j3")
+
+[node name="LiftOff!!" type="AudioStreamPlayer" parent="." unique_id=1923685137]
+stream = ExtResource("1_sjuyx")
+volume_db = 11.0
+script = ExtResource("2_1tac3")
+
+[connection signal="finished" from="LiftOff!!" to="LiftOff!!" method="_on_finished"]
