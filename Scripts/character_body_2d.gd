@@ -94,6 +94,22 @@ func _open_chance_card() -> void:
 	]
 
 	var effect: Dictionary = effects[rng.randi_range(0, effects.size() - 1)]
+	
+	if str(effect["type"]) == "lose_part" and not _has_any_parts():
+		effect = {
+			"text": "You found a mysterious part!",
+			"type": "gain_part"
+		}
+
+	elif str(effect["type"]) == "money" and int(effect["amount"]) < 0 and _get_current_money() < 10:
+		effect = {
+			"text": "You gained 10 coins!",
+			"type": "money",
+			"amount": 10
+		}
+
+
+
 
 	await _show_chance_prompt(str(effect["text"]))
 	await _apply_chance_effect(effect)
@@ -128,13 +144,61 @@ func _apply_chance_effect(effect: Dictionary) -> void:
 	match effect_type:
 		"money":
 			var amount: int = int(effect["amount"])
-			MoneySave.add_money(amount)
+
+		
+			if amount < 0 and _get_current_money() < 10:
+				MoneySave.add_money(10)
+			else:
+				MoneySave.add_money(amount)
 
 		"gain_part":
 			_gain_random_part()
 
 		"lose_part":
-			_lose_random_part()
+	
+			if _has_any_parts():
+				_lose_random_part()
+			else:
+				_gain_random_part()
+func _has_any_parts() -> bool:
+	var player_inventory: InventoryModel = $InventoryModel
+
+	var range_info: Dictionary = player_inventory.get_category_slot_range(ItemData.InventoryCategory.PART)
+	var start: int = int(range_info["start"])
+	var count: int = int(range_info["count"])
+
+	for i in range(start, start + count):
+		var slot = player_inventory.get_slot(i)
+
+		if slot == null:
+			continue
+
+		if not slot.has("item"):
+			continue
+
+		var part_instance: PartInstance = slot["item"] as PartInstance
+
+		if part_instance != null:
+			return true
+
+	return false
+func _get_current_money() -> int:
+	if MoneySave.has_method("get_money"):
+		return int(MoneySave.get_money())
+
+	if MoneySave.has_method("get_coins"):
+		return int(MoneySave.get_coins())
+
+	var money_value = MoneySave.get("money")
+	if money_value != null:
+		return int(money_value)
+
+	var coins_value = MoneySave.get("coins")
+	if coins_value != null:
+		return int(coins_value)
+
+	push_warning("Could not read current money from MoneySave. Defaulting to 0.")
+	return 0
 func _get_random_part_from_database() -> ItemData:
 	if not FileAccess.file_exists(ITEM_DATABASE_PATH):
 		push_warning("Item database not found: " + ITEM_DATABASE_PATH)
@@ -266,7 +330,6 @@ func _lose_random_part() -> void:
 	player_inventory.set_slot(chosen_index, null)
 
 func roll_and_move(amount: int = 0) -> void:
-	Board._refresh_quest_display()
 	if not initialized:
 		push_error("roll_and_move called too early")
 		return
@@ -359,7 +422,6 @@ func _open_shop() -> void:
 
 	can_roll = true
 	busy = false
-	Board._refresh_quest_display()
 
 func _update_turn_label() -> void:
 	var board_iterations: int = _get_board_iterations_completed()
@@ -382,8 +444,6 @@ func _set_board_ui_visible(is_visible: bool) -> void:
 
 	if inventory_overlay != null and not is_visible:
 		inventory_overlay.hide()
-
-	Board.set_quest_bar_visible(is_visible)
 
 func _configure_minigames() -> void:
 	minigames.clear()
@@ -499,7 +559,6 @@ func _show_reward_screen() -> void:
 		return
 
 	Board.overlay_root.visible = false
-	Board._refresh_quest_display()
 
 func _get_board_iterations_completed() -> int:
 	var board_count: int = Board.get_tile_count()

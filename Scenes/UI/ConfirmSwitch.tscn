@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://6yt6b20ucnf1" path="res://Scenes/UI/confirm_switch.gd" id="1_m27pt"]
 [ext_resource type="Texture2D" uid="uid://c6snwdh8irybb" path="res://Sources/Images/UI/ConfirmButton.png" id="2_g38fx"]
+[ext_resource type="Script" uid="uid://bkp1ge84kr67m" path="res://Scripts/UI/TextBtnEffect.gd" id="3_asecw"]
 [ext_resource type="Texture2D" uid="uid://b564aaw8ri5kn" path="res://Sources/Images/UI/CancelButton.png" id="3_hiofy"]
 
 [node name="ConfirmSwitch" type="Control" unique_id=1919206113]
@@ -70,6 +71,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("2_g38fx")
 stretch_mode = 6
+script = ExtResource("3_asecw")
 
 [node name="Skip" type="TextureButton" parent="Center/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=536366222]
 custom_minimum_size = Vector2(80, 50)
@@ -77,3 +79,4 @@ layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("3_hiofy")
 stretch_mode = 6
+script = ExtResource("3_asecw")
