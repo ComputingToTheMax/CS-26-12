@@ -7,7 +7,7 @@ var _used_types: Array[Quest.Type] = []
 var _used_targets: Array[String] = []
 
 func _get_live_inventory() -> InventoryModel:
-	return get_node("/root/MainBoard/CharacterBody2D/InventoryModel")
+	return get_node_or_null("/root/MainBoard/CharacterBody2D/InventoryModel") as InventoryModel
 
 func set_inventory(inv: InventoryModel) -> void:
 	pass
