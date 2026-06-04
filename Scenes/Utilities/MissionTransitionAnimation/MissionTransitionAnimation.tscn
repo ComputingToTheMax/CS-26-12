@@ -34,6 +34,7 @@ grow_vertical = 2
 texture = SubResource("ViewportTexture_1r65q")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=812953027]
+material = SubResource("ShaderMaterial_sh46o")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,8 +48,16 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/MissionTransitionVideoViewport" unique_id=1451490537]
+custom_minimum_size = Vector2(12000, 12000)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07058824, 0.8980392, 0, 1)
+
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="SubViewportContainer/MissionTransitionVideoViewport" unique_id=1621423375]
-material = SubResource("ShaderMaterial_sh46o")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -68,3 +77,7 @@ zoom = Vector2(0.5, 0.5)
 
 [node name="HoldingTimer" type="Timer" parent="." unique_id=1215632313]
 wait_time = 2.0
+
+[node name="TransisionTimer" type="Timer" parent="." unique_id=1208586252]
+
+[connection signal="timeout" from="TransisionTimer" to="." method="_emit_transition_signal"]
