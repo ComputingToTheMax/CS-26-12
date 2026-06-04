@@ -4,7 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://curmlx3l2blbo" path="res://Scenes/GameSetup/Images/BluePlayerSelect.svg" id="1_ykakd"]
 [ext_resource type="Texture2D" uid="uid://b1u6c1y7dbfas" path="res://Scenes/GameSetup/Images/UnconfiguredPlayer.svg" id="2_kuscj"]
 [ext_resource type="Texture2D" uid="uid://b0s2ih8ulakn3" path="res://Scenes/GameSetup/Images/ConfiguredPlayer.png" id="3_4gpx5"]
+[ext_resource type="Script" uid="uid://b6x31w0ld1msf" path="res://Scenes/GameSetup/card_text.gd" id="5_5lwxj"]
 [ext_resource type="Script" uid="uid://c01arwkghbdhk" path="res://Scenes/GameSetup/coin_slot.gd" id="7_5lwxj"]
+[ext_resource type="AudioStream" uid="uid://prnb6rhcdi0v" path="res://Sources/Sounds/SoundEffects/VendingMachine.wav" id="7_nggko"]
 
 [node name="PlayerCard" type="VBoxContainer" unique_id=337562230]
 anchors_preset = -1
@@ -46,40 +48,48 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CardBackground/CardForeground/VBoxContainer" unique_id=1503075192]
+[node name="CardText" type="MarginContainer" parent="CardBackground/CardForeground/VBoxContainer" unique_id=1503075192]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
+script = ExtResource("5_5lwxj")
 
-[node name="Label" type="Label" parent="CardBackground/CardForeground/VBoxContainer/MarginContainer" unique_id=599271249]
+[node name="AddPlayer" type="Label" parent="CardBackground/CardForeground/VBoxContainer/CardText" unique_id=599271249]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 17
 text = "Insert Token to
 Add Player"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="CardBackground/CardForeground/VBoxContainer/MarginContainer" unique_id=1843840117]
+[node name="PlayerNumber" type="Label" parent="CardBackground/CardForeground/VBoxContainer/CardText" unique_id=1843840117]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 37
 text = "Player 1"
 horizontal_alignment = 1
 
+[node name="Spacer2" type="Control" parent="CardBackground/CardForeground/VBoxContainer" unique_id=1019602076]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="CardBackground/CardForeground/VBoxContainer" unique_id=1117615462]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.75
 
 [node name="Spacer2" type="Control" parent="CardBackground/CardForeground/VBoxContainer/HBoxContainer" unique_id=669252056]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.1
+size_flags_stretch_ratio = 0.3
 
 [node name="CoinSlot" type="Control" parent="CardBackground/CardForeground/VBoxContainer/HBoxContainer" unique_id=1461379409]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
+size_flags_stretch_ratio = 0.22
 mouse_default_cursor_shape = 7
 script = ExtResource("7_5lwxj")
 
@@ -87,6 +97,9 @@ script = ExtResource("7_5lwxj")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="CoinSound" type="AudioStreamPlayer" parent="CardBackground/CardForeground/VBoxContainer/HBoxContainer/CoinSlot" unique_id=2120704844]
+stream = ExtResource("7_nggko")
 
 [node name="Spacer" type="Control" parent="CardBackground/CardForeground/VBoxContainer/HBoxContainer" unique_id=1632117256]
 layout_mode = 2
