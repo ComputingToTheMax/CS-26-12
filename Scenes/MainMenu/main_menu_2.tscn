@@ -275,6 +275,7 @@ icon_alignment = 1
 script = ExtResource("22_25pk5")
 target_scene = ExtResource("23_clwl7")
 reset_game_on_press = true
+play_transition_animation = true
 
 [node name="PlayMinigames" type="Button" parent="GameMenu/ButtonBlock/MarginContainer/GameMenuButtons" unique_id=97862537]
 texture_filter = 4
@@ -289,6 +290,7 @@ icon_alignment = 1
 script = ExtResource("22_25pk5")
 target_scene = ExtResource("23_clwl7")
 reset_game_on_press = true
+play_transition_animation = true
 
 [node name="SettingsButton" type="Button" parent="GameMenu/ButtonBlock/MarginContainer/GameMenuButtons" unique_id=2004235370]
 texture_filter = 4

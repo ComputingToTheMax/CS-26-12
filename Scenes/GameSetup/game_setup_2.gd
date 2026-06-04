@@ -33,10 +33,10 @@ func _on_start_button_pressed() -> void:
 	
 	print("Get ready! We're about to start the game!")
 
-	# Play the mission transition animation and wait for the
-	# animation loading screen to be in place before transitioning.
-	StageManager.play_mission_transition_animation()
-	await StageManager.ready_to_transition
+	## Play the mission transition animation and wait for the
+	## animation loading screen to be in place before transitioning.
+	#StageManager.play_mission_transition_animation()
+	#await StageManager.ready_to_transition
 
 	if Settings.play_tutorial:
 		Navigator.go_to_scene_by_path(tutorial_scene_path)
