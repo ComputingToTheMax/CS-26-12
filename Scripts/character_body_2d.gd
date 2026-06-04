@@ -3,6 +3,12 @@ class_name Player
 
 const MAX_BOARD_ITERATIONS: int = 1
 
+# Music coordination. ~15% linear volume (-16.5 dB) keeps every track consistent.
+const MUSIC_VOLUME_DB: float = -16.5
+const MUSIC_SILENT_DB: float = -40.0
+const MUSIC_FADE_TIME: float = 1.5
+const GENERAL_MUSIC_NAME: String = "LiftOff!!"
+
 @export var Board: MainBoard
 @export var cell_size: Vector2i
 
@@ -445,6 +451,28 @@ func _set_board_ui_visible(is_visible: bool) -> void:
 	if inventory_overlay != null and not is_visible:
 		inventory_overlay.hide()
 
+func _find_minigame_music(node: Node) -> AudioStreamPlayer:
+	if node == null:
+		return null
+	return node.get_node_or_null("Music") as AudioStreamPlayer
+
+func _fade_in_minigame_music(node: Node) -> void:
+	var music := _find_minigame_music(node)
+	if music == null:
+		return
+	music.volume_db = MUSIC_SILENT_DB
+	music.play()
+	var fade := create_tween()
+	fade.tween_property(music, "volume_db", MUSIC_VOLUME_DB, MUSIC_FADE_TIME).set_ease(Tween.EASE_IN)
+
+func _fade_out_minigame_music(node: Node) -> void:
+	var music := _find_minigame_music(node)
+	if music == null or not music.playing:
+		return
+	var fade := create_tween()
+	fade.tween_property(music, "volume_db", MUSIC_SILENT_DB, MUSIC_FADE_TIME).set_ease(Tween.EASE_OUT)
+	await fade.finished
+
 func _configure_minigames() -> void:
 	minigames.clear()
 
@@ -523,12 +551,27 @@ func _offer_game() -> void:
 		await intro.intro_finished
 		canvas.queue_free()
 
+	# Only the Asteroid Targeting minigame ships its own background music, so it
+	# is the one that must not overlap with the general soundtrack.
+	var has_own_music: bool = scene_key.begins_with("AsteroidTargeting")
+
 	var mg := chosen_game_scene.instantiate()
 	Board.game_root.add_child(mg)
+
+	# Crossfade: fade the general soundtrack out and the minigame's music in so
+	# the two never play over each other.
+	if has_own_music:
+		Audio.fade_out_audio(GENERAL_MUSIC_NAME)
+		_fade_in_minigame_music(mg)
 
 	var result: Dictionary = await mg.done
 	await _result(result)
 	await get_tree().process_frame
+
+	# Crossfade back to the general soundtrack before tearing the minigame down.
+	if has_own_music:
+		Audio.fade_in_audio(GENERAL_MUSIC_NAME)
+		await _fade_out_minigame_music(mg)
 
 	for child in Board.game_root.get_children():
 		child.queue_free()
