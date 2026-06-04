@@ -7,11 +7,13 @@ extends AudioStreamPlayer
 
 # Customizable volume dB levels to allow for quick adjustments when
 # this script is applied across multiple audio sources.
-@export var silent_volume: float = 1
+@export var silent_volume: float = -5
 @export var target_volume: float = 10
 
 @export var fade_in_time: float = 10
 @export var fade_out_time: float = 1.5
+
+var _volume_tween: Tween
 
 func _ready() -> void:
 	# Programatically connect this audio node's "finished" signal
@@ -21,8 +23,6 @@ func _ready() -> void:
 # Automatically loop when playback is finished.
 func _on_finished_playing() -> void:
 	self.fade_in(true)
-
-var _volume_tween: Tween
 
 func fade_in(start_from_beginning:bool=true) -> void:
 	
