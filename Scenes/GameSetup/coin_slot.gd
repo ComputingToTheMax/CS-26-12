@@ -1,5 +1,7 @@
 extends Control
 
+@onready var coin_sound = $CoinSound
+
 signal token_dropped(token:DiscoveryToken)
 
 var token_already_dropped = false
@@ -30,6 +32,8 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 func _drop_data(at_position: Vector2, data: Variant) -> void:
 	
 	if data is DiscoveryToken:
+		
+		coin_sound.play(1.0)
 		
 		# Request the token to preform drop animations and behavior itself.
 		data.drop_coin()

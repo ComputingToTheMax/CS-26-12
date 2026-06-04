@@ -100,6 +100,7 @@ offset_bottom = 40.0
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="CardBackground/CardForeground/VBoxContainer/HBoxContainer/CoinSlot" unique_id=2120704844]
 stream = ExtResource("7_nggko")
+volume_db = -4.5
 
 [node name="Spacer" type="Control" parent="CardBackground/CardForeground/VBoxContainer/HBoxContainer" unique_id=1632117256]
 layout_mode = 2
