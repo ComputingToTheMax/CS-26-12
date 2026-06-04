@@ -1,4 +1,7 @@
+class_name Coin3D
 extends Node3D
+
+@onready var coin_graphic = %CoinGraphic
 
 var target_rotation = Vector3()
 
@@ -10,8 +13,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func set_coin_graphic_texture_path(path):
+	coin_graphic.texture = load(path)
 	
-	#var x_rotation = 0
+#var x_rotation = 0
 	#var z_rotation = 0
 	#
 	#var current_x_rotation = rotation_degrees.x
