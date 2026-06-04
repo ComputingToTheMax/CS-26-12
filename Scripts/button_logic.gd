@@ -4,6 +4,8 @@ extends Button
 @export var target_scene_path: String
 @export var reset_game_on_press: bool = false
 
+@export var play_transition_animation:bool = false
+
 var click_sound_player: AudioStreamPlayer
 
 func _ready() -> void:
@@ -39,6 +41,10 @@ func _on_press():
 	_switch_scenes()
 	
 func _switch_scenes():
+	
+	if play_transition_animation:
+		StageManager.play_mission_transition_animation()
+		await StageManager.ready_to_transition
 	
 	if (target_scene != null):
 		Navigator.go_to_packed_scene(target_scene)
