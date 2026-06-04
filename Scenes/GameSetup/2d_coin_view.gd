@@ -1,11 +1,12 @@
 class_name DiscoveryToken
 extends Control
 
+@onready var coin_table_drop_sound = $CoinTableDropSound
+
 @export var token_mission:String
 @onready var image_texture = %Coin/Coin/Graphic.texture.resource_path
 
 # Coin Variables
-
 @export var maximum_rotation:int = 35
 @export var coin_image = null
 
@@ -63,6 +64,7 @@ func _on_panel_mouse_exited() -> void:
 	mouse_inside = false
 	
 	
+	
 func _input(event):
 	
 	
@@ -97,6 +99,11 @@ func _input(event):
 		_follow_mouse = false
 		coin.set_target_rotation(Vector3())
 		click_panel.mouse_filter = Control.MOUSE_FILTER_PASS
+		
+		# If the coin hasn't already been dropped into the vending machine,
+		# it has been dropped back onto the table.
+		if !_coin_dropped:
+			coin_table_drop_sound.play()
 			
 		
 func rotate_to_side():

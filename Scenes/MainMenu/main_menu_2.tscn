@@ -22,13 +22,14 @@
 [ext_resource type="Texture2D" uid="uid://cc4sfu2uhgrdr" path="res://Sources/Images/logo.png" id="20_flg3m"]
 [ext_resource type="Theme" uid="uid://cq22sdrr66eho" path="res://Themes/primary_game_theme.res" id="21_pgl5d"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="22_25pk5"]
-[ext_resource type="Texture2D" uid="uid://b1jreamxbqyvb" path="res://Sources/Icons/rocket.svg" id="22_oabop"]
+[ext_resource type="Texture2D" uid="uid://bgpt4vhon3vlw" path="res://Sources/Images/ButtonGraphics/Play Full Game.svg" id="22_oabop"]
 [ext_resource type="PackedScene" uid="uid://085emeti05rs" path="res://Scenes/GameSetup/game_setup_2.tscn" id="23_clwl7"]
 [ext_resource type="PackedScene" uid="uid://cbx4uhnqjl7v2" path="res://Scenes/settings.tscn" id="24_k0rfa"]
 [ext_resource type="PackedScene" uid="uid://damhiumjctum" path="res://Scenes/Credits/credits.tscn" id="25_50b1j"]
-[ext_resource type="Texture2D" uid="uid://xur3ghc7kwj0" path="res://Sources/Icons/cog.svg" id="25_g31n2"]
+[ext_resource type="Texture2D" uid="uid://fri10byytt1q" path="res://Sources/Images/ButtonGraphics/Play Minigames.svg" id="25_g31n2"]
+[ext_resource type="Texture2D" uid="uid://c3jfhcfq5cos" path="res://Sources/Images/ButtonGraphics/Settings.svg" id="25_oabop"]
 [ext_resource type="Texture2D" uid="uid://dmsm4lpd63fya" path="res://Sources/Images/Psyche_Icon_Color-PNG.png" id="26_vcwvx"]
-[ext_resource type="Texture2D" uid="uid://du3sqg15p6yr3" path="res://Sources/Icons/heart.svg" id="27_logkf"]
+[ext_resource type="Texture2D" uid="uid://sw5bmeqeam7f" path="res://Sources/Images/ButtonGraphics/Credits.svg" id="27_g31n2"]
 [ext_resource type="Texture2D" uid="uid://dmx2fpdu3penv" path="res://Scenes/MainMenu/Images/Overlay.png" id="27_m5n0w"]
 
 [sub_resource type="PackedScene" id="PackedScene_6vfk8"]
@@ -224,12 +225,23 @@ text = "Asteroid 16 Psyche"
 label_settings = SubResource("LabelSettings_2sbhq")
 vertical_alignment = 2
 
+[node name="Control" type="Control" parent="GameMenu/UpperBlock/HBoxContainer" unique_id=1673155778]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
 [node name="DiscoveryAnimation" type="TextureRect" parent="GameMenu/UpperBlock/HBoxContainer" unique_id=789922885]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = SubResource("ViewportTexture_q6w0b")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Spacer" type="Control" parent="GameMenu" unique_id=1957309351]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
 
 [node name="ButtonBlock" type="HBoxContainer" parent="GameMenu" unique_id=2139652654]
 layout_mode = 2
@@ -243,45 +255,62 @@ size_flags_stretch_ratio = 0.01
 [node name="MarginContainer" type="MarginContainer" parent="GameMenu/ButtonBlock" unique_id=692530449]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_right = 30
+theme_override_constants/margin_left = 55
+theme_override_constants/margin_right = 55
 
 [node name="GameMenuButtons" type="VBoxContainer" parent="GameMenu/ButtonBlock/MarginContainer" unique_id=1890901600]
 layout_mode = 2
 theme_override_constants/separation = 14
 
 [node name="PlayButton" type="Button" parent="GameMenu/ButtonBlock/MarginContainer/GameMenuButtons" unique_id=1743614122]
+texture_filter = 4
 layout_mode = 2
 theme = ExtResource("21_pgl5d")
 theme_type_variation = &"BigButton"
+theme_override_constants/icon_max_width = 300
 theme_override_font_sizes/font_size = 32
-text = "Play"
+text = " "
 icon = ExtResource("22_oabop")
-icon_alignment = 2
-expand_icon = true
+icon_alignment = 1
+script = ExtResource("22_25pk5")
+target_scene = ExtResource("23_clwl7")
+reset_game_on_press = true
+
+[node name="PlayMinigames" type="Button" parent="GameMenu/ButtonBlock/MarginContainer/GameMenuButtons" unique_id=97862537]
+texture_filter = 4
+layout_mode = 2
+theme = ExtResource("21_pgl5d")
+theme_type_variation = &"BigButton"
+theme_override_constants/icon_max_width = 300
+theme_override_font_sizes/font_size = 32
+text = " "
+icon = ExtResource("25_g31n2")
+icon_alignment = 1
 script = ExtResource("22_25pk5")
 target_scene = ExtResource("23_clwl7")
 reset_game_on_press = true
 
 [node name="SettingsButton" type="Button" parent="GameMenu/ButtonBlock/MarginContainer/GameMenuButtons" unique_id=2004235370]
+texture_filter = 4
 layout_mode = 2
 theme = ExtResource("21_pgl5d")
+theme_type_variation = &"BigButton"
+theme_override_constants/icon_max_width = 300
 theme_override_font_sizes/font_size = 32
-text = "Settings"
-icon = ExtResource("25_g31n2")
-icon_alignment = 2
-expand_icon = true
+icon = ExtResource("25_oabop")
+icon_alignment = 1
 script = ExtResource("22_25pk5")
 target_scene = ExtResource("24_k0rfa")
 
 [node name="CreditsButton" type="Button" parent="GameMenu/ButtonBlock/MarginContainer/GameMenuButtons" unique_id=1033019032]
+texture_filter = 4
 layout_mode = 2
 theme = ExtResource("21_pgl5d")
+theme_type_variation = &"BigButton"
+theme_override_constants/icon_max_width = 300
 theme_override_font_sizes/font_size = 32
-text = "Credits"
-icon = ExtResource("27_logkf")
-icon_alignment = 2
-expand_icon = true
+icon = ExtResource("27_g31n2")
+icon_alignment = 1
 script = ExtResource("22_25pk5")
 target_scene = ExtResource("25_50b1j")
 
@@ -321,7 +350,7 @@ size_flags_stretch_ratio = 2.1
 [node name="LowerBlock" type="Control" parent="GameMenu" unique_id=2145506431]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.1
 
 [node name="MarginContainer" type="MarginContainer" parent="GameMenu/LowerBlock" unique_id=1667247987]
 layout_mode = 1

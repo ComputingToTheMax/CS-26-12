@@ -4,7 +4,3 @@
 
 [resource]
 base_font = ExtResource("1_dmpdw")
-variation_embolden = 0.3
-opentype_features = {
-1667329140: 0
-}

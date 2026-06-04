@@ -68,3 +68,7 @@ func _on_coin_slot_token_dropped(token: DiscoveryToken) -> void:
 	GlobalSettings.set_number_of_players(GlobalSettings.get_number_of_active_players() + 1)
 
 	mission_icon_display.texture = load(token.image_texture)
+	
+	# Switch between card text indicating player number and requesting
+	# a player to insert a token.
+	%CardText.toggle_card_text()
