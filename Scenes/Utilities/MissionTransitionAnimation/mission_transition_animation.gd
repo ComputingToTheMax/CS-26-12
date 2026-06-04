@@ -2,9 +2,11 @@ extends Control
 
 signal ready_to_transition
 
-@export var animation_duration:int = 3
+@export var animation_duration:float = 2.5
 
 @onready var animation_camera = %AnimationCamera
+@onready var animation_video = %AnimationVideo
+
 @onready var holding_timer = $HoldingTimer
 @onready var transition_timer = $TransisionTimer
 
@@ -31,12 +33,14 @@ func _process(delta: float) -> void:
 	
 func play_animation():
 	self.show()
+	animation_video.play()
 	animation_camera.offset = starting_offset
 	current_tween = create_tween()
-	current_tween.tween_property(animation_camera, "offset", holding_offset, animation_duration * 1 / 3).set_ease(Tween.EASE_IN_OUT)
+	current_tween.tween_property(animation_camera, "offset", holding_offset, animation_duration * 1. / 3).set_ease(Tween.EASE_IN_OUT)
 	current_tween.tween_callback(_end_animation)
 	
 func _end_animation():
+	
 	holding_timer.start()
 	await holding_timer.timeout
 	current_tween = create_tween()
@@ -44,13 +48,15 @@ func _end_animation():
 	var exit_duration: float = animation_duration * 2 / 4.
 	current_tween.tween_property(animation_camera, "offset", target_offset, exit_duration).set_ease(Tween.EASE_IN_OUT)
 	
-	transition_timer.wait_time = exit_duration * 3 / 4 + 0.1
+	transition_timer.wait_time = exit_duration * 1 / 5
 	transition_timer.start()
+	await transition_timer.timeout
+	ready_to_transition.emit()
 	
-	current_tween.tween_callback(_queue_free)
+	#current_tween.tween_callback(_queue_free)
 
-func _queue_free():
-	queue_free()
+#func _queue_free():
+	#queue_free()
 
 # Emit the transition signal when the viewport is hidden and we can
 # safely transition.
