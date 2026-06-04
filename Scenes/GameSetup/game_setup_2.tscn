@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://jsebyqnin6ak" path="res://Scenes/GameSetup/Images/TokenTray.png" id="4_1dmt7"]
 [ext_resource type="PackedScene" uid="uid://c8fpamm7fxfa5" path="res://Scenes/GameSetup/discovery_token.tscn" id="5_okjav"]
 [ext_resource type="Texture2D" uid="uid://bqt6xsrnu8uu7" path="res://Scenes/GameSetup/Images/Start.svg" id="6_start"]
-[ext_resource type="PackedScene" uid="uid://bb30q40erdi6j" path="res://Scenes/Utilities/MissionTransitionAnimation/MissionTransitionAnimation.tscn" id="8_vsc1k"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ypne3"]
 
@@ -257,10 +256,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ypne3")
-
-[node name="MissionTransitionAnimation" parent="CanvasLayer" unique_id=846156881 instance=ExtResource("8_vsc1k")]
-unique_name_in_owner = true
-visible = false
 
 [connection signal="toggled" from="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/TextureRect/Tutorial Button/MarginContainer/VBoxContainer/CenterContainer/CheckBox" to="." method="_on_tutorial_selection_toggled"]
 [connection signal="pressed" from="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/TextureRect/StartButtonBackground/StartButton" to="." method="_on_start_button_pressed"]
