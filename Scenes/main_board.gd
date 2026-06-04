@@ -76,7 +76,36 @@ func _ready() -> void:
 		quest_bar.offset_top = -160.0
 		quest_bar.offset_bottom = -10.0
 		quest_bar.add_theme_constant_override("separation", 16)
+	# Keep the quest bar hidden whenever a minigame is active. Minigames are
+	# added as children of game_root, so we watch that node and toggle the
+	# quest bar based on whether one is currently present. This guarantees the
+	# quest text is never visible during minigames (e.g. Asteroid Targeting,
+	# Alien Communication) regardless of how the minigame was launched.
+	if game_root != null:
+		game_root.child_entered_tree.connect(_on_game_root_changed)
+		game_root.child_exiting_tree.connect(_on_game_root_changed)
+	_ensure_background_music()
 	_refresh_quest_display()
+
+func _ensure_background_music() -> void:
+	# The soundtrack normally starts from the main menu and persists via the
+	# Audio autoload. Make sure it is playing once we reach the board so the
+	# background music is present even if the board scene was entered directly.
+	if not has_node("/root/Audio"):
+		return
+	var music := Audio.get_node_or_null("LiftOff!!") as AudioStreamPlayer
+	if music != null and not music.playing:
+		Audio.play_audio("LiftOff!!")
+
+func _on_game_root_changed(_node: Node) -> void:
+	# child_exiting_tree fires before the child is actually removed, so defer
+	# the recount until the tree has settled.
+	call_deferred("_update_quest_bar_for_minigame")
+
+func _update_quest_bar_for_minigame() -> void:
+	if game_root == null:
+		return
+	set_quest_bar_visible(game_root.get_child_count() == 0)
 
 func _refresh_quest_display() -> void:
 	if quest_bar == null:

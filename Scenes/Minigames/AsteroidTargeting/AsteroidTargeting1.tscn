@@ -22,8 +22,7 @@ stream = ExtResource("3")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1077642328]
 stream = ExtResource("5")
-volume_db = -16.48
-autoplay = true
+volume_db = -16.5
 parameters/looping = true
 
 [node name="PsycheAsteroid" type="Sprite2D" parent="." unique_id=1544079292]
