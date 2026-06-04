@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b1u6c1y7dbfas" path="res://Scenes/GameSetup/Images/UnconfiguredPlayer.svg" id="2_kuscj"]
 [ext_resource type="Texture2D" uid="uid://b0s2ih8ulakn3" path="res://Scenes/GameSetup/Images/ConfiguredPlayer.png" id="3_4gpx5"]
 [ext_resource type="Script" uid="uid://b6x31w0ld1msf" path="res://Scenes/GameSetup/card_text.gd" id="5_5lwxj"]
+[ext_resource type="Theme" uid="uid://cq22sdrr66eho" path="res://Themes/primary_game_theme.res" id="6_nggko"]
 [ext_resource type="Script" uid="uid://c01arwkghbdhk" path="res://Scenes/GameSetup/coin_slot.gd" id="7_5lwxj"]
 [ext_resource type="AudioStream" uid="uid://prnb6rhcdi0v" path="res://Sources/Sounds/SoundEffects/VendingMachine.wav" id="7_nggko"]
 
@@ -58,6 +59,8 @@ script = ExtResource("5_5lwxj")
 
 [node name="AddPlayer" type="Label" parent="CardBackground/CardForeground/VBoxContainer/CardText" unique_id=599271249]
 layout_mode = 2
+theme = ExtResource("6_nggko")
+theme_type_variation = &"BigHeader"
 theme_override_font_sizes/font_size = 17
 text = "Insert Token to
 Add Player"

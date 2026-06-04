@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://c8fpamm7fxfa5" path="res://Scenes/GameSetup/2DCoinView.tscn" id="5_okjav"]
 [ext_resource type="Texture2D" uid="uid://bqt6xsrnu8uu7" path="res://Scenes/GameSetup/Images/Start.svg" id="6_start"]
 
-
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ypne3"]
 
 [node name="GameSetup2_tscn" type="Node2D" unique_id=1147239988]
@@ -83,6 +81,8 @@ size_flags_vertical = 3
 [node name="PlayerCardScene" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/LeftPanel/PlayerCardMargin/PlayerCardManager" unique_id=1030897 instance=ExtResource("3_vc0qs")]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("2_okjav")
+theme_type_variation = &"BigHeader"
 
 [node name="Spacer" type="Control" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer" unique_id=1056986764]
 layout_mode = 2
@@ -164,7 +164,6 @@ size_flags_horizontal = 3
 layout_mode = 2
 texture = ExtResource("6_start")
 
-
 [node name="Tutorial Button" type="Control" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/TextureRect" unique_id=915214406]
 layout_mode = 1
 anchor_right = 0.292
@@ -213,6 +212,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/TextureRect/StartButtonBackground" unique_id=1736803910]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -225,7 +225,6 @@ theme_override_font_sizes/font_size = 44
 text = "Start!"
 horizontal_alignment = 1
 vertical_alignment = 1
-clip_contents = true
 
 [node name="StartButton" type="Button" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/TextureRect/StartButtonBackground" unique_id=1937663138]
 unique_name_in_owner = true
