@@ -3,6 +3,7 @@
 [ext_resource type="VideoStream" uid="uid://d0rspwytggq6" path="res://Sources/Videos/MissionTransition.ogv" id="1_1r65q"]
 [ext_resource type="Shader" uid="uid://cpok1ij5vvuk3" path="res://Scenes/Utilities/MissionTransitionAnimation/ChromaKeyGreenScreen.gdshader" id="1_tq1xx"]
 [ext_resource type="Script" uid="uid://di2cxodtvlani" path="res://Scenes/Utilities/MissionTransitionAnimation/mission_transition_animation.gd" id="1_yn4pl"]
+[ext_resource type="AudioStream" uid="uid://dty4yox1v72q2" path="res://Sources/Sounds/SoundEffects/SpaceshipFlyby.wav" id="4_yn4pl"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_1r65q"]
 viewport_path = NodePath("SubViewportContainer/MissionTransitionVideoViewport")
@@ -31,6 +32,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = SubResource("ViewportTexture_1r65q")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=812953027]
@@ -40,6 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch = true
 
 [node name="MissionTransitionVideoViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1159014696]
@@ -82,5 +85,9 @@ zoom = Vector2(0.5, 0.5)
 wait_time = 2.0
 
 [node name="TransisionTimer" type="Timer" parent="." unique_id=1208586252]
+
+[node name="SpaceshipSound" type="AudioStreamPlayer" parent="." unique_id=563837860]
+stream = ExtResource("4_yn4pl")
+volume_db = -8.0
 
 [connection signal="timeout" from="TransisionTimer" to="." method="_emit_transition_signal"]
