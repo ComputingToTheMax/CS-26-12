@@ -1,6 +1,6 @@
 [gd_resource type="FontVariation" format=3 uid="uid://fd8e62k6vslo"]
 
+[ext_resource type="FontFile" uid="uid://donyg4x8mv5tp" path="res://Sources/Fonts/LemonMilk/LEMONMILK-Medium.otf" id="1_dmpdw"]
+
 [resource]
-opentype_features = {
-1667329140: 0
-}
+base_font = ExtResource("1_dmpdw")
