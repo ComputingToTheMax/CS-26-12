@@ -2,7 +2,16 @@
 
 [ext_resource type="VideoStream" uid="uid://c5tcylm0orj03" path="res://Sources/Videos/Discovery Mission Animation.ogv" id="1_1r65q"]
 
-[node name="MissionTransitionAnimation" type="Node2D" unique_id=1206256713]
+[sub_resource type="ViewportTexture" id="ViewportTexture_1r65q"]
+viewport_path = NodePath("SubViewport")
+
+[node name="MissionTransitionAnimation" type="Control" unique_id=846156881]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1159014696]
 
@@ -10,3 +19,13 @@
 offset_right = 40.0
 offset_bottom = 40.0
 stream = ExtResource("1_1r65q")
+autoplay = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=772283129]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_1r65q")
