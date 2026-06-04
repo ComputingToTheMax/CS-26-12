@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dn6h2pvmtjcxr" path="res://Scenes/GameSetup/player_card_manager.gd" id="3_1dmt7"]
 [ext_resource type="PackedScene" uid="uid://b6mprb2wjh47y" path="res://Scenes/GameSetup/player_card.tscn" id="3_vc0qs"]
 [ext_resource type="Texture2D" uid="uid://jsebyqnin6ak" path="res://Scenes/GameSetup/Images/TokenTray.png" id="4_1dmt7"]
-[ext_resource type="PackedScene" uid="uid://c8fpamm7fxfa5" path="res://Scenes/GameSetup/2DCoinView.tscn" id="5_okjav"]
+[ext_resource type="PackedScene" uid="uid://c8fpamm7fxfa5" path="res://Scenes/GameSetup/discovery_token.tscn" id="5_okjav"]
 [ext_resource type="Texture2D" uid="uid://bqt6xsrnu8uu7" path="res://Scenes/GameSetup/Images/Start.svg" id="6_start"]
 [ext_resource type="PackedScene" uid="uid://bb30q40erdi6j" path="res://Scenes/Utilities/MissionTransitionAnimation/MissionTransitionAnimation.tscn" id="8_vsc1k"]
 
@@ -128,34 +128,55 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = -10
-theme_override_constants/v_separation = 4
+theme_override_constants/v_separation = -13
 
 [node name="2dCoinView" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/MarginContainer/HFlowContainer" unique_id=1999495920 instance=ExtResource("5_okjav")]
 layout_mode = 2
+token_mission_name = "Near Shoemaker"
 
 [node name="2dCoinView2" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/MarginContainer/HFlowContainer" unique_id=44652160 instance=ExtResource("5_okjav")]
 layout_mode = 2
+token_mission_name = "Pathfinder"
 
 [node name="2dCoinView3" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/MarginContainer/HFlowContainer" unique_id=932643649 instance=ExtResource("5_okjav")]
 layout_mode = 2
+token_mission_name = "Lunar Prospector"
 
 [node name="2dCoinView4" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/MarginContainer/HFlowContainer" unique_id=206242168 instance=ExtResource("5_okjav")]
 layout_mode = 2
+token_mission_name = "Stardust"
 
 [node name="2dCoinView5" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/MarginContainer/HFlowContainer" unique_id=427503070 instance=ExtResource("5_okjav")]
 layout_mode = 2
+token_mission_name = "Genesis"
 
 [node name="2dCoinView6" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/MarginContainer/HFlowContainer" unique_id=202681288 instance=ExtResource("5_okjav")]
 layout_mode = 2
+token_mission_name = "Contour"
 
 [node name="2dCoinView7" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/MarginContainer/HFlowContainer" unique_id=1918130902 instance=ExtResource("5_okjav")]
 layout_mode = 2
+token_mission_name = "Messenger"
 
 [node name="2dCoinView8" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/MarginContainer/HFlowContainer" unique_id=472780777 instance=ExtResource("5_okjav")]
 layout_mode = 2
+token_mission_name = "Dawn"
 
 [node name="2dCoinView9" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/MarginContainer/HFlowContainer" unique_id=290204071 instance=ExtResource("5_okjav")]
 layout_mode = 2
+token_mission_name = "Kepler Space Telescope"
+
+[node name="2dCoinView10" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/MarginContainer/HFlowContainer" unique_id=1225264931 instance=ExtResource("5_okjav")]
+layout_mode = 2
+token_mission_name = "InSight"
+
+[node name="2dCoinView11" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/MarginContainer/HFlowContainer" unique_id=2108975258 instance=ExtResource("5_okjav")]
+layout_mode = 2
+token_mission_name = "Lucy"
+
+[node name="2dCoinView12" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel/MarginContainer/TokenTray/VBoxContainer/MarginContainer/HFlowContainer" unique_id=1111348573 instance=ExtResource("5_okjav")]
+layout_mode = 2
+token_mission_name = "Psyche"
 
 [node name="Spacer" type="Control" parent="CanvasLayer/TopScene/MarginContainer/HBoxContainer/RightPanel" unique_id=1105090625]
 layout_mode = 2
