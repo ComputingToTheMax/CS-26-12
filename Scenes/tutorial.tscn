@@ -44,10 +44,11 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_aj4rq")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = 20.0
 offset_top = -61.0
-offset_right = -854.0
+offset_right = -20.0
 offset_bottom = 3.0
-grow_horizontal = 2
+grow_horizontal = 1
 theme_override_font_sizes/font_size = 36
 text = "Mission Control:"
 vertical_alignment = 1
@@ -68,7 +69,7 @@ theme_override_constants/margin_bottom = 20
 clip_contents = true
 custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 28
 text = "Hello
 Text here
 anything works"

@@ -14,7 +14,7 @@ var current_index := 0
 
 var board_dialog := [
 	{
-		"text": "Welcome to Psyche-Opoly. This game is inspired by NASA's Psyche mission, but it is not a literal simulation of the real mission. Press Space or left click to move through the tutorial.",
+		"text": "Welcome to DISCOVERY-OPOLY. This game is inspired by NASA's Psyche mission, but it is not a literal simulation of the real mission. Press Space or left click to move through the tutorial.",
 		"bg": "",
 		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
 		"context": ""
