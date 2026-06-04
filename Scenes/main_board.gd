@@ -85,6 +85,23 @@ func _ready() -> void:
 		game_root.child_entered_tree.connect(_on_game_root_changed)
 		game_root.child_exiting_tree.connect(_on_game_root_changed)
 	_ensure_background_music()
+	_connect_quest_updates()
+	_refresh_quest_display()
+
+func _connect_quest_updates() -> void:
+	# Re-check quests and refresh the quest bar whenever the player's live
+	# inventory changes (gaining/losing a part, buying from the shop, rewards).
+	# Previously nothing re-evaluated quests during play, so collecting the
+	# required items never marked a quest complete.
+	var player_inventory := get_node_or_null("CharacterBody2D/InventoryModel")
+	if player_inventory != null and player_inventory.has_signal("changed") \
+			and not player_inventory.changed.is_connected(_refresh_quest_display):
+		player_inventory.changed.connect(_refresh_quest_display)
+	# Refresh the display the moment a quest is marked complete.
+	if not QuestManager.quest_completed.is_connected(_on_quest_completed):
+		QuestManager.quest_completed.connect(_on_quest_completed)
+
+func _on_quest_completed(_quest_index: int) -> void:
 	_refresh_quest_display()
 
 func _ensure_background_music() -> void:
