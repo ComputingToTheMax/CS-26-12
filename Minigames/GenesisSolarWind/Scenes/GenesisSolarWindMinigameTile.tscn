@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cs76va8ew86b5" path="res://Minigames/GenesisSolarWind/Src/Images/EarthNoBackground.png" id="3_34gd1"]
 [ext_resource type="Script" uid="uid://b5prwcypcnncr" path="res://Minigames/GenesisSolarWind/Scripts/Node2DToControl/particle_path.gd" id="4_34gd1"]
 [ext_resource type="Texture2D" uid="uid://b35l82h0q0o3c" path="res://Minigames/GenesisSolarWind/Src/Images/MissionTrajectory.png" id="4_jabtr"]
+[ext_resource type="FontVariation" uid="uid://b1arnq5f8mlj" path="res://Sources/Fonts/LemonMilk/LEMONMILK-Bold.tres" id="5_34gd1"]
 [ext_resource type="Script" uid="uid://cfpwiq4s7dwco" path="res://Minigames/GenesisSolarWind/Scenes/genesis_spacecraft.gd" id="5_igkls"]
 [ext_resource type="Texture2D" uid="uid://bk74sk3eoo0vf" path="res://Minigames/GenesisSolarWind/Src/Images/GenesisRenderingNoBackground.png" id="6_6srcd"]
 [ext_resource type="PackedScene" uid="uid://ckesh74ho2idd" path="res://Scenes/Keycap.tscn" id="7_t22to"]
@@ -14,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dnb47nm81105f" path="res://Minigames/GenesisSolarWind/Scripts/Node2DToControl/genesis_paths.gd" id="9_un60b"]
 [ext_resource type="VideoStream" uid="uid://hgglyd8j7hfb" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Coronal Hole.ogv" id="10_ishca"]
 [ext_resource type="VideoStream" uid="uid://fwko75pi5qm3" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Eruption.ogv" id="11_r7e7m"]
+[ext_resource type="Texture2D" uid="uid://b1oxpxuep3alt" path="res://Sources/Images/UnpressedKeycap.png" id="12_jabtr"]
 [ext_resource type="PackedScene" uid="uid://babvh353lkwy4" path="res://Minigames/GenesisSolarWind/Scenes/GenesisHud.tscn" id="13_fslk0"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_fslk0"]
@@ -59,7 +61,7 @@ _data = {
 }
 point_count = 25
 
-[node name="Camera2D" type="Control" unique_id=1041601590 node_paths=PackedStringArray("genesis_spacecraft", "particle_path")]
+[node name="GenesisSolarWindMinigameTile" type="Control" unique_id=1041601590 node_paths=PackedStringArray("genesis_spacecraft", "particle_path")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -69,7 +71,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_kc7nk")
-target_score = 2
+target_score = 15
 genesis_spacecraft = NodePath("VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisSpacecraft")
 particle_scene = ExtResource("2_ldy0v")
 particle_path = NodePath("VBoxContainer/CenterGame/Left/VBoxContainer/Sun/ParticlePath/ParticlePath/PathFollow2D")
@@ -131,6 +133,57 @@ curve = SubResource("Curve2D_kc7nk")
 [node name="PathFollow2D" type="PathFollow2D" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun/ParticlePath/ParticlePath" unique_id=1140376928]
 position = Vector2(-316, -22)
 rotates = false
+
+[node name="Control" type="Control" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun" unique_id=1242258571]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun/Control" unique_id=986115640]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun/Control/HBoxContainer" unique_id=2107057774]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control2" type="Control" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun/Control/HBoxContainer" unique_id=605099193]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun/Control/HBoxContainer/Control2" unique_id=1555625061]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 400
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun/Control/HBoxContainer/Control2/MarginContainer" unique_id=30793495]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun/Control/HBoxContainer/Control2/MarginContainer/VBoxContainer" unique_id=1696371375]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_34gd1")
+theme_override_font_sizes/font_size = 23
+text = "Current Solar Weather"
+
+[node name="SolarWindIndicator" type="Label" parent="VBoxContainer/CenterGame/Left/VBoxContainer/Sun/Control/HBoxContainer/Control2/MarginContainer/VBoxContainer" unique_id=399471530]
+unique_name_in_owner = true
+layout_mode = 2
+text = "NORMAL
+Slow \"Interstream\" Wind"
 
 [node name="Left-Center" type="Control" parent="VBoxContainer/CenterGame" unique_id=1114112663]
 layout_mode = 2
@@ -198,9 +251,9 @@ script = ExtResource("9_un60b")
 
 [node name="HistoricalTrajectory" type="Line2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisPaths" unique_id=1463188988]
 unique_name_in_owner = true
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.47007585, 0.47007585, 0.47007585, 1)
 use_parent_material = true
-position = Vector2(0.5, -1)
+position = Vector2(-396.5, -49)
 scale = Vector2(0.9999999, 0.9999999)
 width = 3.0
 
@@ -239,10 +292,125 @@ loop = false
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CenterGame/Center/VBoxContainer/BottomSpacer" unique_id=251377502]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 90
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 90
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CenterGame/Center/VBoxContainer/BottomSpacer/MarginContainer" unique_id=1802118653]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterGame/Center/VBoxContainer/BottomSpacer/MarginContainer/HBoxContainer" unique_id=1732793332]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterGame/Center/VBoxContainer/BottomSpacer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=472663017]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("12_jabtr")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CenterGame/Center/VBoxContainer/BottomSpacer/MarginContainer/HBoxContainer/VBoxContainer/TextureRect" unique_id=136588517]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 12
+
+[node name="SlowDownLetter" type="Label" parent="VBoxContainer/CenterGame/Center/VBoxContainer/BottomSpacer/MarginContainer/HBoxContainer/VBoxContainer/TextureRect/MarginContainer" unique_id=842297362]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterGame/Center/VBoxContainer/BottomSpacer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1380007425]
+layout_mode = 2
+text = "Slow
+Down"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/CenterGame/Center/VBoxContainer/BottomSpacer/MarginContainer/HBoxContainer" unique_id=1807461614]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterGame/Center/VBoxContainer/BottomSpacer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1341384621]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("12_jabtr")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CenterGame/Center/VBoxContainer/BottomSpacer/MarginContainer/HBoxContainer/VBoxContainer2/TextureRect" unique_id=1795639192]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 12
+
+[node name="SpeedUpLetter" type="Label" parent="VBoxContainer/CenterGame/Center/VBoxContainer/BottomSpacer/MarginContainer/HBoxContainer/VBoxContainer2/TextureRect/MarginContainer" unique_id=1293337858]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterGame/Center/VBoxContainer/BottomSpacer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=570832206]
+layout_mode = 2
+text = "Speed
+Up"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Right" type="Control" parent="VBoxContainer/CenterGame" unique_id=1723399447]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CenterGame/Right" unique_id=734474017]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterGame/Right/MarginContainer" unique_id=1719152290]
+layout_mode = 2
+
+[node name="Scorebar" type="ProgressBar" parent="VBoxContainer/CenterGame/Right/MarginContainer/VBoxContainer" unique_id=134945875]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+step = 1.0
+fill_mode = 3
+indeterminate = true
+editor_preview_indeterminate = false
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterGame/Right/MarginContainer/VBoxContainer" unique_id=556139802]
+layout_mode = 2
+text = "Ions
+Collected"
+horizontal_alignment = 1
 
 [node name="BottomSpacer" type="Control" parent="VBoxContainer" unique_id=1133717589]
 visible = false
@@ -289,7 +457,13 @@ wait_time = 3.0
 visible = false
 layout_mode = 1
 
+[node name="ExitTimer" type="Timer" parent="." unique_id=183536524]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
 [connection signal="body_entered" from="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisSpacecraft" to="." method="_on_genesis_spacecraft_body_entered"]
 [connection signal="finished" from="SolarViewport/SolarVideoPlayer" to="SolarViewport" method="_on_solar_video_player_finished"]
 [connection signal="timeout" from="ChangeSolarStateTimer" to="." method="_on_change_solar_state_timer_timeout"]
 [connection signal="timeout" from="ParticleSpawnTimer" to="." method="_on_particle_spawn_timer_timeout"]
+[connection signal="timeout" from="ExitTimer" to="." method="_coord_end_game"]
