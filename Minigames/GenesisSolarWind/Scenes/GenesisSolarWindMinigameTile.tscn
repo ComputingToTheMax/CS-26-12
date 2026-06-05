@@ -8,10 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://b35l82h0q0o3c" path="res://Minigames/GenesisSolarWind/Src/Images/MissionTrajectory.png" id="4_jabtr"]
 [ext_resource type="FontVariation" uid="uid://b1arnq5f8mlj" path="res://Sources/Fonts/LemonMilk/LEMONMILK-Bold.tres" id="5_34gd1"]
 [ext_resource type="Script" uid="uid://cfpwiq4s7dwco" path="res://Minigames/GenesisSolarWind/Scenes/genesis_spacecraft.gd" id="5_igkls"]
-[ext_resource type="Texture2D" uid="uid://bk74sk3eoo0vf" path="res://Minigames/GenesisSolarWind/Src/Images/GenesisRenderingNoBackground.png" id="6_6srcd"]
 [ext_resource type="PackedScene" uid="uid://ckesh74ho2idd" path="res://Scenes/Keycap.tscn" id="7_t22to"]
 [ext_resource type="Script" uid="uid://nmnc78vqwahc" path="res://Minigames/GenesisSolarWind/Scripts/solar_viewport.gd" id="8_3dxrw"]
 [ext_resource type="VideoStream" uid="uid://33kqs2vg1eu5" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Normal.ogv" id="9_ayclc"]
+[ext_resource type="Texture2D" uid="uid://cjt77q3p51ptw" path="res://Sources/Images/Discovery Missions/05A Genesis.png" id="9_jabtr"]
 [ext_resource type="Script" uid="uid://dnb47nm81105f" path="res://Minigames/GenesisSolarWind/Scripts/Node2DToControl/genesis_paths.gd" id="9_un60b"]
 [ext_resource type="VideoStream" uid="uid://hgglyd8j7hfb" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Coronal Hole.ogv" id="10_ishca"]
 [ext_resource type="VideoStream" uid="uid://fwko75pi5qm3" path="res://Minigames/GenesisSolarWind/Src/Videos/5 Second Eruption.ogv" id="11_r7e7m"]
@@ -238,7 +238,7 @@ shape = SubResource("RectangleShape2D_t5ql6")
 
 [node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisSpacecraft" unique_id=324884284]
 scale = Vector2(0.07, 0.07)
-texture = ExtResource("6_6srcd")
+texture = ExtResource("9_jabtr")
 
 [node name="Keycap" parent="VBoxContainer/CenterGame/Center/VBoxContainer/Earth/Genesis Mission Trajectory Map/GenesisSpacecraft" unique_id=1104716233 instance=ExtResource("7_t22to")]
 unique_name_in_owner = true
