@@ -5,7 +5,7 @@ extends Node2D
 @export var tutorial_scene_path = "res://Scenes/tutorial.tscn"
 @export var main_board_scene_path = "res://Scenes/main_board.tscn"
 
-@onready var mission_transition_animation = %MissionTransitionAnimation
+
 
 var play_tutorial:bool = true
 
@@ -33,10 +33,10 @@ func _on_start_button_pressed() -> void:
 	
 	print("Get ready! We're about to start the game!")
 
-	mission_transition_animation.show()
-	mission_transition_animation.play_animation()	
-	
-	await mission_transition_animation.ready_to_transition
+	## Play the mission transition animation and wait for the
+	## animation loading screen to be in place before transitioning.
+	#StageManager.play_mission_transition_animation()
+	#await StageManager.ready_to_transition
 
 	if Settings.play_tutorial:
 		Navigator.go_to_scene_by_path(tutorial_scene_path)

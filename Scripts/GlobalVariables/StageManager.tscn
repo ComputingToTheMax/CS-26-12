@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cp6tbet07cvsh"]
+
+[ext_resource type="Script" uid="uid://ofkdf265cm8k" path="res://Scripts/GlobalVariables/stage_manager.gd" id="1_4oya8"]
+[ext_resource type="PackedScene" uid="uid://bb30q40erdi6j" path="res://Scenes/Utilities/MissionTransitionAnimation/MissionTransitionAnimation.tscn" id="1_mnubw"]
+
+[node name="StageManager" type="CanvasLayer" unique_id=805855074]
+layer = 100
+script = ExtResource("1_4oya8")
+
+[node name="MissionTransitionAnimation" parent="." unique_id=846156881 instance=ExtResource("1_mnubw")]
+unique_name_in_owner = true
+visible = false
+mouse_filter = 2

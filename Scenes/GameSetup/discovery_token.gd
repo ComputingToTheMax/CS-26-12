@@ -3,16 +3,14 @@ extends Control
 
 @onready var coin_table_drop_sound = $CoinTableDropSound
 
-@export var token_mission:String
-@onready var image_texture = %Coin/Coin/Graphic.texture.resource_path
-
 # Coin Variables
 @export var maximum_rotation:int = 35
-@export var coin_image = null
+@export var token_mission_name:String
+#@export var coin_image = null
 
 var mouse_inside = false
 @onready var click_panel = %InteractionArea
-@onready var coin = %Coin
+@onready var coin = %Coin3D
 
 # The target top scene to reparent coins to after they have been moved.
 @onready var top_scene = %TopScene
@@ -24,9 +22,14 @@ var _coin_dropped = false
 var _follow_mouse = false
 var local_click_location
 var current_rotation
+var image_texture_path
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	# Set the image on the coin's face if a mission name is provided.
+	if token_mission_name != null:
+		set_coin_image()
 	
 	# Determine the current radius of the coin
 	coin_radius = click_panel.size.x / 2
@@ -36,8 +39,19 @@ func _ready() -> void:
 	
 	pass # Replace with function body.
 	
-func set_coin_image(filepath):
-	pass
+func set_coin_image():
+	
+	# Ensure that a mission with the provided name exists and has a stored image.
+	if !(token_mission_name in GameTheme.DISCOVERY_MISSIONS):
+		push_error("Oops, a mission with the name \"" + str(token_mission_name) + "\" couldn't be found in the game theme list of stored missions.")
+		return
+	
+	# Lookup the path to the mission with the provided name.
+	var mission_image_path = GameTheme.DISCOVERY_MISSION_IMAGES[token_mission_name]
+	
+	# Set the coin's image path.
+	coin.set_coin_graphic_texture_path(mission_image_path)
+	image_texture_path = mission_image_path
 	
 func drop_coin():
 	_coin_dropped = true
@@ -96,14 +110,16 @@ func _input(event):
 			_follow_mouse = true
 			
 	if (event is InputEventMouseButton) and (event.button_index == MOUSE_BUTTON_LEFT) and (event.pressed == false):
+		# If the coin hasn't already been dropped into the vending machine,
+		# it has been dropped back onto the table.
+		if (!_coin_dropped) and (_follow_mouse):
+			coin_table_drop_sound.play()
+		
 		_follow_mouse = false
 		coin.set_target_rotation(Vector3())
 		click_panel.mouse_filter = Control.MOUSE_FILTER_PASS
 		
-		# If the coin hasn't already been dropped into the vending machine,
-		# it has been dropped back onto the table.
-		if !_coin_dropped:
-			coin_table_drop_sound.play()
+		
 			
 		
 func rotate_to_side():

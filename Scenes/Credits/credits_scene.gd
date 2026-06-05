@@ -18,5 +18,9 @@ func _process(delta: float) -> void:
 
 	if (lastElement.global_position.y + lastElement.size.y + 50) < 0:
 		credits_finished = true
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(0.3).timeout
+		
+		StageManager.play_mission_transition_animation()
+		await StageManager.ready_to_transition
+		
 		$ReturnButton.emit_signal("pressed")

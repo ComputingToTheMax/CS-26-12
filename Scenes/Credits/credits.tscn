@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dhhooc4dw8xxn" path="res://Scenes/Credits/credits_scene.gd" id="1_gryuy"]
 [ext_resource type="Texture2D" uid="uid://b760yqcfgp404" path="res://Sources/Images/AsteroidMinigame/BlackSpaceBackground2.png" id="2"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="3_1bamb"]
+[ext_resource type="Theme" uid="uid://cq22sdrr66eho" path="res://Themes/primary_game_theme.res" id="3_4hn7j"]
 [ext_resource type="Script" uid="uid://dmnhpclvoeh81" path="res://Scenes/Credits/godot_license.gd" id="3_ut8rr"]
 
 [node name="Credits" type="Control" unique_id=1290088201]
@@ -39,6 +40,7 @@ metadata/_edit_group_ = true
 custom_minimum_size = Vector2(920, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("3_4hn7j")
 bbcode_enabled = true
 text = "[center][font_size=32][b]The Crew[/b][/font_size][/center]
 
@@ -70,6 +72,7 @@ size_flags_horizontal = 4
 custom_minimum_size = Vector2(920, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("3_4hn7j")
 bbcode_enabled = true
 text = "[center]This work was created in partial fulfillment of Seattle University Capstone Course CPSC 4870-4890. The work is a result of the Psyche Student Collaborations component of NASA’s Psyche Mission (https://psyche.ssl.berkeley.edu/). Psyche: A Journey to a Metal World [Contract number NNM16AA09C] is part of the NASA Discovery Program mission to solar system targets. Trade names and trademarks of ASU and NASA are used in this work for identification only. Their usage does not constitute an official endorsement, either expressed or implied, by Arizona State University or National Aeronautics and Space Administration. The content is solely the responsibility of the authors and does not necessarily represent the official views of ASU or NASA.[/center]"
 fit_content = true
@@ -84,6 +87,7 @@ size_flags_horizontal = 4
 custom_minimum_size = Vector2(920, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("3_4hn7j")
 bbcode_enabled = true
 text = "[center][font_size=32][b]Resource Credits[/b][/font_size][/center]
 
@@ -102,6 +106,7 @@ scroll_active = false
 custom_minimum_size = Vector2(920, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("3_4hn7j")
 bbcode_enabled = true
 text = "[center][font_size=20][b]Icons[/b][/font_size][/center]
 [center]This game uses Lucide icons. At the time of use, these icons have been released under the following license: 
@@ -161,6 +166,7 @@ size_flags_horizontal = 4
 [node name="GodotLicense" type="RichTextLabel" parent="VBoxContainer" unique_id=1471308825]
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("3_4hn7j")
 bbcode_enabled = true
 fit_content = true
 scroll_active = false

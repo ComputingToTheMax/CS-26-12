@@ -32,6 +32,8 @@ playerPos="*uid://c0pxd6kv02tid"
 CurGameState="*uid://chymtq8s0hi28"
 QuestManager="*uid://bo3cysswmv8iq"
 Audio="*uid://cdwbtxfo0sn4m"
+GameTheme="*uid://puffnybb4spu"
+StageManager="*uid://cp6tbet07cvsh"
 
 [display]
 

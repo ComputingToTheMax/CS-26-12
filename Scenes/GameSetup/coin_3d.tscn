@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bdqngjdx3nre1"]
 
-[ext_resource type="Texture2D" uid="uid://bk74sk3eoo0vf" path="res://Minigames/GenesisSolarWind/Src/Images/GenesisRenderingNoBackground.png" id="1_5pu7v"]
+[ext_resource type="Script" uid="uid://cs7ypdpxq6p32" path="res://Scenes/GameSetup/coin_3d.gd" id="1_crxkf"]
+[ext_resource type="Texture2D" uid="uid://lf0o7na8yqv2" path="res://Sources/Images/Discovery Missions/02A Pathfinder.png" id="2_crxkf"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_5pu7v"]
 noise_type = 4
@@ -18,6 +19,9 @@ material = SubResource("StandardMaterial3D_5pu7v")
 height = 0.1
 radial_segments = 12
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_crxkf"]
+viewport_path = NodePath("SubViewport")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gk3p8"]
 albedo_color = Color(0.9, 0.55979997, 0.41399997, 1)
 
@@ -31,14 +35,16 @@ height = 0.1
 
 [sub_resource type="Compositor" id="Compositor_n4we7"]
 
-[node name="Coin" type="Node3D" unique_id=1451926600]
+[node name="Coin3D" type="Node3D" unique_id=1451926600]
+script = ExtResource("1_crxkf")
 
 [node name="Coin" type="MeshInstance3D" parent="." unique_id=1961361906]
 mesh = SubResource("CylinderMesh_5pu7v")
 
-[node name="Graphic" type="Sprite3D" parent="Coin" unique_id=778376131]
+[node name="CoinGraphic" type="Sprite3D" parent="Coin" unique_id=778376131]
 transform = Transform3D(0.03, 0, 0, 0, -1.3113416e-09, -0.03, 0, 0.03, -1.3113416e-09, 0, 0.051, 0)
-texture = ExtResource("1_5pu7v")
+flip_v = true
+texture = SubResource("ViewportTexture_crxkf")
 
 [node name="FullyRoundCoin" type="MeshInstance3D" parent="." unique_id=319370672]
 visible = false
@@ -55,3 +61,26 @@ compositor = SubResource("Compositor_n4we7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=784561878]
 transform = Transform3D(0.9961947, 0.08715574, 0, 3.8096983e-09, -4.3545054e-08, 1, 0.08715574, -0.9961947, -4.371139e-08, 0, 0, 0)
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=102040929]
+transparent_bg = true
+size = Vector2i(2500, 2500)
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport" unique_id=1064992780]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07058824, 0.8980392, 0, 1)
+
+[node name="CoinGraphic" type="TextureRect" parent="SubViewport" unique_id=55457760]
+unique_name_in_owner = true
+offset_right = 2500.0
+offset_bottom = 2500.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_crxkf")
+expand_mode = 1
+stretch_mode = 5

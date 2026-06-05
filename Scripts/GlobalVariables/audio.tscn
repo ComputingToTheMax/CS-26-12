@@ -11,3 +11,4 @@ script = ExtResource("1_xq3j3")
 stream = ExtResource("1_sjuyx")
 volume_db = 11.0
 script = ExtResource("2_1tac3")
+target_volume = 7.0

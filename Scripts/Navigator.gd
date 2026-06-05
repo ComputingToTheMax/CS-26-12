@@ -6,12 +6,17 @@ var scenes_in_memory: Dictionary[String, Node] = {}
 var previous_scene_stack: Array[String] = []
 @export var fallback_scene: String = "res://Scenes/MainMenu/main_menu_2.tscn"
 
-func go_to_packed_scene(target_scene: PackedScene, push_onto_previous_scene_stack=true, retain_in_memory:bool=true):
+func go_to_packed_scene(target_scene: PackedScene, push_onto_previous_scene_stack=true, retain_in_memory:bool=true, play_transition:=false):
 	var target_scene_path = target_scene.resource_path
 	
-	go_to_scene_by_path(target_scene_path, push_onto_previous_scene_stack, retain_in_memory)
+	go_to_scene_by_path(target_scene_path, push_onto_previous_scene_stack, retain_in_memory, play_transition)
 
-func go_to_scene_by_path(target_scene_path: String, push_onto_previous_scene_stack := true, retain_in_memory := true) -> void:
+func go_to_scene_by_path(target_scene_path: String, push_onto_previous_scene_stack := true, retain_in_memory := true, play_transition:=false) -> void:
+	
+	if play_transition:
+		StageManager.play_mission_transition_animation()
+		await StageManager.ready_to_transition
+	
 	var current_scene_root_node := get_tree().current_scene
 	var current_scene_path := ""
 	if current_scene_root_node != null:

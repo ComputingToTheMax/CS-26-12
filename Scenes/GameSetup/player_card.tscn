@@ -121,7 +121,7 @@ anchor_bottom = 0.964
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
-stretch_mode = 4
+stretch_mode = 5
 
 [node name="Spacer" type="Control" parent="CardBackground/CardForeground/VBoxContainer" unique_id=1672346005]
 layout_mode = 2
