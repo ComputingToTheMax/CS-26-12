@@ -110,9 +110,9 @@ func _ensure_background_music() -> void:
 	# background music is present even if the board scene was entered directly.
 	if not has_node("/root/Audio"):
 		return
-	var music := Audio.get_node_or_null("LiftOff!!") as AudioStreamPlayer
+	var music := Audio.get_node_or_null("Board") as AudioStreamPlayer
 	if music != null and not music.playing:
-		Audio.play_audio("LiftOff!!")
+		Audio.play_audio("Board")
 
 func _on_game_root_changed(_node: Node) -> void:
 	# child_exiting_tree fires before the child is actually removed, so defer
