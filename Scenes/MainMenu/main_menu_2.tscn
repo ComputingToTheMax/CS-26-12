@@ -284,6 +284,7 @@ theme = ExtResource("21_pgl5d")
 theme_type_variation = &"BigButton"
 theme_override_constants/icon_max_width = 300
 theme_override_font_sizes/font_size = 32
+disabled = true
 text = " "
 icon = ExtResource("25_g31n2")
 icon_alignment = 1
