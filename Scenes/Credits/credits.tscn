@@ -59,6 +59,10 @@ text = "[center][font_size=32][b]The Crew[/b][/font_size][/center]
 
 [center][font_size=20][b]Project Advisor[/b][/font_size][/center]
 [center]Dr. Braxton Cuneo | Seattle University[/center]
+[center][/center]
+
+[center][font_size=20][b]Game Composer[/b][/font_size][/center]
+[center]Brandon Nguyen | Seattle University[/center]
 [center][/center]"
 fit_content = true
 scroll_active = false
@@ -83,6 +87,29 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
+[node name="SpecialThanks" type="RichTextLabel" parent="VBoxContainer" unique_id=836754181]
+custom_minimum_size = Vector2(920, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("3_4hn7j")
+bbcode_enabled = true
+text = "[center][font_size=32][b]Special Thanks[/b][/font_size][/center]
+
+[center]Carolina Delgado-Ruiz[/center]
+[center]Dr. Rachael Brown[/center]
+[center]Macklin Hamilton[/center]
+[center]Mr. Jon Bach[/center]
+
+[center]Dedicated to all of our amazing capstone teachers, mentors, colleagues, friends, and family.[/center]
+"
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer" unique_id=757923676]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
 [node name="ResourceCredits" type="RichTextLabel" parent="VBoxContainer" unique_id=1529615037]
 custom_minimum_size = Vector2(920, 0)
 layout_mode = 2
@@ -90,6 +117,14 @@ size_flags_vertical = 4
 theme = ExtResource("3_4hn7j")
 bbcode_enabled = true
 text = "[center][font_size=32][b]Resource Credits[/b][/font_size][/center]
+
+[center][font_size=20][b]Game Soundtracks[/b][/font_size][/center]
+[center]Lift Off!! Game Theme by Brandon Nguyen[/center]
+[center][/center]
+[center]Board soundtrack by Brandon Nguyen[/center]
+[center][/center]
+[center]Shop soundtrack by Brandon Nguyen[/center]
+[center][/center]
 
 [center][font_size=20][b]Fonts[/b][/font_size][/center]
 [center]LEMON MILK font by MARSNEV[/center]
@@ -102,8 +137,90 @@ text = "[center][font_size=32][b]Resource Credits[/b][/font_size][/center]
 [center][/center]
 
 [center][font_size=20][b]Images[/b][/font_size][/center]
-[center]Image Credits are Forthcoming[/center]
-[center][/center]"
+[center]
+Pathfinder Rover Atop Mermaid
+NASA/JPL | PIA01132
+
+Illustration of NASA's Stardust / Stardust NExT
+NASA/JPL-Caltech
+
+Mercury Orbit Insertion Artist Concept
+NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington| PIA18146
+
+Dawn Spacecraft
+NASA /McREL | PIA19376
+
+The InSight Lander
+NASA/JPL-Caltech | PIA22227
+
+Reborn Kepler Discovers First K2 Exoplanet Artist Concept
+NASA/Ames/JPL-Caltech | PIA18904
+
+GRAIL Flying in Formation Artist Concept
+NASA/JPL-Caltech | PIA13956
+Lucy Spacecraft Illustration
+NASA
+
+Artist's Concept of Psyche Spacecraft with Five-Panel Array
+NASA/JPL-Caltech/Arizona State Univ./Space Systems Loral/Peter Rubin | PIA21499
+
+Hit Me With Your Best Shot (Comet P/Temple 1 Comet)
+NASA/JPL-Caltech/UMD | PIA02127
+
+CONTOUR
+NASA
+
+Lunar Prospector Artist Concept
+NASA/Ames | PIA18162
+
+A Southern Hemisphere Overview (Eros Asteroid)
+NASA/JPL/JHUAPL | PIA03137
+
+NEAR Shoemaker Spacecraft Model
+NASA
+
+Moon - North Polar Mosaic, Color
+NASA/JPL/USGS | PIA00404
+
+Stardust Image of Asteroid Annefrank (5535 Annefrank Asteroid)
+NASA/JPL-Caltech (PIA02885)
+
+Stardust Worlds
+NASA/JPL-Caltech/University of Maryland/Cornell | PIA13943
+Comet Wild 2 - Stardust Approach Image
+NASA/JPL-Caltech | PIA05004
+
+Mercury as Never Seen Before
+NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington | PIA11245
+
+Slipping By Comet Hartley 2 (103P/ Hartley 2 Comet)
+NASA/JPL-Caltech/UMD | PIA13600
+
+Model of Vesta
+NASA/JPL-Caltech/UCLA/PSI | PIA13770
+
+Ceres in Color
+NASA/JPL-Caltech/UCLA/MPS/DLR/IDA | PIA21079
+
+Global Color Views of Mars
+NASA/JPL/USGS | PIA00407
+
+Asteroid Donaldjohanson
+NASA/Goddard/SwRI/Johns Hopkins APL
+
+Sun Emits a Solstice CME
+NASA Goddard | GSFC_20171208_Archive_e001435
+
+MESSENGER Spacecraft at Mercury
+NASA/JHU/APL
+
+Artist Concept of Deep Impact Encounter with Comet Tempel 1
+NASA/JPL/UMD | PIA07923
+
+Asteroid Psyche (Illustration)
+NASA/JPL-Caltech/ASU | PIA24471
+
+[/center]"
 fit_content = true
 scroll_active = false
 
