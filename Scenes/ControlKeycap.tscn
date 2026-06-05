@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://ustd6snqf1my"]
+
+[ext_resource type="Script" uid="uid://beqlb7roelvic" path="res://Scenes/control_keycap.gd" id="1_okelb"]
+[ext_resource type="Texture2D" uid="uid://b1oxpxuep3alt" path="res://Sources/Images/UnpressedKeycap.png" id="2_c02vv"]
+[ext_resource type="Texture2D" uid="uid://cmsy0gnmk5qgm" path="res://Sources/Images/PressedKeycap.png" id="3_qovd5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1hkb5"]
+font_size = 90
+font_color = Color(0, 0, 0, 1)
+shadow_size = 6
+
+[node name="Keycap" type="Control" unique_id=1981436822]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_okelb")
+blink = false
+unpressed_keycap = ExtResource("2_c02vv")
+pressed_keycap = ExtResource("3_qovd5")
+
+[node name="Key" type="TextureRect" parent="." unique_id=942406825]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_qovd5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CenterContainer" type="CenterContainer" parent="Key" unique_id=203633180]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="KeyCharacter" type="Label" parent="Key/CenterContainer" unique_id=589437798]
+layout_mode = 2
+text = "M"
+label_settings = SubResource("LabelSettings_1hkb5")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BlinkTimer" type="Timer" parent="." unique_id=669722198]
+autostart = true

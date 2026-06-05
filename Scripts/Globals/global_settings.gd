@@ -23,6 +23,23 @@ static var default_background:String = "res://Sources/Images/SpaceBackgroundPlai
 static func get_window_size(screen=0) -> Vector2i:
 	return DisplayServer.window_get_size_with_decorations(screen)
 
+# Ensures a valid player configuration is set and applies a default configuration otherwise.
+# A "true" return value indicates all values were set appropriately, and a "false" return value indicates a default configuration is being used.
+static func ensure_player_configuration_is_set():
+	if GlobalSettings.number_of_players == 0:
+		use_default_player_configuration_for_testing()
+		return false
+		
+	else:
+		return true
+	
+	
+static func use_default_player_configuration_for_testing():
+	
+	push_warning("We've been asked to use a default player configuration state. This should only be used during development and testing.")
+	
+	GlobalSettings.set_number_of_players(1)
+
 
 
 #

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cdwbtxfo0sn4m"]
+
+[ext_resource type="AudioStream" uid="uid://dnwpen1xwmkfy" path="res://Sources/Sounds/Soundtracks/Discover-Opoly OST - Lift Off!!.wav" id="1_sjuyx"]
+[ext_resource type="Script" uid="uid://dukliiyyhivaq" path="res://Scripts/Globals/audio.gd" id="1_xq3j3"]
+[ext_resource type="Script" uid="uid://bq41y0fske4s2" path="res://Scripts/Globals/audio_loop.gd" id="2_1tac3"]
+[ext_resource type="AudioStream" uid="uid://bqyq7i0vc3ya" path="res://Sources/Sounds/Soundtracks/Discovery-Opoly OST - Shop.wav" id="4_wrvmr"]
+[ext_resource type="AudioStream" uid="uid://dipoxe307key5" path="res://Sources/Sounds/Soundtracks/Discovery-Opoly OST - Board.wav" id="5_7c80w"]
+[ext_resource type="AudioStream" uid="uid://cbj1cdk81f56x" path="res://Sources/Sounds/Soundtrack 1.wav" id="6_7c80w"]
+
+[node name="Audio" type="Node" unique_id=564560327]
+script = ExtResource("1_xq3j3")
+
+[node name="LiftOff!!" type="AudioStreamPlayer" parent="." unique_id=1923685137]
+stream = ExtResource("1_sjuyx")
+volume_db = 11.0
+script = ExtResource("2_1tac3")
+target_volume = 7.0
+fade_out_time = 3.0
+clamp_maximum_playback_position = nan
+
+[node name="Shop" type="AudioStreamPlayer" parent="." unique_id=1208405102]
+stream = ExtResource("4_wrvmr")
+script = ExtResource("2_1tac3")
+target_volume = 1.0
+fade_in_time = 1.0
+clamp_maximum_playback_position = nan
+
+[node name="Board" type="AudioStreamPlayer" parent="." unique_id=1462678669]
+stream = ExtResource("5_7c80w")
+script = ExtResource("2_1tac3")
+target_volume = -2.0
+fade_in_time = 3.0
+fade_out_time = 2.5
+clamp_maximum_playback_position = nan
+
+[node name="Soundtrack 1" type="AudioStreamPlayer" parent="." unique_id=1644235141]
+stream = ExtResource("6_7c80w")
+volume_db = -14.0
+bus = &"Fix"
+script = ExtResource("2_1tac3")
+target_volume = -2.0
+fade_in_time = 7.0
+clamp_maximum_playback_position = 34.0

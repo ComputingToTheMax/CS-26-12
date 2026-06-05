@@ -32,6 +32,9 @@ var selected_item: ItemData = null
 var selected_part_instance: PartInstance = null
 
 func _ready() -> void:
+	
+	Audio.fade_in_audio("Shop")
+	
 	randomize()
 	slot_button_scene = load(SLOT_BUTTON_SCENE_PATH) as PackedScene
 
@@ -363,6 +366,7 @@ func receive_sold_item(item: ItemData, qty: int) -> void:
 	_rebuild_shop_grid()
 
 func _on_close_pressed() -> void:
+	Audio.play_audio("Board")
 	leave_shop()
 
 func _unhandled_input(event: InputEvent) -> void:

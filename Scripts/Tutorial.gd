@@ -92,7 +92,7 @@ var asteroid_dialog := [
 
 var genisis_dialog := [
 	{
-		"text": "Your crew has found the Genesis craft drifting through space. Collect different kinds of solar wind to help the mission.",
+		"text": "The Genesis spacecraft needs help collecting ions from the sun! Use your keyboard to help Genesis speed up.",
 		"bg": "",
 		"tutorialchar": "res://Sources/Images/SpacemanCharacter1.png",
 		"context": ""
@@ -109,7 +109,7 @@ func _ready() -> void:
 			dialog_entries = hanger_dialog
 		"AsteroidTargeting1":
 			dialog_entries = asteroid_dialog
-		"genesis":
+		"Genesis Solar Wind Collection":
 			dialog_entries = genisis_dialog
 		_:
 			push_error("tutorial.gd: unrecognized tutorial_type '%s'" % tutorial_type)

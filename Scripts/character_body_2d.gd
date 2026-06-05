@@ -7,7 +7,7 @@ const MAX_BOARD_ITERATIONS: int = 1
 const MUSIC_VOLUME_DB: float = -16.5
 const MUSIC_SILENT_DB: float = -40.0
 const MUSIC_FADE_TIME: float = 1.5
-const GENERAL_MUSIC_NAME: String = "LiftOff!!"
+const GENERAL_MUSIC_NAME: String = "Board"
 
 @export var Board: MainBoard
 @export var cell_size: Vector2i
@@ -20,6 +20,7 @@ const GENERAL_MUSIC_NAME: String = "LiftOff!!"
 @export var offer_scene: PackedScene = preload("res://Scenes/UI/ConfirmSwitch.tscn")
 @export var asteroid: PackedScene = preload("res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting1.tscn")
 @export var alien: PackedScene = preload("res://Scenes/Minigames/alien_communication/alien_communication.tscn")
+@export var genesis_minigame_path: String = "res://Minigames/GenesisSolarWind/Scenes/Genesis Solar Wind Collection.tscn"
 @export var reward_screen: PackedScene = preload("res://Scenes/reward_screen.tscn")
 @export var tutorial_scene: PackedScene = preload("res://Scenes/tutorial.tscn")
 @export var possible_part_items: Array[ItemData] = []
@@ -487,6 +488,10 @@ func _configure_minigames() -> void:
 
 	if alien != null:
 		minigames.append(alien)
+		
+	if genesis_minigame_path != null:
+		var loaded_genesis_minigame = load(genesis_minigame_path)
+		minigames.append(loaded_genesis_minigame)
 
 func _offer_game() -> void:
 	busy = true
@@ -554,6 +559,7 @@ func _offer_game() -> void:
 	# Only the Asteroid Targeting minigame ships its own background music, so it
 	# is the one that must not overlap with the general soundtrack.
 	var has_own_music: bool = scene_key.begins_with("AsteroidTargeting")
+	#has_own_music = has_own_music or scene_key.begins_with("Genesis")
 
 	var mg := chosen_game_scene.instantiate()
 	Board.game_root.add_child(mg)
@@ -561,7 +567,7 @@ func _offer_game() -> void:
 	# Crossfade: fade the general soundtrack out and the minigame's music in so
 	# the two never play over each other.
 	if has_own_music:
-		Audio.fade_out_audio(GENERAL_MUSIC_NAME)
+		Audio.fade_out_current_audio()
 		_fade_in_minigame_music(mg)
 
 	var result: Dictionary = await mg.done

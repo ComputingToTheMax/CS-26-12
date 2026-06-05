@@ -20,11 +20,14 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/image="uid://dietlc30wtb5e"
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://3uwse6d4x0ft"
+
 [autoload]
 
 ui="*res://Scripts/UI/UI.gd"
 Navigator="*res://Scripts/Navigator.gd"
-GlobalSettings="*res://Scripts/GlobalVariables/global_settings.gd"
 Settings="*res://Scripts/PlayerSettings.gd"
 MoneySave="*uid://co0jfodd27uxj"
 PauseMenu="*uid://b7wnjbm0o6fjj"
@@ -34,6 +37,8 @@ QuestManager="*uid://bo3cysswmv8iq"
 Audio="*uid://cdwbtxfo0sn4m"
 GameTheme="*uid://puffnybb4spu"
 StageManager="*uid://cp6tbet07cvsh"
+GlobalSettings="*uid://cewj5y0q4j6ae"
+GlobalUtilities="*uid://cvwqb5la3vk82"
 
 [display]
 

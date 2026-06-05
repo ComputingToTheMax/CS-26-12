@@ -8,6 +8,7 @@ extends Control
 var credits_finished: bool = false
 
 func _ready() -> void:
+	Audio.play_audio("LiftOff!!")
 	vBoxContainer.position.y = get_viewport_rect().size.y
 
 func _process(delta: float) -> void:

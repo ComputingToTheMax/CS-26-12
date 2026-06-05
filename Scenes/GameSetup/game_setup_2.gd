@@ -26,6 +26,8 @@ func _on_tutorial_selection_toggled(toggled_on: bool) -> void:
 
 func _on_start_button_pressed() -> void:
 	
+	#Audio.fade_in_audio("Board")
+	
 	if GlobalSettings.number_of_players < 1:
 		return
 	
@@ -37,6 +39,8 @@ func _on_start_button_pressed() -> void:
 	## animation loading screen to be in place before transitioning.
 	#StageManager.play_mission_transition_animation()
 	#await StageManager.ready_to_transition
+	
+	
 
 	if Settings.play_tutorial:
 		Navigator.go_to_scene_by_path(tutorial_scene_path)

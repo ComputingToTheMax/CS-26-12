@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cpfawjltxl5ie" path="res://Sources/Images/PlayerSelection/Standard 4.svg" id="8_mx6bh"]
 [ext_resource type="Texture2D" uid="uid://drlafv6f5v1o" path="res://Sources/Images/PlayerSelection/Wave 4.svg" id="9_kb3c1"]
 [ext_resource type="Script" uid="uid://dvllxhwnjhhxn" path="res://Scripts/button_logic.gd" id="10_pckjr"]
-[ext_resource type="PackedScene" uid="uid://yvtjjujrw067" path="res://Minigames/GenesisSolarWind/Scenes/GenesisSolarWindMinigame.tscn" id="11_tprhj"]
+[ext_resource type="PackedScene" uid="uid://yvtjjujrw067" path="res://Minigames/GenesisSolarWind/Scenes/Genesis Solar Wind Collection.tscn" id="11_tprhj"]
 [ext_resource type="PackedScene" uid="uid://bo4mp5audgyic" path="res://Minigames/GenesisSolarWind/Scenes/GenesisSolarWindMinigameTile.tscn" id="12_dolva"]
 [ext_resource type="PackedScene" uid="uid://da7v2pxnl3ccx" path="res://Scenes/Minigames/alien_communication/alien_communication.tscn" id="13_6i3ng"]
 

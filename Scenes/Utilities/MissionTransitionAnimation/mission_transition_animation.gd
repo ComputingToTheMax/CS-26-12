@@ -53,13 +53,14 @@ func _end_animation():
 	
 	var exit_duration: float = animation_duration * 3 / 4.
 	current_tween.tween_property(animation_camera, "offset", target_offset, exit_duration).set_ease(Tween.EASE_IN_OUT)
+	current_tween.tween_callback(self.hide)
 	
 	transition_timer.wait_time = exit_duration * 3. / 7
 	transition_timer.start()
 	await transition_timer.timeout
 	ready_to_transition.emit()
 	
-	current_tween.tween_callback(self.hide)
+	
 
 #func _queue_free():
 	#queue_free()
