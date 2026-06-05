@@ -20,6 +20,7 @@ const GENERAL_MUSIC_NAME: String = "LiftOff!!"
 @export var offer_scene: PackedScene = preload("res://Scenes/UI/ConfirmSwitch.tscn")
 @export var asteroid: PackedScene = preload("res://Scenes/Minigames/AsteroidTargeting/AsteroidTargeting1.tscn")
 @export var alien: PackedScene = preload("res://Scenes/Minigames/alien_communication/alien_communication.tscn")
+@export var genesis_minigame_path: String = "res://Minigames/GenesisSolarWind/Scenes/Genesis Solar Wind Collection.tscn"
 @export var reward_screen: PackedScene = preload("res://Scenes/reward_screen.tscn")
 @export var tutorial_scene: PackedScene = preload("res://Scenes/tutorial.tscn")
 @export var possible_part_items: Array[ItemData] = []
@@ -487,6 +488,10 @@ func _configure_minigames() -> void:
 
 	if alien != null:
 		minigames.append(alien)
+		
+	if genesis_minigame_path != null:
+		var loaded_genesis_minigame = load(genesis_minigame_path)
+		minigames.append(loaded_genesis_minigame)
 
 func _offer_game() -> void:
 	busy = true
