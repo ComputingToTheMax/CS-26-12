@@ -20,6 +20,10 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/image="uid://dietlc30wtb5e"
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://3uwse6d4x0ft"
+
 [autoload]
 
 ui="*res://Scripts/UI/UI.gd"
