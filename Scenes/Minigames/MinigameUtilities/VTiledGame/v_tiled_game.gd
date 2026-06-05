@@ -12,6 +12,7 @@ var initialized: bool = false
 
 var target_minigame_path:String
 var child_game_scenes = []
+var first_player = true
 
 # A custom initialization function to allow passthrough of parameters during programatic instantiation calls.
 func __init(current_tree, target_minigame_path: String) -> void:
@@ -37,6 +38,8 @@ func __init(current_tree, target_minigame_path: String) -> void:
 func _ready() -> void:
 	print("Quick!")
 	
+	first_player = true
+	
 	# If initialization of parameters hasn't yet been performed, initialize with default values.
 	# This will only work if the current scene has access to the current scene tree.
 	# TODO: More robust versions might be able to access the scene tree through a singleton.
@@ -59,6 +62,10 @@ func _ready() -> void:
 	child_game_scenes[0].game_done.connect(_propagate_game_done_signal)
 	child_game_scenes[0].launch_game()
 	
+	# TODO: This should likely be limited to specific games instead.
+	Audio.play_audio("Soundtrack 1")
+	
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -70,6 +77,10 @@ func _create_subview(player: GlobalSettings.PlayerConfiguration, viewport_size: 
 	
 	# Create an instance of the target game scene tile.
 	var current_instance_of_target_scene = load(target_minigame_path).instantiate()
+	
+	if first_player:
+		first_player = false
+		current_instance_of_target_scene.reset_game()
 	#current_instance_of_target_scene.set_process(false)
 	#return
 	
@@ -106,5 +117,8 @@ func _propagate_game_done_signal(result: Dictionary):
 	
 	for scene in child_game_scenes:
 		scene.queue_free()
+		
+	# TODO: This should likely be in a more centralized place of the board.
+	Audio.play_audio("Board")
 		
 	queue_free()

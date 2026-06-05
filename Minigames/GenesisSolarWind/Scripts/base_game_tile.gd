@@ -312,6 +312,10 @@ func update_scorebar():
 	
 	#print(fill_proportion, scorebar.value)
 
+func reset_game():
+	games = []
+	game_coordinator = null
+
 func _on_genesis_spacecraft_body_entered(body: Node2D) -> void:
 	
 	if body is particle_type:
