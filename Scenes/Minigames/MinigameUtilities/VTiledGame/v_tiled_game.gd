@@ -1,5 +1,7 @@
 extends Control
 
+signal game_done(result: Dictionary)
+
 @export var default_minigame_tile_path: String
 
 @onready var game_tile_container = %GameTileContainer
@@ -54,7 +56,9 @@ func _ready() -> void:
 		_create_subview(player, viewport_size)
 		
 	# Request a child to coordinate and begin the game. Any child should be able to launch the game, but the first child is chosen as the default.
+	child_game_scenes[0].game_done.connect(_propagate_game_done_signal)
 	child_game_scenes[0].launch_game()
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -95,3 +99,12 @@ func _create_subview(player: GlobalSettings.PlayerConfiguration, viewport_size: 
 	#current_subview.visible = true
 	
 	child_game_scenes.append(current_instance_of_target_scene)
+	
+func _propagate_game_done_signal(result: Dictionary):
+	print("The VTiled Game is passing on a game end signal.")
+	game_done.emit(result)
+	
+	for scene in child_game_scenes:
+		scene.queue_free()
+		
+	queue_free()
