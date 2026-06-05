@@ -13,12 +13,19 @@ extends AudioStreamPlayer
 @export var fade_in_time: float = 10
 @export var fade_out_time: float = 1.5
 
+@export var clamp_maximum_playback_position: float = NAN
+
 var _volume_tween: Tween
 
 func _ready() -> void:
 	# Programatically connect this audio node's "finished" signal
 	# to this script so that appliers do not have to do so manually.
 	self.finished.connect(_on_finished_playing)
+	
+func _process(float) -> void:
+	if clamp_maximum_playback_position != NAN:
+		if get_playback_position() > clamp_maximum_playback_position:
+			Audio.play_audio(Audio.currently_playing_audio_name)
 
 # Automatically loop when playback is finished.
 func _on_finished_playing() -> void:
@@ -51,6 +58,8 @@ func fade_out() -> void:
 	_volume_tween = create_tween()
 	_volume_tween.tween_property(self, "volume_db", silent_volume, fade_out_time).set_ease(Tween.EASE_OUT)
 	_volume_tween.tween_callback(Callable(self, "set_stream_paused").bind(true))
+	
+	
 
 func _cancel_fade() -> void:
 	if _volume_tween != null and _volume_tween.is_valid():
