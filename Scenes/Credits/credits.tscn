@@ -105,7 +105,7 @@ text = "[center][font_size=32][b]Special Thanks[/b][/font_size][/center]
 fit_content = true
 scroll_active = false
 
-[node name="HSeparator4" type="HSeparator" parent="VBoxContainer" unique_id=757923676]
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer" unique_id=742665591]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -119,11 +119,11 @@ bbcode_enabled = true
 text = "[center][font_size=32][b]Resource Credits[/b][/font_size][/center]
 
 [center][font_size=20][b]Game Soundtracks[/b][/font_size][/center]
-[center]Lift Off!! Game Theme by Brandon Nguyen[/center]
+[center]\"Lift Off!!\" Game Theme by Brandon Nguyen[/center]
 [center][/center]
-[center]Board soundtrack by Brandon Nguyen[/center]
+[center]\"T-Minus...\" Board Soundtrack by Brandon Nguyen[/center]
 [center][/center]
-[center]Shop soundtrack by Brandon Nguyen[/center]
+[center]\"Just Browsing\" Shop Soundtrack by Brandon Nguyen[/center]
 [center][/center]
 
 [center][font_size=20][b]Fonts[/b][/font_size][/center]
@@ -280,7 +280,7 @@ SOFTWARE.
 fit_content = true
 scroll_active = false
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer" unique_id=742665591]
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer" unique_id=757923676]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
